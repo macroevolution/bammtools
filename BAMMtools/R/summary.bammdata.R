@@ -41,8 +41,8 @@ summary.bammdata = function(object, display=10, ...) {
 	cat("\nCompute credible set of shift configurations for more information:\n");
 	cat("\tSee ?credibleShiftSet and ?getBestShiftConfiguration\n");
 	
-	xx <- table(fev);
-	df <- data.frame(shifts = as.numeric(names(xx)), prob =  as.numeric(xx / (sum(xx))));
+	xx <- tabulate(fev);
+	df <- data.frame(shifts = seq.int(0,length(xx)-1,1), prob = signif(xx / sum(xx),3));
 	
 	invisible(df);
 }
