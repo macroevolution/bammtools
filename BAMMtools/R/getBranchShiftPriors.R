@@ -9,7 +9,7 @@ getBranchShiftPriors <- function(phy, priordata){
 		stop("invalid priordata argument (wrong class) in getBranchShiftPriors\n");
 	}
 	
-	tx <- cumsum(table(priordata$N_shifts) / nrow(priordata));
+	tx <- cumsum(table(prior$N_shifts) / nrow(prior));
 	tx <- as.numeric(names(tx[tx >=  0.95][1]));
 	
 	wts <- phy$edge.length / sum(phy$edge.length);
