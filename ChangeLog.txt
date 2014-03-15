@@ -1,0 +1,20 @@
+ChangeLog for BAMMtools 1.0.1
+
+2014-03-14    Dan Rabosky    dan.rabosky@gmail.com
+
+        Bug fix: subtreeBAMM misnamed some list elements in the bammdata object.
+
+2014-03-13    Pascal Title    ptitle@umich.edu
+
+        Bug fix: getBranchShiftPriors was not reading prior data when passed as a 
+        filename.
+
+2014-03-10    Mike Grundler    mcgrundler@gmail.com
+
+        Bug fix: summary.bammdata incorrectly returned a matrix where the number of rate 
+        shifts and their posterior frequency were offset by 1. The information printed to
+        the console was correct, however, and left unchanged.
+        
+
+        
+ 
