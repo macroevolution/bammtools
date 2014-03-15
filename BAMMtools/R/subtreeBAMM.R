@@ -99,15 +99,16 @@ subtreeBAMM<-function(ephy,tips=NULL,node=NULL)
   stree <- getRecursiveSequence(stree);
   subphy$downseq<-stree$downseq
   subphy$lastvisit<-stree$lastvisit
-  subphy$numberEvents<-c()
+  subphy$numberEvents<- NA
   subphy$eventData<-list()
   subphy$eventVectors<-list()
   subphy$tipStates<-list()
-  subphy$eventBranchSegs<-list()
-  subphy$tipLambda<-sapply(ephy$tipLambda,function(x){x[oldnode[1:sNtip]]})
+  subphy$tipLambda<-lapply(ephy$tipLambda,function(x){x[oldnode[1:sNtip]]})
   subphy$meanTipLambda<-ephy$meanTipLambda[oldnode[1:sNtip]]
-  subphy$tipMu<-sapply(ephy$tipMu,function(x){x[oldnode[1:sNtip]]})
+  subphy$eventBranchSegs<-list()  
+  subphy$tipMu<-lapply(ephy$tipMu,function(x){x[oldnode[1:sNtip]]})
   subphy$meanTipMu<-ephy$meanTipMu[oldnode[1:sNtip]]
+
   subphy$type<-ephy$type
   
   
@@ -158,7 +159,7 @@ subtreeBAMM<-function(ephy,tips=NULL,node=NULL)
     #fix the tipstate
     tipState<-ephy$tipStates[[en]];
     tipState<-tipState[oldnode[1:sNtip]]
-    subphy$tipState[[en]]<-match(tipState,newprocess)
+    subphy$tipStates[[en]]<-match(tipState,newprocess)
     #fix the eventVectors
     eventVectors<-sapply(subphy$edge[,2], function(x){eventVectors[which(ephy$edge[,2]==oldnode[x])]})
     subphy$eventVectors[[en]]<-match(eventVectors,newprocess)
