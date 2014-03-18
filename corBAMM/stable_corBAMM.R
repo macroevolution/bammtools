@@ -2,12 +2,19 @@
 
 ##########
 # Implements the linear mixture error structure
+#    type = "lambda" corresponds to:
 #           psi*lambda*Em + (1-psi)*Eb
+#    type = "exponential" corresponds to:
+#        psi*exp(-alpha*Em) + (1-psi)*Eb, where exp(-alpha*Em) is scaled to be a correlation matrix
+#    type = "linear" corresponds to:
+#        psi*(-beta*(Em/0.5*max(Em)) + (1-psi)*Eb, where -beta*(Em/0.5*max(Em)) is scaled to be a correlation matrix
 # \params
 #    psi    :: mixture coefficient
 #    lambda :: Pagel's lambda
+#    alpha  :: shape parameter
+#    beta   :: shape parameter
 # \constants
-#    Em     :: phylogenetic correlation matrix
+#    Em     :: phylogenetic correlation matrix (type = "lambda") or matrix of patristic distances (type = "exponential" or "linear")
 #    Eb     :: BAMM correlation matrix
 # 
 # Parameters are supplied via the 'value' argument. If value = numeric(0),
@@ -23,13 +30,14 @@
 #    value = c(0.5, 0.75)  fixed = FALSE        psi = 0.5(estimated), lambda = 0.75(estimated)
 ##########
 
-corBAMM <- function(value = numeric(0), ephy, form = ~1, fixed = FALSE)
+corBAMM <- function(value = numeric(0), ephy, form = ~1, fixed = FALSE, type = c("lambda", "exponential", "linear"))
 {
     if (class(ephy) != "bammdata")
 	    stop("arg 'ephy' is not of class 'bammdata'");
     attr(value, "formula") <- form;
 	attr(value, "fixed") <- fixed;
 	attr(value, "bammdata") <- ephy;
+	attr(value, "type") <- match.arg(type);
     class(value) <- c("corBAMM", "corStruct");
     return (value);    
 }
@@ -53,11 +61,18 @@ Initialize.corBAMM <- function(object, data, ...)
             val[1] <- .Machine$double.eps;
         val[1] <- log(val[1]) - log(1-val[1]);
         if (length(val) > 1) {
-            if (val[2] < 0 || val[2] > 1)
-                stop("lambda must be between 0 and 1");
-            if (val[2] == 0)
-                val[2] <- .Machine$double.eps;
-            val[2] <- log(val[2]) - log(1-val[2]);
+            if (attr(object, "type") == "lambda") {
+                if (val[2] < 0 || val[2] > 1)
+                    stop("lambda must be between 0 and 1");
+                if (val[2] == 0)
+                    val[2] <- .Machine$double.eps;
+                val[2] <- log(val[2]) - log(1-val[2]);
+            }
+            else {
+                if (val[2] < 0)
+                    stop("alpha must be non-negative");
+                val[2] <- log(val[2]);
+            }
         }
     }
     else {
@@ -69,8 +84,10 @@ Initialize.corBAMM <- function(object, data, ...)
     bammdata <- attr(object, "bammdata");
     phy <- as.phylo.bammdata(bammdata);
     attr(object, "Eb") <- getCohortMatrix(bammdata);
-    attr(object, "Em") <- vcv.phylo(phy, corr = TRUE);
-    
+    attr(object, "Em") <- switch(attr(object,"type"),
+        lambda = vcv.phylo(phy, corr = TRUE),
+        cophenetic.phylo(phy)
+    );
     if (nrow(data) != length(phy$tip.label))
         stop("number of observations and number of tips in the tree are not equal");
     if (is.null(rownames(data))) {
@@ -106,8 +123,15 @@ corMatrix.corBAMM <- function(object, covariate = getCovariate(object), corr = T
         Em <- psi*Em[index,index] + (1-psi)*Eb[index, index];
     }
     else {
-        lambda <- 1/(1+exp(-object[2]));
-        Em <- psi*lambda*Em[index,index] + (1-psi)*Eb[index, index];
+        parm <- switch(attr(object,"type"),
+            lambda = 1/(1+exp(-object[2])),
+            -exp(object[2])
+        );
+        Em <- switch(attr(object,"type"),
+            lambda = psi*lambda*Em[index,index] + (1-psi)*Eb[index, index],
+            exponential = psi*cov2cor(exp(parm*Em[index,index])) + (1-psi)*Eb[index, index],
+            linear = psi*cov2cor(1+parm*(Em[index,index]/(0.5*max(Em)))) + (1-psi)*Eb[index, index]
+        );
     }
     diag(Em) <- 1;
     return (Em);
@@ -117,17 +141,18 @@ corMatrix.corBAMM <- function(object, covariate = getCovariate(object), corr = T
 coef.corBAMM <- function (object, unconstrained = TRUE, ...) 
 {
     lx <- function(x) 1/(1+exp(-x));
-    if (unconstrained) {
-        if (attr(object, "fixed")) 
-            return(numeric(0))
-        else return(lx(as.vector(object)));
+    if (attr(object, "fixed") && unconstrained) {
+        return(numeric(0));
     }
-    aux <- as.vector(object);
-    if (length(aux) > 1)
-        names(aux) <- c("psi", "lambda")
+    val <- as.vector(object)
+    if (length(val) == 0) {
+        return(val);
+    }
+    if (length(val) > 1)
+        names(val) <- switch(attr(object,"type"), lambda = c("psi", "lambda"), exponential = c("psi", "alpha"), linear = c("psi", "beta"))
     else
-        names(aux) <- "psi";
-    return (lx(aux));
+        names(val) <- "psi";
+    return (switch(attr(object,"type"), lambda = lx(val), c(lx(val[1]),exp(val[2]))));
 }
 
 
