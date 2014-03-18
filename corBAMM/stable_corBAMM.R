@@ -64,8 +64,26 @@ coef.corBAMM <- function(object, unconstrained = TRUE, ...)
 {
     if (!("corBAMM" %in% class(object)))
         stop('object is not of class "corBAMM"')
-    return(numeric(0));
+    #return(numeric(0));
+    
+    
 }
+
+
+# This is basically coef
+coef.corBAMM <- function (object, unconstrained = TRUE, ...) 
+{
+    if (unconstrained) {
+        if (attr(object, "fixed")) 
+            return(numeric(0))
+        else return(object[1])
+    }
+    aux <- object[1]
+    names(aux) <- "kappa"
+    aux
+}
+
+
 
 ##########
 # Implements the linear mixture error structure:
@@ -139,3 +157,11 @@ corMatrix.corBAMM <- function(object, covariate = getCovariate(object), corr = T
     kappa <- object[1];
     return(kappa*Em[index,index] + (1-kappa)*Eb[index, index]);
 }
+
+
+
+
+
+
+
+
