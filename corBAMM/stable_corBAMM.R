@@ -70,7 +70,7 @@ Initialize.corBAMM <- function(object, data, ...)
             }
             else {
                 if (val[2] < 0)
-                    stop("alpha must be non-negative");
+                    stop("shape parameter must be non-negative");
                 val[2] <- log(val[2]);
             }
         }
@@ -84,10 +84,7 @@ Initialize.corBAMM <- function(object, data, ...)
     bammdata <- attr(object, "bammdata");
     phy <- as.phylo.bammdata(bammdata);
     attr(object, "Eb") <- getCohortMatrix(bammdata);
-    attr(object, "Em") <- switch(attr(object,"type"),
-        lambda = vcv.phylo(phy, corr = TRUE),
-        cophenetic.phylo(phy)
-    );
+    attr(object, "Em") <- vcv.phylo(phy, corr = TRUE);
     if (nrow(data) != length(phy$tip.label))
         stop("number of observations and number of tips in the tree are not equal");
     if (is.null(rownames(data))) {
@@ -123,17 +120,27 @@ corMatrix.corBAMM <- function(object, covariate = getCovariate(object), corr = T
         Em <- psi*Em[index,index] + (1-psi)*Eb[index, index];
     }
     else {
-        parm <- switch(attr(object,"type"),
-            lambda = 1/(1+exp(-object[2])),
-            -exp(object[2])
-        );
+        lambdaTree <- function(Vm, x) {
+            d <- diag(Vm);
+            Vm <- x*Vm;
+            diag(Vm) <- d;
+            Vm
+        }
         Em <- switch(attr(object,"type"),
-            lambda = psi*lambda*Em[index,index] + (1-psi)*Eb[index, index],
-            exponential = psi*cov2cor(exp(parm*Em[index,index])) + (1-psi)*Eb[index, index],
-            linear = psi*cov2cor(1+parm*(Em[index,index]/(0.5*max(Em)))) + (1-psi)*Eb[index, index]
+            lambda = {
+                parm <- 1/(1+exp(-object[2]));
+                psi*lambdaTree(Em[index,index],parm) + (1-psi)*Eb[index, index];
+            },
+            exponential = {
+                parm <- exp(object[2]);
+                psi*Em[index, index] + (1-psi)*exp(-parm*(1-Eb[index,index]));
+            },
+            linear = {
+                parm <- exp(object[2]);
+                psi*Em[index,index] + (1-psi)*(1-parm*(1-Eb[index,index]));
+            }     
         );
     }
-    diag(Em) <- 1;
     return (Em);
 }
 
