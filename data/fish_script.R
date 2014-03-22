@@ -27,9 +27,15 @@ plotRateThroughTime(rmat)
 plotRateThroughTime(ed, node = 7923, nodetype = 'exclude', start.time = 225, plot=T);
 # Plot does not start at 225 million years before present, but I think it should based on
 # these arguments
+##-- start.time and end.time appear to be defined as node heights in getRateThroughTimeMatrix, so changing 225 to max(branching.times(as.phylo.bammdata(ed))) - 225 = 120
+plotRateThroughTime(ed, node = 7923, nodetype = 'exclude', start.time = 120, plot=T);
+##-- now it plots with the x-axis going from 225 to 0. Alternatively you could do the following:
+plotRateThroughTime(ed, node = 7923, nodetype = 'exclude', plot=T,xlim=c(225,0))
 
-# Acanthomorphs: fails due to missing values
+# Acanthomorphs: fails due to missing values 
 plotRateThroughTime(ed, node = 7923, plot=T, start.time = 225);
+## -- Where is this failing? Do you mean the initial flat line?
+
 
 # yes, this overshoots the crown age of the clade, but I think
 # we want the function to work. 
@@ -53,6 +59,8 @@ rmat_A <- getRateThroughTimeMatrix(ed, node = 7923, end.time = 1)
 
 # no, this now gives an NA-based error message.
 plotRateThroughTime(rmat_A, xlim=c(300,0))
+
+##-- This doesn't work because end.time = 1 is 1 unit above the root as this is node height, and now the rates are all being calculated in a part of the tree that is outside of the clade defined by node.
 
 
 
