@@ -1,4 +1,4 @@
-plot.bammdata = function (x, method = "phylogram", vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, legend = FALSE, spex = "s", lwd = 1, cex = 1, pal = "RdYlBu", colorbreaks = NULL, par.reset = TRUE, ...) {
+plot.bammdata = function (x, method = "phylogram", vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, legend = FALSE, spex = "s", lwd = 1, cex = 1, pal = "RdYlBu", colorbreaks = NULL, logcolor = FALSE, par.reset = TRUE, ...) {
     if ("bammdata" %in% class(x)) {
     	if (attributes(x)$order != "cladewise") {
     		stop("Function requires tree in 'cladewise' order");
@@ -16,14 +16,14 @@ plot.bammdata = function (x, method = "phylogram", vtheta = 5, rbf = 0.001, show
         x <- dtRates(x, 0.01);
     }
     if (is.null(colorbreaks)) {
-    	colorbreaks <- assignColorBreaks(x$dtrates$rates, 64, spex);
+    	colorbreaks <- assignColorBreaks(x$dtrates$rates, 64, spex, logcolor);
     }
     if (x$type == "trait") {
         if (sum(is.na(x$dtrates$rates))) {
             warning(sprintf("Found %d NA phenotypic rates. Coercing to zero.", sum(is.na(x$dtrates$rates))));
             x$dtrates$rates[is.na(x$dtrates$rates)] <- 0;
         }
-    	colorobj <- colorMap(x$dtrates$rates, pal, colorbreaks);
+    	colorobj <- colorMap(x$dtrates$rates, pal, colorbreaks, logcolor);
     }
     else if (x$type == "diversification") {
         if (sum(is.na(x$dtrates$rates[[1]]))) {
@@ -35,13 +35,13 @@ plot.bammdata = function (x, method = "phylogram", vtheta = 5, rbf = 0.001, show
             x$dtrates$rates[[2]][is.na(x$dtrates$rates[[2]])] <- 0;
         }
         if (tolower(spex) == "s") {
-        	colorobj <- colorMap(x$dtrates$rates[[1]], pal, colorbreaks);
+        	colorobj <- colorMap(x$dtrates$rates[[1]], pal, colorbreaks, logcolor);
         }
         else if (tolower(spex) == "e") {
-        	colorobj <- colorMap(x$dtrates$rates[[2]], pal, colorbreaks);
+        	colorobj <- colorMap(x$dtrates$rates[[2]], pal, colorbreaks, logcolor);
         }
         else {
-        	colorobj <- colorMap(x$dtrates$rates[[1]] - x$dtrates$rates[[2]], pal, colorbreaks);
+        	colorobj <- colorMap(x$dtrates$rates[[1]] - x$dtrates$rates[[2]], pal, colorbreaks, logcolor);
         }
     }
     else {
@@ -102,7 +102,7 @@ plot.bammdata = function (x, method = "phylogram", vtheta = 5, rbf = 0.001, show
             }
         }
         if (legend) {
-            rateLegend(colorobj$colsdensity);
+            rateLegend(colorobj$colsdensity, logcolor);
         }
     }
     index <- order(as.numeric(rownames(ret$segs)));

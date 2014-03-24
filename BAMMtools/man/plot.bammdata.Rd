@@ -12,7 +12,7 @@ colors each branch by the estimated rate of speciation, extinction, or trait evo
 \method{plot}{bammdata}(x, method = "phylogram", 
     vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, 
     legend = FALSE, spex="s", lwd = 1, cex = 1, pal = "RdYlBu", 
-    colorbreaks = NULL, par.reset = TRUE, ...)
+    colorbreaks = NULL, logcolor = FALSE, par.reset = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -45,8 +45,7 @@ mapping of evolutionary rates to colors. Defaults to \code{FALSE}.
 }
   \item{spex}{
 a character string indicating what type of macroevolutionary rates should be plotted. "s" (default) indicates
-speciation rates, "e" indicates extinction rates, and any other character, e.g. "se", indicates net diversification
-rates. Ignored if \code{ephy$type = "trait"}.  	
+speciation rates, "e" indicates extinction rates, and any other character, e.g. "se", indicates net diversification rates. Ignored if \code{ephy$type = "trait"}.  	
 }
   \item{lwd}{
 a numeric specifying the line width for branches.
@@ -62,6 +61,9 @@ Details for explanation of options.
 a numeric vector of percentiles delimiting the bins for mapping rates to colors. If \code{NULL} (default) bins
 are calculated from the rates that are passed with the \code{bammdata} object.  	
 }
+\item{logcolor}{
+should colors be plotted on a log scale.
+}
   \item{par.reset}{
 a logical indicating whether or not to reset the graphical parameters when the function exits. Defaults to \code{TRUE}. The function will only reset the graphical parameters if arguments are passed via \dots.
 }
@@ -75,7 +77,10 @@ and the mean of the marginal posterior density of the rate of speciation/extinct
 calculated for each such segment. Rates are mapped to colors such that cool colors represent 
 slow rates and warm colors represent fast rates. When the tree is
 plotted each of these small segments is plotted so that changes in rates through time and shifts in 
-rates are visible as gradients of color.
+rates are visible as gradients of color. The \code{spex} argument determines the type of rate that will
+be calculated. \code{spex = "s"} will plot speciation rates, \code{spex = "e"} will plot extinction rates,
+and \code{spex = "se"} will plot diversification rates (speciation - extinction). Note that if \code{x$type = "trait"} the \code{spex} argument is ignored and rates of phenotypic evolution are plotted instead. If \code{legend = TRUE} the function will plot a legend with the (kernel density estimated) distribution of rates. This
+contains the mapping of colors to numerical values as well as a comparison of their frequencies.  
 
 A number of color palettes come built in with BAMMtools. Color-blind friendly options include
 \tabular{r}{

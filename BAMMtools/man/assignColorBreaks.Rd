@@ -7,7 +7,7 @@
 	Maps macroevolutionary rates to a set of \code{NCOLORS}.
 }
 \usage{
-	assignColorBreaks(rates, NCOLORS, spex)
+	assignColorBreaks(rates, NCOLORS, spex, log = FALSE)
 }
 \arguments{
 	\item{rates}{
@@ -22,6 +22,9 @@
 		a character string. "s" means that speciation rates are used to make the
 		map, "e" means that extinction rates are used. Any other string, e.g. "se",
 		means that diversification rates are used. Ignored for BAMM trait data.
+	}
+	\item{log}{
+		should the natural logarithm of rates be used for the color map.
 	}
 }
 \details{

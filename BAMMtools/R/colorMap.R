@@ -2,7 +2,7 @@
 #	Internal function called by plot.bammdata(...)
 #
 #
-colorMap <- function(x, pal, breaks) {
+colorMap <- function(x, pal, breaks, log = FALSE) {
     dpal <- list(
 BrBG=rev(c("#543005","#8c510a","#bf812d","#dfc27d","#f6e8c3","#f5f5f5","#c7eae5","#80cdc1","#35978f","#01665e","#003c30")),
 PiYG=rev(c("#8e0152","#c51b7d","#de77ae","#f1b6da","#fde0ef","#f7f7f7","#e6f5d0","#b8e186","#7fbc41","#4d9221","#276419")),
@@ -35,6 +35,7 @@ Spectral=c("#9e0142","#d53e4f","#f46d43","#fdae61","#fee08b","#ffffbf","#e6f598"
 	else {
 		stop("Unrecognized color palette specification");
 	}
+	if (log) x <- log(x);
 	kde <- density(x, from=min(x), to=max(x));
 	colset <- numeric(length(x));
 	coldens <- numeric(length(kde$x));
@@ -49,7 +50,7 @@ Spectral=c("#9e0142","#d53e4f","#f46d43","#fdae61","#fee08b","#ffffbf","#e6f598"
         }
         else {
             colset[x >= breaks[i-1] & x < breaks[i]] <- colpalette[i-1];
-        	coldens[kde$x >= breaks[i-1] & kde$x < breaks[i]] <- colpalette[i-1];
+        		coldens[kde$x >= breaks[i-1] & kde$x < breaks[i]] <- colpalette[i-1];
         }
     }
 	coldens <- data.frame(kde$x,kde$y,coldens,stringsAsFactors=FALSE);
