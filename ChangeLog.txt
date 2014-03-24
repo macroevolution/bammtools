@@ -1,5 +1,10 @@
 ChangeLog for BAMMtools 1.0.1
 
+2014-03-22    Pascal Title   ptitle@umich.edu
+
+		Bug fix: getRateThroughTimeMatrix now includes root node when node is specified
+		and nodetype is 'exclude'.
+
 2014-03-14    Dan Rabosky    dan.rabosky@gmail.com
 
         Bug fix: subtreeBAMM misnamed some list elements in the bammdata object.

@@ -30,6 +30,7 @@ getRateThroughTimeMatrix <- function(ephy, start.time=NULL, end.time=NULL, nslic
 		nodeset <- unlist(sapply(node, function(x) getDesc(ephy, x)$desc_set))
 	} else if (!is.null(node) & nodetype == 'exclude') {
 		nodeset <- setdiff( ephy$edge[,2], unlist(sapply(node, function(x) getDesc(ephy, x)$desc_set)));
+		nodeset <- c(length(ephy$tip.label)+1, nodeset);
 	} else {
 		stop('error in getRateThroughTimeMatrix\n');
 	}
