@@ -8,7 +8,7 @@ Computes pairwise Bayes factors for a set of macroevolutionary models sampled us
 }
 \usage{
 computeBayesFactors(postdata, priordata, burnin = 0.1, modelset = NULL, 
-	threshpost = 1, threshprior = 0, nbprior = FALSE, strict = FALSE)
+	threshpost = 1, threshprior = 1, nbprior = FALSE, strict = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -41,6 +41,8 @@ If TRUE, requires that both models i and j be sampled at least \code{threshpost}
 This function returns a matrix of pairwise Bayes factors, where the Bayes factor is the ratio of marginal likelihoods between two models M_{i} and M_{j}. Numerator models are given as rows, and denominator models as columns. Row names and column names give the number of shifts in the corresponding model. Suppose you have an output matrix with row and column names 0:3 (0, 1, 2, 3). Model 0 is a model with just a single process (starting at the root), and no among-lineage rate heterogeneity. 
 
 If \code{computeBayesFactors} gives a matrix \code{mm}, and \code{mm[2,1]} is 10.0, this implies Bayes factor evidence of 10 in favor of the 2nd row model (a model with 1 process; e.g., \code{rownames(mm)[2]} over the first column model (a model with a single process).
+
+This function has some potential to be misused. In particular, it can be very difficult to approximate either the posterior or prior probability of models that are very rarely sampled. By default (\code{strict = TRUE}), the function requires that each model be sampled at least \code{threshprior} times in the prior simulation, and \code{threshpost} times in the posterior. This will not compute a Bayes factor for pairwise model comparisons where at least one model was sampled less than the threshold arguments. By way of example: suppose you have model M1, with posterior probability of 0.2, and model M0, with posterior probability 0.01. Let the prior odds on M1 be 0.4 and the prior odds on M0 be 0.5. The Bayes factor for model M1 v M2 is simply (0.2 / 0.01) / (0.4 / 0.5), or 
 
 
 }
