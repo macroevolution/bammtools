@@ -49,7 +49,7 @@
 # 
 #   This function can be very difficult to use.
 
-computeBayesFactors <- function(postdata, priordata, burnin = 0.1, modelset = NULL, threshpost = 1, threshprior = 0, nbprior = FALSE, strict=FALSE){
+computeBayesFactors <- function(postdata, priordata, burnin = 0.1, modelset = NULL, threshpost = 1, threshprior = 1, nbprior = FALSE, strict=TRUE){
 
 
 	if (class(postdata) == 'character'){
@@ -73,7 +73,13 @@ computeBayesFactors <- function(postdata, priordata, burnin = 0.1, modelset = NU
  
 	
 	if (is.null(modelset)){
-		modelset <- unique(c(post[,2], prior[,2]));
+		if (strict){
+			modelset <- intersect(unique(post[,2]), unique(prior[,2]));
+		}else{
+			modelset <- unique(c(post[,2], prior[,2]));			
+		}
+		
+
 	}else if (length(modelset) < 2){
 		stop('\nInvalid modelset argument. This must be a vector of length > 1');
 	}else{

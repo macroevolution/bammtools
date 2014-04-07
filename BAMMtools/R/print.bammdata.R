@@ -6,4 +6,5 @@ print.bammdata = function(x, ...)
 	cat("List elements:\n");
 	cat("\t",names(x)[1:10]);
 	cat("\t",names(x)[11:length(x)]);
+	cat('\n');
 }
