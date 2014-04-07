@@ -1,4 +1,4 @@
-plot.bammdata = function (x, method = "phylogram", vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, legend = FALSE, spex = "s", lwd = 1, cex = 1, pal = "RdYlBu", colorbreaks = NULL, logcolor = FALSE, par.reset = TRUE, ...) {
+plot.bammdata = function (x, method = "phylogram", vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, legend = FALSE, spex = "s", lwd = 1, cex = 1, pal = "RdYlBu", mask = integer(0), colorbreaks = NULL, logcolor = FALSE, par.reset = TRUE, ...) {
     if ("bammdata" %in% class(x)) {
     	if (attributes(x)$order != "cladewise") {
     		stop("Function requires tree in 'cladewise' order");
@@ -69,6 +69,9 @@ plot.bammdata = function (x, method = "phylogram", vtheta = 5, rbf = 0.001, show
     y0 <- c(ret$segs[1,2], p[, 3]);
     y1 <- c(ret$segs[1,4], p[, 4]);
     offset <- table(p[, 5])[as.character(unique(p[, 5]))];
+    if (length(mask)) {
+    	edge.color[p[,5] %in% mask] <- gray(0.5);
+    }
     arc.color <- c(edge.color[1], edge.color[match(unique(p[, 5]), p[, 5]) + offset]);
     edge.color <- c(edge.color[1], edge.color);
     if (show) {

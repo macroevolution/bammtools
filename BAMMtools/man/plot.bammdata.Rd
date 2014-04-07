@@ -12,7 +12,8 @@ colors each branch by the estimated rate of speciation, extinction, or trait evo
 \method{plot}{bammdata}(x, method = "phylogram", 
     vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, 
     legend = FALSE, spex="s", lwd = 1, cex = 1, pal = "RdYlBu", 
-    colorbreaks = NULL, logcolor = FALSE, par.reset = TRUE, ...)
+    mask = integer(0), colorbreaks = NULL, logcolor = FALSE, 
+    par.reset = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -56,6 +57,9 @@ a numeric specifying the size of tip labels.
   \item{pal}{
 a character string or vector of mode character that describes the color palette. See
 Details for explanation of options.
+}
+  \item{mask}{
+an optional integer vector of node numbers specifying branches that will be grayed out when plotted.	
 }
   \item{colorbreaks}{
 a numeric vector of percentiles delimiting the bins for mapping rates to colors. If \code{NULL} (default) bins
