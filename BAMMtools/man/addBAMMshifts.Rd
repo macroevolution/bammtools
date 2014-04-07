@@ -10,7 +10,7 @@ macroevolutionary dynamics of diversification or trait evolution.
 }
 \usage{
 addBAMMshifts(ephy, method = 'phylogram', index, 
-	cex = 1, pch = 21, col = 1, bg = 2, par.reset = TRUE)
+	cex = 1, pch = 21, col = 1, bg = 2, msp = NULL, par.reset = TRUE)
 }
 
 \arguments{
@@ -34,6 +34,11 @@ an integer or character string indicating the border color of the plotting symbo
 }
   \item{bg}{
 an integer or character string indicating the background color of the plotting symbol.
+}
+  \item{msp}{
+if not \code{NULL}, an object of class \code{phylo} where each branch length is equal to 
+the marginal probability of a shift occurring on that branch. Plotted points corresponding
+to shifts will be sized by these probabilities.  	
 }
   \item{par.reset}{
 a logical indicating whether to reset the graphical parameters before exiting.
