@@ -10,7 +10,7 @@ macroevolutionary dynamics of diversification or trait evolution.
 }
 \usage{
 addBAMMshifts(ephy, index, method = 'phylogram', 
-	cex = 1, pch = 21, col = 1, bg = 2, msp = NULL, par.reset = TRUE)
+	cex = 1, pch = 21, col = 1, bg = 2, msp = NULL, shiftnodes = NULL, par.reset = TRUE)
 }
 
 \arguments{
@@ -40,6 +40,9 @@ if not \code{NULL}, an object of class \code{phylo} where each branch length is 
 the marginal probability of a shift occurring on that branch. Plotted points corresponding
 to shifts will be sized by these probabilities.  	
 }
+  \item{shiftnodes}{
+an optional vector of node numbers indicating the locations of shifts to plot. 	
+}
   \item{par.reset}{
 a logical indicating whether to reset the graphical parameters before exiting.
 }
@@ -67,7 +70,7 @@ ed <- getEventData(whales, events.whales, burnin=0.25)
 
 #adding shifts to tree for specific posterior samples
 plot(ed, method="polar")
-addBAMMshifts(ed, "polar", index=5)
+addBAMMshifts(ed, index=5, "polar")
 
 #multi-panel plotting and adding shifts
 par(mfrow=c(2,3),mar=c(5,1,1,1))
@@ -75,7 +78,7 @@ samples = sample(1:length(ed$eventData), 6)
 for (i in 1:6) {
 	sed <- subsetEventData(ed, samples[i])
 	plot(sed, par.reset=FALSE)
-	addBAMMshifts(sed,method="phylogram",index=1,par.reset=FALSE)	
+	addBAMMshifts(sed,index=1,method="phylogram",par.reset=FALSE)	
 }
 }
 

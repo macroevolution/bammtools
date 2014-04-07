@@ -1,4 +1,4 @@
-plot.bammdata = function (x, method = "phylogram", vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, legend = FALSE, spex = "s", lwd = 1, cex = 1, pal = "RdYlBu", mask = integer(0), colorbreaks = NULL, logcolor = FALSE, par.reset = TRUE, ...) {
+plot.bammdata <- function (x, method = "phylogram", vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, legend = FALSE, spex = "s", lwd = 1, cex = 1, pal = "RdYlBu", mask = integer(0), colorbreaks = NULL, logcolor = FALSE, par.reset = TRUE, ...) {
     if ("bammdata" %in% class(x)) {
     	if (attributes(x)$order != "cladewise") {
     		stop("Function requires tree in 'cladewise' order");

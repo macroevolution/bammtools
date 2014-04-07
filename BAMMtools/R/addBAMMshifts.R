@@ -1,4 +1,4 @@
-addBAMMshifts = function(ephy, index, method = 'phylogram', cex=1, pch=21, col=1, bg=2, msp = NULL, par.reset=TRUE) {
+addBAMMshifts = function(ephy, index, method = 'phylogram', cex=1, pch=21, col=1, bg=2, msp = NULL, shiftnodes = NULL, par.reset=TRUE) {
 	if (!'bammdata' %in% class(ephy)) stop("Object ephy must be of class bammdata");
 	lastPP <- get("last_plot.phylo", envir = .PlotPhyloEnv);
 	
@@ -10,8 +10,7 @@ addBAMMshifts = function(ephy, index, method = 'phylogram', cex=1, pch=21, col=1
 	if (length(ephy$eventData) == 1){
 		index <- 1;
 	}
-	
-	shiftnodes <- getShiftNodesFromIndex(ephy, index);
+	if (is.null(shiftnodes)) shiftnodes <- getShiftNodesFromIndex(ephy, index);
 	isShift <- ephy$eventData[[index]]$node %in% shiftnodes;
 	times <- ephy$eventData[[index]]$time[isShift];	
 	if (!is.null(msp)) {
