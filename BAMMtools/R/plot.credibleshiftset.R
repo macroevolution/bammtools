@@ -104,6 +104,8 @@ plot.credibleshiftset <- function(x, plotmax=9, method='phylogram', pal = 'RdYlB
     	bg[which(AcDc == FALSE)] <- "red";
 		cex <- 0.75 + 5 * x$marg.probs[as.character(shiftnodes)];
 		if (use.plot.bammdata) {
+			cex <- cex[match(sed$eventData[[1]]$node, shiftnodes, nomatch=0)];
+			shiftnodes <- shiftnodes[match(sed$eventData[[1]]$node, shiftnodes, nomatch=0)];
 			addBAMMshifts(sed, 1, method, cex=cex, bg=transparentColor(bg, 0.5), shiftnodes = shiftnodes, par.reset=FALSE);	
 		}
 		else {

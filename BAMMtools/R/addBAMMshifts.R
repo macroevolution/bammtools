@@ -10,7 +10,9 @@ addBAMMshifts = function(ephy, index, method = 'phylogram', cex=1, pch=21, col=1
 	if (length(ephy$eventData) == 1){
 		index <- 1;
 	}
-	if (is.null(shiftnodes)) shiftnodes <- getShiftNodesFromIndex(ephy, index);
+	
+	if (is.null(shiftnodes))
+		shiftnodes <- getShiftNodesFromIndex(ephy, index)
 	isShift <- ephy$eventData[[index]]$node %in% shiftnodes;
 	times <- ephy$eventData[[index]]$time[isShift];	
 	if (!is.null(msp)) {

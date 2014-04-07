@@ -56,6 +56,11 @@ If the \code{bammdata} object contains just a single sample, these shifts will b
 
 }
 
+\note{
+If a \code{shiftnodes} argument is passed care should be taken to ensure that the nodes are in the same order
+as in the event data for the sample index. 	
+}
+
 \author{
 Mike Grundler
 }
