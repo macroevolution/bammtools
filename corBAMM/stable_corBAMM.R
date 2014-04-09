@@ -92,11 +92,11 @@ Initialize.corBAMM <- function(object, data, ...)
         attr(object, "index") <- 1:dim(data)[1];
     } 
     else {
-        index <- match(rownames(data), phy$tip.label);
+        index <- match(phy$tip.label, rownames(data));
         if (any(is.na(index))) {
             warning("Rownames in data frame do not match tree tip names; data taken to be in the same order as in tree");
             attr(object, "index") <- 1:dim(data)[1];
-        } 
+        }
         else {
             attr(object, "index") <- index;
         }
@@ -117,7 +117,7 @@ corMatrix.corBAMM <- function(object, covariate = getCovariate(object), corr = T
     index <- attr(object, "index");
     psi <- 1/(1+exp(-object[1]));
     if (length(as.vector(object)) == 1) {
-        Em <- psi*Em[index,index] + (1-psi)*Eb[index, index];
+        Em <- psi*Em[index, index] + (1-psi)*Eb[index, index];
     }
     else {
         lambdaTree <- function(Vm, x) {
@@ -129,15 +129,15 @@ corMatrix.corBAMM <- function(object, covariate = getCovariate(object), corr = T
         Em <- switch(attr(object,"type"),
             lambda = {
                 parm <- 1/(1+exp(-object[2]));
-                psi*lambdaTree(Em[index,index],parm) + (1-psi)*Eb[index, index];
+                psi*lambdaTree(Em[index, index], parm) + (1-psi)*Eb[index, index];
             },
             exponential = {
                 parm <- exp(object[2]);
-                psi*Em[index, index] + (1-psi)*exp(-parm*(1-Eb[index,index]));
+                psi*Em[index, index] + (1-psi)*exp(-parm*(1-Eb[index, index]));
             },
             linear = {
                 parm <- exp(object[2]);
-                psi*Em[index,index] + (1-psi)*(1-parm*(1-Eb[index,index]));
+                psi*Em[index, index] + (1-psi)*(1-parm*(1-Eb[index, index]));
             }     
         );
     }
