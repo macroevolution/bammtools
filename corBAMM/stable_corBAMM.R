@@ -30,7 +30,7 @@
 #    value = c(0.5, 0.75)  fixed = FALSE        psi = 0.5(estimated), lambda = 0.75(estimated)
 ##########
 
-corBAMM <- function(value = numeric(0), ephy, form = ~1, fixed = FALSE, type = c("lambda", "exponential", "linear"))
+corBAMM <- function(value = numeric(0), ephy, form = ~1, fixed = FALSE, type = c("Psi", "lambda", "exponential", "linear"))
 {
     if (class(ephy) != "bammdata")
 	    stop("arg 'ephy' is not of class 'bammdata'");
@@ -61,12 +61,23 @@ Initialize.corBAMM <- function(object, data, ...)
             val[1] <- .Machine$double.eps;
         val[1] <- log(val[1]) - log(1-val[1]);
         if (length(val) > 1) {
-            if (attr(object, "type") == "lambda") {
+            if (attr(object, "type") %in% c("Psi","lambda")) {
                 if (val[2] < 0 || val[2] > 1)
-                    stop("lambda must be between 0 and 1");
+                    stop("tau must be between 0 and 1");
                 if (val[2] == 0)
                     val[2] <- .Machine$double.eps;
                 val[2] <- log(val[2]) - log(1-val[2]);
+                if (attr(object, "type") == "lambda") {
+                    if (length(val) > 2) {
+                        if (val[3] < 0 || val[3] > 1)
+                            stop("lambda must be between 0 and 1");
+                        if (val[3] == 0)
+                            val[3] <- .Machine$double.eps;
+                        val[3] <- log(val[3]) - log(1-val[3]);
+                    }
+                    else
+                        val[3] <- log(1);
+                }
             }
             else {
                 if (val[2] < 0)
@@ -74,9 +85,20 @@ Initialize.corBAMM <- function(object, data, ...)
                 val[2] <- log(val[2]);
             }
         }
+        else {
+        	    if (attr(object, "type") == "lambda")
+   	            val[2:3] <- log(1)
+   	        else
+   	            val[2] <- log(0.5);
+        }
     }
     else {
-        val <- log(1);
+        val <- switch(attr(object, "type"), 
+        	    Psi = c(log(1), log(1)),
+        	    lambda = c(log(1), log(1), log(1)),
+        	    exponential = c(log(1), log(0.5)),
+        	    linear = c(log(1), log(0.5))
+        );
     }
     oldAttr <- attributes(object);
     object <- val;
@@ -116,31 +138,33 @@ corMatrix.corBAMM <- function(object, covariate = getCovariate(object), corr = T
         Em <- vcv.phylo(as.phylo.bammdata(attr(object, "bammdata")), corr = TRUE);
     index <- attr(object, "index");
     psi <- 1/(1+exp(-object[1]));
-    if (length(as.vector(object)) == 1) {
-        Em <- psi*Em[index, index] + (1-psi)*Eb[index, index];
+    lambdaTree <- function(Vm, x) {
+        d <- diag(Vm);
+        Vm <- x*Vm;
+        diag(Vm) <- d;
+        return (Vm);
     }
-    else {
-        lambdaTree <- function(Vm, x) {
-            d <- diag(Vm);
-            Vm <- x*Vm;
-            diag(Vm) <- d;
-            Vm
-        }
-        Em <- switch(attr(object,"type"),
-            lambda = {
-                parm <- 1/(1+exp(-object[2]));
-                psi*lambdaTree(Em[index, index], parm) + (1-psi)*Eb[index, index];
-            },
-            exponential = {
-                parm <- exp(object[2]);
-                psi*Em[index, index] + (1-psi)*exp(-parm*(1-Eb[index, index]));
-            },
-            linear = {
-                parm <- exp(object[2]);
-                psi*Em[index, index] + (1-psi)*(1-parm*(1-Eb[index, index]));
-            }     
-        );
-    }
+    Em <- switch(attr(object,"type"),
+        	Psi = {
+        		#psi*Em[index, index] + (1-psi)*Eb[index, index];
+        		Z <- Eb[index,index] >= 1/(1+exp(-object[2]));
+        		Z*Eb[index,index] + (1-Z)*(psi*Em[index, index] + (1-psi)*Eb[index, index]);
+        	},
+        lambda = {
+            parm <- 1/(1+exp(-object[3]));
+            #psi*lambdaTree(Em[index, index], parm) + (1-psi)*Eb[index, index];
+            Z <- Eb[index,index] >= 1/(1+exp(-object[2]));
+            Z*Eb[index,index] + (1-Z)*(psi*lambdaTree(Em[index, index], parm) + (1-psi)*Eb[index, index]);
+        },
+        exponential = {
+            parm <- exp(object[2]);
+            psi*Em[index, index] + (1-psi)*exp(-parm*(1-Eb[index, index]));
+        },
+        linear = {
+            parm <- exp(object[2]);
+            psi*Em[index, index] + (1-psi)*(1-parm*(1-Eb[index, index]));
+        }     
+    );
     return (Em);
 }
 
@@ -155,11 +179,8 @@ coef.corBAMM <- function (object, unconstrained = TRUE, ...)
     if (length(val) == 0) {
         return(val);
     }
-    if (length(val) > 1)
-        names(val) <- switch(attr(object,"type"), lambda = c("psi", "lambda"), exponential = c("psi", "alpha"), linear = c("psi", "beta"))
-    else
-        names(val) <- "psi";
-    return (switch(attr(object,"type"), lambda = lx(val), c(lx(val[1]),exp(val[2]))));
+    names(val) <- switch(attr(object,"type"), Psi = c("psi", "tau"), lambda = c("psi", "tau", "lambda"), exponential = c("psi", "alpha"), linear = c("psi", "beta"))
+    return (switch(attr(object, "type"), Psi = lx(val), lambda = lx(val), c(lx(val[1]),exp(val[2]))));
 }
 
 
