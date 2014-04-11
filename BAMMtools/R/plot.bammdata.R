@@ -1,4 +1,4 @@
-plot.bammdata <- function (x, method = "phylogram", vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, legend = FALSE, spex = "s", lwd = 1, cex = 1, pal = "RdYlBu", mask = integer(0), colorbreaks = NULL, logcolor = FALSE, par.reset = TRUE, ...) {
+plot.bammdata <- function (x, tau = 0.01, method = "phylogram", vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, legend = FALSE, spex = "s", lwd = 1, cex = 1, pal = "RdYlBu", mask = integer(0), mask.color = gray(0.5), colorbreaks = NULL, logcolor = FALSE, par.reset = TRUE, ...) {
     if ("bammdata" %in% class(x)) {
     	if (attributes(x)$order != "cladewise") {
     		stop("Function requires tree in 'cladewise' order");
@@ -13,10 +13,10 @@ plot.bammdata <- function (x, method = "phylogram", vtheta = 5, rbf = 0.001, sho
         warning("Tree contains zero length branches. Rates for these will be NA and coerced to zero");
     }
     if (!("dtrates" %in% names(x))) {
-        x <- dtRates(x, 0.01);
+        x <- dtRates(x, tau);
     }
     if (is.null(colorbreaks)) {
-    	colorbreaks <- assignColorBreaks(x$dtrates$rates, 64, spex, logcolor);
+   	    colorbreaks <- assignColorBreaks(x$dtrates$rates, 64, spex, logcolor);
     }
     if (x$type == "trait") {
         if (sum(is.na(x$dtrates$rates))) {
@@ -35,17 +35,17 @@ plot.bammdata <- function (x, method = "phylogram", vtheta = 5, rbf = 0.001, sho
             x$dtrates$rates[[2]][is.na(x$dtrates$rates[[2]])] <- 0;
         }
         if (tolower(spex) == "s") {
-        	colorobj <- colorMap(x$dtrates$rates[[1]], pal, colorbreaks, logcolor);
+            colorobj <- colorMap(x$dtrates$rates[[1]], pal, colorbreaks, logcolor);
         }
         else if (tolower(spex) == "e") {
-        	colorobj <- colorMap(x$dtrates$rates[[2]], pal, colorbreaks, logcolor);
+            colorobj <- colorMap(x$dtrates$rates[[2]], pal, colorbreaks, logcolor);
         }
         else {
-        	colorobj <- colorMap(x$dtrates$rates[[1]] - x$dtrates$rates[[2]], pal, colorbreaks, logcolor);
+            colorobj <- colorMap(x$dtrates$rates[[1]] - x$dtrates$rates[[2]], pal, colorbreaks, logcolor);
         }
     }
     else {
-    	stop("Unrecognized/corrupt bammdata class. Type does not equal 'trait' or 'diversification'");	
+   	    stop("Unrecognized/corrupt bammdata class. Type does not equal 'trait' or 'diversification'");	
     }
     edge.color <- colorobj$cols;
     tH <- max(branching.times(phy));
@@ -70,7 +70,7 @@ plot.bammdata <- function (x, method = "phylogram", vtheta = 5, rbf = 0.001, sho
     y1 <- c(ret$segs[1,4], p[, 4]);
     offset <- table(p[, 5])[as.character(unique(p[, 5]))];
     if (length(mask)) {
-    	edge.color[p[,5] %in% mask] <- gray(0.5);
+   	    edge.color[p[,5] %in% mask] <- mask.color;
     }
     arc.color <- c(edge.color[1], edge.color[match(unique(p[, 5]), p[, 5]) + offset]);
     edge.color <- c(edge.color[1], edge.color);
