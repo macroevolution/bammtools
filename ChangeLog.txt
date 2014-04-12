@@ -1,9 +1,14 @@
 ChangeLog for BAMMtools 1.0.1
 
+2014-04-12    Pascal Title   ptitle@umich.edu
+
+        Modification: getRateThroughTimeMatrix and plotRateThroughTime now handle
+        start.time and end.time as 'time before present' rather than 'time after root'.
+
 2014-03-22    Pascal Title   ptitle@umich.edu
 
-		Bug fix: getRateThroughTimeMatrix now includes root node when node is specified
-		and nodetype is 'exclude'.
+        Bug fix: getRateThroughTimeMatrix now includes root node when node is specified
+        and nodetype is 'exclude'.
 
 2014-03-14    Dan Rabosky    dan.rabosky@gmail.com
 
