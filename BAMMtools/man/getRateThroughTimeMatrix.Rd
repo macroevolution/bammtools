@@ -17,10 +17,10 @@ getRateThroughTimeMatrix(ephy, start.time = NULL,
 an object of class \code{bammdata}
 }
   \item{start.time}{
-the start time for the time sequence over which rates should be computed. If NULL, starts at time 0
+the start time (in units before present) for the time sequence over which rates should be computed. If NULL, starts at the root
 }
   \item{end.time}{
-the end time for the time sequence over which rates should be computed. If NULL, ends in the present
+the end time (in units before present) for the time sequence over which rates should be computed. If NULL, ends in the present
 }
   \item{nslices}{
 The number of time points at which to compute rate estimates (between \code{start.time} and \code{end.time})

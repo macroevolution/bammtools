@@ -26,7 +26,6 @@ getRateThroughTimeMatrix <- function(ephy, start.time=NULL, end.time=NULL, nslic
 	if (is.null(node)) {
 		nodeset <- c(length(ephy$tip.label)+1, ephy$edge[,2]);
 	} else if (!is.null(node) & nodetype == 'include') {
-		#nodeset <- getDesc(ephy, node)$desc_set;
 		nodeset <- unlist(sapply(node, function(x) getDesc(ephy, x)$desc_set))
 	} else if (!is.null(node) & nodetype == 'exclude') {
 		nodeset <- setdiff( ephy$edge[,2], unlist(sapply(node, function(x) getDesc(ephy, x)$desc_set)));
@@ -38,12 +37,23 @@ getRateThroughTimeMatrix <- function(ephy, start.time=NULL, end.time=NULL, nslic
 	bt <- branching.times(as.phylo.bammdata(ephy));
 	maxpossible <- max(bt[as.character(intersect(nodeset, ephy$edge[,1]))]);
 
+
+	#convert from time before present to node heights
+	if (!is.null(start.time)) {
+		start.time <- max(bt) - start.time;
+	}
+	if (!is.null(end.time)) {
+		end.time <- max(bt) - end.time;
+	}
+
+
 	if (is.null(start.time)) {
 		start.time <- max(bt) - maxpossible;
 	}
 	if (is.null(end.time)) {
 		end.time <- max(bt);
 	}
+	
  
 	tvec <- seq(start.time, end.time, length.out= nslices);
 	#tol = 1*10^-decimals(ephy$eventBranchSegs[[1]][1,2]);
