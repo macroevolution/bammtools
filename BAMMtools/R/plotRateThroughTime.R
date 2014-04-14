@@ -14,8 +14,8 @@
 #	opacity = opacity of color for interval polygons
 #	intervalCol = transparent color for interval polygons
 #	avgCol = color for mean/median line
-#	start.time = start time to be fed to getRateThroughTimeMatrix
-#	end.time = end time to be fed to getRateThroughTimeMatrix
+#	start.time = start time in time before present to be fed to getRateThroughTimeMatrix
+#	end.time = end time in time before present to be fed to getRateThroughTimeMatrix
 #	node = if supplied, the clade descended from this node will be used.
 #	nodetype = supplied to getRateThroughTimeMatrix
 #	plot = boolean: if TRUE, a plot will be returned, if FALSE, the data for the plot will be returned. 
@@ -82,9 +82,15 @@ plotRateThroughTime <- function(ephy, useMedian = TRUE, intervals=seq(from = 0,t
 		ratelabel <- 'net diversification rate';
 	}
 
+	maxTime <- max(rmat$times)
+
+	#remove NaN columns
+	nanCol <- apply(rate, 2, function(x) any(is.nan(x)));
+	rate <- rate[,which(nanCol == FALSE)];
+	rmat$times <- rmat$times[which(nanCol == FALSE)];
+
 	#generate coordinates for polygons
 	rmat$times <- max(rmat$times) - rmat$times;
-	maxTime <- max(rmat$times)
 	if (!is.null(intervals)) {
 		mm <- apply(rate, MARGIN = 2, quantile, intervals);
 
