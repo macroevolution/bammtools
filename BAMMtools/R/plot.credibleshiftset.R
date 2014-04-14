@@ -61,7 +61,7 @@ plot.credibleshiftset <- function(x, plotmax=9, method='phylogram', pal = 'RdYlB
 	    sed <- subsetEventData(cset.bamm, index=x$indices[[i]]);
 		par(mar = c(2,2,2,2));
 		if (use.plot.bammdata) {
-    		plot.bammdata(sed, method=method, pal=pal, colorbreaks=colorbreaks, par.reset=FALSE, ...);
+            plot.bammdata(sed, method=method, pal=pal, spex=spex, colorbreaks=colorbreaks, par.reset=FALSE, ...);
 		}
 		else {
 		    if (method=="polar") method = "fan";
