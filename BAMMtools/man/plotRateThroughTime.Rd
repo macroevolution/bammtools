@@ -12,7 +12,7 @@ plotRateThroughTime(ephy, useMedian = TRUE,
  	ratetype = 'auto', nBins = 100, smooth = FALSE, smoothParam = 0.20, 
  	opacity = 0.01, intervalCol='blue', avgCol='red', start.time = NULL, 
  	end.time = NULL, node = NULL, nodetype='include', plot = TRUE, cex.axis=1, 
- 	cex.lab=1.3, lwd=3, xline=3.5, yline=3.5, mar=c(6,6,1,1), xticks=5, yticks=5, 
+ 	cex.lab=1.3, lwd=3, xline=3.5, yline=3.5, mar=c(6,6,1,1), xticks=NULL, yticks=NULL, 
  	xlim='auto', ylim='auto',add=FALSE, axis.labels=TRUE)
 }
 \arguments{
@@ -82,10 +82,10 @@ margin line for placing y-axis label.
 passed to \code{par()} to set plot margins.
 }
   \item{xticks}{
-number of ticks on the x-axis.
+number of ticks on the x-axis, automatically inferred if \code{NULL}.
 }
   \item{yticks}{
-number of ticks on the y-axis.
+number of ticks on the y-axis, automatically inferred if \code{NULL}.
 }
   \item{xlim}{
 vector of length 2 with min and max times for x axis. X axis is time since present, 
