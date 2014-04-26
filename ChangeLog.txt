@@ -1,5 +1,10 @@
 ChangeLog for BAMMtools 1.0.1
 
+2014-04-25    Pascal Title   ptitle@umich.edu
+        Enhancement: In plotRateThroughTime, if 'xticks' or 'yticks' are set to NULL,
+        numer and locations of tick marks are automatically determined, as per default
+        R plotting behavior. Otherwise, the user can specify a number of tick marks. 
+
 2014-04-12    Pascal Title   ptitle@umich.edu
 
         Modification: getRateThroughTimeMatrix and plotRateThroughTime now handle
