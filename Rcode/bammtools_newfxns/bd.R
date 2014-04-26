@@ -42,17 +42,29 @@ exd <- function(Tend, Tstart, args) {
 #
 # Calculate rate through time plot conditional on expected diversity
 #
-rtt <- function(ephy, nslices = 100) {
-	tH <- max(branching.times(as.phylo.bammdata(ephy)));
-	tvec <- seq(0,tH, length.out = nslices);
+rtt <- function(ephy, nslices = 100, shift.include = NULL, shift.exclude = NULL) {
+	if (is.null(shift.include))
+		shift.include = c(ephy$edge[1,1], ephy$edge[,2]);
+	if (!is.null(shift.exclude))
+		shift.include = setdiff(shift.include, shift.exclude);
+	if (ephy$type == "trait")
+		stop("rtt is specific to diversification BAMM");
+	root <- ephy$Nnode+2;
+	bt <- branching.times(as.phylo.bammdata(ephy));
+	tH <- max(bt);
+	st <- min(tH-bt[as.character(intersect(shift.include,ephy$edge[,1]))]);
+	tvec <- seq(st, tH, length.out = nslices);
 	rt <- matrix(0, length(ephy$eventData), length(tvec));
 	for (i in 1:length(ephy$eventData)) {
 		ed <- ephy$eventData[[i]];
+		ed <- ed[ed$node %in% shift.include,];
+		if (nrow(ed) < 1)
+			next;
 		wts <- matrix(0,nrow(ed),ncol(rt));
 		rts <- matrix(0,nrow(ed),ncol(rt));
 		for (j in 1:nrow(ed)) {
 			k <- which(tvec >= ed[j,2])[1];
-			if (j == 1)
+			if (ed[j,1] == root)
 				wts[j,k:ncol(rt)] <- 2*sapply(tvec[k:ncol(rt)], exd, ed[j,2], as.numeric(ed[j,2:6]))
 			else 
 				wts[j,k:ncol(rt)] <- sapply(tvec[k:ncol(rt)], exd, ed[j,2], as.numeric(ed[j,2:6]));			
