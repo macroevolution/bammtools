@@ -34,6 +34,8 @@ exd <- function(Tend, Tstart, args) {
 		1 - pt(Tend, Tstart, args)*exp(rt(Tend, Tstart, args));
 	}
 	p <- 1-b(Tend, Tstart, args); # parameter of geometric distribution
+	if (p == 0)
+		return (0);
 	return (1/p);                 # expected value of geometric distribution
 }
 
