@@ -51,9 +51,9 @@ rtt <- function(ephy, nslices = 100) {
 		for (j in 1:nrow(ed)) {
 			k <- which(tvec >= ed[j,2])[1];
 			if (j == 1)
-				wts[j,k:ncol(rt)] <- 1/(2*sapply(tvec[k:ncol(rt)], exd, ed[j,2], as.numeric(ed[j,2:6])))
+				wts[j,k:ncol(rt)] <- 2*sapply(tvec[k:ncol(rt)], exd, ed[j,2], as.numeric(ed[j,2:6]))
 			else 
-				wts[j,k:ncol(rt)] <- 1/sapply(tvec[k:ncol(rt)], exd, ed[j,2], as.numeric(ed[j,2:6]));			
+				wts[j,k:ncol(rt)] <- sapply(tvec[k:ncol(rt)], exd, ed[j,2], as.numeric(ed[j,2:6]));			
 			rts[j,k:ncol(rt)] <- sapply(tvec[k:ncol(rt)]-ed[j,2], exponentialRate, ed[j,3],ed[j,4]);
 		}
 		rt[i,] <- colSums(rts*wts)/colSums(wts);
