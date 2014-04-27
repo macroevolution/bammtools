@@ -75,9 +75,12 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", vtheta = 5, rbf 
     arc.color <- c(edge.color[1], edge.color[match(unique(p[, 5]), p[, 5]) + offset]);
     edge.color <- c(edge.color[1], edge.color);
     if (show) {
+    	    op <- par(no.readonly = TRUE);
         if (length(list(...))) {
-            op <- par(no.readonly = TRUE);
             par(...);
+        }
+        if (legend) {
+            par(fig=c(0,0.9,0,1));
         }
         plot.new();
         ofs <- 0;
@@ -105,7 +108,8 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", vtheta = 5, rbf 
             }
         }
         if (legend) {
-            rateLegend(colorobj$colsdensity, logcolor);
+            #rateLegend(colorobj$colsdensity, logcolor);
+            barLegend(pal, colorbreaks);
         }
     }
     index <- order(as.numeric(rownames(ret$segs)));
@@ -116,9 +120,7 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", vtheta = 5, rbf 
         assign("last_plot.phylo", list(type = "fan", Ntip = phy$Nnode + 1, Nnode = phy$Nnode, edge = phy$edge, xx = ret$segs[index, 3], yy = ret$segs[index, 4], theta = ret$segs[index, 5], rb = rb, pp = par(no.readonly = TRUE)), envir = .PlotPhyloEnv);
     }
     if (par.reset) {
-        if (length(list(...))) {
-            par(op);
-        }
+        par(op);
     }
     invisible(list(coords = ret$segs[-1, ], colorbreaks = colorbreaks, colordens = colorobj$colsdensity));
 }

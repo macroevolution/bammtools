@@ -44,7 +44,7 @@ a logical indicating whether or not to plot the tree. Defaults to \code{TRUE}.
 a logical indicating whether or not to plot the tip labels. Defaults to \code{FALSE}.
 }
   \item{legend}{
-a logical indicating whether or not to plot a density function for interpreting the 
+a logical indicating whether or not to plot a legend for interpreting the 
 mapping of evolutionary rates to colors. Defaults to \code{FALSE}.
 }
   \item{spex}{

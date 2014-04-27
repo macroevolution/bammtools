@@ -5,6 +5,7 @@
 \alias{as.bammdata}
 \alias{as.bammdata.credibleshiftset}
 \alias{as.phylo.bammdata}
+\alias{barLegend}
 \alias{branchMeanRateExponential}
 \alias{colorMap}
 \alias{exponentialRate}
@@ -29,6 +30,7 @@
 \alias{setPhyloTreeCoords}
 \alias{setPolarTreeCoords}
 \alias{phylogeneticMean}
+\alias{bammcolors}
 
 \title{Internal BAMMtools functions}
 \description{
