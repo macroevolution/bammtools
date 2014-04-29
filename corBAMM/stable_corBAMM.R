@@ -175,13 +175,16 @@ corMatrix.corBAMM <- function(object, covariate = getCovariate(object), corr = T
 coef.corBAMM <- function (object, unconstrained = TRUE, ...) 
 {
     lx <- function(x) 1/(1+exp(-x));
-    if (attr(object, "fixed") && unconstrained) {
-        return(numeric(0));
+    if (unconstrained) {
+        if (attr(object, "fixed")) 
+            return(numeric(0))
+        else
+            return (as.vector(object));
     }
     val <- as.vector(object)
-    if (length(val) == 0) {
-        return(val);
-    }
+    #if (length(val) == 0) {
+    #    return(val);
+    #}
     names(val) <- switch(attr(object,"type"), Psi = "psi", lambda = c("psi", "lambda"), exponential = c("psi", "alpha"), linear = c("psi", "beta"))
     return (switch(attr(object, "type"), Psi = lx(val), lambda = lx(val), c(lx(val[1]),exp(val[2]))));
 }

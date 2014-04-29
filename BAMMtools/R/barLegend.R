@@ -1,5 +1,6 @@
 barLegend <- function(pal, colorbreaks) {
-	pal <- colorRampPalette(get("palettes",envir=.colorEnv)[[pal]])(length(colorbreaks)-1);
+	if (length(pal) == 1)
+		pal <- colorRampPalette(get("palettes",envir=.colorEnv)[[pal]])(length(colorbreaks)-1);
 	n <- length(pal);
 	x <- seq(0,n,1)/n;
 	x <- rep(x,each=2);
@@ -9,6 +10,9 @@ barLegend <- function(pal, colorbreaks) {
 	plot.new();
 	plot.window(ylim=c(0,1),xlim=c(-0.5,0.5));
 	segments(y0=x[,1],x0=-0.5,y1=x[,2],x1=-0.5,col=pal,lwd=8,lend=2);
-	tx <- colorbreaks[c("0%","50%","100%")];
+	tx <- numeric(3);
+	tx[1] <- min(colorbreaks,na.rm=TRUE);
+	tx[2] <- colorbreaks[median(1:length(colorbreaks))];
+	tx[3] <- max(colorbreaks,na.rm=TRUE); 
 	axis(4,at=c(0,0.5,1),labels=signif(tx,1),line=-3, las=1);
 }
