@@ -13,7 +13,7 @@ colors each branch by the estimated rate of speciation, extinction, or trait evo
     vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, 
     legend = FALSE, spex="s", lwd = 1, cex = 1, pal = "RdYlBu", 
     mask = integer(0), mask.color = gray(0.5), colorbreaks = NULL, logcolor = FALSE, 
-    par.reset = TRUE, ...)
+    par.reset = TRUE, direction = "rightwards", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -76,6 +76,9 @@ should colors be plotted on a log scale.
 }
   \item{par.reset}{
 a logical indicating whether or not to reset the graphical parameters when the function exits. Defaults to \code{TRUE}. The function will only reset the graphical parameters if arguments are passed via \dots.
+}
+  \item{direction}{
+a character string. Options are "rightwards", "leftwards", "upwards", and "downwards", which determine the orientation of the tips when the phylogeny plotted.  	
 }
   \item{\dots}{
 further arguments passed to \code{par}.

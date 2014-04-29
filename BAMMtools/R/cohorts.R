@@ -37,12 +37,3 @@ cohorts <- function(x, ephy, col, pal, lwd = 1, use.plot.bammdata = TRUE, useras
 	barLegend(col, quantile(seq(min(x),max(x),length.out=ncolors+1),probs=seq(min(x),max(x),length.out=ncolors+1)));
 	par(op);
 }
-
-data(whales,events.whales);
-ed <- getEventData(whales,events.whales,0.1);
-cormat <- getCohortMatrix(ed);
-
-cohorts(cormat,ed);
-cohorts(cormat,ed,use.plot.bammdata=FALSE);
-cohorts(cormat,ed,col=terrain.colors(64));
-cohorts(cormat,ed,pal="RdYlGn");
