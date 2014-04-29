@@ -106,9 +106,11 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", vtheta = 5, rbf 
         	}
         	else if (direction == "leftwards") {
         		bars <- redirect(cbind(x0,y0,x1,y1),pi);
+        		bars[,c(2,4)] <- abs(bars[,c(2,4)]);
             	arcs <- redirect(ret$arcs,pi);
+            	arcs[,c(2,4)] <- abs(arcs[,c(2,4)]);
 				xlim <- rev(-1*c(0, 1 + ofs));
-				ylim <- rev(-1*c(0, phy$Nnode * 1/(phy$Nnode + 1)));
+				ylim <- c(0, phy$Nnode * 1/(phy$Nnode + 1));
         	}
         	else if (direction == "downwards") {
         		bars <- redirect(cbind(x0,y0,x1,y1),-pi/2);
@@ -118,8 +120,10 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", vtheta = 5, rbf 
         	}
         	else if (direction == "upwards") {
         		bars <- redirect(cbind(x0,y0,x1,y1),pi/2);
+        		bars[,c(1,3)] <- abs(bars[,c(1,3)]);
             	arcs <- redirect(ret$arcs,pi/2);
-        		xlim <- rev(-1*c(0, phy$Nnode * 1/(phy$Nnode + 1)));
+            	arcs[,c(1,3)] <- abs(arcs[,c(1,3)]);
+        		xlim <- c(0, phy$Nnode * 1/(phy$Nnode + 1));
         		ylim <- c(0, 1 + ofs);
         	}     
             plot.window(xlim = xlim, ylim = ylim);
