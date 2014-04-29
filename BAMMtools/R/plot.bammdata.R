@@ -30,21 +30,9 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", vtheta = 5, rbf 
    	    colorbreaks <- assignColorBreaks(x$dtrates$rates, 64, spex, logcolor);
     }
     if (x$type == "trait") {
-        if (sum(is.na(x$dtrates$rates))) {
-            warning(sprintf("Found %d NA phenotypic rates. Coercing to zero.", sum(is.na(x$dtrates$rates))));
-            x$dtrates$rates[is.na(x$dtrates$rates)] <- 0;
-        }
     	colorobj <- colorMap(x$dtrates$rates, pal, colorbreaks, logcolor);
     }
     else if (x$type == "diversification") {
-        if (sum(is.na(x$dtrates$rates[[1]]))) {
-            warning(sprintf("Found %d NA speciation rates. Coercing to zero.", sum(is.na(x$dtrates$rates[[1]]))));
-            x$dtrates$rates[[1]][is.na(x$dtrates$rates[[1]])] <- 0;
-        }
-        if (sum(is.na(x$dtrates$rates[[2]]))) {
-            warning(sprintf("Found %d NA extinction rates. Coercing to zero.", sum(is.na(x$dtrates$rates[[2]]))));
-            x$dtrates$rates[[2]][is.na(x$dtrates$rates[[2]])] <- 0;
-        }
         if (tolower(spex) == "s") {
             colorobj <- colorMap(x$dtrates$rates[[1]], pal, colorbreaks, logcolor);
         }

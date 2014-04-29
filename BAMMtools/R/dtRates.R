@@ -53,12 +53,24 @@ dtRates <- function (ephy, tau, ism = NULL, tmat = FALSE) {
             dtrates[[i]] <- dtrates[[i]][as.character(index)];
             names(dtrates[[i]]) <- NULL;
         }
+        if (sum(is.na(dtrates[[1]]))) {
+            warning(sprintf("Found %d NA speciation rates. Coercing to zero.", sum(is.na(dtrates[[1]]))));
+            dtrates[[1]][is.na(dtrates[[1]])] <- 0;
+        }
+        if (sum(is.na(dtrates[[2]]))) {
+            warning(sprintf("Found %d NA extinction rates. Coercing to zero.", sum(is.na(dtrates[[2]]))));
+            dtrates[[2]][is.na(dtrates[[2]])] <- 0;
+        }
     }
     else if (ephy$type == "trait") {
         dtrates <- .Call("dtrates", ephy, segmat, tol, ism, 1L, PACKAGE = "BAMMtools");
         names(dtrates) <- rownames(segmat);
         dtrates <- dtrates[as.character(index)];
         names(dtrates) <- NULL;
+        if (sum(is.na(dtrates))) {
+            warning(sprintf("Found %d NA phenotypic rates. Coercing to zero.", sum(is.na(dtrates))));
+            dtrates[is.na(dtrates)] <- 0;
+        }
     }
     else {
     	stop("Unrecognized model type");
