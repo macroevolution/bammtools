@@ -10,11 +10,11 @@ summary.credibleshiftset <- function(object, ...) {
 	}
 	
 	xvec <- numeric(object$number.distinct);
-	dd <- data.frame(rank=1:object$number.distinct, probability = xvec, cumulative=xvec, N_shifts=xvec);
+	dd <- data.frame(rank=1:object$number.distinct, probability = xvec, cumulative=xvec, Core_shifts=xvec);
 	for (i in 1:nrow(dd)){
 		dd$probability[i] <- object$frequency[i];
 		dd$cumulative[i] <- object$cumulative[i];
-		dd$N_shifts[i] <- length(object$shiftnodes[[i]]);
+		dd$Core_shifts[i] <- length(object$shiftnodes[[i]]);
 	}
 	
 	
@@ -33,6 +33,9 @@ summary.credibleshiftset <- function(object, ...) {
 		cat('from the credible set. You can access the full set from your \n');
 		cat('credibleshiftset object\n');
 	}
+	
+	cat('\n')
+	
 	invisible(dd);
 }
 
