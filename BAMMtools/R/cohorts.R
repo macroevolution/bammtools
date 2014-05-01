@@ -1,11 +1,12 @@
 cohorts <- function(x, ephy, col, pal, lwd = 1, use.plot.bammdata = TRUE, useraster = FALSE) {
 	op <- par(no.readonly = TRUE);
 	figs <- matrix(c(0,0.2,0.8,1,
-	                 0.2,1,0.8,1,
+	                 0.2,0.95,0.8,1,
 	                 0,0.2,0,0.8,
-	                 0.2,1,0,0.8
+	                 0.2,0.95,0,0.8,
+	                 0.95,1,0.25,0.75
 	                 ), byrow=TRUE,
-	               nrow=4, ncol=4);
+	               nrow=5, ncol=4);
 	LARGE <- 500;
 	if (dim(x)[1] > LARGE)
 		useraster <- TRUE;
@@ -34,6 +35,6 @@ cohorts <- function(x, ephy, col, pal, lwd = 1, use.plot.bammdata = TRUE, useras
 		plot(0,0,type="n",axes=FALSE,ann=FALSE,xlim=c(1,length(gl)-1),ylim=c(1,length(gl)-1))
 		image(gl,gl,x,axes=FALSE,xlab="",ylab="",col=col,xlim=c(1,length(gl)-1),ylim=c(1,length(gl)-1),add=TRUE,useRaster=useraster);
 	}
-	barLegend(col, quantile(seq(min(x),max(x),length.out=ncolors+1),probs=seq(min(x),max(x),length.out=ncolors+1)));
+	barLegend(col, quantile(seq(min(x),max(x),length.out=ncolors+1),probs=seq(min(x),max(x),length.out=ncolors+1)),fig=figs[5,],side=2);
 	par(op);
 }

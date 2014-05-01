@@ -137,7 +137,7 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", vtheta = 5, rbf 
         }
         if (legend) {
             #rateLegend(colorobj$colsdensity, logcolor);
-            barLegend(pal, colorbreaks);
+            barLegend(pal, colorbreaks, fig=c(0.9,1,0.25,0.75), side=2);
         }
     }
     index <- order(as.numeric(rownames(ret$segs)));
