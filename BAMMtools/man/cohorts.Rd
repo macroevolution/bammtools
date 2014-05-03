@@ -27,6 +27,9 @@ the help file for \code{plot.bammdata}.
   \item{lwd}{
 a numeric indicating the width of branches in the phylogeny.  	
 }
+  \item{use.plot.bammdata}{
+logical. should phylorate plot be used?  	
+}
   \item{useraster}{
 a logical indicating whether the function \code{image} should plot the matrix 
 as a raster.  	

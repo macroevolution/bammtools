@@ -30,7 +30,8 @@
 \alias{setPhyloTreeCoords}
 \alias{setPolarTreeCoords}
 \alias{phylogeneticMean}
-\alias{bammcolors}
+\alias{palettes}
+\alias{redirect}
 
 \title{Internal BAMMtools functions}
 \description{
