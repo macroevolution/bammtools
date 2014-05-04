@@ -36,6 +36,8 @@ summary.credibleshiftset <- function(object, ...) {
 	
 	cat('\n')
 	
+
+	
 	invisible(dd);
 }
 

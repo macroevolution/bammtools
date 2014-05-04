@@ -9,14 +9,23 @@ getBranchShiftPriors <- function(phy, priordata){
 		stop("invalid priordata argument (wrong class) in getBranchShiftPriors\n");
 	}
 	
-	tx <- cumsum(table(prior$N_shifts) / nrow(prior));
-	tx <- as.numeric(names(tx[tx >=  0.95][1]));
+	tx <- table(prior$N_shifts) / nrow(prior);
 	
-	wts <- phy$edge.length / sum(phy$edge.length);
-
+	tx <- tx[names(tx) != '0'];
+	ns <- as.numeric(names(tx));
+	
+	pvec <- phy$edge.length / sum(phy$edge.length);
+	
+	pp <- numeric(length(phy$edge.length));
+	
+	for (i in 1:length(tx)){
+		
+		pp <- pp + (1 - dbinom(0, ns[i], prob=pvec))*tx[i];
+		
+	}
+	
 	obj <- phy;	
-	obj$edge.length <- wts * tx;
-	obj$criterion <- 0.95;
+	obj$edge.length <- pp;
 	class(obj) <- 'branchprior';
 	return(obj);
 }

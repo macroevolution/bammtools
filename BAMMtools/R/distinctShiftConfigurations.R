@@ -6,10 +6,11 @@
 #  if so, add to list
 # Returns:
 #	$marg.probs = marginal probs for nodes
+#	$bayesfactors = branch-specific BF for shift
 #	$shifts = unique shift sets
 #	$samplesets = list of sample indices that reduce to each of the unique shift sets
 #	$frequency = vector of frequencies of each shift configuration
-#	$threshold = marginal prob threshold for nodes (ignores all nodes less than this value)
+#	$bfthreshold = bayes factor threshold for shifts
 #	
 #	Results are sorted by frequency. 
 #	$frequency[1] gives the most common shift config sampled
@@ -18,18 +19,27 @@
 
 
 
-distinctShiftConfigurations <- function(ephy, threshold) {
-	mm <- marginalShiftProbsTree(ephy);
+distinctShiftConfigurations <- function(ephy, prior, BFcriterion, ... ) {
 	
-	if (class(threshold) == 'branchprior'){
-		goodnodes <- mm$edge[,2][mm$edge.length >= threshold$edge.length];
-	}else if (class(threshold) == 'numeric'){
-		goodnodes <- mm$edge[,2][mm$edge.length >= threshold];		
-	}else{
-		stop('Threshold is of wrong class\n');
+	if (hasArg(threshold)){
+		cat("Argument < threshold > has been deprecated. It is \nreplaced");
+		cat(" by the argument < bfthreshold >, \nwhich uses an explicit Bayes factor")
+		cat(" criterion to identify core shifts.\n Please see help on this function")
+		cat(" ( ?distinctShiftConfigurations )\n\n");
+		cat("Apologies for the change, but the new way is much better...\n")
+		stop();
+		
 	}
 	
+	if (class(prior) != 'branchprior'){
+		stop("object prior not of class branchprior");
+	}
 	
+	bf <- bayesFactorBranches(ephy, prior);
+	
+	mm <- marginalShiftProbsTree(ephy);
+
+	goodnodes <- bf$edge[,2][bf$edge.length >= BFcriterion];
 
 	xlist <- list();
 	for (i in 1:length(ephy$eventData)) {
@@ -67,10 +77,12 @@ distinctShiftConfigurations <- function(ephy, threshold) {
 	obj <- list();
 	obj$marg.probs <- mm$edge.length;  
 	names(obj$marg.probs) <- mm$edge[,2]; 
+	obj$bayesfactors <- bf$edge.length;
+	names(obj$bayesfactors) <- bf$edge[,2];
 	obj$shifts <- ulist[ord]; 
 	obj$samplesets <- treesets[ord];
 	obj$frequency <- freqs[ord];
-	obj$threshold <- threshold;
+	obj$BFcriterion <- BFcriterion;
 
 	class(obj) <- 'bammshifts';
 	
