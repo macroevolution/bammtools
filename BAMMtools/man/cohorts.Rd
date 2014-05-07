@@ -7,7 +7,7 @@ Visualize macroevolutionary cohorts
 Plots the matrix of pairwise correlations in rate regimes between all tips in a phylogeny
 }
 \usage{
-cohorts(x, ephy, col, pal, lwd = 1, use.plot.bammdata = TRUE, useraster = FALSE)
+cohorts(x, ephy, col, pal, lwd = 1, ofs = 0, use.plot.bammdata = TRUE, useraster = FALSE, LARGE = 500)
 }
 \arguments{
   \item{x}{
@@ -27,12 +27,20 @@ the help file for \code{plot.bammdata}.
   \item{lwd}{
 a numeric indicating the width of branches in the phylogeny.  	
 }
+  \item{ofs}{
+a numeric controlling the offset of the phylogeny from the matrix plot. Appropriate
+values will probably be in the interval [0,0.1].  	
+}
   \item{use.plot.bammdata}{
-logical. should phylorate plot be used?  	
+logical. should a phylorate plot be generated?  	
 }
   \item{useraster}{
 a logical indicating whether the function \code{image} should plot the matrix 
 as a raster.  	
+}
+  \item{LARGE}{
+an integer. If trees have more tips than \code{LARGE}, \code{useraster} will be
+coerced to \code{TRUE}.  	
 }
 }
 
@@ -50,5 +58,8 @@ ed <- getEventData(whales, events.whales, 0.1)
 x <- getCohortMatrix(ed)
 cohorts(x, ed)
 cohorts(x, ed, col=richColors(64))
+cohorts(x, ed, ofs=0.05, col=richColors(64))
 cohorts(x, ed, pal="temperature", col=richColors(64))
+# gray scale
+cohorts(x, ed, col=gray(seq(0.2,0.9,length.out=128)), use.plot.bammdata=FALSE)
 }

@@ -1,13 +1,12 @@
-cohorts <- function(x, ephy, col, pal, lwd = 1, use.plot.bammdata = TRUE, useraster = FALSE) {
+cohorts <- function(x, ephy, col, pal, lwd = 1, ofs = 0, use.plot.bammdata = TRUE, useraster = FALSE, LARGE = 500) {
 	op <- par(no.readonly = TRUE);
 	figs <- matrix(c(0,0.2,0.8,1,
-	                 0.2,0.95,0.8,1,
-	                 0,0.2,0,0.8,
+	                 0.2,0.95,0.8+ofs,1,
+	                 0,0.2-ofs,0,0.8,
 	                 0.2,0.95,0,0.8,
 	                 0.95,1,0.25,0.75
 	                 ), byrow=TRUE,
 	               nrow=5, ncol=4);
-	LARGE <- 500;
 	if (dim(x)[1] > LARGE)
 		useraster <- TRUE;
 	if (missing(pal))
