@@ -75,7 +75,7 @@ are calculated from the rates that are passed with the \code{bammdata} object.
 should colors be plotted on a log scale.
 }
   \item{par.reset}{
-a logical indicating whether or not to reset the graphical parameters when the function exits. Defaults to \code{TRUE}. The function will only reset the graphical parameters if arguments are passed via \dots.
+a logical indicating whether or not to reset the graphical parameters when the function exits. Defaults to \code{TRUE}. If you notice weird placement of points or labels after the function exits retry with this argument set to \code{FALSE}.
 }
   \item{direction}{
 a character string. Options are "rightwards", "leftwards", "upwards", and "downwards", which determine the orientation of the tips when the phylogeny plotted.  	
