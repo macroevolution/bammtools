@@ -54,7 +54,15 @@ getRateThroughTimeMatrix <- function(ephy, start.time=NULL, end.time=NULL, nslic
 		end.time <- max(bt);
 	}
 	
- 
+ 	#remove node from nodeset to prevent branch leading up to node from being included
+	# This is only an issue if start.time occurs before node.
+	if (!is.null(node)) {
+		if (nodetype == 'include') {
+			nodeset <- nodeset[nodeset != node];
+		}
+	}
+
+	
 	tvec <- seq(start.time, end.time, length.out= nslices);
 	#tol = 1*10^-decimals(ephy$eventBranchSegs[[1]][1,2]);
 	tol <- 0.00001
@@ -162,6 +170,15 @@ getRateThroughTimeMatrix <- function(ephy, start.time=NULL, end.time=NULL, nslic
 	# goodTime <- function (vec, val, tol) {
 		# (vec[,2] - val <= tol) & (val - vec[,3] <= tol);
 	# }	
+	
+	# #remove node from nodeset to prevent branch leading up to node from being included
+	# # This is only an issue if start.time occurs before node.
+	# if (!is.null(node)) {
+		# if (nodetype == 'include') {
+			# nodeset <- nodeset[nodeset != node];
+		# }
+	# }
+
 	
 	# mm <- matrix(NA, nrow=length(ephy$eventBranchSegs), ncol=length(tvec));
 	# mumat <- matrix(NA, nrow=length(ephy$eventBranchSegs), ncol=length(tvec));
