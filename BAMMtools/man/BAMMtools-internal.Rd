@@ -5,6 +5,7 @@
 \alias{as.bammdata}
 \alias{as.bammdata.credibleshiftset}
 \alias{as.phylo.bammdata}
+\alias{as.phylo.branchprior}
 \alias{barLegend}
 \alias{branchMeanRateExponential}
 \alias{colorMap}

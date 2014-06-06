@@ -2,8 +2,8 @@
 
 subsetEventData <- function(ephy, index) {
 	
-	if (class(ephy) != 'bammdata' & class(ephy) != 'credibleshiftset') {
-		stop("Object ephy must be of class 'bammdata or credibleshiftset'\n");
+	if (class(ephy) != 'bammdata') {
+		stop("Object ephy must be of class bammdata\n");
 	}
 	
 	nsamples <- length(ephy$eventData);

@@ -116,8 +116,11 @@ Some color-blind unfriendly options include
 \code{temperature} \cr
 \code{terrain} \cr
 }
-For more information about these color palettes visit \code{colorbrewer2.org} and 
-\code{geography.uoregon.edu/datagraphics/color_scales.htm} or use the help files of the R packages \code{RColorBrewer} and \code{dichromat}.
+For more information about these color palettes visit \code{colorbrewer2.org} and
+
+\code{geography.uoregon.edu/datagraphics/color_scales.htm} 
+
+or use the help files of the R packages \code{RColorBrewer} and \code{dichromat}.
 
 Additionally, any vector of valid named colors may also be used. The only restriction is that the length of this vector be greater than or equal to three. The colors should be ordered from cool to warm as the colors will be mapped from low rates to high rates in the order supplied (e.g. \code{pal=c("darkgreen","yellow2","red")}). The option \code{pal = "temperature"} uses the \code{rich.colors} function written by Arni Magnusson for the R package \code{gplots}.
 

@@ -8,27 +8,37 @@ Computes the 95\% (or any other \%) credible set of macroevolutionary rate shift
 
 }
 \usage{
-credibleShiftSet(ephy, threshold, set.limit = 0.95)
+credibleShiftSet(ephy, prior, BFcriterion = 5, set.limit = 0.95, ...)
 }
 \arguments{
   \item{ephy}{
 an object of class \code{bammdata}
 }
-  \item{threshold}{
-Either an object of class \code{branchprior}, or a numeric value giving the marginal probability threshold for including nodes in the enumeration of distinct shift configurations. See \code{\link{getBranchShiftPriors}}
+\item{prior}{
+An object of class \code{branchprior}. See \code{\link{getBranchShiftPriors}}
 }
-  \item{set.limit}{
+\item{BFcriterion}{
+The Bayes factor criterion for including nodes as core shifts in the enumeration of distinct shift configurations.
+}
+ 
+\item{set.limit}{
 the desired limit to the credible set. A value of 0.95 will return the 95\% credible set of shift configurations.
 }
+\item{...}{
+Other arguments to \code{credibleShiftSet}
+}
+
 }
 \details{
 Computes the 95\% credible set (or XX\% credible set, depending on \code{set.limit}) of diversification shift configurations sampled using BAMM. This is analogous to a credible set of phylogenetic tree topologies from a Bayesian phylogenetic analysis. 
 
-To understand how this calculation is performed, one must first distinguish between "core" and "non-core" rate shifts. Because the BAMM algorithm is always proposing (and deleting) shifts during simulation of the posterior, it is often the case that - for any sample - there is at least one non-core shift that has been proposed and accepted but which is not really improving the ability to model the data. Hence, such non-core shift locations will have extremely low marginal probabilities overall. Core shifts are those that do contribute to the ability to model the data and which are favored in the posterior as they improve the posterior probability of the data. 
+To understand how this calculation is performed, one must first distinguish between "core" and "non-core" rate shifts. A "core shift" is a rate shift with a marginal probability that is substantially elevated above the probability expected on the basis of the prior alone. With BAMM, every branch in a phylogenetic tree is associated with some non-zero prior probability of a rate shift. Typically this is a very low per-branch shift probability (this prior is determined by the value of the "poissonRatePrior" parameter in a BAMM analysis). 
 
-If we compute distinct shift configurations with every sampled shift (including those shifts with very low marginal probabilities), the number of distinct shift configurations will be overwhelmingly high. However, most of these configurations are functionally identical because they contain the same core shifts and differ only in non-core shifts that have very low marginal probabilities. 
+If we compute distinct shift configurations with every sampled shift (including those shifts with very low marginal probabilities), the number of distinct shift configurations will be overwhelmingly high. However, most of these configurations include shifts with marginal probabilities that are expected even under the prior alone. Hence, using these shifts to identify distinct shift configurations simply generates noise and isn't particularly useful.
 
-By specifying a \code{threshold} argument, the user can choose to ignore shifts with low probabilities during enumeration of distinct shift configurations. Ideally, you should include a \code{branchprior} object for this argument (see function \code{\link{getBranchShiftPriors}}). This will essentially ignore all rate shifts with marginal probabilities less than expected under the prior alone. Shifts are thus retained only if their marginal probability is greater than expected under the prior.
+The solution adopted in BAMMtools is, for each branch in the phylogeny, to compute both the posterior and prior probabilities of a rate shift occurring. The ratio of these probabilities is a branch-specific Bayes factor: it is the posterior probability of a rate shift normalized by the corresponding prior probability. Hence, any branch with a Bayes factor value of 1.0 is one where the observed (posterior) odds of a rate shift are no different from the prior odds. A value of 10 implies that the posterior probability is 10 times the prior probability. 
+
+The user of \code{credibleShiftSet} must specify a \code{BFcriterion} argument. This is simply a Bayes factor cutoff value for identifying "important" shifts for the purposes of identifying distinct shift configurations. See the online documentation on this topic available at \code{www.bamm-project.org} for more information. If you specify \code{BFcriterion = 5} as an argument to \code{credibleShiftSet}, the function will ignore all shifts with Bayes factors less than 5 during the enumeration of topologically distinct shift configurations. Only shifts with a Bayes factor value greater than or equal to \code{BFcriterion} will be treated as core shifts for the purposes of identifying distinct shift configurations.
 
 For each shift configuration in the credible set, this function will compute the average diversification parameters. For example, the most frequent shift configuration (the maximum a posteriori shift configuration) might have 3 shifts, and 150 samples from your posterior (within the \code{bammdata} object) might show this shift configuration. However, the parameters associated with each of these shift configurations (the actual evolutionary rate parameters) might be different for every sample. This function returns the mean set of rate parameters for each shift configuration, averaging over all samples from the posterior that can be assigned to a particular shift configuration.
 
@@ -54,15 +64,20 @@ A list of vectors containing the indices of samples in the \code{bammdata} objec
 Like \code{frequency}, but contains the cumulative frequencies
 }
 
-\item{threshold}{
-Threshold for identifying "core" shifts.  
+\item{BFcriterion}{
+The Bayes factor criterion used during enumeration of distinct shift configurations.
 }
+
 \item{number.distinct}{
 Number of distinct shift configurations in the credible set
 }
 
 \item{set.limit}{
 which credible set is this (0.9, 0.95, etc)?
+}
+
+\item{coreshifts}{
+A vector of node numbers corresponding to the core shifts. All of these nodes have a Bayes factor of at least \code{BFcriterion} supporting a rate shift.
 }
 
 In addition, a number of components that are defined similarly in class \code{phylo} or class \code{bammdata} objects:
@@ -152,7 +167,7 @@ ed <- getEventData(whales, events.whales)
 # Here we get the prior distribution on branch-specific shifts:
 priordist <- getBranchShiftPriors(whales, prior.whales)
 
-cset <- credibleShiftSet(ed, threshold = priordist)
+cset <- credibleShiftSet(ed, prior = priordist, BFcriterion = 5)
 
 # Here is the total number of samples in the posterior:
 length(ed$eventData)
