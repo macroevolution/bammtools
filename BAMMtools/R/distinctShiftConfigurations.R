@@ -82,6 +82,7 @@ distinctShiftConfigurations <- function(ephy, prior, BFcriterion, ... ) {
 	obj$shifts <- ulist[ord]; 
 	obj$samplesets <- treesets[ord];
 	obj$frequency <- freqs[ord];
+	obj$coreshifts <- goodnodes;
 	obj$BFcriterion <- BFcriterion;
 
 	class(obj) <- 'bammshifts';

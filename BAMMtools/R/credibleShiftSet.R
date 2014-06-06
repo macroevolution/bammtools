@@ -1,6 +1,6 @@
 
 # Feb 28 2014
-credibleShiftSet <- function(ephy, prior, BFcriterion, set.limit=0.95, ...){
+credibleShiftSet <- function(ephy, prior, BFcriterion = 5, set.limit=0.95, ...){
 	
 	if (hasArg(threshold)){
 		cat("Argument < threshold > has been deprecated. It is \nreplaced");
@@ -32,6 +32,7 @@ credibleShiftSet <- function(ephy, prior, BFcriterion, set.limit=0.95, ...){
  	ephy$indices <- indices;
  	ephy$frequency <- frequency;
  	ephy$cumulative <- cumulative;
+ 	ephy$coreshifts <- dsc$coreshifts;
  	ephy$BFcriterion <- BFcriterion;
  	ephy$set.limit <- set.limit;
  	ephy$number.distinct <- length(indices);

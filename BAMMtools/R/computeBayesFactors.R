@@ -1,61 +1,19 @@
-#############################################################
-#	computeBayesFactors
-#
-#
-#   postdata		=   MCMC output file from regular BAMM run
-#				 			e.g., with sampleFromPriorOnly = 0
-#							OR a dataframe			
-#
-#	priordata		=	MCMC output file from running BAMM with 
-#                           sampleFromPriorOnly = 1
-#							OR a dataframe
-#
-#
-#	burnin				=	How many samples from posterior to discard
-#							Uses fraction (e.g, 0.25 = 25% discarded)
-#							Will also discard this same fraction from the prior.
-#			
-#	modelset			=	Integer set corresponding to models for which
-#							you wish to compute pairwise Bayes Factors
-#							e.g., 0:2 will compute all pairwise BF between models 
-#							with 0 to 2 process 
-#							(0 is a model with zero non-root processes)
-#							If is.null(modelset), this will assume modelset consists of 
-#							all sampled models
-#	
-#
-#  threshpost, threshprior	=   Will only compute BF for a model comparison where 
-#	 						at least one of the models has been sampled at least
-#							thresh times. This avoids comparisons between two models
-#							that were very rarely or never sampled, which always implies
-#							highly inaccurate posterior or prior probabilities	  
-#							This runs into trouble in some cases.  
-#	strict 		        =   logical. If TRUE, requires that both 
-#							models i and j be sampled 
-#							at least threshpost or threshprior times.
-#
-#
-#   Returns:  matrix w pairwise Bayes Factors
-#			  BF_{i, j} is the Bayes factor between model i (numerator)
-#							and model j (denominator)
-#
-#	By default, odds ratios are computed as 
-#			(prior_odds_M2  + 1   ) / (prior_odds_M1 + 1)
-#		     where the 1 is added to both numerator and denominator 
-#			 to avoid divide by zero erros 
-#	
-#   Dependency on BAMM MCMC output: if order of output columns 
-#		changes, it will break this function.
-# 
-#   This function can be very difficult to use.
 
-computeBayesFactors <- function(postdata, priordata, burnin = 0.1, modelset = NULL, threshpost = 1, threshprior = 1, nbprior = FALSE, strict=TRUE){
+computeBayesFactors <- function(postdata, priordata, burnin = 0.1, modelset = NULL, ...){
+
+	if (hasArg(strict) | hasArg(threshpost) | hasArg(threshprior) | hasArg(nbprior)){
+ 		cat("Error - you have specified some argument names that have been deprecated\n");
+ 		cat("in this version of BAMMtools. Check the help file on this function\n");
+ 		cat("to see what has changed\n\n");
+		stop();
+		
+	}
 
 
 	if (class(postdata) == 'character'){
-		post <- read.csv(postdata, header=T);
+		dpost <- read.csv(postdata, header=T);
 	}else if (class(postdata) == 'data.frame'){
-		post <- postdata;
+		dpost <- postdata;
 	}else{
 		stop("invalid postdata argument (wrong class) in computeBayesFactors\n");
 	}
@@ -68,97 +26,60 @@ computeBayesFactors <- function(postdata, priordata, burnin = 0.1, modelset = NU
 		stop("invalid priordata argument (wrong class) in computeBayesFactors\n");
 	}
  
-	post <- post[floor(burnin*nrow(post)):nrow(post), ];
-	prior <- prior[floor(burnin*nrow(prior)):nrow(prior), ];
+	dpost <- dpost[floor(burnin*nrow(dpost)):nrow(dpost), ];
  
+	tx <- table(dpost$N_shifts) / nrow(dpost);
 	
-	if (is.null(modelset)){
-		if (strict){
-			modelset <- intersect(unique(post[,2]), unique(prior[,2]));
-		}else{
-			modelset <- unique(c(post[,2], prior[,2]));			
+	post <- data.frame(N_shifts=as.numeric(names(tx)), prob=as.numeric(tx));
+	
+ 	### Restrict to set of models that have been sampled:
+ 	
+ 	inboth <- intersect(prior$N_shifts, post$N_shifts);
+ 
+ 	if (length(inboth) == 0){
+ 		cat("No overlap between models sampled during simulation of the prior\n");
+ 		cat("and those sampled during simulation of posterior\n");
+		cat("Bayes factors cannot be computed in this case due to difficulty\n");
+		cat("approximating model probabilities for (very) rarely sampled models\n");
+		stop();
+ 	}else{
+ 		prior <- prior[prior$N_shifts %in% inboth, ];
+ 		post <- post[post$N_shifts %in% inboth, ];
+ 	}
+	
+	not.in.obs <- setdiff(modelset, inboth);
+	
+	if (!is.null(modelset)){
+		inboth <- intersect(inboth, modelset);
+		if (length(inboth) == 0){
+			cat("No overlap between sampled models and those for which\n");
+			cat("you wish to compute Bayes factors\n");
+			stop();
+		}else if (length(not.in.obs) > 0){
+			cat("\nThe modelset you specified includes models that were not sampled by BAMM\n");
+			cat("Consequently, you cannot estimate their probabilities with any degree\n");
+			cat("of accuracy. They will be excluded from the Bayes factor matrix.\n\n");
 		}
-		
-
-	}else if (length(modelset) < 2){
-		stop('\nInvalid modelset argument. This must be a vector of length > 1');
-	}else{
-		
-	}	
-	
-
-	tprior <- table(prior[,2]);	
-
-
-
-
-	tpost <- table(post[,2]);
-	
-	
-	modelset <- sort(modelset);
-	
-	mset <- as.character(modelset);
-
-	
-	postf <- numeric(length(modelset));
-	names(postf) <- mset;
-	inboth <- intersect(mset, names(tpost));
-	postf[inboth] <- tpost[inboth];
-	
-	priorf <- numeric(length(modelset));
-	names(priorf) <- mset;
-	inboth <- intersect(mset, names(tprior));
-	priorf[inboth] <- tprior[inboth];
-	
-	mm <- matrix(NA, nrow=length(mset), ncol=length(mset));
-	rownames(mm) <- mset;
-	colnames(mm) <- mset;
-	
-	if (length(modelset) < 2){
-		stop('\nError. Invalid model choice - is rank of specified model too high?\n');
-	}
-	
+	} 
  
-	
-	
-	for (i in 1:length(modelset)){
-		
-		for (j in 1:length(modelset)){
-					
-			if (nbprior){
-				prior_odds <- priorf[i] / priorf[j];				
-			}else{
-				prior_odds <- (priorf[i] + 1) / (priorf[j] + 1);				
-			}
-			post_odds <- (postf[i] + 1) / (postf[j] + 1);
-			
-			ix <- modelset[i];
-			ij <- modelset[j];
+	mm <- matrix(NA, nrow=length(inboth), ncol=length(inboth));
+	rownames(mm) <- inboth;
+	colnames(mm) <- inboth;
  
+	for (i in 1:length(inboth)){
+			mi <- inboth[i];
+		for (j in 1:length(inboth)){
 			
-			if (!strict){
-				isGood1 <- (sum(post[,2] == ix) >= threshpost) | (sum(post[,2] == ij) >= threshpost); 
-				isGood2 <- (sum(prior[,2] == ix) >= threshprior) | (sum(prior[,2] == ij) >= threshprior); 
-		
-				if (isGood1 & isGood2){
-					mm[i , j] <- post_odds / prior_odds;	
-				}				
-			}else{
-				# All models must be sampled at least once.
-				isGood1 <- (sum(post[,2] == ix) >= threshpost) & (sum(post[,2] == ij) >= threshpost); 
-				isGood2 <- (sum(prior[,2] == ix) >= threshprior) & (sum(prior[,2] == ij) >= threshprior); 				
+			mj <- inboth[j];
 				
-				if (isGood1 & isGood2){
-					mm[i , j] <- post_odds / prior_odds;	
-				}					
-			}
+			prior_odds <- prior$prob[prior$N_shifts == mi] / prior$prob[prior$N_shifts == mj];
+			post_odds <- post$prob[post$N_shifts == mi] / post$prob[post$N_shifts == mj];
 			
-
+			mm[i,j] <- post_odds * (1 / prior_odds);
 			
 		}	
 		
 	}
-
 	
 	return(mm);
 	

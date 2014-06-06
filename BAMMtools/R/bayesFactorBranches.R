@@ -15,7 +15,16 @@ bayesFactorBranches <- function(ephy, priordata){
 	}
 
 	tree <- mprobs;
-	tree$edge.length <- mprobs$edge.length / prior$edge.length;
+	
+	post_shift <- mprobs$edge.length;
+	prior_shift <- prior$edge.length;
+	
+	post_noshift <- 1 - mprobs$edge.length;
+	prior_noshift <- 1 - prior$edge.length;
+	
+	bf <- (post_shift / post_noshift) * (prior_noshift / prior_shift);
+
+	tree$edge.length <- bf;
 	return(tree);
 }
 
