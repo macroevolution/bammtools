@@ -52,7 +52,7 @@ rates. Ignored if \code{ephy$type = "trait"}.
 A rate shift configuration is the set of nodes of the phylogeny where a shift occurs in the macroevolutionary rate dynamic of diversification or trait evolution. Each posterior sample is a potentially distinct rate shift configuration.
 Different configurations may imply different macroevolutionary scenarios. This function helps visualize the different distinct rate shift configurations sampled by BAMM.
 
-A core shift configuration is defined by a set of nodes that have a marginal shift probability greater than some threshold value that is specified in the function \code{distinctShiftConfigurations}. It is almost certain that more than one core shift configuration will be sampled by BAMM. Moreover, each core shift configuration may contain many subconfigurations. A subconfiguration contains the core shift node configuration and zero or more additional shift nodes that occur with low marginal probability.  
+A core shift configuration is defined by a set of nodes that have shift probabilities that are substantially elevated relative to what you expect under the prior alone. These core configurations are inferred in \code{distinctShiftConfigurations}. It is almost certain that more than one core shift configuration will be sampled by BAMM. Moreover, each core shift configuration may contain many subconfigurations. A subconfiguration contains the core shift node configuration and zero or more additional shift nodes that occur with low marginal probability.  
 
 Points are added to the branches subtending the nodes of each rate configuration. The size of the point is proportional to the marginal probability that a shift occurs on a specific branch. If the instantaneous rate at a shift's origin represents an initial increase above the ancestral instantaneous rate the point is red. If the instantaneous rate at a shift's origin represents an initial decrease below the ancestral instantaneous rate the point is blue.   
 	
@@ -75,7 +75,7 @@ ed <- getEventData(whales, events.whales, burnin=0.25)
 # Here we get prior for identifying "significant" (core) rate shifts
 priordist <- getBranchShiftPriors(whales, prior.whales)
 
-sc <- distinctShiftConfigurations(ed, threshold=priordist)
+sc <- distinctShiftConfigurations(ed, prior = priordist, BFcriterion = 5)
 
 plot(sc, ed)
 }

@@ -58,7 +58,7 @@ ed <- getEventData(whales, events.whales)
  
 data(prior.whales)
 bp <- getBranchShiftPriors(whales, prior.whales)
-cset <- credibleShiftSet(ed, threshold = bp)
+cset <- credibleShiftSet(ed, bp)
 summary(cset)
 
 }

@@ -52,7 +52,7 @@ ed <- getEventData(whales, events.whales)
 # Get branch-specific cutoffs for identifying branches with 
 #	elevated shift probabilities:
 bprior <- getBranchShiftPriors(whales, prior.whales)
-cset <- credibleShiftSet(ed, threshold = bprior)
+cset <- credibleShiftSet(ed, bprior)
 
 # Here is the total number of samples in the posterior:
 length(ed$eventData)

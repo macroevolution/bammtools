@@ -8,7 +8,7 @@ Computes the 95\% (or any other \%) credible set of macroevolutionary rate shift
 
 }
 \usage{
-credibleShiftSet(ephy, prior, bfthreshold, set.limit = 0.95, ...)
+credibleShiftSet(ephy, prior, BFcriterion = 5, set.limit = 0.95, ...)
 }
 \arguments{
   \item{ephy}{
@@ -74,6 +74,10 @@ Number of distinct shift configurations in the credible set
 
 \item{set.limit}{
 which credible set is this (0.9, 0.95, etc)?
+}
+
+\item{coreshifts}{
+A vector of node numbers corresponding to the core shifts. All of these nodes have a Bayes factor of at least \code{BFcriterion} supporting a rate shift.
 }
 
 In addition, a number of components that are defined similarly in class \code{phylo} or class \code{bammdata} objects:

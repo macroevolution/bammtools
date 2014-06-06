@@ -8,7 +8,7 @@ Identify distinct rate shift configurations
 Identify topologically distinct rate shift configurations that were sampled with BAMM, and assign each sample in the posterior to one of the distinct shift configurations.	
 }
 \usage{
-distinctShiftConfigurations(ephy, prior, BFcriterion)
+distinctShiftConfigurations(ephy, prior, BFcriterion, ...)
 }
 \arguments{
 	\item{ephy}{
@@ -18,8 +18,11 @@ distinctShiftConfigurations(ephy, prior, BFcriterion)
 		an object of class \code{branchprior}
 	}
 	
-	\item{bfthreshold}{
+	\item{BFcriterion}{
 		Numeric value for the Bayes factor threshold used to identify branches with elevated shift probabilities relative to prior
+	}
+	\item{...}{
+		Other arguments to distinctShiftConfigurations (possibly deprecated args)
 	}
 }
 
@@ -41,7 +44,10 @@ A list of sample indices that reduce to each of the unique shift sets.
 \item{frequency}{
 A vector of frequencies of each distinct shift configuration	.
 }
-\item{bfthreshold}{
+\item{coreshifts}{
+A vector of node numbers corresponding to the core shifts. All of these nodes have a Bayes factor of at least \code{BFcriterion} supporting a rate shift.
+}
+\item{BFcriterion}{
 A single numeric value giving the Bayes factor threshold used during enumeration of distinct shift configurations
 }	
 Results are sorted by frequency:

@@ -38,15 +38,12 @@ This is a "quick and dirty" tool for identifying approximately acceptable priors
 The general rules applied here are: 
 
 For the \code{lambdaInitPrior}, we estimate the speciation rate of the data under a pure birth model. We then set this prior to give an exponential distribution with a mean five times greater than this computed pure birth speciation estimate.
-
-For the \code{lambdaInitRootPrior} (this is the prior on the speciation rate for the root of the tree), we place a stronger prior on the data. Specifically, we set the prior on the root lambdaInit value to an exponential distribution with a mean equal to the observed pure-birth estimate of speciation. It can be a good idea to make this prior relatively informative. 
-
+ 
 The \code{lambdaShiftPrior} is the standard deviation of the normal prior on the exponential change parameter k. We set the prior distribution based on the age of the root of the tree. We set the standard deviation of this distribution such that 2 standard deviations give a parameter that will yield a 90\% decline in the initial speciation rate between the root of the tree and the tips. The basic model is lambda(t) = lambda_0 * exp(k * t). This is a straightforward calculation: let x = -log(0.1) / TMAX, where TMAX is the age of the tree. Then set the standard deviation equal to (x / 2).
 
-We set \code{muInitPrior} equal to \code{lambdaInitPrior}. Also, \code{muInitRootPrior} equal 
-to \code{lambdaInitRootPrior}.
+We set \code{muInitPrior} equal to \code{lambdaInitPrior}.  
 
-For trait evolution, we first compute the maximum likelihood estimate of the variance of a Brownian motion process of trait evolution. The prior \code{betaInitPrior} is then set to an exponential distribution with a mean 5 times greater than this value (similar to what is done for lambda and mu, above). The \code{betaInitRootPrior} is set to a distribution with a mean equal to the Brownian variance, and the \code{betaShiftPrior} is parameterized identically to \code{lambdaShiftPrior} above.
+For trait evolution, we first compute the maximum likelihood estimate of the variance of a Brownian motion process of trait evolution. The prior \code{betaInitPrior} is then set to an exponential distribution with a mean 5 times greater than this value (similar to what is done for lambda and mu, above).  
 
 This function generates an output file containing a prior parameters block that can be pasted directly into the priors section of your \code{BAMM} control file.
 

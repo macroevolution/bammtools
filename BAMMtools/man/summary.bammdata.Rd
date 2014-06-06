@@ -7,7 +7,7 @@ Summary of rate shift results from \code{BAMM} analysis.
 Summarizes the posterior distribution on the number of shifts.
 }
 \usage{
-\method{summary}{bammdata}(object, display = 10, ...)
+\method{summary}{bammdata}(object, display = 10, print=T, ...)
 }
 \arguments{
   \item{object}{
@@ -16,6 +16,9 @@ an object of class \code{bammdata}.
 
   \item{display}{
 an integer for the number of rows of the posterior to display.
+}
+\item{print}{
+	Print summary of shift distribution in console window?
 }
 \item{...}{
 	additional arguments (unused).
