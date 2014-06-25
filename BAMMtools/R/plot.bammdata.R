@@ -17,6 +17,12 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", vtheta = 5, rbf 
         phy <- as.phylo.bammdata(x);
     }
     else stop("Object ephy must be of class bammdata");
+    
+    if (length(pal) == 1 & pal %in% colors()){
+    	pal <- rep(pal, 3);
+    }
+    
+    
     if (!is.binary.tree(phy)) {
         stop("Function requires fully bifurcating tree");
     }
