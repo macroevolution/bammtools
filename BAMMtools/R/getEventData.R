@@ -4,6 +4,8 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 		stop("Invalid 'type' specification. Should be 'diversification' or 'trait'");
 	}
 	
+	phy$node.label <- NULL;
+	
 	if (any(is.null(c(phy$begin, phy$end)))) {
 		phy = getStartStopTimes(phy);
 	}
