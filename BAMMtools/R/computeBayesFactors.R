@@ -1,7 +1,7 @@
 
 computeBayesFactors <- function(postdata, priordata, burnin = 0.1, modelset = NULL, ...){
 
-	if (hasArg(strict) | hasArg(threshpost) | hasArg(threshprior) | hasArg(nbprior)){
+	if (hasArg("strict") | hasArg("threshpost") | hasArg("threshprior") | hasArg("nbprior")){
  		cat("Error - you have specified some argument names that have been deprecated\n");
  		cat("in this version of BAMMtools. Check the help file on this function\n");
  		cat("to see what has changed\n\n");

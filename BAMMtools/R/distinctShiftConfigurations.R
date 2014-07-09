@@ -21,7 +21,7 @@
 
 distinctShiftConfigurations <- function(ephy, prior, BFcriterion, ... ) {
 	
-	if (hasArg(threshold)){
+	if (hasArg("threshold")){
 		cat("Argument < threshold > has been deprecated. It is \nreplaced");
 		cat(" by the argument < BFcriterion >, \nwhich uses an explicit Bayes factor")
 		cat(" criterion to identify core shifts.\n Please see help on this function")
