@@ -10,7 +10,8 @@ macroevolutionary dynamics of diversification or trait evolution.
 }
 \usage{
 addBAMMshifts(ephy, index = 1, method = 'phylogram', 
-	cex = 1, pch = 21, col = 1, bg = 2, msp = NULL, shiftnodes = NULL, par.reset = TRUE)
+	cex = 1, pch = 21, col = 1, bg = 2, msp = NULL, 
+		shiftnodes = NULL, par.reset = TRUE)
 }
 
 \arguments{

@@ -7,7 +7,8 @@ Visualize macroevolutionary cohorts
 Plots the matrix of pairwise correlations in rate regimes between all tips in a phylogeny
 }
 \usage{
-cohorts(x, ephy, col, pal, lwd = 1, ofs = 0, use.plot.bammdata = TRUE, useraster = FALSE, LARGE = 500)
+cohorts(x, ephy, col, pal, lwd = 1, ofs = 0, use.plot.bammdata = TRUE, 
+			useraster = FALSE, LARGE = 500)
 }
 \arguments{
   \item{x}{
