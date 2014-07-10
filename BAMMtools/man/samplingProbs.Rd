@@ -54,7 +54,8 @@ The first line must contain the overall sampling fraction for the phylogeny and 
 
 \examples{
 #Generate dummy data
-tree <- read.tree(text="(((t1:2,(t2:1,t3:1):1):1,((t4:1,t5:1):1,t6:2):1):1,(t7:3,(t8:2,t9:2):1):1);")
+tree <- read.tree(text="(((t1:2,(t2:1,t3:1):1):1,((t4:1,t5:1):1,t6:2):1):1,
+(t7:3,(t8:2,t9:2):1):1);")
 tree$tip.label <- paste(rep('Species',9),1:9,sep='')
 
 spTable <- as.data.frame(matrix(nrow=9,ncol=2))
