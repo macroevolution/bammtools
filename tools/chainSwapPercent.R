@@ -38,8 +38,6 @@ chainSwapPercent <- function(bammPath = 'bamm', controlfile, nChains = 4, deltaT
 	for (i in 1:length(nChains)) {
 		for (j in 1:length(deltaT)) {
 			for (k in 1:length(swapPeriod)) {
-				counter <- counter + 1
-				setTxtProgressBar(pb, counter)
 				id <- paste('TMP', round(runif(1)*100000), sep='_')
 				call <- paste(bammPath, '-c', controlfile, '--numberOfGenerations', as.integer(nGenerations), '--numberOfChains', nChains[i], '--swapPeriod', swapPeriod[k], '--deltaT', deltaT[j], '--outName', id, '--simulatePriorShifts', '0', sep=' ')
 				if (.Platform$OS.type != 'windows') {
@@ -53,6 +51,9 @@ chainSwapPercent <- function(bammPath = 'bamm', controlfile, nChains = 4, deltaT
 				resVec <- c(nChains[i], deltaT[j], swapPeriod[k], mean(data), sum(data), length(data))
 				res <- rbind(res, resVec)
 				file.remove(list.files(pattern = id))
+				counter <- counter + 1
+				setTxtProgressBar(pb, counter)
+
 			}
 		}
 	}
