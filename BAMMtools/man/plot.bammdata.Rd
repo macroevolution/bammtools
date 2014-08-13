@@ -10,10 +10,10 @@ colors each branch by the estimated rate of speciation, extinction, or trait evo
 }
 \usage{
 \method{plot}{bammdata}(x, tau = 0.01, method = "phylogram", 
-    vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, 
+    xlim = NULL, ylim = NULL, vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, 
     legend = FALSE, spex="s", lwd = 1, cex = 1, pal = "RdYlBu", 
     mask = integer(0), mask.color = gray(0.5), colorbreaks = NULL, logcolor = FALSE, 
-    par.reset = TRUE, direction = "rightwards", ...)
+    par.reset = FALSE, direction = "rightwards", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,6 +28,17 @@ a character string indicating the method for plotting the phylogenetic tree.
 \code{method = "phylogram"} (default) plots the phylogenetic tree using rectangular 
 coordinates. 
 \code{method = "polar"} plots the phylogenetic tree using polar coordinates.
+}
+  \item{xlim}{
+a numeric vector of coordinates for the x-axis endpoints. Defaults to NULL, in which case 
+they are calculated automatically. The x-axis corresponds to time when the phylogeny is
+plotted facing to the left or to the right. The time at the root equals zero.  
+}
+  \item{ylim}{
+a numeric vector of coordinates for the y-axis endpoints. Defaults to NULL, in which case 
+they are calculated automatically. Tips are plotted at integer values beginning from zero 
+and stepping by one when the phylogeny is plotted facing to the left or to the 
+right.
 }
   \item{vtheta}{
 a numeric indicating the angular separation (in degrees) of the first and last
@@ -75,7 +86,7 @@ are calculated from the rates that are passed with the \code{bammdata} object.
 should colors be plotted on a log scale.
 }
   \item{par.reset}{
-a logical indicating whether or not to reset the graphical parameters when the function exits. Defaults to \code{TRUE}. If you notice weird placement of points or labels after the function exits retry with this argument set to \code{FALSE}.
+a logical indicating whether or not to reset the graphical parameters when the function exits. Defaults to \code{FALSE}. 
 }
   \item{direction}{
 a character string. Options are "rightwards", "leftwards", "upwards", and "downwards", which determine the orientation of the tips when the phylogeny plotted.  	
@@ -150,10 +161,7 @@ A matrix of the kernel density estimates (column 2) of evolutionary rates (colum
 \author{
 Mike Grundler
 }
-\note{
-If arguments to \code{par} are specified in \code{\dots} the function resets \code{par} variables before
-returning unless \code{multi = TRUE}.
-}
+
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
@@ -202,8 +210,8 @@ plot(ed, lwd = 3, spex = "s") #internally calls dtRates and assignColorBreaks
 # xx <- plot(ed, show=FALSE) #individual plots will have a color map relative to the mean
 # for (i in 1:6) {
 # 	ed <- dtRates(ed, 0.005, samples[i])
-# 	plot(ed, par.reset=FALSE, colorbreaks=xx$colorbreaks)
-# 	addBAMMshifts(ed,index=samples[i],method="phylogram",par.reset=FALSE)	
+# 	plot(ed, colorbreaks=xx$colorbreaks)
+# 	addBAMMshifts(ed,index=samples[i],method="phylogram")	
 # }
 # dev.off()
 #

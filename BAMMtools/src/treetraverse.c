@@ -152,9 +152,11 @@ void setpolartreecoords(int * anc, int * desc, int * ndorder, int * ntip, int * 
 
 void setphylotreecoords(int * anc, int * desc, int * ndorder, double * bl, int * ntip, int * rootnd, int * nnode, double * bar, double * xy, double * root) {
 	int i, j, d, ne = *nnode - 1;
-	double dy = 1./(*ntip);
+	//double dy = 1./(*ntip);
 	int * ci;
 	ci = Calloc(2, int);
+	
+	int cntr = 0;
 	
 	for (i = 0; i < *nnode; i++) {
 		d = 0;
@@ -162,15 +164,18 @@ void setphylotreecoords(int * anc, int * desc, int * ndorder, double * bl, int *
 			for (j = 0; j < ne; j++) {
 				if (desc[j] == ndorder[i]) {
 					xy[j + ne * 0] = 1. - bl[j];
-					xy[j + ne * 1] = (ndorder[i] - 1) * dy;
+					//xy[j + ne * 1] = (ndorder[i] - 1) * dy;
+					xy[j + ne * 1] = cntr;
 					xy[j + ne * 2] = 1.;
-					xy[j + ne * 3] = (ndorder[i] - 1) * dy;
+					//xy[j + ne * 3] = (ndorder[i] - 1) * dy;
+					xy[j + ne * 3] = cntr;
 					
 					bar[j + ne * 0] = 0.;
 					bar[j + ne * 1] = 0.;
 					bar[j + ne * 2] = 0.;
 					bar[j + ne * 3] = 0.;
-
+					
+					cntr++;
 					break;
 				}
 			}

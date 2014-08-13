@@ -9,7 +9,7 @@ redirect <- function(coord, theta) {
 	return (tmp);
 }
 
-plot.bammdata <- function (x, tau = 0.01, method = "phylogram", vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, legend = FALSE, spex = "s", lwd = 1, cex = 1, pal = "RdYlBu", mask = integer(0), mask.color = gray(0.5), colorbreaks = NULL, logcolor = FALSE, par.reset = TRUE, direction = "rightwards", ...) {
+plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, ylim = NULL, vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, legend = FALSE, spex = "s", lwd = 1, cex = 1, pal = "RdYlBu", mask = integer(0), mask.color = gray(0.5), colorbreaks = NULL, logcolor = FALSE, par.reset = FALSE, direction = "rightwards", ...) {
     if ("bammdata" %in% class(x)) {
     	if (attributes(x)$order != "cladewise") {
     		stop("Function requires tree in 'cladewise' order");
@@ -90,7 +90,7 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", vtheta = 5, rbf 
         plot.new();
         ofs <- 0;
         if (labels) {
-            ofs <- max(nchar(phy$tip.label) * 0.03 * cex);
+            ofs <- max(nchar(phy$tip.label) * 0.03 * cex * tH);
         }
         if (method == "polar") {
             plot.window(xlim = c(-1, 1) + c(-rb, rb) + c(-ofs, ofs), ylim = c(-1, 1) + c(-rb, rb) + c(-ofs, ofs), asp = 1);
@@ -107,38 +107,84 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", vtheta = 5, rbf 
         	if (direction == "rightwards") {
         		bars <- redirect(cbind(x0,y0,x1,y1),0);
             	arcs <- redirect(ret$arcs,0);
-        		xlim <- c(0, 1 + ofs);
-        		ylim <- c(0, phy$Nnode * 1/(phy$Nnode + 1));	
+            	bars[,c(1,3)] <- tH * bars[,c(1,3)];
+            	arcs[,c(1,3)] <- tH * arcs[,c(1,3)];
+            	
+            	# xlim <- c(0, 1 + ofs);
+        		# ylim <- c(0, phy$Nnode * 1/(phy$Nnode + 1));
+            	
+            	ret$segs[-1, c(1,3)] <- tH * ret$segs[-1, c(1,3)]; 
+            	        	
         	}
         	else if (direction == "leftwards") {
         		bars <- redirect(cbind(x0,y0,x1,y1),pi);
         		bars[,c(2,4)] <- abs(bars[,c(2,4)]);
             	arcs <- redirect(ret$arcs,pi);
             	arcs[,c(2,4)] <- abs(arcs[,c(2,4)]);
-				xlim <- rev(-1*c(0, 1 + ofs));
-				ylim <- c(0, phy$Nnode * 1/(phy$Nnode + 1));
+            	
+
+            	bars[,c(1,3)] <- tH * bars[,c(1,3)];
+            	arcs[,c(1,3)] <- tH * arcs[,c(1,3)];
+            	
+            	
+            	ret$segs[-1, c(1,3)] <- -tH * ret$segs[-1, c(1,3)];
+            	
+				# xlim <- rev(-1*c(0, 1 + ofs));
+				# ylim <- c(0, phy$Nnode * 1/(phy$Nnode + 1));
         	}
         	else if (direction == "downwards") {
         		bars <- redirect(cbind(x0,y0,x1,y1),-pi/2);
             	arcs <- redirect(ret$arcs,-pi/2);
-            	xlim <- c(0, phy$Nnode * 1/(phy$Nnode + 1));
-            	ylim <- rev(-1*c(0, 1 + ofs));	
+            	
+            	bars[,c(2,4)] <- tH * bars[,c(2,4)];
+            	arcs[,c(2,4)] <- tH * arcs[,c(2,4)];
+            	
+            	
+            	ret$segs <- redirect(ret$segs, -pi/2);
+            	ret$segs[,c(2,4)] <- tH * ret$segs[,c(2,4)];
+            	
+            	# xlim <- c(0, phy$Nnode * 1/(phy$Nnode + 1));
+            	# ylim <- rev(-1*c(0, 1 + ofs));	
         	}
         	else if (direction == "upwards") {
         		bars <- redirect(cbind(x0,y0,x1,y1),pi/2);
         		bars[,c(1,3)] <- abs(bars[,c(1,3)]);
             	arcs <- redirect(ret$arcs,pi/2);
             	arcs[,c(1,3)] <- abs(arcs[,c(1,3)]);
-        		xlim <- c(0, phy$Nnode * 1/(phy$Nnode + 1));
-        		ylim <- c(0, 1 + ofs);
-        	}     
+            	
+            	bars[,c(2,4)] <- tH * bars[,c(2,4)];
+            	arcs[,c(2,4)] <- tH * arcs[,c(2,4)];
+            	
+            	ret$segs <- redirect(ret$segs, pi/2);
+            	ret$segs[,c(1,3)] <- abs(ret$segs[,c(1,3)]);
+            	ret$segs[,c(2,4)] <- tH * ret$segs[,c(2,4)];
+            	
+        		# xlim <- c(0, phy$Nnode * 1/(phy$Nnode + 1));
+        		# ylim <- c(0, 1 + ofs);
+        	}
+        	if (is.null(xlim) && direction == "rightwards") xlim <- c(0, tH + ofs);
+        	if (is.null(xlim) && direction == "leftwards") xlim <- c(-(tH + ofs), 0);
+        	if (is.null(ylim) && (direction == "rightwards" || direction == "leftwards")) ylim <- c(0, phy$Nnode);  
+        	
+        	if (is.null(xlim) && (direction == "upwards" || direction == "downwards")) xlim <- c(0, phy$Nnode);
+        	if (is.null(ylim) && direction == "upwards") ylim <- c(0, tH + ofs);
+        	if (is.null(ylim) && direction == "downwards") ylim <- c(-(tH + ofs), 0);  
+        	
+        	   
             plot.window(xlim = xlim, ylim = ylim);
             segments(bars[-1,1], bars[-1,2], bars[-1,3], bars[-1,4], col = edge.color[-1], lwd = lwd, lend = 2);
             isTip <- phy$edge[, 2] <= phy$Nnode + 1;
             isTip <- c(FALSE, isTip);
             segments(arcs[!isTip, 1], arcs[!isTip, 2], arcs[!isTip, 3], arcs[!isTip, 4], col = arc.color[!isTip], lwd = lwd, lend = 2);  
             if (labels) {
-                text(ret$segs[-1, ][phy$edge[, 2] <= phy$Nnode + 1, 3], ret$segs[-1, ][phy$edge[, 2] <= phy$Nnode + 1, 4], phy$tip.label, cex = cex, pos = 4, offset = 0.25);
+                if (direction == "rightwards")
+ 	                text(ret$segs[isTip, 3], ret$segs[isTip, 4], phy$tip.label[phy$edge[isTip[-1],2]], cex = cex, pos = 4, offset = 0.25)
+                else if (direction == "leftwards")
+                    text(ret$segs[isTip, 3], ret$segs[isTip, 4], phy$tip.label[phy$edge[isTip[-1],2]], cex = cex, pos = 2, offset = 0.25)
+                else if (direction == "upwards")
+                    text(ret$segs[isTip, 3], ret$segs[isTip, 4], phy$tip.label[phy$edge[isTip[-1],2]], cex = cex, pos = 4, srt = 90, offset = 0)
+                else if (direction == "downwards")
+                    text(ret$segs[isTip, 3], ret$segs[isTip, 4], phy$tip.label[phy$edge[isTip[-1],2]], cex = cex, pos = 2, srt = 90, offset = 0);
             }
         }
         if (legend) {
@@ -148,7 +194,7 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", vtheta = 5, rbf 
     }
     index <- order(as.numeric(rownames(ret$segs)));
     if (method == "phylogram") {
-        assign("last_plot.phylo", list(type = "phylogram", direction = "rightwards", Ntip = phy$Nnode + 1, Nnode = phy$Nnode, edge = phy$edge, xx = ret$segs[index, 3], yy = ret$segs[index, 4], pp = par(no.readonly = TRUE)), envir = .PlotPhyloEnv);
+        assign("last_plot.phylo", list(type = "phylogram", direction = direction, Ntip = phy$Nnode + 1, Nnode = phy$Nnode, edge = phy$edge, xx = ret$segs[index, 3], yy = ret$segs[index, 4], pp = par(no.readonly = TRUE)), envir = .PlotPhyloEnv);
     }
     else if (method == "polar") {
         assign("last_plot.phylo", list(type = "fan", Ntip = phy$Nnode + 1, Nnode = phy$Nnode, edge = phy$edge, xx = ret$segs[index, 3], yy = ret$segs[index, 4], theta = ret$segs[index, 5], rb = rb, pp = par(no.readonly = TRUE)), envir = .PlotPhyloEnv);

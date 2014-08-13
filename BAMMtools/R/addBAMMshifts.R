@@ -20,11 +20,13 @@ addBAMMshifts = function(ephy, index = 1, method = 'phylogram', cex=1, pch=21, c
 	}
 	
 	if (method == 'phylogram') {
-		if (max(lastPP$xx) <= 1) {
-			XX <- times/max(branching.times(as.phylo.bammdata(ephy)));
-		} else {
-			XX <- times;
-		}
+		###  obsolete b/c plot.bammdata no longer scales each axis to a max of 1. now behaves like plot.phylo
+		# if (max(lastPP$xx) <= 1) {
+		# 	XX <- times/max(branching.times(as.phylo.bammdata(ephy)));
+		# } else {
+		# 	XX <- times;
+		# }
+		XX <- times;
 		YY <- lastPP$yy[shiftnodes];
 	} else if (method == 'polar') {
 		rb <- lastPP$rb;
