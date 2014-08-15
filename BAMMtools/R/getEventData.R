@@ -133,7 +133,9 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 
  		tmpEventSegMat <- matrix(0, nrow=(max(phy$edge) + nrow(dftemp) - 2), ncol=4);
  		
-		non.root <- c(1:length(phy$tip.label), (length(phy$tip.label)+2):max(phy$edge));
+		#non.root <- c(1:length(phy$tip.label), (length(phy$tip.label)+2):max(phy$edge));
+		non.root <- c(1:length(phy$tip.label), unique(phy$edge[,1]));
+		non.root <- non.root[-match(length(phy$tip.label)+1, non.root)];
 		pos <- 1;	
 		
 		is_noEventBranch = !(phy$edge[,2] %in% dftemp$node);
