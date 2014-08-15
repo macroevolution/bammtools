@@ -14,6 +14,7 @@ cohorts <- function(x, ephy, col, pal, lwd = 1, ofs = 0, use.plot.bammdata = TRU
 	if (missing(col))
 		col <- colorRampPalette(get("palettes",.colorEnv)[["RdYlBu"]])(64);
 	ncolors <- length(col);
+	breaks <- quantile(seq(0,1.01,length.out=100),probs=seq(0,1,length.out=ncolors+1));
 	if (use.plot.bammdata) {               
 		par(fig = figs[2,], new=FALSE, mar = c(0,0,1,4));
 		plot(ephy, pal=pal,lwd=lwd,direction="downwards");
@@ -21,7 +22,7 @@ cohorts <- function(x, ephy, col, pal, lwd = 1, ofs = 0, use.plot.bammdata = TRU
 		plot(ephy,pal=pal,lwd=lwd,direction="rightwards")
 		par(fig = figs[4,], new=TRUE, mar = c(5,0,0,4));
 		plot(0,0,type="n",axes=FALSE,ann=FALSE,xlim=c(0,1),ylim=c(0,1))
-		image(x,axes=FALSE,xlab="",ylab="",col=col,xlim=c(0,1),ylim=c(0,1),add=TRUE,useRaster=useraster);
+		image(x,axes=FALSE,xlab="",ylab="",col=col,xlim=c(0,1),ylim=c(0,1),breaks=breaks,add=TRUE,useRaster=useraster);
 	}
 	else {
 		phy <- as.phylo.bammdata(ephy);
@@ -33,8 +34,9 @@ cohorts <- function(x, ephy, col, pal, lwd = 1, ofs = 0, use.plot.bammdata = TRU
 		par(fig = figs[4,], new=TRUE, mar = c(5,0,0,4));
 		gl <- 1:(length(ephy$tip.label)+1);
 		plot(0,0,type="n",axes=FALSE,ann=FALSE,xlim=c(1,length(gl)-1),ylim=c(1,length(gl)-1))
-		image(gl,gl,x,axes=FALSE,xlab="",ylab="",col=col,xlim=c(1,length(gl)-1),ylim=c(1,length(gl)-1),add=TRUE,useRaster=useraster);
+		image(gl,gl,x,axes=FALSE,xlab="",ylab="",col=col,xlim=c(1,length(gl)-1),ylim=c(1,length(gl)-1),breaks=breaks,add=TRUE,useRaster=useraster);
 	}
-	barLegend(col, quantile(seq(min(x),max(x),length.out=ncolors+1),probs=seq(min(x),max(x),length.out=ncolors+1)),fig=figs[5,],side=2);
+	#barLegend(col, quantile(seq(min(x),max(x),length.out=ncolors+1),probs=seq(min(x),max(x),length.out=ncolors+1)),fig=figs[5,],side=2);
+	barLegend(col,breaks,fig=figs[5,],side=2);
 	par(op);
 }
