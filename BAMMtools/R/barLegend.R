@@ -1,6 +1,23 @@
 barLegend <- function(pal, colorbreaks, fig, side, mar = rep(0,4), ...) {
-	if (length(pal) == 1)
-		pal <- colorRampPalette(get("palettes",envir=.colorEnv)[[pal]])(length(colorbreaks)-1);
+	#if (length(pal) == 1)
+	#	pal <- colorRampPalette(get("palettes",envir=.colorEnv)[[pal]])(length(colorbreaks)-1);
+	dpal <- get("palettes", envir = .colorEnv);
+	NCOLORS <- length(colorbreaks)-1;
+	if (length(pal) >= 3) {
+		pal <- colorRampPalette(pal,space='Lab')(NCOLORS);	
+	}
+	else if (pal %in% names(dpal)) {
+		pal <- colorRampPalette(dpal[[pal]],space='Lab')(NCOLORS);
+	}
+	else if (tolower(pal) == "temperature") {
+		pal <- richColors(NCOLORS);	
+	}
+	else if (tolower(pal) == "terrain") {
+		pal <- terrain.colors(NCOLORS);
+	}
+	else {
+		stop("Unrecognized color palette specification");
+	}
 	n <- length(pal);
 	x <- seq(0,n,1)/n;
 	x <- rep(x,each=2);
