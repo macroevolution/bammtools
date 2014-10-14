@@ -18,9 +18,10 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
     }
     else stop("Object ephy must be of class bammdata");
     
-    if (length(pal) == 1 & pal %in% colors()){
+    if (length(pal) == 1)
     	pal <- rep(pal, 3);
-    }
+    else if (length(pal) == 2)
+    	pal <- c(pal, pal[2]);
     
     
     if (!is.binary.tree(phy)) {
