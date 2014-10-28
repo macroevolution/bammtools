@@ -28,7 +28,8 @@ dtRates <- function (ephy, tau, ism = NULL, tmat = FALSE) {
     ephy$eventBranchSegs <- lapply(ephy$eventBranchSegs, function(x) x[order(x[,1]), ]);
     phy <- as.phylo.bammdata(ephy);
     phy <- getStartStopTimes(phy);
-    tH <- max(branching.times(phy));
+    
+    tH <- max(branching.times(phy))
     segmat <- segMap(ephy, tau);
     #tol = max(1 * 10^-decimals(ephy$eventBranchSegs[[1]][1, 2]),1 * 10^-decimals(ephy$eventBranchSegs[[1]][1, 3]));
     tol <- 0.00001;

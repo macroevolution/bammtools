@@ -5,7 +5,7 @@
 setPolarTreeCoords = function(phy,vtheta,rbf)
 {
 	phy = getStartStopTimes(phy);
-	tH = max(branching.times(phy));
+	tH = max(branching.times(phy))
 	
 	rootnd = as.integer(phy$Nnode+2);
 	ntip = as.integer(phy$Nnode+1);
