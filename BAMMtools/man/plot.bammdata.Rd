@@ -13,7 +13,7 @@ colors each branch by the estimated rate of speciation, extinction, or trait evo
     xlim = NULL, ylim = NULL, vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, 
     legend = FALSE, spex="s", lwd = 1, cex = 1, pal = "RdYlBu", 
     mask = integer(0), mask.color = gray(0.5), colorbreaks = NULL, logcolor = FALSE, 
-    par.reset = FALSE, direction = "rightwards", ...)
+    breaksmethod = "linear", par.reset = FALSE, direction = "rightwards", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -85,6 +85,9 @@ are calculated from the rates that are passed with the \code{bammdata} object.
 \item{logcolor}{
 should colors be plotted on a log scale.
 }
+\item{breaksmethod}{
+	method used for determining color breaks. See help file for \code{\link{assignColorBreaks}}
+}
   \item{par.reset}{
 a logical indicating whether or not to reset the graphical parameters when the function exits. Defaults to \code{FALSE}. 
 }
@@ -103,8 +106,7 @@ slow rates and warm colors represent fast rates. When the tree is
 plotted each of these small segments is plotted so that changes in rates through time and shifts in 
 rates are visible as gradients of color. The \code{spex} argument determines the type of rate that will
 be calculated. \code{spex = "s"} will plot speciation rates, \code{spex = "e"} will plot extinction rates,
-and \code{spex = "se"} will plot diversification rates (speciation - extinction). Note that if \code{x$type = "trait"} the \code{spex} argument is ignored and rates of phenotypic evolution are plotted instead. If \code{legend = TRUE} the function will plot a legend with the (kernel density estimated) distribution of rates. This
-contains the mapping of colors to numerical values as well as a comparison of their frequencies.  
+and \code{spex = "se"} will plot diversification rates (speciation - extinction). Note that if \code{x$type = "trait"} the \code{spex} argument is ignored and rates of phenotypic evolution are plotted instead. If \code{legend = TRUE} the function will plot a legend that contains the mapping of colors to numerical values.  
 
 A number of color palettes come built in with BAMMtools. Color-blind friendly options include
 \tabular{r}{

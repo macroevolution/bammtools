@@ -7,7 +7,7 @@
 	Maps macroevolutionary rates to a set of \code{NCOLORS}.
 }
 \usage{
-	assignColorBreaks(rates, NCOLORS, spex, log = FALSE)
+	assignColorBreaks(rates, NCOLORS, spex, log = FALSE, method = c("linear", "quantile"))
 }
 \arguments{
 	\item{rates}{
@@ -26,13 +26,16 @@
 	\item{log}{
 		should the natural logarithm of rates be used for the color map.
 	}
+	\item{method}{
+		determines how the color breaks are created. See details.
+	}
 }
 \details{
-	Macroevolutionary rates are binned into \code{NCOLORS+1} percentiles and rates in each bin are
-	mapped to a color determined by the \code{pal} argument in \code{plot.bammdata}.
+	If \code{method = "quantile"} macroevolutionary rates are binned into \code{NCOLORS+1} percentiles and rates in 	each bin are mapped to a color determined by the \code{pal} argument in \code{plot.bammdata}. Alternatively,
+	if \code{method = "linear"} macroevolutionary rates are binned into \code{NCOLORS+1} equal length intervals		between the minimum and maximum.
 }
 \value{
-	A numeric vector of rate percentiles. 
+	A numeric vector of rate percentiles/intervals. 
 }
 \author{
 	Mike Grundler
