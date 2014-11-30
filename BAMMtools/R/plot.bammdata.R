@@ -18,7 +18,7 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
     }
     else stop("Object ephy must be of class bammdata");
     
-    if (length(pal) == 1 && !pal %in% names(get("palettes", envir=.colorEnv)))
+    if (length(pal) == 1 && !pal %in% names(get("palettes", envir=.colorEnv)) && pal != "temperature")
     	pal <- rep(pal, 3)
     else if (length(pal) == 2)
     	pal <- c(pal, pal[2]);
@@ -53,8 +53,12 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
     else {
    	    stop("Unrecognized/corrupt bammdata class. Type does not equal 'trait' or 'diversification'");	
     }
-    edge.color <- colorobj$cols;    
-    tH <- max(branching.times(phy))
+    edge.color <- colorobj$cols;
+#    if (is.ultrametric(phy))    
+#    	tH <- max(branching.times(phy))
+#    else
+#    	tH <- max(NU.branching.times(phy));
+	tH <- max(x$end);
     phy$begin <- x$begin;
     phy$end <- x$end;
     tau <- x$dtrates$tau;

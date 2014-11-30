@@ -7,11 +7,7 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 	phy$node.label <- NULL;
 	
 	if (any(is.null(c(phy$begin, phy$end)))) {
-		if (!is.ultrametric(phy)){
-			phy <- NU.branching.times(phy, return.type = 'begin.end')			
-		}else {
-			phy <- getStartStopTimes(phy)
-		}
+		phy <- getStartStopTimes(phy)
 	}
 	
 # Getting branching times direct from

@@ -26,10 +26,14 @@ dtRates <- function (ephy, tau, ism = NULL, tmat = FALSE) {
     	stop("Function requires tree in 'cladewise' order");
     }
     ephy$eventBranchSegs <- lapply(ephy$eventBranchSegs, function(x) x[order(x[,1]), ]);
-    phy <- as.phylo.bammdata(ephy);
-    phy <- getStartStopTimes(phy);
-    
-    tH <- max(branching.times(phy))
+#   phy <- as.phylo.bammdata(ephy);
+#   phy <- getStartStopTimes(phy);   
+#   if (is.ultrametric(phy))
+#	    tH <- max(branching.times(phy))
+#	else
+#		tH <- max(NU.branching.times(phy));
+
+	tH <- max(ed$end);
     segmat <- segMap(ephy, tau);
     #tol = max(1 * 10^-decimals(ephy$eventBranchSegs[[1]][1, 2]),1 * 10^-decimals(ephy$eventBranchSegs[[1]][1, 3]));
     tol <- 0.00001;
