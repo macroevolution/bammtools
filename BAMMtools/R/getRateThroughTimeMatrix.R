@@ -34,7 +34,12 @@ getRateThroughTimeMatrix <- function(ephy, start.time=NULL, end.time=NULL, nslic
 		stop('error in getRateThroughTimeMatrix\n');
 	}
 	
-	bt <- branching.times(as.phylo.bammdata(ephy));
+	if (is.ultrametric(as.phylo.bammdata(ephy))) {
+		bt <- branching.times(as.phylo.bammdata(ephy));
+	}
+	if (!is.ultrametric(as.phylo.bammdata(ephy))) {
+		bt <- NU.branching.times(as.phylo.bammdata(ephy));
+	}
 	maxpossible <- max(bt[as.character(intersect(nodeset, ephy$edge[,1]))]);
 
 
@@ -145,7 +150,12 @@ getRateThroughTimeMatrix <- function(ephy, start.time=NULL, end.time=NULL, nslic
 		# stop('error in getRateThroughTimeMatrix\n');
 	# }
 	
-	# bt <- branching.times(as.phylo.bammdata(ephy));
+	# if (is.ultrametric(as.phylo.bammdata(ephy))) {
+		# bt <- branching.times(as.phylo.bammdata(ephy));
+	# }
+	# if (!is.ultrametric(as.phylo.bammdata(ephy))) {
+		# bt <- NU.branching.times(as.phylo.bammdata(ephy));
+	# }
 	# maxpossible <- max(bt[as.character(intersect(nodeset, ephy$edge[,1]))]);
 
 	# #convert from time before present to node heights

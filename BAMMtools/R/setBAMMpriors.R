@@ -7,7 +7,11 @@
 
 setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPriors.txt', Nmax = 1000){
 	
-	mbt <- max(branching.times(phy));
+	if (is.ultrametric(phy)) {
+		mbt <- max(branching.times(phy));
+	} else {
+		mbt <- max(NU.branching.times(phy));
+	}
 	if (is.null(total.taxa)){
 		total.taxa <- length(phy$tip.label);
 	}
