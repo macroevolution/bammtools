@@ -26,7 +26,7 @@ cohorts <- function(x, ephy, col, pal, lwd = 1, ofs = 0, use.plot.bammdata = TRU
 	}
 	else {
 		phy <- as.phylo.bammdata(ephy);
-		bt <- max(branching.times(phy));
+		bt <- max(ephy$end)
 		par(fig = figs[2,], new=FALSE, mar = c(0,0,1,4));
 		plot.phylo(phy,edge.width=lwd,direction="downwards",show.tip.label=FALSE,x.lim=c(1,length(phy$tip.label)),y.lim=c(0,bt));
 		par(fig = figs[3,], new=TRUE, mar = c(5,1,0,0));

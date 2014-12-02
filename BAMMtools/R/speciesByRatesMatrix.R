@@ -1,18 +1,17 @@
 speciesByRatesMatrix = function(ephy, nslices, index = NULL, spex = "s") {
-	phy = as.phylo.bammdata(ephy);
 	seq.nod = .Call("seq_root2tip", phy$edge, length(phy$tip.label), phy$Nnode, PACKAGE = "BAMMtools");
 	if (nslices <= 100) {
-		tvec = (seq(0, 1, 0.01)+0.005) * max(branching.times(phy));
+		tvec = (seq(0, 1, 0.01)+0.005) * max(ephy$end);
 		tvec = tvec[seq.int(1,length(tvec),length.out=nslices+1)];
 		ephy = dtRates(ephy, 0.01, index, tmat = TRUE);
 	}
 	else if (nslices > 100 && nslices <= 500) {
-		tvec = (seq(0, 1, 0.002)+0.001) * max(branching.times(phy));
+		tvec = (seq(0, 1, 0.002)+0.001) * max(ephy$end);
 		tvec = tvec[seq.int(1,length(tvec),length.out=nslices+1)];
 		ephy = dtRates(ephy, 0.002, index, tmat = TRUE);
 	}
 	else if (nslices > 500 && nslices <= 1000) {
-		tvec = (seq(0, 1, 0.001)+0.0005) * max(branching.times(phy));
+		tvec = (seq(0, 1, 0.001)+0.0005) * max(ephy$end);
 		tvec = tvec[seq.int(1,length(tvec),length.out=nslices+1)];
 		ephy = dtRates(ephy, 0.001, index, tmat = TRUE);
 	}
@@ -38,6 +37,6 @@ speciesByRatesMatrix = function(ephy, nslices, index = NULL, spex = "s") {
 		}
 	});
 	ret = do.call(rbind, ret);
-	rownames(ret) = phy$tip.label;
+	rownames(ret) = ephy$tip.label;
 	return(list(times = tvec[-length(tvec)],rates = ret));	
 }
