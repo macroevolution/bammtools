@@ -1,5 +1,5 @@
 speciesByRatesMatrix = function(ephy, nslices, index = NULL, spex = "s") {
-	seq.nod = .Call("seq_root2tip", phy$edge, length(phy$tip.label), phy$Nnode, PACKAGE = "BAMMtools");
+	seq.nod = .Call("seq_root2tip", ephy$edge, length(ephy$tip.label), ephy$Nnode, PACKAGE = "BAMMtools");
 	if (nslices <= 100) {
 		tvec = (seq(0, 1, 0.01)+0.005) * max(ephy$end);
 		tvec = tvec[seq.int(1,length(tvec),length.out=nslices+1)];
