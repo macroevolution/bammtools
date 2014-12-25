@@ -33,7 +33,7 @@ dtRates <- function (ephy, tau, ism = NULL, tmat = FALSE) {
 #	else
 #		tH <- max(NU.branching.times(phy));
 
-	tH <- max(ed$end);
+	tH <- max(ephy$end);
     segmat <- segMap(ephy, tau);
     #tol = max(1 * 10^-decimals(ephy$eventBranchSegs[[1]][1, 2]),1 * 10^-decimals(ephy$eventBranchSegs[[1]][1, 3]));
     tol <- 0.00001;
