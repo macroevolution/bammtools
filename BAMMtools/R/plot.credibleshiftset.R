@@ -1,4 +1,4 @@
-plot.credibleshiftset <- function(x, plotmax=9, method='phylogram', pal = 'RdYlBu', spex = "s", add.freq.text = TRUE, use.plot.bammdata = TRUE, border = TRUE, legend = FALSE, send2pdf = FALSE, ...)
+plot.credibleshiftset <- function(x, plotmax=9, method='phylogram', pal = 'RdYlBu', spex = "s", add.freq.text = TRUE, use.plot.bammdata = TRUE, border = TRUE, legend = FALSE, send2pdf = FALSE, log=F, ...)
 {
 	if (class(x) != "credibleshiftset") {
 		stop('arg x must be of class "credibleshiftset"');
@@ -55,13 +55,13 @@ plot.credibleshiftset <- function(x, plotmax=9, method='phylogram', pal = 'RdYlB
 	cat("Omitted", max(x$number.distinct,mm) - min(x$number.distinct,mm), "plots\n");
 	if (use.plot.bammdata) {
     	cset.bamm <- dtRates(cset.bamm, 0.01);
-	    colorbreaks <- assignColorBreaks(cset.bamm$dtrates$rates,spex=spex, ...);
+	    colorbreaks <- assignColorBreaks(cset.bamm$dtrates$rates,spex=spex, log=log);
 	}
 	for (i in 1:mm) {
 	    sed <- subsetEventData(cset.bamm, index=x$indices[[i]]);
 		par(mar = c(2,2,2,2));
 		if (use.plot.bammdata) {
-            plot.bammdata(sed, method=method, pal=pal, spex=spex, colorbreaks=colorbreaks, par.reset=FALSE, ...);
+            plot.bammdata(sed, method=method, pal=pal, spex=spex, colorbreaks=colorbreaks, par.reset=FALSE, log=log, ...);
 		}
 		else {
 		    if (method=="polar") method = "fan";
