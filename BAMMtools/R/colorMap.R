@@ -2,7 +2,7 @@
 #	Internal function called by plot.bammdata(...)
 #
 #
-colorMap <- function(x, pal, breaks, log = FALSE) {
+colorMap <- function(x, pal, breaks, logcolor = FALSE) {
     dpal <- get("palettes", envir = .colorEnv);
 	NCOLORS <- length(breaks)-1;
 	if (length(pal) >= 3) {
@@ -20,7 +20,7 @@ colorMap <- function(x, pal, breaks, log = FALSE) {
 	else {
 		stop("Unrecognized color palette specification");
 	}
-	if (log) x <- log(x);
+#	if (logcolor) x <- log(x);
 	kde <- density(x, from=min(x), to=max(x));
 	colset <- numeric(length(x));
 	coldens <- numeric(length(kde$x));
@@ -35,7 +35,7 @@ colorMap <- function(x, pal, breaks, log = FALSE) {
         }
         else {
             colset[x >= breaks[i-1] & x < breaks[i]] <- colpalette[i-1];
-        		coldens[kde$x >= breaks[i-1] & kde$x < breaks[i]] <- colpalette[i-1];
+        	coldens[kde$x >= breaks[i-1] & kde$x < breaks[i]] <- colpalette[i-1];
         }
     }
 	coldens <- data.frame(kde$x,kde$y,coldens,stringsAsFactors=FALSE);

@@ -41,5 +41,5 @@ barLegend <- function(pal, colorbreaks, fig, side, mar = rep(0,4), ...) {
 	tx[1] <- min(colorbreaks,na.rm=TRUE);
 	tx[2] <- colorbreaks[median(1:length(colorbreaks))];
 	tx[3] <- max(colorbreaks,na.rm=TRUE); 
-	axis(side,at=c(0,0.5,1),labels=signif(tx,1),las=1,...);
+	axis(side,at=c(0,0.5,1),labels=signif(tx,2),las=1,...);
 }

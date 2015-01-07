@@ -7,8 +7,8 @@ Visualize macroevolutionary cohorts
 Plots the matrix of pairwise correlations in rate regimes between all tips in a phylogeny
 }
 \usage{
-cohorts(x, ephy, col, pal, lwd = 1, ofs = 0, use.plot.bammdata = TRUE, 
-			useraster = FALSE, LARGE = 500)
+cohorts(x, ephy, col, pal, lwd = 1, ofs = 0, use.plot.bammdata = FALSE, 
+			useraster = FALSE, LARGE = 500,...)
 }
 \arguments{
   \item{x}{
@@ -43,6 +43,9 @@ as a raster.
 an integer. If trees have more tips than \code{LARGE}, \code{useraster} will be
 coerced to \code{TRUE}.  	
 }
+\item{...}{
+	further arguments passed to \code{plot.bammdata} if \code{use.plot.bammdata=TRUE}
+}
 }
 \details{
 The plotting function creates an image of the BAMM correlation matrix between tip
@@ -50,6 +53,9 @@ lineages of the phylogeny. Each correlation is the posterior frequency with whic
 mapped to a set of colors, with warmer colors corresponding to higher correlations than cooler colors. The set of colors is specified by the \code{col} argument and 
 a legend is plotted to guide interpretation of the color-correlation map. Trees are
 plotted on the margins of the matrix image. The correlation between any two tips can be inferred by finding their intersection within the matrix image. 
+
+IMPORTANT: the legend DOES NOT apply to 
+the phylorate plots shown in the margin if \code{use.plot.bammdata=TRUE}. 
 }
 
 \author{
