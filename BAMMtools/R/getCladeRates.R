@@ -35,6 +35,10 @@ getCladeRates <- function(ephy, node = NULL, nodetype='include', verbose=FALSE) 
 		}
 		esegs <- ephy$eventBranchSegs[[i]];
 		esegs <- esegs[esegs[,1] %in% nodeset, ];
+	
+       	if (is.null(nrow(esegs))){
+       		esegs <- t(as.matrix(esegs))
+       	}	
 		
 		events <- ephy$eventData[[i]];
 		events <- events[order(events$index), ];			
