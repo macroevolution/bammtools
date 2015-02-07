@@ -162,8 +162,8 @@ generate input data.
 # plotRateThroughTime(ephy, intervals=seq(from=0,0.9,by=0.01), smooth=TRUE, 
 #	node=141, nodetype='include', add=TRUE, intervalCol='orange')
 #
-# legend('topleft',legend=c('Dolphins','Whales'),col='red',
-#	fill=c('orange','blue'),border=FALSE,lty=1,lwd=2,merge=TRUE,seg.len=0.6)
+# legend('topleft', legend=c('Dolphins','Whales'), col='red',
+#	fill=c('orange','blue'), border=FALSE, lty=1, lwd=2, merge=TRUE, seg.len=0.6)
 #
 ## Same plot, but from bamm-ratematrix objects
 # rmat1 <- getRateThroughTimeMatrix(ephy, node=141, nodetype='exclude')

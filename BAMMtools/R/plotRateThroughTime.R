@@ -136,21 +136,29 @@ plotRateThroughTime <- function(ephy, useMedian = TRUE, intervals=seq(from = 0,t
 			if (unique(xlim == 'auto') & unique(ylim == 'auto')) {
 				xMin <- maxTime;
 				xMax <- 0;
-				yMin <- 0;
 				if (!is.null(intervals)){
+					yMin <- min(poly[[1]][,2]);
 					yMax <- max(poly[[1]][,2]);
 				} else {
+					yMin <- min(avg);
 					yMax <- max(avg);
+				}
+				if (yMin >= 0) {
+					yMin <- 0;
 				}
 			}
 			if (unique(xlim != 'auto') & unique(ylim == 'auto')) {
 				xMin <- xlim[1];
 				xMax <- xlim[2];
-				yMin <- 0;
 				if (!is.null(intervals)){
+					yMin <- min(poly[[1]][,2]);
 					yMax <- max(poly[[1]][,2]);
 				} else {
+					yMin <- min(avg);
 					yMax <- max(avg);
+				}
+				if (yMin >= 0) {
+					yMin <- 0;
 				}
 			}
 			if (unique(xlim == 'auto') & unique(ylim != 'auto')) {
