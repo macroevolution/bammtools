@@ -19,9 +19,6 @@ void jenksBrks(double *d, int *k1, int *length_d1, double *brks)
 	int i3;
 	int i4;
 	double v;
-	double s1;
-	double s2;
-	double w;
 	double val;
 	double last;
 	double id;
