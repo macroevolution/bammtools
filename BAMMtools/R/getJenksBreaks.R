@@ -14,8 +14,10 @@ getJenksBreaks <- function(var, k, subset = NULL) {
 	
 	#if requested, regularly sample subset values
 	if (!is.null(subset)) {
-		ind <- c(seq(from=1, to=length(var), by=floor(length(var)/subset)), length(var))
-		var <- var[ind]
+		if (length(var) > subset) {
+			ind <- c(seq(from=1, to=length(var), by=floor(length(var)/subset)), length(var));
+			var <- var[ind];
+		}
 	}
 	
 	d <- sort(var);
