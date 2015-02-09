@@ -60,7 +60,7 @@ void jenksBrks(double *d, int *k1, int *length_d1, double *brks)
 
 	//Begin
 	for (int l = 2; l <= length_d; l++) {
-		Rprintf("%d\n", l);
+		//Rprintf("%d\n", l);
 		double s1 = 0;
 		double s2 = 0;
 		double w = 0;

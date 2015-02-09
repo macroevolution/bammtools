@@ -6,7 +6,6 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 				bks <- quantile(rates, seq(0,1, length.out=(NCOLORS+1)))
 			}
 			if (method == 'jenks') {
-				cat('jenks','\n')
 				bks <- getJenksBreaks(rates, k=(NCOLORS + 1))
 			}
 			if (method == 'linear') {
@@ -18,7 +17,6 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 				bks <- quantile(log(rates), seq(0,1, length.out=(NCOLORS+1)))
 			}
 			if (method == 'jenks') {
-				cat('jenks','\n')
 				bks <- getJenksBreaks(log(rates), k=(NCOLORS + 1))
 			}
 			if (method == 'linear') {
@@ -33,7 +31,6 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 					bks <- quantile(rates[[1]], seq(0,1, length.out=(NCOLORS+1)))
 				}
 				if (method == 'jenks') {
-					cat('jenks','\n')
 					bks <- getJenksBreaks(rates[[1]], k=(NCOLORS + 1))
 				}
 				if (method == 'linear') {
@@ -45,7 +42,6 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 					bks <- quantile(log(rates[[1]]), seq(0,1, length.out=(NCOLORS+1)))
 				}
 				if (method == 'jenks') {
-					cat('jenks','\n')
 					bks <- getJenksBreaks(log(rates[[1]]), k=(NCOLORS + 1))
 				}
 				if (method == 'linear') {
@@ -59,7 +55,6 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 					bks <- quantile(rates[[2]], seq(0,1, length.out=(NCOLORS+1)))
 				}
 				if (method == 'jenks') {
-					cat('jenks','\n')
 					bks <- getJenksBreaks(rates[[2]], k=(NCOLORS + 1))
 				}
 				if (method == 'linear') {
@@ -71,7 +66,6 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 					bks <- quantile(log(rates[[2]]), seq(0,1, length.out=(NCOLORS+1)))
 				}
 				if (method == 'jenks') {
-					cat('jenks','\n')
 					bks <- getJenksBreaks(log(rates[[2]]), k=(NCOLORS + 1))
 				}
 				if (method == 'linear') {
