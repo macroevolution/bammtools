@@ -24,7 +24,7 @@ If doing speciation-extinction analysis, the total number of taxa in your clade.
 A filename where the trait data (BAMM format) are stored. Leave NULL if doing a speciation-extinction analysis.
 }
   \item{outfile}{
-Filename for outputting the sample priors block.
+Filename for outputting the sample priors block. If \code{NULL}, then a dataframe is returned instead.
 }
   \item{Nmax}{
 If analyzing a very large tree for phenotypic evolution, uses only this many taxa to estimate priors for your dataset. Avoid matrix inversion issues with large numbers of tips. 
