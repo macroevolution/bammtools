@@ -15,6 +15,9 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 				} else {
 					minVal <- color.interval[1];
 					maxVal <- color.interval[2];
+					if (minVal < min(rates) | maxVal > max(rates)) {
+						stop("Supplied color.interval is out of bounds.");
+					}
 				}
 				bks <- seq(minVal, maxVal, length.out = (NCOLORS+1));
 			}
@@ -33,6 +36,9 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 				} else {
 					minVal <- color.interval[1];
 					maxVal <- color.interval[2];
+					if (minVal < min(log(rates)) | maxVal > max(log(rates))) {
+						stop("Supplied color.interval is out of bounds.");
+					}
 				}
 				bks <- seq(minVal, maxVal, length.out = (NCOLORS+1));
 			}
@@ -54,6 +60,9 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 					} else {
 						minVal <- color.interval[1];
 						maxVal <- color.interval[2];
+						if (minVal < min(rates[[1]]) | maxVal > max(rates[[1]])) {
+							stop("Supplied color.interval is out of bounds.");
+						}
 					}
 					bks <- seq(minVal, maxVal, length.out = (NCOLORS+1));
 				}
@@ -72,6 +81,9 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 					} else {
 						minVal <- color.interval[1];
 						maxVal <- color.interval[2];
+						if (minVal < min(log(rates[[1]])) | maxVal > max(log(rates[[1]]))) {
+							stop("Supplied color.interval is out of bounds.");
+						}
 					}
 					bks <- seq(minVal, maxVal, length.out = (NCOLORS+1));
 				}
@@ -92,6 +104,9 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 					} else {
 						minVal <- color.interval[1];
 						maxVal <- color.interval[2];
+						if (minVal < min(rates[[2]]) | maxVal > max(rates[[2]])) {
+							stop("Supplied color.interval is out of bounds.");
+						}
 					}
 					bks <- seq(minVal, maxVal, length.out = (NCOLORS+1));
 				}
@@ -110,6 +125,9 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 					} else {
 						minVal <- color.interval[1];
 						maxVal <- color.interval[2];
+						if (minVal < min(log(rates[[1]])) | maxVal > max(log(rates[[1]]))) {
+							stop("Supplied color.interval is out of bounds.");
+						}
 					}
 					bks <- seq(minVal, maxVal, length.out = (NCOLORS+1));
 				}
@@ -130,6 +148,9 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 					} else {
 						minVal <- color.interval[1];
 						maxVal <- color.interval[2];
+						if (minVal < min(rates[[1]] - rates[[2]]) | maxVal > max(rates[[1]] - rates[[2]])) {
+							stop("Supplied color.interval is out of bounds.");
+						}
 					}
 					bks <- seq(minVal, maxVal, length.out = (NCOLORS+1));
 				}
@@ -150,6 +171,9 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 					} else {
 						minVal <- color.interval[1];
 						maxVal <- color.interval[2];
+						if (minVal < min(z) | maxVal > max(z)) {
+							stop("Supplied color.interval is out of bounds.");
+						}
 					}
 					bks <- seq(minVal, maxVal, length.out = (NCOLORS+1));
 					#bks <- seq(min(log(rates[[1]] - rates[[2]])), max(min(log(rates[[1]] - rates[[2]]))), length.out=(NCOLORS+1) );

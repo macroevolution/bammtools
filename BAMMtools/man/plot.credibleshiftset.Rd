@@ -9,7 +9,7 @@
 }
 \usage{
 \method{plot}{credibleshiftset}(x, plotmax=9, method="phylogram", pal="RdYlBu", spex="s", add.freq.text=TRUE,
-use.plot.bammdata=TRUE, border=TRUE, legend=FALSE, send2pdf=FALSE, ...)
+use.plot.bammdata=TRUE, border=TRUE, legend=FALSE, send2pdf=FALSE, logcolor = FALSE, ...)
 }
 \arguments{
 \item{x}{
@@ -41,6 +41,9 @@ a logical indicating whether to plot a legend.
 }
 \item{send2pdf}{
 a logical indicating whether to print the figure to a PDF file.
+}
+\item{logcolor}{
+a logical indicating whether the rates should be log-transformed. 
 }
 \item{...}{
 further arguments to pass to \code{plot.bammdata}.

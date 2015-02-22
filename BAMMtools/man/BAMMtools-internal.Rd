@@ -20,8 +20,10 @@
 \alias{logit}
 \alias{mkdtsegsPolar}
 \alias{mkdtsegsPhylo}
+\alias{NU.branching.times}
 \alias{richColors}
 \alias{recursivelySetNodeStates}
+\alias{safeLog}
 \alias{segMap}
 \alias{timeIntegratedBranchRate}
 \alias{transparentColor}

@@ -7,7 +7,7 @@
 	Maps macroevolutionary rates to a set of \code{NCOLORS}.
 }
 \usage{
-	assignColorBreaks(rates, NCOLORS, spex, log = FALSE, method = c("linear","quantile","jenks"), 
+	assignColorBreaks(rates, NCOLORS = 64, spex = "s", logcolor = FALSE, method = c("linear","quantile","jenks"), 
 		color.interval = NULL, JenksSubset = NULL)
 }
 \arguments{
@@ -24,7 +24,7 @@
 		map, "e" means that extinction rates are used. Any other string, e.g. "se",
 		means that diversification rates are used. Ignored for BAMM trait data.
 	}
-	\item{log}{
+	\item{logcolor}{
 		should the natural logarithm of rates be used for the color map.
 	}
 	\item{method}{
