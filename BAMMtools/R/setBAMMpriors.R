@@ -31,7 +31,13 @@ setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPrio
 		s6 <- paste('muInitPrior = ', lamprior, sep='');
 		s7 <- paste('#### End Prior block\n######################\n\n');
 		ss <- paste(s1,s2,s3,s4,s5,s6,s7, sep='\n\n');
-		write(ss, file = outfile, sep='');
+		if (!is.null(outfile)) {
+			write(ss, file = outfile, sep='');
+		} else {
+			res <- as.data.frame(cbind(c('poissonRatePrior', 'lambdaInitPrior', 'lambdaShiftPrior', 'muInitPrior'), c(1.0, lamprior, kprior, lamprior)), stringsAsFactors=FALSE);
+			res[,2] <- as.numeric(res[,2]);
+			colnames(res) <- c('param','value');
+		}
 	}else{
 		x <- read.table(file = traits, sep='\t', stringsAsFactors=F, header=F);
 		tvec <- x[,2];
@@ -70,18 +76,29 @@ setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPrio
 		s6 <- paste('useObservedMinMaxAsTraitPriors = 1');
 		s7 <- paste('#### End Prior block\n######################\n\n');
 		ss <- paste(s1,s2,s3,s4,s5,s6,s7,sep='\n\n');
-		write(ss, file = outfile, sep='');		
+		if (!is.null(outfile)) {
+			write(ss, file = outfile, sep='');
+		} else {
+			res <- as.data.frame(cbind(c('poissonRatePrior', 'betaInitPrior', 'betaShiftPrior', 'useObservedMinMaxAsTraitPriors'), c(1.0, betaprior, kprior, 1)), stringsAsFactors=FALSE);
+			res[,2] <- as.numeric(res[,2]);
+			colnames(res) <- c('param','value');
+		}
 				
 	}
-	
-	cat('\nPrior block written to file << ', outfile, " >>\n", sep='');
-	cat('Copy and paste the contents of the file into the\n');
-	cat('priors block of your BAMM input file\n');
+
+	if (!is.null(outfile)) {	
+		cat('\nPrior block written to file << ', outfile, " >>\n", sep='');
+		cat('Copy and paste the contents of the file into the\n');
+		cat('priors block of your BAMM input file\n');
+	}
 
 	cat('\nThis function simply sets the poissonRatePrior to 1;\n');
 	cat('This is a parameter you may need to vary to achieve good convergence\n');
 	cat('with your data.\n');
-	
+
+	if (is.null(outfile)) {
+		return(res);
+	}	
 }
 
 
