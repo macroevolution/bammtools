@@ -9,7 +9,7 @@ redirect <- function(coord, theta) {
 	return (tmp);
 }
 
-plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, ylim = NULL, vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, legend = FALSE, spex = "s", lwd = 1, cex = 1, pal = "RdYlBu", mask = integer(0), mask.color = gray(0.5), colorbreaks = NULL, logcolor = FALSE, breaksmethod = "linear", par.reset = FALSE, direction = "rightwards", ...) {
+plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, ylim = NULL, vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, legend = FALSE, spex = "s", lwd = 1, cex = 1, pal = "RdYlBu", mask = integer(0), mask.color = gray(0.5), colorbreaks = NULL, logcolor = FALSE, breaksmethod = "linear", color.interval = NULL, JenksSubset = 20000, par.reset = FALSE, direction = "rightwards", ...) {
     if ("bammdata" %in% class(x)) {
     	if (attributes(x)$order != "cladewise") {
     		stop("Function requires tree in 'cladewise' order");
@@ -23,7 +23,12 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
     else if (length(pal) == 2)
     	pal <- c(pal, pal[2]);
     
-    
+    if (breaksmethod == 'linear' & !is.null(color.interval)) {
+        if (length(color.interval) != 2) {
+            stop("color.interval must be a vector of 2 numeric values.");
+        }
+    }
+
     if (!is.binary.tree(phy)) {
         stop("Function requires fully bifurcating tree");
     }
@@ -34,7 +39,7 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
         x <- dtRates(x, tau);
     }
     if (is.null(colorbreaks)) {
-   	    colorbreaks <- assignColorBreaks(x$dtrates$rates, 64, spex, logcolor, breaksmethod);
+   	    colorbreaks <- assignColorBreaks(x$dtrates$rates, 64, spex, logcolor, breaksmethod, color.interval, JenksSubset);
     }
     if (x$type == "trait") {
     	colorobj <- colorMap(x$dtrates$rates, pal, colorbreaks, logcolor);
