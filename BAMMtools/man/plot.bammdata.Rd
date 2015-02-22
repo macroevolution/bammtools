@@ -13,7 +13,8 @@ colors each branch by the estimated rate of speciation, extinction, or trait evo
     xlim = NULL, ylim = NULL, vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, 
     legend = FALSE, spex="s", lwd = 1, cex = 1, pal = "RdYlBu", 
     mask = integer(0), mask.color = gray(0.5), colorbreaks = NULL, logcolor = FALSE, 
-    breaksmethod = "linear", par.reset = FALSE, direction = "rightwards", ...)
+    breaksmethod = "linear", color.interval = NULL, JenksSubset = 20000, 
+    par.reset = FALSE, direction = "rightwards", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -86,16 +87,23 @@ are calculated from the rates that are passed with the \code{bammdata} object.
 should colors be plotted on a log scale.
 }
 \item{breaksmethod}{
-	method used for determining color breaks. See help file for \code{\link{assignColorBreaks}}
+	method used for determining color breaks. See help file for \code{\link{assignColorBreaks}}.
 }
-  \item{par.reset}{
-a logical indicating whether or not to reset the graphical parameters when the function exits. Defaults to \code{FALSE}. 
+\item{color.interval}{
+  Min and max value for the linear mapping of rates when \code{breaksmethod = "linear"}. See help file for \code{\link{assignColorBreaks}}.
+}
+\item{JenksSubset}{
+  If \code{breaksmethod = "jenks"}, the number of regularly spaced samples to subset from the full rates vector.
+  Only relevant for large datasets. See help file for \code{\link{assignColorBreaks}}.
+}
+\item{par.reset}{
+  a logical indicating whether or not to reset the graphical parameters when the function exits. Defaults to \code{FALSE}. 
 }
   \item{direction}{
-a character string. Options are "rightwards", "leftwards", "upwards", and "downwards", which determine the orientation of the tips when the phylogeny plotted.  	
+  a character string. Options are "rightwards", "leftwards", "upwards", and "downwards", which determine the orientation of the tips when the phylogeny plotted.  	
 }
   \item{\dots}{
-further arguments passed to \code{par}.
+  further arguments passed to \code{par}.
 }
 }
 \details{
@@ -177,6 +185,15 @@ ed <- getEventData(whales, events.whales, burnin=0.25)
 
 #the first call to plot.bammdata. No calculations or assignments of rates have been made
 plot(ed, lwd = 3, spex = "s") #internally calls dtRates and assignColorBreaks
+
+#Compare the different color breaks methods
+par(mfrow=c(1,3))
+plot(ed, lwd = 3, spex = "s", breaksmethod = "linear")
+title(main="linear")
+plot(ed, lwd = 3, spex = "s", breaksmethod = "quantile")
+title(main="quantile")
+plot(ed, lwd = 3, spex = "s", breaksmethod = "jenks")
+title(main="jenks")
 
 ##NOT RUN##
 ## now plot.bammdata no longer calls dtRates

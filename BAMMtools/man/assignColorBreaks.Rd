@@ -7,7 +7,8 @@
 	Maps macroevolutionary rates to a set of \code{NCOLORS}.
 }
 \usage{
-	assignColorBreaks(rates, NCOLORS, spex, log = FALSE, method = c("linear", "quantile"))
+	assignColorBreaks(rates, NCOLORS = 64, spex = "s", logcolor = FALSE, method = c("linear","quantile","jenks"), 
+		color.interval = NULL, JenksSubset = NULL)
 }
 \arguments{
 	\item{rates}{
@@ -23,22 +24,41 @@
 		map, "e" means that extinction rates are used. Any other string, e.g. "se",
 		means that diversification rates are used. Ignored for BAMM trait data.
 	}
-	\item{log}{
+	\item{logcolor}{
 		should the natural logarithm of rates be used for the color map.
 	}
 	\item{method}{
 		determines how the color breaks are created. See details.
 	}
+	\item{color.interval}{
+		Numeric vector of length 2. Min and max values for the linear mapping of rates to colors. 
+		If \code{NULL}, then min and max are inferred from the data. Only relevant 
+		when \code{method = "linear"}. See Details. 
+	}
+	\item{JenksSubset}{
+		Number of regularly spaced samples to subset from \code{rates}. Only relevant when \code{method = "jenks"}. 
+		See Details. 
+	}
 }
 \details{
-	If \code{method = "quantile"} macroevolutionary rates are binned into \code{NCOLORS+1} percentiles and rates in 	each bin are mapped to a color determined by the \code{pal} argument in \code{plot.bammdata}. Alternatively,
-	if \code{method = "linear"} macroevolutionary rates are binned into \code{NCOLORS+1} equal length intervals		between the minimum and maximum.
+	If \code{method = "quantile"} macroevolutionary rates are binned into \code{NCOLORS+1} percentiles 
+	and rates in each bin are mapped to a color determined by the \code{pal} argument in \code{plot.bammdata}. 
+	Alternatively, if \code{method = "linear"} macroevolutionary rates are binned into \code{NCOLORS+1} equal 
+	length intervals between the minimum and maximum. If color.interval is defined, then those min and max values 
+	override the automatic detection of min and max. This might be useful if some small number of lineages have very
+	high or very low rates, such that the linear map of colors is being skewed towards these extremes, resulting in
+	other rate variation being drowned out. 
+	If \code{method = "jenks"}, macroevolutionary rates are binned into \code{NCOLORS+1} categories, according to 
+	the Jenks natural breaks classification method. This method is borrowed from the field of cartography, and 
+	seeks to minimize the variance within categories, while maximizing the variance between categories. 
+
+	The Jenks natural breaks method was ported to C from code found in the classInt R package. 
 }
 \value{
 	A numeric vector of rate percentiles/intervals. 
 }
 \author{
-	Mike Grundler
+	Mike Grundler, Pascal Title
 }
 \examples{
 	data(whales, events.whales)
