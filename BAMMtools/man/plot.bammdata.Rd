@@ -169,7 +169,7 @@ A matrix of the kernel density estimates (column 2) of evolutionary rates (colum
 \url{colorbrewer2.org}, \url{geography.uoregon.edu/datagraphics/color_scales.htm}
 }
 \author{
-Mike Grundler
+Mike Grundler, Pascal Title
 }
 
 
