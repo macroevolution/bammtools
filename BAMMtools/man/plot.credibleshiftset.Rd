@@ -9,7 +9,7 @@
 }
 \usage{
 \method{plot}{credibleshiftset}(x, plotmax=9, method="phylogram", pal="RdYlBu", spex="s", add.freq.text=TRUE,
-use.plot.bammdata=TRUE, border=TRUE, legend=FALSE, send2pdf=FALSE, logcolor = FALSE, ...)
+use.plot.bammdata=TRUE, border=TRUE, legend=FALSE, send2pdf=FALSE, logcolor = FALSE, breaksmethod='linear', color.interval=NULL, JenksSubset=20000, ...)
 }
 \arguments{
 \item{x}{
@@ -44,6 +44,15 @@ a logical indicating whether to print the figure to a PDF file.
 }
 \item{logcolor}{
 a logical indicating whether the rates should be log-transformed. 
+}
+\item{breaksmethod}{
+method used for determining color breaks. See help file for \code{\link{assignColorBreaks}}.
+}
+\item{color.interval}{
+Min and max value for the linear mapping of rates when \code{breaksmethod = "linear"}. See help file for \code{\link{assignColorBreaks}}.
+}
+\item{JenksSubset}{
+If \code{breaksmethod = "jenks"}, the number of regularly spaced samples to subset from the full rates vector. Only relevant for large datasets. See help file for \code{\link{assignColorBreaks}}.
 }
 \item{...}{
 further arguments to pass to \code{plot.bammdata}.
