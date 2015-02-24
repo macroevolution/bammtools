@@ -10,6 +10,7 @@
 
 
 getJenksBreaks <- function(var, k, subset = NULL) {
+	k <- k - 1;
 	brks <- rep(1, k + 1);
 	
 	#if requested, regularly sample subset values
