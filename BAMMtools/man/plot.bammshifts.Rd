@@ -10,7 +10,8 @@
 \usage{
 \method{plot}{bammshifts}(x, ephy, method="phylogram",pal="RdYlBu",
 	 rank=NULL, index=NULL, spex="s", 
-	 legend=TRUE, add.freq.text=TRUE,...)
+	 legend=TRUE, add.freq.text=TRUE, logcolor=FALSE, breaksmethod="linear", 
+	 color.interval=NULL, JenksSubset=20000, ...)
 }
 \arguments{
 	\item{x}{
@@ -43,6 +44,18 @@ rates. Ignored if \code{ephy$type = "trait"}.
 	}
 	\item{add.freq.text}{
 		a logical indicating whether the frequency of each sampled shift configuration should be added to each plot.
+	}
+	\item{logcolor}{
+		should colors be plotted on a log scale.
+	}
+	\item{breaksmethod}{
+		method used for determining color breaks. See help file for \code{\link{assignColorBreaks}}.
+	}
+	\item{color.interval}{
+		Min and max value for the linear mapping of rates when \code{breaksmethod = "linear"}. See help file for \code{\link{assignColorBreaks}}.
+	}
+	\item{JenksSubset}{
+		If \code{breaksmethod = "jenks"}, the number of regularly spaced samples to subset from the full rates vector. Only relevant for large datasets. See help file for \code{\link{assignColorBreaks}}.
 	}
 	\item{...}{
 		other arguments to \code{plot.bammdata}.

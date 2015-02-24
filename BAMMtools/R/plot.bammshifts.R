@@ -9,7 +9,7 @@
 
 
 plot.bammshifts <- function(x, ephy, method="phylogram", pal="RdYlBu", 
-rank=NULL, index=NULL, spex="s", legend=TRUE, add.freq.text=TRUE, ...) 
+rank=NULL, index=NULL, spex="s", legend=TRUE, add.freq.text=TRUE, logcolor=FALSE, breaksmethod="linear", color.interval=NULL, JenksSubset=20000, ...) 
 {
 	if (class(x) != "bammshifts") {
 		stop("arg sc must be of class 'bammshifts'");
@@ -57,7 +57,7 @@ rank=NULL, index=NULL, spex="s", legend=TRUE, add.freq.text=TRUE, ...)
 	}
 	
 	ephy <- dtRates(ephy,0.01);
-	colorbreaks <- assignColorBreaks(ephy$dtrates$rates, spex=spex);
+	colorbreaks <- assignColorBreaks(ephy$dtrates$rates, spex=spex, logcolor=logcolor, method=breaksmethod, color.interval=color.interval, JenksSubset=JenksSubset);
 	sed <- subsetEventData(ephy, index);
 	plot.bammdata(sed, method=method, pal=pal, spex=spex, colorbreaks=colorbreaks, par.reset=par.reset, ...);
 
