@@ -8,7 +8,7 @@
 	Plots the credible set of rate shift configurations from a BAMM analysis on a phylogeny
 }
 \usage{
-\method{plot}{credibleshiftset}(x, plotmax=9, method="phylogram", pal="RdYlBu", spex="s", add.freq.text=TRUE,
+\method{plot}{credibleshiftset}(x, plotmax=9, method="phylogram", pal="RdYlBu", shiftColor="black", spex="s", add.freq.text=TRUE,
 use.plot.bammdata=TRUE, border=TRUE, legend=FALSE, send2pdf=FALSE, logcolor = FALSE, breaksmethod='linear', color.interval=NULL, JenksSubset=20000, ...)
 }
 \arguments{
@@ -23,6 +23,9 @@ a coordinate method to use for plotting. Options are "phylogram" or "polar".
 }
 \item{pal}{
 a color palette to use with \code{plot.bammdata}.
+}
+\item{shiftColor}{
+color to use for shift points. 
 }
 \item{spex}{
 a character string indicating what type of macroevolutionary rates should be plotted. "s" (default) indicates speciation rates, "e" indicates extinction rates, and any other character, e.g. "se", indicates net diversification rates. Ignored if ephy$type = "trait".
@@ -61,7 +64,8 @@ further arguments to pass to \code{plot.bammdata}.
 \details{
 This produces phylorate plots for the \code{plotmax} most-probable shift configurations sampled with \code{BAMM}. Shift configurations are plotted in a single graphics window. The posterior probability (frequency) of each rate shift configuration in the posterior is shown (omitted with argument \code{add.freq.text = FALSE}).
 
-Points are added to the branches subtending the nodes of each rate configuration. The size of the point is proportional to the marginal probability that a shift occurs on a specific branch. If the instantaneous rate at a shift's origin represents an initial increase above the ancestral instantaneous rate the point is red. If the instantaneous rate at a shift's origin represents an initial decrease below the ancestral instantaneous rate the point is blue.  	
+Points are added to the branches subtending the nodes of each rate configuration. The size of the point is proportional to the marginal probability that a shift occurs on a specific branch. 
+%If the instantaneous rate at a shift's origin represents an initial increase above the ancestral instantaneous rate the point is red. If the instantaneous rate at a shift's origin represents an initial decrease below the ancestral instantaneous rate the point is blue.  	
 }
 
 \references{
