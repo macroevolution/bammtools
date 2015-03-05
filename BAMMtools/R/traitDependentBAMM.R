@@ -228,7 +228,7 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 	if (method == "spearman" | method == "pearson") {
 		obj <- list(estimate = mean(as.numeric(obs)), p.value = pval, method = method, two.tailed = two.tailed);
 	} else {
-		ave.tiprate <- getTipRates(ed)$lambda.avg;
+		ave.tiprate <- getTipRates(ephy)$lambda.avg;
 		l <- lapply(unique(traits[! is.na(traits)]), function(x) {
 			median(ave.tiprate[which(traits == x)], na.rm = TRUE);
 		});
