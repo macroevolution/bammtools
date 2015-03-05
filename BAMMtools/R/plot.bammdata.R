@@ -18,7 +18,7 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
     }
     else stop("Object ephy must be of class bammdata");
     
-    if (length(pal) == 1 && !pal %in% names(get("palettes", envir=.colorEnv)) && pal != "temperature")
+    if (length(pal) == 1 && !pal %in% names(get("palettes", envir=.colorEnv)) && pal != "temperature" && pal != "terrain")
     	pal <- rep(pal, 3)
     else if (length(pal) == 2)
     	pal <- c(pal, pal[2]);
