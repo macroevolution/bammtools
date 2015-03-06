@@ -52,7 +52,7 @@ a logical indicating whether the rates should be log-transformed.
 method used for determining color breaks. See help file for \code{\link{assignColorBreaks}}.
 }
 \item{color.interval}{
-Min and max value for the linear mapping of rates when \code{breaksmethod = "linear"}. See help file for \code{\link{assignColorBreaks}}.
+Min and max value for the mapping of rates. One of the two values can be \code{NA}. See details in \code{\link{plot.bammdata}} for further details. 
 }
 \item{JenksSubset}{
 If \code{breaksmethod = "jenks"}, the number of regularly spaced samples to subset from the full rates vector. Only relevant for large datasets. See help file for \code{\link{assignColorBreaks}}.

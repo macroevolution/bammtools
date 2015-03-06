@@ -90,7 +90,7 @@ should colors be plotted on a log scale.
 	method used for determining color breaks. See help file for \code{\link{assignColorBreaks}}.
 }
 \item{color.interval}{
-  Min and max value for the linear mapping of rates when \code{breaksmethod = "linear"}. See help file for \code{\link{assignColorBreaks}}.
+  Min and max value for the mapping of rates. If \code{NULL}, then min and max are inferrd from the data. NA can also be supplied for one of the two values. See details. 
 }
 \item{JenksSubset}{
   If \code{breaksmethod = "jenks"}, the number of regularly spaced samples to subset from the full rates vector.
@@ -148,6 +148,7 @@ Additionally, any vector of valid named colors may also be used. The only restri
 Internally \code{plot.bammdata} checks whether or not rates have been calculated by looking for a component named
 "dtrates" in the \code{bammdata} object. If rates have not been calculated \code{plot.bammdata} calls \code{dtRates} with \code{tau}. Specifying smaller values for \code{tau} will result in smoother-looking rate changes on the tree. Note that smaller values of \code{tau} require more computation. If the \code{colorbreaks} argument is \code{NULL} a map of rates to colors is also made by calling \code{assignColorBreaks} with \code{NCOLORS = 64}. A user supplied \code{colorbreaks} argument can be passed as well. This allows one to plot parts of a tree while preserving the map of rates to colors that was made using rates for the entire tree.
 
+If color.interval is defined, then those min and max values override the automatic detection of min and max. This might be useful if some small number of lineages have very high or very low rates, such that the map of colors is being skewed towards these extremes, resulting in other rate variation being drowned out. If specified, the color ramp will be built between these two color.interval values, and the rates outside of the color interval range will be set to the highest and lowest color. 
 
 If \code{plot.bammdata} is called repeatedly with the same \code{bammdata} object, computation can be reduced by first calling \code{dtRates} in the global environment.
 }

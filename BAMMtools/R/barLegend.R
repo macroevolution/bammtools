@@ -1,4 +1,4 @@
-barLegend <- function(pal, colorbreaks, fig, side, mar = rep(0,4), ...) {
+barLegend <- function(pal, colorbreaks, fig, side, mar = rep(0,4), colpalette = NULL, ...) {
 	#if (length(pal) == 1)
 	#	pal <- colorRampPalette(get("palettes",envir=.colorEnv)[[pal]])(length(colorbreaks)-1);
 	dpal <- get("palettes", envir = .colorEnv);
@@ -17,6 +17,10 @@ barLegend <- function(pal, colorbreaks, fig, side, mar = rep(0,4), ...) {
 	}
 	else {
 		stop("Unrecognized color palette specification");
+	}
+	
+	if (!is.null(colpalette)) {
+		pal <- colpalette;
 	}
 	n <- length(pal);
 	x <- seq(0,n,1)/n;

@@ -39,20 +39,20 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
         x <- dtRates(x, tau);
     }
     if (is.null(colorbreaks)) {
-   	    colorbreaks <- assignColorBreaks(x$dtrates$rates, 64, spex, logcolor, breaksmethod, color.interval, JenksSubset);
+   	    colorbreaks <- assignColorBreaks(x$dtrates$rates, 64, spex, logcolor, breaksmethod, JenksSubset);
     }
     if (x$type == "trait") {
-    	colorobj <- colorMap(x$dtrates$rates, pal, colorbreaks, logcolor);
+    	colorobj <- colorMap(x$dtrates$rates, pal, colorbreaks, logcolor, color.interval);
     }
     else if (x$type == "diversification") {
         if (tolower(spex) == "s") {
-            colorobj <- colorMap(x$dtrates$rates[[1]], pal, colorbreaks, logcolor);
+            colorobj <- colorMap(x$dtrates$rates[[1]], pal, colorbreaks, logcolor, color.interval);
         }
         else if (tolower(spex) == "e") {
-            colorobj <- colorMap(x$dtrates$rates[[2]], pal, colorbreaks, logcolor);
+            colorobj <- colorMap(x$dtrates$rates[[2]], pal, colorbreaks, logcolor, color.interval);
         }
         else {
-            colorobj <- colorMap(x$dtrates$rates[[1]] - x$dtrates$rates[[2]], pal, colorbreaks, logcolor);
+            colorobj <- colorMap(x$dtrates$rates[[1]] - x$dtrates$rates[[2]], pal, colorbreaks, logcolor, color.interval);
         }
     }
     else {
@@ -199,7 +199,11 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
         }
         if (legend) {
             #rateLegend(colorobj$colsdensity, logcolor);
-            barLegend(pal, colorbreaks, fig=c(0.9,1,0.25,0.75), side=2);
+            if (is.null(color.interval)) {
+            	barLegend(pal, colorbreaks, fig=c(0.9,1,0.25,0.75), side=2);
+        	} else {
+        		barLegend(pal, colorbreaks, fig=c(0.9,1,0.25,0.75), side=2, colpalette=colorobj$colpalette);
+        	}
         }
     }
     index <- order(as.numeric(rownames(ret$segs)));

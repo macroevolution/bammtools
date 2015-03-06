@@ -55,7 +55,7 @@ plot.credibleshiftset <- function(x, plotmax=9, method='phylogram', pal = 'RdYlB
 	cat("Omitted", max(x$number.distinct,mm) - min(x$number.distinct,mm), "plots\n");
 	if (use.plot.bammdata) {
     	cset.bamm <- dtRates(cset.bamm, 0.01);
-	    colorbreaks <- assignColorBreaks(cset.bamm$dtrates$rates,spex=spex, logcolor=logcolor, method=breaksmethod, color.interval=color.interval, JenksSubset=JenksSubset);
+	    colorbreaks <- assignColorBreaks(cset.bamm$dtrates$rates,spex=spex, logcolor=logcolor, method=breaksmethod, JenksSubset=JenksSubset);
 	}
 	for (i in 1:mm) {
 	    sed <- subsetEventData(cset.bamm, index=x$indices[[i]]);

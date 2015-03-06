@@ -57,7 +57,7 @@ rank=NULL, index=NULL, spex="s", legend=TRUE, add.freq.text=TRUE, logcolor=FALSE
 	}
 	
 	ephy <- dtRates(ephy,0.01);
-	colorbreaks <- assignColorBreaks(ephy$dtrates$rates, spex=spex, logcolor=logcolor, method=breaksmethod, color.interval=color.interval, JenksSubset=JenksSubset);
+	colorbreaks <- assignColorBreaks(ephy$dtrates$rates, spex=spex, logcolor=logcolor, method=breaksmethod, JenksSubset=JenksSubset);
 	sed <- subsetEventData(ephy, index);
 	plot.bammdata(sed, method=method, pal=pal, spex=spex, colorbreaks=colorbreaks, par.reset=par.reset, ...);
 
