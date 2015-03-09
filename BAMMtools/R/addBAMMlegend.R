@@ -46,16 +46,7 @@ addBAMMlegend <- function(x, corners = c(0,1,0,10), side = 3, nTicks = 2, axisOf
 	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));
 	tickLocs <- x[tx,1]
 	tx <- z[tx,1]
-	tickLocs[length(tickLocs)] <- max(x[,2])
-	#tickLocs <- (tx - min(tx)) / (max(tx) - min(tx));
-	
-	# #scale tick locations
-	# if ((corners[2] - corners[1]) >= (corners[4] - corners[3])) {
-		# tickLocs <- tickLocs * (corners[2] - corners[1]) + corners[1];
-	# } else {
-		# tickLocs <- tickLocs * (corners[4] - corners[3]) + corners[3];
-	# }
-	
+	tickLocs[length(tickLocs)] <- max(x[,2])	
 	
 	#plot bar
 	if ((corners[2] - corners[1]) >= (corners[4] - corners[3])) {
