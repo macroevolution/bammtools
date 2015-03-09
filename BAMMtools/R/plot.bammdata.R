@@ -216,5 +216,5 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
     if (par.reset) {
         par(op);
     }
-    invisible(list(coords = ret$segs[-1, ], colorbreaks = colorbreaks, colordens = colorobj$colsdensity));
+    invisible(list(coords = ret$segs[-1, ], colorbreaks = colorbreaks, palette = colorobj$colpalette, colordens = colorobj$colsdensity));
 }
