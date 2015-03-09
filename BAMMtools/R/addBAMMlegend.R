@@ -46,7 +46,8 @@ addBAMMlegend <- function(x, corners = c(0,1,0,10), side = 3, nTicks = 2, axisOf
 	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));
 	tickLocs <- x[tx,1]
 	tx <- z[tx,1]
-	tickLocs[length(tickLocs)] <- max(x[,2])	
+	tickLocs[length(tickLocs)] <- max(x[,2])
+	tx[length(tx)] <- max(z[,2])	
 	
 	#plot bar
 	if ((corners[2] - corners[1]) >= (corners[4] - corners[3])) {
