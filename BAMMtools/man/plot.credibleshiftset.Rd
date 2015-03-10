@@ -8,8 +8,10 @@
 	Plots the credible set of rate shift configurations from a BAMM analysis on a phylogeny
 }
 \usage{
-\method{plot}{credibleshiftset}(x, plotmax=9, method="phylogram", pal="RdYlBu", shiftColor="black", spex="s", add.freq.text=TRUE,
-use.plot.bammdata=TRUE, border=TRUE, legend=FALSE, send2pdf=FALSE, logcolor = FALSE, breaksmethod='linear', color.interval=NULL, JenksSubset=20000, ...)
+\method{plot}{credibleshiftset}(x, plotmax=9, method="phylogram", pal="RdYlBu", shiftColor="black", 
+	spex="s", add.freq.text=TRUE, use.plot.bammdata=TRUE, border=TRUE, legend=FALSE, 
+	send2pdf=FALSE, logcolor = FALSE, breaksmethod='linear', 
+	color.interval=NULL, JenksSubset=20000, ...)
 }
 \arguments{
 \item{x}{

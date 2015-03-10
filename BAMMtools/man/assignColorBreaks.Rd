@@ -7,7 +7,8 @@
 	Maps macroevolutionary rates to a set of \code{NCOLORS}.
 }
 \usage{
-	assignColorBreaks(rates, NCOLORS = 64, spex = "s", logcolor = FALSE, method = c("linear","quantile","jenks"), JenksSubset = NULL)
+	assignColorBreaks(rates, NCOLORS = 64, spex = "s", logcolor = FALSE, 
+		method = c("linear","quantile","jenks"), JenksSubset = NULL)
 }
 \arguments{
 	\item{rates}{
