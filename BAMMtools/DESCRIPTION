@@ -10,3 +10,4 @@ Description: BAMMtools provides functions for analyzing and visualizing complex 
 License: GPL (>=2)
 URL: http://www.bamm-project.org
 NeedsCompilation: yes
+Suggests: snow

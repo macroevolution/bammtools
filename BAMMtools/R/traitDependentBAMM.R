@@ -30,21 +30,24 @@
 # two.tailed=T
 # nthreads=6
 # traitorder='0,1';
-traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method = 'spearman', logrates = TRUE, two.tailed = TRUE, traitorder = NA) {
+traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method = 'spearman', logrates = TRUE, two.tailed = TRUE, traitorder = NA, nthreads = 1) {
 
 	if (ephy$type != 'diversification'){
 		stop("Function currently supports only bammdata objects from speciationextinction analyses\n");
 	}
   
-	nthreads = 1;
+	# if (nthreads > 1) {
+		# if (! 'snow' %in% rownames(installed.packages())) {
+			# stop("Please install package 'snow' for using the multi-thread option\n");
+		# } else {
+			# require(snow);
+		# }
+	# }
 	if (nthreads > 1) {
-		if (! 'snow' %in% rownames(installed.packages())) {
+		if (!"package:snow" %in% search()) {
 			stop("Please install package 'snow' for using the multi-thread option\n");
-		} else {
-			require(snow);
 		}
 	}
-  
   
 	if (sum(! names(traits) %in% ephy$tip.label) > 0) {
 		cat("ignored taxa with trait but not in the bammdata object\n");
@@ -61,7 +64,7 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 		stop("method must be one of spearman, pearson, mann-whitney, and kruskal, only the initial letter is needed");
 	}
 
-# check if the trait is right class
+	# check if the trait is right class
 
 	if (method == 'spearman' | method=="pearson") {
 		if (! is.numeric(traits)){
@@ -80,7 +83,7 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 		}
 	}
 
-#check if the traitorder is specified
+	#check if the traitorder is specified
 	trait.state <- NA;
 	if (two.tailed == FALSE) {
 		if (is.na(traitorder)) {
@@ -152,9 +155,9 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 		x;   
 	}
 	if (nthreads > 1) {
-		cl<-makeSOCKcluster(nthreads);
-		p.gen.tiprates <- parLapply(cl, gen.tiprates, permute_tiprates);
-		stopCluster(cl);
+		cl <- snow::makeSOCKcluster(nthreads);
+		p.gen.tiprates <- snow::parLapply(cl, gen.tiprates, permute_tiprates);
+		snow::stopCluster(cl);
 	} else {
 		p.gen.tiprates <- lapply(gen.tiprates, permute_tiprates);
 	}
@@ -180,19 +183,19 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 	}
  
 
- if (nthreads > 1) {
-	cl <- makeSOCKcluster(nthreads);
-	if (method == 'spearman' | method == "pearson"){
-		obs <- parLapply(cl, gen.tiprates,cortest, traits, method);
-		permu <- parLapply(cl, p.gen.tiprates, cortest, traits, method);
-	} else if (method == "mann-whitney") {
-		obs <- parLapply(cl, gen.tiprates, manntest, traits, two.tailed, trait.state);
-		permu <- parLapply(cl, p.gen.tiprates, manntest, traits, two.tailed, trait.state);
-	} else {
-		obs <- parLapply(cl, gen.tiprates, kruskaltest, traits);
-		permu<- parLapply(cl, p.gen.tiprates, kruskaltest, traits);
-	}
-	stopCluster(cl);
+	if (nthreads > 1) {
+		cl <- snow::makeSOCKcluster(nthreads);
+		if (method == 'spearman' | method == "pearson"){
+			obs <- snow::parLapply(cl, gen.tiprates,cortest, traits, method);
+			permu <- snow::parLapply(cl, p.gen.tiprates, cortest, traits, method);
+		} else if (method == "mann-whitney") {
+			obs <- snow::parLapply(cl, gen.tiprates, manntest, traits, two.tailed, trait.state);
+			permu <- snow::parLapply(cl, p.gen.tiprates, manntest, traits, two.tailed, trait.state);
+		} else {
+			obs <- snow::parLapply(cl, gen.tiprates, kruskaltest, traits);
+			permu<- snow::parLapply(cl, p.gen.tiprates, kruskaltest, traits);
+		}
+		snow::stopCluster(cl);
 	} else {
 		if (method == 'spearman' | method == "pearson") {
 			obs <- lapply(gen.tiprates, cortest, traits, method);
