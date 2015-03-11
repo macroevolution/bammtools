@@ -5,11 +5,11 @@ getBestShiftConfiguration <- function(x, prior, BFcriterion = 5){
 		stop("arg threshold is not valid\n")
 	}
 	
-	if (class(x) == 'bammdata'){
+	if (class(x) == 'bammdata') {
 		x <- credibleShiftSet(x, prior, BFcriterion, set.limit = 0.95);	
-	}else if (class(x) == 'credibleshiftset'){
+	} else if (class(x) == 'credibleshiftset') {
 
-	}else{
+	} else {
 		stop("Argument x must be of class bammdata or credibleshiftset\n");
 	}
 	

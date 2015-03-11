@@ -22,6 +22,8 @@ Filename for the \code{BAMM}-generated output file containing a simulation of sh
 This function computes the prior odds on the distribution of numbers of rate shift events per branch under the prior. It returns an object of class 'branchprior', which is nothing more than a copy of the original phylogenetic tree but where each branch length has been replaced by the prior probability of a rate shift on each branch.
 
 The significance of this function is that it lets us explicitly determine which branches have shift probabilities that are elevated relative to the prior expectation. The user does not work with the output of this function directly; it is passed to other functions \link[BAMMtools]{credibleShiftSet} and \link[BAMMtools]{distinctShiftConfigurations}.
+
+Note: If you are working with a subset of a bammdata object (created with \code{\link{subtreeBAMM}}), then you must generate a new branchpriors object with a pruned phylogeny that matches the one associated with your subsetted bammdata object. 
  
 }
 \value{

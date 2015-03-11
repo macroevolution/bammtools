@@ -15,6 +15,10 @@ credibleShiftSet <- function(ephy, prior, BFcriterion = 5, set.limit=0.95, ...){
 	if (class(prior) != 'branchprior'){
 		stop("object bprior is not of class branchprior\n");
 	}
+
+	if (length(setdiff(prior$tip.label, ephy$tip.label)) != 0 | length(setdiff(ephy$tip.label, prior$tip.label)) != 0) {
+		stop("Different tips in bammdata and branchprior objects. If x is a subset of a bammdata object, you must generate a new branchprior object with a pruned phylogeny.");
+	}
 	
 	dsc <- distinctShiftConfigurations(ephy, prior, BFcriterion);
 	cfreq <- cumsum(dsc$frequency);

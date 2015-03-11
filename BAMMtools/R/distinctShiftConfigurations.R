@@ -34,6 +34,10 @@ distinctShiftConfigurations <- function(ephy, prior, BFcriterion, ... ) {
 	if (class(prior) != 'branchprior'){
 		stop("object prior not of class branchprior");
 	}
+
+	if (length(setdiff(prior$tip.label, ephy$tip.label)) != 0 | length(setdiff(ephy$tip.label, prior$tip.label)) != 0) {
+		stop("Different tips in bammdata and branchprior objects. If x is a subset of a bammdata object, you must generate a new branchprior object with a pruned phylogeny.");
+	}
 	
 	bf <- bayesFactorBranches(ephy, prior);
 	
