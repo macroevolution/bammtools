@@ -79,11 +79,6 @@ Rabosky, D. L., F. Santini, J. T. Eastman, S. A. Smith, B. L. Sidlauskas, J. Cha
 \author{
 Daniel L. Rabosky, Huateng Huang
 }
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
 \code{\link{subtreeBAMM}}

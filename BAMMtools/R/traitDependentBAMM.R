@@ -36,16 +36,10 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 		stop("Function currently supports only bammdata objects from speciationextinction analyses\n");
 	}
   
-	# if (nthreads > 1) {
-		# if (! 'snow' %in% rownames(installed.packages())) {
-			# stop("Please install package 'snow' for using the multi-thread option\n");
-		# } else {
-			# require(snow);
-		# }
-	# }
 	if (nthreads > 1) {
-		if (!"package:snow" %in% search()) {
-			stop("Please install package 'snow' for using the multi-thread option\n");
+		#if (!"package:snow" %in% search()) {
+		if (!"package:parallel" %in% search()) {
+			stop("Please load package 'parallel' for using the multi-thread option\n");
 		}
 	}
   
@@ -155,9 +149,9 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 		x;   
 	}
 	if (nthreads > 1) {
-		cl <- snow::makeSOCKcluster(nthreads);
-		p.gen.tiprates <- snow::parLapply(cl, gen.tiprates, permute_tiprates);
-		snow::stopCluster(cl);
+		cl <- parallel::makePSOCKcluster(nthreads);
+		p.gen.tiprates <- parallel::parLapply(cl, gen.tiprates, permute_tiprates);
+		parallel::stopCluster(cl);
 	} else {
 		p.gen.tiprates <- lapply(gen.tiprates, permute_tiprates);
 	}
@@ -184,18 +178,18 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
  
 
 	if (nthreads > 1) {
-		cl <- snow::makeSOCKcluster(nthreads);
+		cl <- parallel::makePSOCKcluster(nthreads);
 		if (method == 'spearman' | method == "pearson"){
-			obs <- snow::parLapply(cl, gen.tiprates,cortest, traits, method);
-			permu <- snow::parLapply(cl, p.gen.tiprates, cortest, traits, method);
+			obs <- parallel::parLapply(cl, gen.tiprates,cortest, traits, method);
+			permu <- parallel::parLapply(cl, p.gen.tiprates, cortest, traits, method);
 		} else if (method == "mann-whitney") {
-			obs <- snow::parLapply(cl, gen.tiprates, manntest, traits, two.tailed, trait.state);
-			permu <- snow::parLapply(cl, p.gen.tiprates, manntest, traits, two.tailed, trait.state);
+			obs <- parallel::parLapply(cl, gen.tiprates, manntest, traits, two.tailed, trait.state);
+			permu <- parallel::parLapply(cl, p.gen.tiprates, manntest, traits, two.tailed, trait.state);
 		} else {
-			obs <- snow::parLapply(cl, gen.tiprates, kruskaltest, traits);
-			permu<- snow::parLapply(cl, p.gen.tiprates, kruskaltest, traits);
+			obs <- parallel::parLapply(cl, gen.tiprates, kruskaltest, traits);
+			permu <- parallel::parLapply(cl, p.gen.tiprates, kruskaltest, traits);
 		}
-		snow::stopCluster(cl);
+		parallel::stopCluster(cl);
 	} else {
 		if (method == 'spearman' | method == "pearson") {
 			obs <- lapply(gen.tiprates, cortest, traits, method);

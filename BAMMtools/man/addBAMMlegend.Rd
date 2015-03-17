@@ -43,18 +43,19 @@ addBAMMlegend(x, corners = c(0,1,0,10), side = 3, nTicks = 2, axisOffset = 0.4, 
 data(whales, events.whales)
 ephy <- getEventData(whales, events.whales, burnin=0.25)
 
-x <- plot.bammdata(ephy)
+x <- plot.bammdata(ephy, lwd=2)
 axis(1); axis(2)
 addBAMMlegend(x, corners = c(-1, -0.5, 40, 80), nTicks = 4, side = 4, las = 1)
 addBAMMlegend(x, corners = c(5, 20, 60, 61), nTicks = 4, side = 3, las = 1, cex.axis = 0.7)
 
+\donttest{
 #addBAMMlegend also automatically detects the use of color.interval
 data(primates, events.primates)
 ephy <- getEventData(primates, events.primates, burnin=0.25, type = 'trait')
 
-x <- plot.bammdata(ephy, breaksmethod='linear', color.interval=c(NA, 0.12))
+x <- plot.bammdata(ephy, breaksmethod='linear', color.interval=c(NA, 0.12), lwd=2)
 addBAMMlegend(x, corners = c(0, 30, 200, 205), nTicks = 1, side = 3, axisOffset = 1, las = 1)
-
+}
 }
  
 
