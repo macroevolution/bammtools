@@ -30,7 +30,7 @@ a color palette to use with \code{plot.bammdata}.
 color to use for shift points. 
 }
 \item{spex}{
-a character string indicating what type of macroevolutionary rates should be plotted. "s" (default) indicates speciation rates, "e" indicates extinction rates, and any other character, e.g. "se", indicates net diversification rates. Ignored if ephy$type = "trait".
+a character string indicating what type of macroevolutionary rates should be plotted. "s" (default) indicates speciation rates, "e" indicates extinction rates, and "netdiv" indicates net diversification rates. Ignored if ephy$type = "trait".
 }
 \item{add.freq.text}{
 a logical indicating whether to add the posterior frequency of each shift configuration to the plotting region.	

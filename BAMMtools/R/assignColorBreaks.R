@@ -73,7 +73,7 @@ assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
 				}
 			}
 		}
-		else {
+		else if (tolower(spex) == "netdiv") {
 			if (logcolor == FALSE) {
 				if (method == "quantile") {	
 					bks <- quantile(rates[[1]] - rates[[2]], seq(0,1, length.out=(NCOLORS+1)));

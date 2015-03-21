@@ -61,7 +61,7 @@ mapping of evolutionary rates to colors. Defaults to \code{FALSE}.
 }
   \item{spex}{
 a character string indicating what type of macroevolutionary rates should be plotted. "s" (default) indicates
-speciation rates, "e" indicates extinction rates, and any other character, e.g. "se", indicates net diversification rates. Ignored if \code{ephy$type = "trait"}.  	
+speciation rates, "e" indicates extinction rates, and "netdiv" indicates net diversification rates. Ignored if \code{ephy$type = "trait"}.  	
 }
   \item{lwd}{
 a numeric specifying the line width for branches.
@@ -114,7 +114,7 @@ slow rates and warm colors represent fast rates. When the tree is
 plotted each of these small segments is plotted so that changes in rates through time and shifts in 
 rates are visible as gradients of color. The \code{spex} argument determines the type of rate that will
 be calculated. \code{spex = "s"} will plot speciation rates, \code{spex = "e"} will plot extinction rates,
-and \code{spex = "se"} will plot diversification rates (speciation - extinction). Note that if \code{x$type = "trait"} the \code{spex} argument is ignored and rates of phenotypic evolution are plotted instead. If \code{legend = TRUE} the function will plot a legend that contains the mapping of colors to numerical values.  
+and \code{spex = "netdiv"} will plot diversification rates (speciation - extinction). Note that if \code{x$type = "trait"} the \code{spex} argument is ignored and rates of phenotypic evolution are plotted instead. If \code{legend = TRUE} the function will plot a legend that contains the mapping of colors to numerical values.  
 
 A number of color palettes come built in with BAMMtools. Color-blind friendly options include
 \tabular{r}{

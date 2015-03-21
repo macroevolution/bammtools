@@ -3,6 +3,9 @@ plot.credibleshiftset <- function(x, plotmax=9, method='phylogram', pal = 'RdYlB
 	if (class(x) != "credibleshiftset") {
 		stop('arg x must be of class "credibleshiftset"');
 	}
+	if (!spex %in% c('s', 'e', 'netdiv')) {
+		stop("arg spex must be 's', 'e' or 'netdiv'. ")
+	}
 	if ((spex == "e" || spex == "se") && x$type == "trait") {
 		warning("arg spex not meaningful for BAMMtrait");
 		spex <- "s";

@@ -20,7 +20,7 @@
 		an integer or vector of mode integer indicating which posterior samples to use in the calculation. If \code{NULL} (default) all samples are used
 	}
 	\item{spex}{
-		a character string. "s" (default) calculates speciation rates; "e" calculates extinction rates; "se" calculates diversification rates. Ignored if \code{ephy$type = "trait"}
+		a character string. "s" (default) calculates speciation rates; "e" calculates extinction rates; "netdiv" calculates diversification rates. Ignored if \code{ephy$type = "trait"}
 	}
 }
 

@@ -36,7 +36,7 @@
 	}
 	\item{spex}{
 a character string indicating what type of macroevolutionary rates should be plotted. "s" (default) indicates
-speciation rates, "e" indicates extinction rates, and any other character, e.g. "se", indicates net diversification
+speciation rates, "e" indicates extinction rates, and 'netdiv' indicates net diversification
 rates. Ignored if \code{ephy$type = "trait"}.
 	}
 	\item{legend}{

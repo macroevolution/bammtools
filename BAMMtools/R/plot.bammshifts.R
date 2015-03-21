@@ -17,7 +17,10 @@ rank=NULL, index=NULL, spex="s", legend=TRUE, add.freq.text=TRUE, logcolor=FALSE
 	if (class(ephy) != "bammdata") {
 		stop("arg ephy must be of class 'bammdata'");
 	}
-	if ((spex == "e" || spex == "se") && ephy$type == "trait") {
+	if (!spex %in% c('s', 'e', 'netdiv')) {
+		stop("arg spex must be 's', 'e' or 'netdiv'.")
+	}
+	if ((spex == "e" || spex == "netdiv") && ephy$type == "trait") {
 		warning("arg spex not meaningful for BAMMtrait");
 		spex <- "s";
 	}
@@ -84,7 +87,7 @@ rank=NULL, index=NULL, spex="s", legend=TRUE, add.freq.text=TRUE, logcolor=FALSE
     	mu2 <- sed$eventData[[1]][isShiftNodeParent, 6];
     	AcDc <- exponentialRate(time, mu1, mu2) > sed$eventData[[1]][isShiftNode, 5];
     }
-    else {
+    else if (spex == 'netdiv') {
     	lam1 <- sed$eventData[[1]][isShiftNodeParent, 3]; 
     	lam2 <- sed$eventData[[1]][isShiftNodeParent, 4];
     	mu1 <- sed$eventData[[1]][isShiftNodeParent, 5]; 

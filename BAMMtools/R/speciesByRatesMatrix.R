@@ -1,4 +1,7 @@
 speciesByRatesMatrix = function(ephy, nslices, index = NULL, spex = "s") {
+	if (!spex %in% c('s', 'e', 'netdiv')) {
+		stop("arg spex must be 's', 'e' or 'netdiv'.")
+	}
 	seq.nod <- .Call("seq_root2tip", ephy$edge, length(ephy$tip.label), ephy$Nnode, PACKAGE = "BAMMtools");
 	if (nslices <= 100) {
 		tvec <- (seq(0, 1, 0.01)+0.005) * max(ephy$end);
@@ -33,7 +36,7 @@ speciesByRatesMatrix = function(ephy, nslices, index = NULL, spex = "s") {
 			else if (tolower(spex) == "e") {
 				rts = ephy$dtrates$rates[[2]][path][ids];
 			}
-			else {
+			else if (tolower(spex) == "netdiv") {
 				rts = ephy$dtrates$rates[[1]][path][ids] - ephy$dtrates$rates[[2]][path][ids];
 			}
 		}

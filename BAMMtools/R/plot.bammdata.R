@@ -18,6 +18,10 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
     }
     else stop("Object ephy must be of class bammdata");
     
+    if (!spex %in% c('s','e','netdiv')) {
+    	stop("spex must be 's', 'e' or 'netdiv'.");
+    }
+    
     if (length(pal) == 1 && !pal %in% names(get("palettes", envir=.colorEnv)) && pal != "temperature" && pal != "terrain")
     	pal <- rep(pal, 3)
     else if (length(pal) == 2)
@@ -51,7 +55,7 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
         else if (tolower(spex) == "e") {
             colorobj <- colorMap(x$dtrates$rates[[2]], pal, colorbreaks, logcolor, color.interval);
         }
-        else {
+        else if (tolower(spex) == "netdiv") {
             colorobj <- colorMap(x$dtrates$rates[[1]] - x$dtrates$rates[[2]], pal, colorbreaks, logcolor, color.interval);
         }
     }

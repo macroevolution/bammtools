@@ -21,8 +21,8 @@
 	}
 	\item{spex}{
 		a character string. "s" means that speciation rates are used to make the
-		map, "e" means that extinction rates are used. Any other string, e.g. "se",
-		means that diversification rates are used. Ignored for BAMM trait data.
+		map, "e" means that extinction rates are used. "netdiv" means that 
+		diversification rates are used. Ignored for BAMM trait data.
 	}
 	\item{logcolor}{
 		should the natural logarithm of rates be used for the color map.
@@ -62,13 +62,13 @@
 	#this also works for speciation rates
 	
 	plot(ed, colorbreaks = colors, spex="s")
-	colors <- assignColorBreaks(ed$dtrates$rates, spex="se") 
+	colors <- assignColorBreaks(ed$dtrates$rates, spex="netdiv") 
 	#diversification rates
 	
 	#colors <- assignColorBreaks(ed$dtrates$rates[[1]] - ed$dtrates$rates[[2]]) 
 	#this also works for diversification rates
 	
-	plot(ed, colorbreaks = colors, spex="se")
+	plot(ed, colorbreaks = colors, spex="netdiv")
 }
 \seealso{
 	\code{\link{plot.bammdata}}
