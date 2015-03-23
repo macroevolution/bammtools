@@ -20,7 +20,6 @@ void jenksBrks(double *d, int *k1, int *length_d1, double *brks)
 	int i4;
 	double v;
 	double val;
-	double last;
 	double id;
 	
 	int k = k1[0];
@@ -57,7 +56,6 @@ void jenksBrks(double *d, int *k1, int *length_d1, double *brks)
 
 	//Begin
 	for (int l = 2; l <= length_d; l++) {
-		//Rprintf("%d\n", l);
 		double s1 = 0;
 		double s2 = 0;
 		double w = 0;
@@ -91,20 +89,12 @@ void jenksBrks(double *d, int *k1, int *length_d1, double *brks)
 
 	kclass[k - 1] = length_d;
 	k = length_d;
-	last = length_d;
-	double seq[nCat]; 
-	int cntr = nCat;
-	for (int i = 0; i < nCat; i++) {
-		seq[i] = cntr;
-		cntr = cntr - 1;
-	}
 
-	for (int j = 0; j < nCat; j++) {
-		cntr = seq[j];
-		id = (int) (mat1[k-1][cntr-1]) - 1;
-		kclass[cntr - 2] = id;
+	for (int j = nCat; j > 1; j--) {
+		id = (int) (mat1[k-1][j-1]) - 1;
+		//printf("j = %d\n", j);
+		kclass[j - 2] = id;
 		k = id;
-		last = k - 1;
 	}
 
 	brks[0] = d[0];
@@ -121,8 +111,6 @@ void jenksBrks(double *d, int *k1, int *length_d1, double *brks)
 	Free(mat1);
 	Free(mat2);
 }
-
-
 
 
 
