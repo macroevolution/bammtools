@@ -13,19 +13,21 @@ An R package for the analysis and visualization of complex macroevolutionary dyn
 \tabular{ll}{
 Package: \tab BAMMtools\cr
 Type: \tab Package\cr
-Version: \tab 2.0.4\cr
-Date: \tab 2015-01-18\cr
-License: \tab GPL (>= 2)\cr
+Version: \tab 2.0.5\cr
+Date: \tab 2015-03-23\cr
+License: \tab GPL-2 | GPL-3\cr
 }
 
 }
 
 \author{
-Dan Rabosky, Mike Grundler, Pascal Title, Carlos Anderson, Jeff Shi, Joseph Brown, Huateng Huang
-Maintainer: Dan Rabosky <dan.rabosky@gmail.com>
+Dan Rabosky, Mike Grundler, Pascal Title, Carlos Anderson, Jeff Shi, Joseph Brown, Huateng Huang\cr
+Maintainer: {Pascal Title <ptitle@umich.edu}>
 }
 \references{
 \url{bamm-project.org}
+
+Rabosky, D., M. Grundler, C. Anderson, P. Title, J. Shi, J. Brown, H. Huang and J. Larson. 2014. BAMMtools: an R package for the analysis of evolutionary dynamics on phylogenetic trees. Methods in Ecology and Evolution 5: 701-707.
 
 Rabosky, D. L. 2014. Automatic detection of key innovations, rate shifts, and diversity-dependence on phylogenetic trees. PLoS ONE 9: e89543
 
