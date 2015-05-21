@@ -15,6 +15,9 @@ setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPrio
 	if (is.null(total.taxa)){
 		total.taxa <- length(phy$tip.label);
 	}
+	if (!is.null(total.taxa) & total.taxa <= 1) {
+		stop("total.taxa is a count, not a percent.")
+	}
 	if (is.null(traits)){
 		
 		pb <- (log(total.taxa) - log(2)) / mbt;
