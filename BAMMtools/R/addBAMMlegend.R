@@ -12,19 +12,31 @@
 
 
 
-addBAMMlegend <- function(x, corners = c(0,1,0,10), side = 3, nTicks = 2, axisOffset = 0.4, ...) {
+addBAMMlegend <- function(x, corners = c(0,1,0,10), side = 3, nTicks = 2, direction = 'auto', axisOffset = 0.4, ...) {
 	#corners xmin,xmax,ymin,ymax
 	
 	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {
 		stop("x must be a saved plot.bammdata object.")
 	}
 	
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {
+		stop("direction must be auto, vertical or horizontal.");
+	}
+	
 	colorbreaks <- x$colorbreaks
 	pal <- x$palette
 
 	n <- length(colorbreaks);
+	
+	if (direction == 'auto') {
+		if ((corners[2] - corners[1]) >= (corners[4] - corners[3])) {
+			direction <- 'horizontal';
+		} else {
+			direction <- 'vertical';
+		}
+	}
 
-	if ((corners[2] - corners[1]) >= (corners[4] - corners[3])) { #horizontal
+	if (direction == 'horizontal') {
 		x <- seq(from = corners[1], to = corners[2], length.out = n);
 		width <- corners[3:4];
 	} else {
@@ -50,7 +62,7 @@ addBAMMlegend <- function(x, corners = c(0,1,0,10), side = 3, nTicks = 2, axisOf
 	tx[length(tx)] <- max(z[,2])	
 	
 	#plot bar
-	if ((corners[2] - corners[1]) >= (corners[4] - corners[3])) {
+	if (direction == 'horizontal') {
 		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal);
 	} else {
 		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal);
