@@ -17,7 +17,7 @@ writeEventData <- function(ephy, outtreefile, outeventfile){
 	nodes <- as.integer(unique(nodes));
   
 	lr_child <- sapply(nodes, function(x) {
-		l <- tree$ephyge[which(tree$edge[,1] == x), 2];
+		l <- tree$edge[which(tree$edge[,1] == x), 2];
 		if (length(l) == 0) {
 			return(c(x, NA));
 		} else {
@@ -41,5 +41,5 @@ writeEventData <- function(ephy, outtreefile, outeventfile){
 				stringsAsFactors = FALSE
 			))
 	}
-	write.csv(eventdata, file = outeventfile, row.names = FALSE);
+	write.csv(eventdata, file = outeventfile, row.names = FALSE, quote = FALSE);
 }
