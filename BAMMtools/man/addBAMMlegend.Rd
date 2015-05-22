@@ -7,7 +7,7 @@ Add a color legend to a phylo-rate plot
 Add a legend to a phylorate plot, with greater manual control.
 }
 \usage{
-addBAMMlegend(x, corners = c(0,1,0,10), side = 3, nTicks = 2, axisOffset = 0.4, ...)
+addBAMMlegend(x, corners = c(0,1,0,10), side = 3, nTicks = 2, direction = "auto", axisOffset = 0.4, ...)
 }
 \arguments{
 	\item{x}{
@@ -21,6 +21,10 @@ addBAMMlegend(x, corners = c(0,1,0,10), side = 3, nTicks = 2, axisOffset = 0.4, 
 	}
 	\item{nTicks}{
 		number of tick marks, besides of min and max.
+	}
+	\item{direction}{
+		direction of color ramp. If \code{auto}, then direction is automatically inferred,
+		otherwise can be specified as \code{horizontal} or \code{vertical}.
 	}
 	\item{axisOffset}{
 		distance from color bar for labels.
