@@ -1,6 +1,7 @@
 
 # Arguments:
 #	ephy: a bammdata object
+# rate: either "speciation", "extinction" or "net diversification". default to "speciation".
 #	traits: a vector of trait data, with names corresponding to tips in the ephy object
 #	reps: number of permutations to do
 #	return.full: include the permutated and observed correlations in the retunred object?
@@ -30,24 +31,32 @@
 # two.tailed=T
 # nthreads=6
 # traitorder='0,1';
-traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method = 'spearman', logrates = TRUE, two.tailed = TRUE, traitorder = NA, nthreads = 1) {
+traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.full = FALSE, method = 'spearman', logrates = TRUE, two.tailed = TRUE, traitorder = NA, nthreads = 1) {
 
 	if (ephy$type != 'diversification'){
 		stop("Function currently supports only bammdata objects from speciationextinction analyses\n");
 	}
   
 	if (nthreads > 1) {
-		#if (!"package:snow" %in% search()) {
 		if (!"package:parallel" %in% search()) {
 			stop("Please load package 'parallel' for using the multi-thread option\n");
 		}
 	}
+	ratetype.option<-c("speciation", "extinction", "net diversification");
+	ratetype <- ratetype.option[grep(paste("^", rate, sep = ''), ratetype.option,ignore.case = TRUE, perl = TRUE)];
+  if (length(ratetype) == 0) {
+    stop("Rate must be one of 'speciation', 'extinction', or 'net diversification', only the initial letter is needed\n")
+  }
+  
+  if (ratetype == "net diversification" & logrates == TRUE) {
+    print("Net diversification might be negative and the logrates would produce NaNs\n");
+  }
   
 	if (sum(! names(traits) %in% ephy$tip.label) > 0) {
 		cat("ignored taxa with trait but not in the bammdata object\n");
 		traits <- traits[names(traits) %in% ephy$tip.label];
 		if (length(traits) == 0) {
-			stop("no taxa with trait data are in the bammdata object\n");
+			stop("none of the taxa with trait data is in the bammdata object\n");
 		}
 	}
 
@@ -55,7 +64,7 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 	method.option <- c("spearman",  "pearson", "mann-whitney", "kruskal");
 	method <- method.option[grep(paste("^", method, sep = ''), method.option, ignore.case = TRUE)];
 	if (length(method) == 0) {
-		stop("method must be one of spearman, pearson, mann-whitney, and kruskal, only the initial letter is needed");
+		stop("method must be one of 'spearman', 'pearson', 'mann-whitney', or 'kruskal', only the initial letter is needed");
 	}
 
 	# check if the trait is right class
@@ -81,7 +90,7 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 	trait.state <- NA;
 	if (two.tailed == FALSE) {
 		if (is.na(traitorder)) {
-			stop("selected one-tail test, but traitorder is specified\n");
+			stop("selected one-tail test, but traitorder is not specified\n");
 		}
 		if ( method == "kruskal") {
 			stop(" currently one-tail test is only available for continous or binary trait");
@@ -109,7 +118,13 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 			}
 		}
 	}
-	tiprates <- ephy$tipLambda;
+  if (ratetype == 'speciation') {
+	  tiprates <- ephy$tipLambda;
+  } else if (ratetype == "extinction") {
+    tiprates <- ephy$tipMu;
+  } else {
+    tiprates <- lapply(1:length(ephy$tipLambda), function(i) {ephy$tipLambda[[i]] - ephy$tipMu[[i]]});
+  }
 	tipstates <- ephy$tipStates;
 	#tiprates <- tiprates[ephy$tip.label];
 	traits <- traits[ephy$tip.label];
@@ -127,12 +142,12 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 	#randomly sample generations from BAMM posterior
 	gen <- sample(1:length(tiprates), size = reps, replace = TRUE);
 
-	gen.tiprates<-list();
+	gen.tiprates <- list();
 	for (l in 1:length(gen)) {
 		gen.tiprates[[l]] <- data.frame(rates = tiprates[[gen[l]]], states = tipstates[[gen[l]]], stringsAsFactors = FALSE);
 	}
   
-	rm("tiprates","tipstates");
+	rm("tiprates", "tipstates");
 	permute_tiprates <- function(m) {
 		tt <- m$states;
 		tlam <- m$rates;
@@ -161,8 +176,12 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 	}
 	gen.tiprates <- xgen.tiprates; rm("xgen.tiprates");
 
-	cortest <- function(rates, traits, method) {    
-		return(cor.test(rates, traits, method = method, exact = FALSE)$estimate);   
+	cortest <- function(rates, traits, method) {
+	    if (sd(rates) == 0) {
+	    	return(0);
+	    } else {
+			return(cor.test(rates, traits, method = method, exact = FALSE)$estimate);  
+	    }
 	}
 	manntest <- function(rates, traits, two.tailed, trait.state) {
 		if (two.tailed) {
@@ -179,7 +198,7 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 
 	if (nthreads > 1) {
 		cl <- parallel::makePSOCKcluster(nthreads);
-		if (method == 'spearman' | method == "pearson"){
+		if (method == 'spearman' | method == "pearson") {
 			obs <- parallel::parLapply(cl, gen.tiprates,cortest, traits, method);
 			permu <- parallel::parLapply(cl, p.gen.tiprates, cortest, traits, method);
 		} else if (method == "mann-whitney") {
@@ -232,6 +251,7 @@ traitDependentBAMM <- function(ephy, traits, reps, return.full = FALSE, method =
 		names(l) <- as.character(unique(traits[! is.na(traits)]));
 		obj <- list(estimate = l, p.value = pval, method = method, two.tailed = two.tailed);
 	}
+  obj$rate <- ratetype;
 	if (return.full) {
 		obj$obs.corr <- as.numeric(obs);
 		obj$gen <- gen;
