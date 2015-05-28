@@ -211,12 +211,13 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
         }
     }
     index <- order(as.numeric(rownames(ret$segs)));
-    if (method == "phylogram") {
-        assign("last_plot.phylo", list(type = "phylogram", direction = direction, Ntip = phy$Nnode + 1, Nnode = phy$Nnode, edge = phy$edge, xx = ret$segs[index, 3], yy = ret$segs[index, 4], pp = par(no.readonly = TRUE)), envir = .PlotPhyloEnv);
-    }
-    else if (method == "polar") {
-        assign("last_plot.phylo", list(type = "fan", Ntip = phy$Nnode + 1, Nnode = phy$Nnode, edge = phy$edge, xx = ret$segs[index, 3], yy = ret$segs[index, 4], theta = ret$segs[index, 5], rb = rb, pp = par(no.readonly = TRUE)), envir = .PlotPhyloEnv);
-    }
+    if (show) {
+    	if (method == "phylogram") {
+        	assign("last_plot.phylo", list(type = "phylogram", direction = direction, Ntip = phy$Nnode + 1, Nnode = phy$Nnode, edge = phy$edge, xx = ret$segs[index, 3], yy = ret$segs[index, 4], pp = par(no.readonly = TRUE)), envir = .PlotPhyloEnv);
+		} else if (method == "polar") {
+        	assign("last_plot.phylo", list(type = "fan", Ntip = phy$Nnode + 1, Nnode = phy$Nnode, edge = phy$edge, xx = ret$segs[index, 3], yy = ret$segs[index, 4], theta = ret$segs[index, 5], rb = rb, pp = par(no.readonly = TRUE)), envir = .PlotPhyloEnv);
+		}
+	}
     if (par.reset) {
         par(op);
     }

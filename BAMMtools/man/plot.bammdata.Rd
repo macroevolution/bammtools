@@ -231,7 +231,7 @@ title(main="jenks")
 # for (i in 1:6) {
 # 	ed <- dtRates(ed, 0.005, samples[i])
 # 	plot(ed, colorbreaks=xx$colorbreaks)
-# 	addBAMMshifts(ed,index=samples[i],method="phylogram")	
+# 	addBAMMshifts(ed,index=samples[i],method="phylogram", par.reset=FALSE)	
 # }
 # dev.off()
 #
