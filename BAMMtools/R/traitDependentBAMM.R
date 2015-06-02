@@ -49,7 +49,7 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
   }
   
   if (ratetype == "net diversification" & logrates == TRUE) {
-    print("Net diversification might be negative and the logrates would produce NaNs\n");
+    cat("WARNING: Net diversification might be negative and logged rates would then produce NaNs.\n");
   }
   
 	if (sum(! names(traits) %in% ephy$tip.label) > 0) {
@@ -177,7 +177,7 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 	gen.tiprates <- xgen.tiprates; rm("xgen.tiprates");
 
 	cortest <- function(rates, traits, method) {
-	    if (sd(rates) == 0) {
+	    if (sd(rates, na.rm = TRUE) == 0) {
 	    	return(0);
 	    } else {
 			return(cor.test(rates, traits, method = method, exact = FALSE)$estimate);  
