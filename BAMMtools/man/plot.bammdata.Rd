@@ -90,7 +90,7 @@ should colors be plotted on a log scale.
 	method used for determining color breaks. See help file for \code{\link{assignColorBreaks}}.
 }
 \item{color.interval}{
-  Min and max value for the mapping of rates. If \code{NULL}, then min and max are inferrd from the data. NA can also be supplied for one of the two values. See details. 
+  Min and max value for the mapping of rates. If \code{NULL}, then min and max are inferred from the data. NA can also be supplied for one of the two values. See details. 
 }
 \item{JenksSubset}{
   If \code{breaksmethod = "jenks"}, the number of regularly spaced samples to subset from the full rates vector.
