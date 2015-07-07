@@ -30,9 +30,6 @@ colorMap <- function(x, pal, breaks, logcolor = FALSE, color.interval = NULL) {
 		if (is.na(color.interval[2])) {
 			color.interval[2] <- max(x);
 		}
-		if (color.interval[1] < min(x) | color.interval[2] > max(x)) {
-			stop("Supplied color.interval is out of bounds.");
-		}
 		goodbreaks <- intersect(which(breaks > color.interval[1]), which(breaks < color.interval[2]));
 		topcolor <- colpalette[length(colpalette)];
 		bottomcolor <- colpalette[1];
