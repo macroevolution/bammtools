@@ -43,10 +43,6 @@ samplingProbs <- function(tree, cladeTable, cladeRichness = NULL, globalSampling
 		stop("cladeTable must contain 2 columns: one of species, and one of clade assignment.");
 	}
 	
-	if (!is.vector(cladeRichness)) {
-		stop('cladeRichness must be a vector.');
-	}
-	
 	if (is.matrix(cladeTable)) {
 		cladeTable <- as.data.frame(cladeTable, stringsAsFactors=FALSE);
 	}
