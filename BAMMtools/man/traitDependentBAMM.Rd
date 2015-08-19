@@ -8,8 +8,9 @@ STRAPP: STructured Rate Permutations on Phylogenies
 Given a \code{bammdata} object and a vector of trait data (continuous), assess whether the correlation between the trait and bamm estimated speciation , extinction or net diversification rate is significant using permutation. A set of posterior samples is randomly drawn from the \code{bammdata} object. If the trait is continuous, this function calculates the correlation coefficients between the trait and tip rates (observed correlation), as well as that with permuted rates for each posterior sample. In a one-tailed test for positive correlations, the reported p-value is the proportion of the posterior samples in which the observed correlation is larger than the correlations calculated with permuted rates. In a two-tailed test, the reported p-value is the proportion of the posterior samples in which the null correlation is as extreme as the correlation observed. If the trait is binary, the U statistic of the Mann-Whitney test is calculated instead of correlation coefficients to assess whether there is a significant difference in rate between the two trait states. For categorical traits with more than two states, the Kruskal-Wallis rank sum statistic is used.
 }
 \usage{
-traitDependentBAMM(ephy, rate = 'speciation', traits, reps, return.full = FALSE, method = 'spearman', 
-	logrates = TRUE, two.tailed = TRUE, traitorder = NA, nthreads = 1) 
+traitDependentBAMM(ephy, traits, reps, rate = 'speciation', return.full = FALSE, 
+  method = 'spearman', logrates = TRUE, two.tailed = TRUE, 
+  traitorder = NA, nthreads = 1) 
 }
 
 \arguments{
