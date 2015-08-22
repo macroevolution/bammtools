@@ -104,7 +104,10 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
         plot.new();
         ofs <- 0;
         if (labels) {
-            ofs <- max(nchar(phy$tip.label) * 0.03 * cex * tH);
+        	if (method == "phylogram")
+	            ofs <- max(nchar(phy$tip.label) * 0.03 * cex * tH)
+        	else
+        		ofs <- max(nchar(phy$tip.label) * 0.03 * cex);
         }
         if (method == "polar") {
             plot.window(xlim = c(-1, 1) + c(-rb, rb) + c(-ofs, ofs), ylim = c(-1, 1) + c(-rb, rb) + c(-ofs, ofs), asp = 1);
