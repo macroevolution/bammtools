@@ -16,8 +16,13 @@ setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPrio
 		total.taxa <- length(phy$tip.label);
 	}
 	if (!is.null(total.taxa) & total.taxa <= 1) {
-		stop("total.taxa is a count, not a percent.")
+		stop("total.taxa is a count, not a percent.");
 	}
+	
+	if (length(phy$tip.label) > total.taxa) {
+		stop("Your tree has more tips than total.taxa...");
+	}
+	
 	if (is.null(traits)){
 		
 		pb <- (log(total.taxa) - log(2)) / mbt;

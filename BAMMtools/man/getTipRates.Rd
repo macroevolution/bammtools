@@ -17,7 +17,7 @@ an object of class \code{bammdata}.
 logical. If \code{TRUE}, then net diversification rates are returned, if \code{FALSE}, then both speciation and extinction rates are returned. If \code{ephy} is of type \code{trait}, then this is ignored.
 }
   \item{statistic}{
-logical: determines how the average tip rates should be calculated. Can be either \code{mean} or \code{median}.
+Determines how the average tip rates should be calculated. Can be either \code{mean} or \code{median}.
 }
 }
 

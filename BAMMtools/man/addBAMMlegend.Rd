@@ -7,7 +7,8 @@ Add a color legend to a phylo-rate plot
 Add a legend to a phylorate plot, with greater manual control.
 }
 \usage{
-addBAMMlegend(x, corners = c(0,1,0,10), side = 3, nTicks = 2, direction = "auto", axisOffset = 0.4, ...)
+addBAMMlegend(x, corners = c(0,1,0,10), side = 3, nTicks = 2, 
+	direction = "auto", axisOffset = 0.4, ...)
 }
 \arguments{
 	\item{x}{
