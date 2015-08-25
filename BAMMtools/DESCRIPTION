@@ -5,6 +5,7 @@ Version: 2.0.5
 Date: 2015-03-22
 Author: Dan Rabosky, Mike Grundler, Pascal Title, Carlos Anderson, Jeff Shi, Joseph Brown, Huateng Huang
 Maintainer: Pascal Title <ptitle@umich.edu>
+Imports: methods
 Depends: ape
 Description: Provides functions for analyzing and visualizing complex macroevolutionary dynamics on phylogenetic trees. It is a companion package to the command line program BAMM (Bayesian Analysis of Macroevolutionary Mixtures) and is entirely oriented towards the analysis, interpretation, and visualization of evolutionary rates. Functionality includes visualization of rate shifts on phylogenies, estimating evolutionary rates through time, comparing posterior distributions of evolutionary rates across clades, comparing diversification models using Bayes factors, and more. 
 License: GPL (>=2)
