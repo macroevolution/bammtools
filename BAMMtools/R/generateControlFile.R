@@ -1,4 +1,4 @@
-generateControlFile <- function(destination = "controlfile.txt", type = "diversification", params = NULL) {
+generateControlFile <- function(file = "controlfile.txt", type = "diversification", params = NULL) {
 	
 	templates <- list(diversification = 
 	'# BAMM configuration file for speciation/extinction analysis 
@@ -517,6 +517,6 @@ generateControlFile <- function(destination = "controlfile.txt", type = "diversi
 	}
 		
 	#write file to disk
-	write(template, file = destination);
+	write(template, file = file);
 		
 }

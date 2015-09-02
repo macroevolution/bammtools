@@ -8,13 +8,13 @@
 	Generates a template diversification or trait control files for BAMM, while allowing the user to specify parameter values. 
 }
 \usage{
-generateControlFile(destination = "controlfile.txt", type = "diversification", params = NULL)
+generateControlFile(file = "controlfile.txt", type = "diversification", params = NULL)
 }
 \arguments{
 	\item{type}{
 		\code{diversification} or \code{trait}, depending on the desired BAMM analysis
 	}
-	\item{destination}{
+	\item{file}{
 		destination file name with or without path
 	}
 	\item{params}{
@@ -34,6 +34,11 @@ generateControlFile(destination = "controlfile.txt", type = "diversification", p
 }
 
 \examples{
+	
+#Produce a blank template control file
+generateControlFile(file = 'traitcontrol.txt', type='trait')
+
+#Produce a customized control file
 data(whales)
 
 #get bamm priors to supply to control file
@@ -41,7 +46,7 @@ priors <- setBAMMpriors(whales, outfile = NULL)
 rownames(priors) <- priors[,1]
 priors[,2] <- round(priors[,2], 4)
 
-generateControlFile(destination = 'divcontrol.txt', params = list(
+generateControlFile(file = 'divcontrol.txt', params = list(
 	treefile = 'whales.tre',
 	globalSamplingFraction = '1',
 	numberOfGenerations = '100000',
