@@ -12,7 +12,7 @@ getEventData(phy, eventdata, burnin = 0, nsamples = NULL,
 }
 \arguments{
   \item{phy}{
-an object of class \code{phylo} - specifically, the time calibrated tree that was analyzed with \code{BAMM}.
+an object of class \code{phylo} - specifically, the time calibrated tree that was analyzed with \code{BAMM}. Alternatively, a character string specifying the path to a newick-formatted tree.
 }
   \item{eventdata}{
 a character string specifying the path to a \code{BAMM} event-data file. Alternatively, an object of class \code{data.frame} that includes the event data from a \code{BAMM} run.
