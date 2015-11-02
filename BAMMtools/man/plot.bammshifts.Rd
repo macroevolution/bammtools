@@ -8,10 +8,10 @@
 	Plots a random distinct rate shift configuration sampled by BAMM on a phylogeny.
 }
 \usage{
-\method{plot}{bammshifts}(x, ephy, method="phylogram",pal="RdYlBu",
-	 rank=NULL, index=NULL, spex="s", 
-	 legend=TRUE, add.freq.text=TRUE, logcolor=FALSE, breaksmethod="linear", 
-	 color.interval=NULL, JenksSubset=20000, ...)
+\method{plot}{bammshifts}(x, ephy, method = "phylogram", pal = "RdYlBu",
+	 rank = NULL, index = NULL, spex = "s", legend = TRUE, 
+	 add.freq.text = TRUE, logcolor = FALSE, breaksmethod = "linear", 
+	 color.interval = NULL, JenksSubset = 20000, ...)
 }
 \arguments{
 	\item{x}{
@@ -81,14 +81,11 @@ Points are added to the branches subtending the nodes of each rate configuration
 	\code{\link{distinctShiftConfigurations}}, \code{\link{plot.bammdata}}
 }
 \examples{
-data(whales, events.whales, prior.whales)
+data(whales, events.whales)
 
 ed <- getEventData(whales, events.whales, burnin=0.25)
 
-# Here we get prior for identifying "significant" (core) rate shifts
-priordist <- getBranchShiftPriors(whales, prior.whales)
-
-sc <- distinctShiftConfigurations(ed, prior = priordist, BFcriterion = 5)
+sc <- distinctShiftConfigurations(ed, expectedNumberOfShifts = 1, threshold = 5)
 
 plot(sc, ed)
 }

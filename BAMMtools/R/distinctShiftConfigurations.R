@@ -6,11 +6,11 @@
 #  if so, add to list
 # Returns:
 #	$marg.probs = marginal probs for nodes
-#	$bayesfactors = branch-specific BF for shift
+#	$marginal_odds_ratio = branch-specific (marginal) posterior:prior odds ratios associated with 1 or more shifts
 #	$shifts = unique shift sets
 #	$samplesets = list of sample indices that reduce to each of the unique shift sets
 #	$frequency = vector of frequencies of each shift configuration
-#	$bfthreshold = bayes factor threshold for shifts
+#	$threshold =  (marginal) posterior:prior odds ratio threshold for shifts
 #	
 #	Results are sorted by frequency. 
 #	$frequency[1] gives the most common shift config sampled
@@ -19,31 +19,13 @@
 
 
 
-distinctShiftConfigurations <- function(ephy, prior, BFcriterion, ... ) {
-	
-	if (hasArg("threshold")){
-		cat("Argument < threshold > has been deprecated. It is \nreplaced");
-		cat(" by the argument < BFcriterion >, \nwhich uses an explicit Bayes factor")
-		cat(" criterion to identify core shifts.\n Please see help on this function")
-		cat(" ( ?distinctShiftConfigurations )\n\n");
-		cat("Apologies for the change, but the new way is much better...\n")
-		stop();
-		
-	}
-	
-	if (class(prior) != 'branchprior'){
-		stop("object prior not of class branchprior");
-	}
-
-	if (length(setdiff(prior$tip.label, ephy$tip.label)) != 0 | length(setdiff(ephy$tip.label, prior$tip.label)) != 0) {
-		stop("Different tips in bammdata and branchprior objects. If x is a subset of a bammdata object, you must generate a new branchprior object with a pruned phylogeny.");
-	}
-	
-	bf <- bayesFactorBranches(ephy, prior);
+distinctShiftConfigurations <- function(ephy, expectedNumberOfShifts, threshold, ... ) {
+  
+	or <- marginalOddsRatioBranches(ephy, expectedNumberOfShifts)
 	
 	mm <- marginalShiftProbsTree(ephy);
 
-	goodnodes <- bf$edge[,2][bf$edge.length >= BFcriterion];
+	goodnodes <- or$edge[,2][or$edge.length >= threshold];
 
 	xlist <- list();
 	for (i in 1:length(ephy$eventData)) {
@@ -81,13 +63,13 @@ distinctShiftConfigurations <- function(ephy, prior, BFcriterion, ... ) {
 	obj <- list();
 	obj$marg.probs <- mm$edge.length;  
 	names(obj$marg.probs) <- mm$edge[,2]; 
-	obj$bayesfactors <- bf$edge.length;
-	names(obj$bayesfactors) <- bf$edge[,2];
+	obj$marginal_odds_ratio <- or$edge.length;
+	names(obj$marginal_odds_ratio) <- or$edge[,2];
 	obj$shifts <- ulist[ord]; 
 	obj$samplesets <- treesets[ord];
 	obj$frequency <- freqs[ord];
 	obj$coreshifts <- goodnodes;
-	obj$BFcriterion <- BFcriterion;
+	obj$threshold <- threshold;
 
 	class(obj) <- 'bammshifts';
 	

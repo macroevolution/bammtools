@@ -1,10 +1,1541 @@
-?package.skeleton
-dir()
-dir()
-source('Load_BAMMtools.R')
-ls()
-dir()
-package.skeleton(name = "BAMMtools")
-library(geiger)
-?chelonia
-quit()
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))
+pdf('~/Dropbox/megaphylogeniesForPrimeTime/cladeAgeVSrichness.pdf', height=4, width=16)#
+par(mfrow=c(1,4))#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[pyronInd, 'cladeAge'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.')#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[wrightInd, 'cladeAge'], log(divTable[wrightInd, 'richness']), pch=20)#
+title(main='Wright et al.')#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20)#
+title(main='TTOL')#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[litInd, 'cladeAge'], log(divTable[litInd, 'richness']), pch=20)#
+title(main='by-clade literature')#
+#
+dev.off()
+pdf('~/Dropbox/megaphylogeniesForPrimeTime/cladeAgeVSrichness.pdf', height=4, width=16)#
+par(mfrow=c(1,4))#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[pyronInd, 'cladeAge'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.')#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[wrightInd, 'cladeAge'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+title(main='Wright et al.')#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL')#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[litInd, 'cladeAge'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+title(main='by-clade literature')#
+#
+dev.off()
+head(divTable)
+qqnorm(divTable[pyronInd, 'netDiv'])
+qqnorm(divTable[wrightInd, 'netDiv'])
+qqnorm(divTable[ttolInd, 'netDiv'])
+qqnorm(divTable[litInd, 'netDiv'])
+qqnorm(log(divTable[litInd, 'netDiv']))
+qqnorm(log(divTable[pyronInd, 'netDiv']))
+pdf('~/Dropbox/megaphylogeniesForPrimeTime/cladeAgeVSrichness.pdf', height=8, width=16)#
+par(mfrow=c(2,4))#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[pyronInd, 'cladeAge'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.')#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[wrightInd, 'cladeAge'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+title(main='Wright et al.')#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL')#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[litInd, 'cladeAge'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+title(main='by-clade literature')#
+#
+#----- #
+# How does diversification rate relate to richness#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[pyronInd, 'netDiv'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.')#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[wrightInd, 'netDiv'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+title(main='Wright et al.')#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[ttolInd, 'netDiv'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL')#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('sp richness', 2, line=3)#
+points(divTable[litInd, 'netDiv'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+title(main='by-clade literature')#
+dev.off()
+pdf('~/Dropbox/megaphylogeniesForPrimeTime/cladeAgeVSrichness.pdf', height=8, width=16)#
+par(mfrow=c(2,4))#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'cladeAge'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.')#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, 'cladeAge'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+title(main='Wright et al.')#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL')#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, 'cladeAge'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+title(main='by-clade literature')#
+#
+#----- #
+# How does diversification rate relate to richness#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'netDiv'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.')#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, 'netDiv'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+title(main='Wright et al.')#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'netDiv'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL')#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, 'netDiv'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+title(main='by-clade literature')#
+dev.off()
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'netDiv']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'netDiv']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'netDiv']))
+?title
+pdf('~/Dropbox/megaphylogeniesForPrimeTime/cladeAgeVSrichness.pdf', height=8, width=16)#
+par(mfrow=c(2,4))#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'cladeAge'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.', cex.main=1.5)#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, 'cladeAge'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+title(main='Wright et al.', cex.main=1.5)#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL', cex.main=1.5)#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, 'cladeAge'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+title(main='by-clade literature', cex.main=1.5)#
+#
+#----- #
+# How does diversification rate relate to richness#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'netDiv'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Pyron et al.')#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, 'netDiv'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Wright et al.')#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'netDiv'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+#title(main='TTOL')#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, 'netDiv'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+#title(main='by-clade literature')#
+dev.off()
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))
+summary(lm(log(divTable[pyron, 'richness']) ~ divTable[wrightInd, 'netDiv']))
+divTable[pyron, 'richness']
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'netDiv']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'netDiv']))
+dat
+head(divTable)
+dat[which(dat$comparableWithTTOL == 'no'), 'clade']
+bad <- dat[which(dat$comparableWithTTOL == 'no'), 'clade']
+which(divTable$clade %in% bad)
+intersect(which(divTable$clade %in% bad), which(divTable$dataset == 'TTOL'))
+divTable[intersect(which(divTable$clade %in% bad), which(divTable$dataset == 'TTOL')), 3:6] <- NA
+divTable
+divTable[ttolInd, 'cladeAge']
+plot.new()#
+plot.window(xlim = c(0, 75), ylim = c(0, 75))#
+axis(1, at=seq(-10,75, by=20))#
+axis(2, at=seq(-10,75, by=20))#
+mtext('Pyron', 1, line=3)#
+mtext('TTOL', 2, line=3)#
+points(divTable[pyronInd, 'cladeAge'], divTable[ttolInd, 'cladeAge'], pch=20)#
+abline(a=0, b=1, lty=2)
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL', cex.main=1.5)
+divTable[ttolInd, 'cladeAge']
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge'], na.rm=TRUE), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL', cex.main=1.5)
+divTable[, 'richness']
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'cladeAge'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.', cex.main=1.5)
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge'], na.rm=TRUE), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL', cex.main=1.5)
+bad
+pdf('~/Dropbox/megaphylogeniesForPrimeTime/cladeAgeVSrichness.pdf', height=8, width=16)#
+par(mfrow=c(2,4))#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'cladeAge'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.', cex.main=1.5)#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, 'cladeAge'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+title(main='Wright et al.', cex.main=1.5)#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge'], na.rm=TRUE), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL', cex.main=1.5)#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, 'cladeAge'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+title(main='by-clade literature', cex.main=1.5)#
+#
+#----- #
+# How does diversification rate relate to richness#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'netDiv'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Pyron et al.')#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, 'netDiv'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Wright et al.')#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'netDiv'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+#title(main='TTOL')#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'netDiv']), ylim = range(log(divTable[, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, 'netDiv'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+#title(main='by-clade literature')#
+dev.off()
+pdf('~/Dropbox/megaphylogeniesForPrimeTime/cladeAgeVSrichness.pdf', height=8, width=16)#
+par(mfrow=c(2,4))#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'cladeAge'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.', cex.main=1.5)#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, 'cladeAge'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+title(main='Wright et al.', cex.main=1.5)#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge'], na.rm=TRUE), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL', cex.main=1.5)#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, 'cladeAge'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+title(main='by-clade literature', cex.main=1.5)#
+#
+#----- #
+# How does diversification rate relate to richness#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'netDiv']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'netDiv'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Pyron et al.')#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'netDiv']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, 'netDiv'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Wright et al.')#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'netDiv']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'netDiv'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+#title(main='TTOL')#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'netDiv']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, 'netDiv'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+#title(main='by-clade literature')#
+dev.off()
+pdf('~/Dropbox/megaphylogeniesForPrimeTime/cladeAgeVSrichness.pdf', height=8, width=16)#
+par(mfrow=c(2,4))#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'cladeAge'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.', cex.main=1.5)#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, 'cladeAge'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+title(main='Wright et al.', cex.main=1.5)#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge'], na.rm=TRUE), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL', cex.main=1.5)#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, 'cladeAge'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+title(main='by-clade literature', cex.main=1.5)#
+#
+#----- #
+# How does diversification rate relate to richness#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'netDiv']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'netDiv'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Pyron et al.')#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'netDiv']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, 'netDiv'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Wright et al.')#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'netDiv'], na.rm=TRUE), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'netDiv'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+#title(main='TTOL')#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'netDiv']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, 'netDiv'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+#title(main='by-clade literature')#
+dev.off()
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'netDiv']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'netDiv']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'netDiv']))
+head(divTable)
+plot(divTable$specRate, divTable$netDiv)
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'specRate']))#
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'specRate']))#
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'specRate']))#
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'specRate']))
+pdf('~/Dropbox/megaphylogeniesForPrimeTime/cladeAgeVSrichness.pdf', height=8, width=16)#
+par(mfrow=c(2,4))#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'cladeAge'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.', cex.main=1.5)#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, 'cladeAge'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+title(main='Wright et al.', cex.main=1.5)#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge'], na.rm=TRUE), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL', cex.main=1.5)#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, 'cladeAge'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+title(main='by-clade literature', cex.main=1.5)#
+#
+#----- #
+# How does diversification rate relate to richness#
+#
+varToUse <- 'specRate'#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, varToUse]), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, varToUse], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Pyron et al.')#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, varToUse]), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, varToUse], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Wright et al.')#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, varToUse], na.rm=TRUE), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, varToUse], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+#title(main='TTOL')#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, varToUse]), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, varToUse], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+#title(main='by-clade literature')#
+dev.off()
+pdf('~/Dropbox/megaphylogeniesForPrimeTime/cladeAgeVSrichness.pdf', height=8, width=16)#
+par(mfrow=c(2,4))#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'cladeAge'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.', cex.main=1.5)#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, 'cladeAge'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+title(main='Wright et al.', cex.main=1.5)#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge'], na.rm=TRUE), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL', cex.main=1.5)#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, 'cladeAge'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+title(main='by-clade literature', cex.main=1.5)#
+#
+#----- #
+# How does diversification rate relate to richness#
+#
+varToUse <- 'netDiv'#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, varToUse]), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, varToUse], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Pyron et al.')#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, varToUse]), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, varToUse], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Wright et al.')#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, varToUse], na.rm=TRUE), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, varToUse], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+#title(main='TTOL')#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, varToUse]), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, varToUse], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+#title(main='by-clade literature')#
+dev.off()
+pdf('~/Dropbox/megaphylogeniesForPrimeTime/cladeAgeVSrichness.pdf', height=8, width=16)#
+par(mfrow=c(2,4))#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, 'cladeAge'], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+title(main='Pyron et al.', cex.main=1.5)#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, 'cladeAge'], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+title(main='Wright et al.', cex.main=1.5)#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, 'cladeAge'], na.rm=TRUE), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, 'cladeAge'], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+title(main='TTOL', cex.main=1.5)#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, 'cladeAge']), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('clade age (mya)', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, 'cladeAge'], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+title(main='by-clade literature', cex.main=1.5)#
+#
+#----- #
+# How does diversification rate relate to richness#
+#
+varToUse <- 'netDiv'#
+#
+#pyron#
+plot.new()#
+plot.window(xlim = range(divTable[pyronInd, varToUse]), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('net div', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[pyronInd, varToUse], log(divTable[pyronInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Pyron et al.')#
+#
+#wright#
+plot.new()#
+plot.window(xlim = range(divTable[wrightInd, varToUse]), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('net div', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[wrightInd, varToUse], log(divTable[wrightInd, 'richness']), pch=20, cex=1.5)#
+#title(main='Wright et al.')#
+#
+#TTOL#
+plot.new()#
+plot.window(xlim = range(divTable[ttolInd, varToUse], na.rm=TRUE), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('net div', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[ttolInd, varToUse], log(divTable[ttolInd, 'richness']), pch=20, cex=1.5)#
+#title(main='TTOL')#
+#
+#by-clade literature#
+plot.new()#
+plot.window(xlim = range(divTable[litInd, varToUse]), ylim = range(log(divTable[pyronInd, 'richness'])))#
+axis(1, at=c(0, axTicks(1)))#
+axis(2, at=c(0, axTicks(2)))#
+mtext('net div', 1, line=3)#
+mtext('log richness', 2, line=3)#
+points(divTable[litInd, varToUse], log(divTable[litInd, 'richness']), pch=20, cex=1.5)#
+#title(main='by-clade literature')#
+dev.off()
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'specRate']))#
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'specRate']))#
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'specRate']))#
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'specRate']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))#
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'netDiv']))#
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'netDiv']))#
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'netDiv
+']))'
+']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'netDiv']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))#
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))#
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))#
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))
+lmTable <- as.data.frame(matrix(nrow=4, ncol=5), stringsAsFactors=FALSE)
+colnames(lmTable) <- c('dataset','independentVar', 'dependentVar', 'R2', 'pval')
+lmTable[,1] <- c('Pyron','Wright','TTOL','by-Clade literature')
+lmTable[,2] <- c(rep('clade age', 4), rep('net div.', 4))
+c(rep('clade age', 4), rep('net div.', 4))
+lmTable[,1] <- c('Pyron','Pyron','Wright','Wright','TTOL','TTOL','by-Clade literature','by-Clade literature')
+lmTable <- as.data.frame(matrix(nrow=8, ncol=5), stringsAsFactors=FALSE)#
+colnames(lmTable) <- c('dataset','independentVar', 'dependentVar', 'R2', 'pval')#
+#
+lmTable[,1] <- c('Pyron','Pyron','Wright','Wright','TTOL','TTOL','by-Clade literature','by-Clade literature')#
+lmTable[,2] <- c(rep('clade age', 4), rep('net div.', 4))
+lmTable
+lmTable[,3] <- rep('log richness', 8)
+lmTable
+lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge'])
+attributes(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))
+attributes(summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge'])))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$r.squared
+attributes(summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge'])))$terms
+attributes(summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge'])))$coefficients
+str(summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge'])))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$coefficients
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$coefficients[2,4]
+#table of linear regressions#
+lmTable <- as.data.frame(matrix(nrow=8, ncol=5), stringsAsFactors=FALSE)#
+colnames(lmTable) <- c('dataset','independentVar', 'dependentVar', 'R2', 'pval')#
+#
+lmTable[,1] <- c('Pyron','Pyron','Wright','Wright','TTOL','TTOL','by-Clade literature','by-Clade literature')#
+lmTable[,2] <- c(rep('clade age', 4), rep('net div.', 4))#
+lmTable[,3] <- rep('log richness', 8)#
+#
+lmTable[1,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$adj.r.squared#
+lmTable[2,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))$adj.r.squared#
+lmTable[3,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))$adj.r.squared#
+lmTable[4,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))$adj.r.squared#
+lmTable[1,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$$coefficients[2,4]#
+lmTable[2,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))$$coefficients[2,4]#
+lmTable[3,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))$$coefficients[2,4]#
+lmTable[4,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))$$coefficients[2,4]
+lmTable <- as.data.frame(matrix(nrow=8, ncol=5), stringsAsFactors=FALSE)#
+colnames(lmTable) <- c('dataset','independentVar', 'dependentVar', 'R2', 'pval')#
+#
+lmTable[,1] <- c('Pyron','Pyron','Wright','Wright','TTOL','TTOL','by-Clade literature','by-Clade literature')#
+lmTable[,2] <- c(rep('clade age', 4), rep('net div.', 4))#
+lmTable[,3] <- rep('log richness', 8)#
+#
+lmTable[1,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$adj.r.squared#
+lmTable[2,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))$adj.r.squared#
+lmTable[3,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))$adj.r.squared#
+lmTable[4,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))$adj.r.squared#
+lmTable[1,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[2,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[3,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[4,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))$coefficients[2,4]
+lmTable
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))$coefficients[2,4]
+lmTable <- as.data.frame(matrix(nrow=8, ncol=5), stringsAsFactors=FALSE)#
+colnames(lmTable) <- c('dataset','independentVar', 'dependentVar', 'R2', 'pval')#
+#
+lmTable[,1] <- c('Pyron','Pyron','Wright','Wright','TTOL','TTOL','by-Clade literature','by-Clade literature')#
+lmTable[,2] <- c(rep('clade age', 4), rep('net div.', 4))#
+lmTable[,3] <- rep('log richness', 8)#
+#
+lmTable[1,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$adj.r.squared#
+lmTable[2,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))$adj.r.squared#
+lmTable[3,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))$adj.r.squared#
+lmTable[4,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))$adj.r.squared#
+lmTable[1,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))$coefficients[2,4]#
+lmTable[2,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'netDiv']))$coefficients[2,4]#
+lmTable[3,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'netDiv']))$coefficients[2,4]#
+lmTable[4,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'netDiv']))$coefficients[2,4]
+lmTable
+lmTable <- as.data.frame(matrix(nrow=8, ncol=5), stringsAsFactors=FALSE)#
+colnames(lmTable) <- c('dataset','independentVar', 'dependentVar', 'R2', 'pval')#
+#
+lmTable[,1] <- c('Pyron','Pyron','Wright','Wright','TTOL','TTOL','by-Clade literature','by-Clade literature')#
+lmTable[,2] <- c(rep('clade age', 4), rep('net div.', 4))#
+lmTable[,3] <- rep('log richness', 8)#
+#
+lmTable[1,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$adj.r.squared#
+lmTable[2,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))$adj.r.squared#
+lmTable[3,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))$adj.r.squared#
+lmTable[4,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))$adj.r.squared#
+lmTable[1,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[2,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[3,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[4,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))$coefficients[2,4]#
+#
+lmTable[1,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))$adj.r.squared#
+lmTable[2,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'netDiv']))$adj.r.squared#
+lmTable[3,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'netDiv']))$adj.r.squared#
+lmTable[4,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'netDiv']))$adj.r.squared#
+lmTable[1,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))$coefficients[2,4]#
+lmTable[2,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'netDiv']))$coefficients[2,4]#
+lmTable[3,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'netDiv']))$coefficients[2,4]#
+lmTable[4,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'netDiv']))$coefficients[2,4]
+lmTable
+lmTable <- as.data.frame(matrix(nrow=8, ncol=5), stringsAsFactors=FALSE)#
+colnames(lmTable) <- c('dataset','independentVar', 'dependentVar', 'R2', 'pval')#
+#
+lmTable[,1] <- c('Pyron','Pyron','Wright','Wright','TTOL','TTOL','by-Clade literature','by-Clade literature')#
+lmTable[,2] <- c(rep('clade age', 4), rep('net div.', 4))#
+lmTable[,3] <- rep('log richness', 8)#
+#
+lmTable[1,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$adj.r.squared#
+lmTable[2,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))$adj.r.squared#
+lmTable[3,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))$adj.r.squared#
+lmTable[4,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))$adj.r.squared#
+lmTable[1,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[2,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[3,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[4,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))$coefficients[2,4]#
+#
+lmTable[5,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))$adj.r.squared#
+lmTable[6,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'netDiv']))$adj.r.squared#
+lmTable[7,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'netDiv']))$adj.r.squared#
+lmTable[8,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'netDiv']))$adj.r.squared#
+lmTable[5,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))$coefficients[2,4]#
+lmTable[6,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'netDiv']))$coefficients[2,4]#
+lmTable[7,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'netDiv']))$coefficients[2,4]#
+lmTable[8,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'netDiv']))$coefficients[2,4]
+lmTable
+lmTable[4:5] <- round(lmTable[,4:5], 3)
+lmTable
+lmTable <- as.data.frame(matrix(nrow=8, ncol=5), stringsAsFactors=FALSE)#
+colnames(lmTable) <- c('dataset','independentVar', 'dependentVar', 'R2', 'pval')#
+#
+lmTable[,1] <- c('Pyron','Pyron','Wright','Wright','TTOL','TTOL','by-Clade literature','by-Clade literature')#
+lmTable[,2] <- c(rep('clade age', 4), rep('net div.', 4))#
+lmTable[,3] <- rep('log richness', 8)#
+#
+lmTable[1,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$adj.r.squared#
+lmTable[3,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))$adj.r.squared#
+lmTable[5,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))$adj.r.squared#
+lmTable[7,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))$adj.r.squared#
+lmTable[1,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[3,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[5,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[7,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))$coefficients[2,4]#
+#
+lmTable[2,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))$adj.r.squared#
+lmTable[4,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'netDiv']))$adj.r.squared#
+lmTable[6,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'netDiv']))$adj.r.squared#
+lmTable[8,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'netDiv']))$adj.r.squared#
+lmTable[2,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))$coefficients[2,4]#
+lmTable[4,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'netDiv']))$coefficients[2,4]#
+lmTable[6,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'netDiv']))$coefficients[2,4]#
+lmTable[8,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'netDiv']))$coefficients[2,4]#
+#
+lmTable[4:5] <- round(lmTable[,4:5], 3)
+lmTable
+rep(c('clade age','net div.'), 4)
+lmTable <- as.data.frame(matrix(nrow=8, ncol=5), stringsAsFactors=FALSE)#
+colnames(lmTable) <- c('dataset','independentVar', 'dependentVar', 'R2', 'pval')#
+#
+lmTable[,1] <- c('Pyron','Pyron','Wright','Wright','TTOL','TTOL','by-Clade literature','by-Clade literature')#
+lmTable[,2] <- rep(c('clade age','net div.'), 4)#
+lmTable[,3] <- rep('log richness', 8)#
+#
+lmTable[1,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$adj.r.squared#
+lmTable[3,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))$adj.r.squared#
+lmTable[5,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))$adj.r.squared#
+lmTable[7,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))$adj.r.squared#
+lmTable[1,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[3,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[5,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'cladeAge']))$coefficients[2,4]#
+lmTable[7,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'cladeAge']))$coefficients[2,4]#
+#
+lmTable[2,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))$adj.r.squared#
+lmTable[4,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'netDiv']))$adj.r.squared#
+lmTable[6,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'netDiv']))$adj.r.squared#
+lmTable[8,4] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'netDiv']))$adj.r.squared#
+lmTable[2,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'netDiv']))$coefficients[2,4]#
+lmTable[4,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'netDiv']))$coefficients[2,4]#
+lmTable[6,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'netDiv']))$coefficients[2,4]#
+lmTable[8,5] <- summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'netDiv']))$coefficients[2,4]#
+#
+lmTable[4:5] <- round(lmTable[,4:5], 3)
+lmTable
+var <- tmin4.tif
+var <- 'tmin4.tif'
+var
+gsub("^([a-z]+)_?(\\d+)$", "\\1_\\2", var)
+gsub("^([a-z]+)_?(\\d+)$", "\\1", var)
+gsub("^([a-z]+)\\_?(\\d+)$", "\\1", var)
+gsub("^([a-z]+)(_?)(\\d+)$", "\\1", var)
+gsub("^([a-z]+)(_?)(\\d+)(.bil|.tif)$", "\\1", var)
+gsub("^([a-z]+)(_?)(\\d+)(.bil|.tif)$", "\\1\\2\\3\\4", var)
+gsub("^([a-z]+)(_?)(\\d+)(.bil|.tif)$", "\\1_\\3\\4", var)
+var <- 'tmax_5.bil'
+var
+gsub("^([a-z]+)(_?)(\\d+)(.bil|.tif)$", "\\1_\\3\\4", var)
+var <- 'tmax5.bil'
+gsub("^([a-z]+)(_?)(\\d+)(.bil|.tif)$", "\\1_\\3\\4", var)
+w <-read.csv('~/Dropbox/fish_in_space/data/bamm_rates/fish_rates.csv')
+head(w)
+nrow(w)
+update.packages(ask=FALSE)
+?inherits
+update.packages(ask=FALSE)
+require(geiger)#
+require(ape)#
+require(laser)#
+#
+getSis <- function(tree, node) {#
+	return(list(node=tree$edge[which(tree$edge[,2] == node),1], sp=setdiff(tips(tree, tree$edge[which(tree$edge[,2] == node),1]), tips(tree, node))))#
+}#
+#
+bammratesfile <- '~/Dropbox/megaphylogeniesForPrimeTime/BAMM/bammRates.csv'#
+#
+#---------------------------#
+#read in phylogenies#
+pyron <- read.tree('~/Dropbox/megaphylogeniesForPrimeTime/trees/Pyron.tre')#
+wright <- read.tree('~/Dropbox/megaphylogeniesForPrimeTime/trees/Wright_squam.tre')#
+ttol <- read.tree('~/Dropbox/megaphylogeniesForPrimeTime/trees/10.TTOL_squamates_unsmoothed.tre')#
+#
+dat <- read.csv('~/Dropbox/megaphylogeniesForPrimeTime/cladeDetails.csv', stringsAsFactors=FALSE)
+dat
+require(BAMMtools)
+?samplingProbs
+#Generate dummy data#
+tree <- read.tree(text="(((t1:2,(t2:1,t3:1):1):1,((t4:1,t5:1):1,t6:2):1):1,#
+(t7:3,(t8:2,t9:2):1):1);")#
+tree$tip.label <- paste(rep('Species',9),1:9,sep='')
+tree
+spTable <- as.data.frame(matrix(nrow=9,ncol=2))#
+spTable[,1] <- tree$tip.label#
+spTable[1:3,2] <- 'cladeA'#
+spTable[4:6,2] <- 'cladeB'#
+spTable[7:9,2] <- 'cladeC'#
+richnessVec <- c(cladeA=5, cladeB=4, cladeC=12)
+spTable
+richnessVec
+samplingProbs(tree, cladeTable = spTable, cladeRichness = richnessVec, #
+	globalSampling = 1, writeToDisk = FALSE)
+spTable <- rbind(spTable, c('Species10','cladeA'),c('Species11','cladeA'),#
+	c('Species12','cladeC'), c('Species13','cladeC'),c('Species14','cladeC'))
+spTable
+samplingProbs(tree, cladeTable = spTable, cladeRichness = NULL, #
+	globalSampling = 0.9, writeToDisk = FALSE)
+cladeTable <- spTable
+cladeRichness <- NULL
+globalSampling=0.9
+writeToDisk=FALSe
+writeToDisk=FALSE
+if (length(intersect(tree$tip.label,cladeTable[,1])) != length(tree$tip.label)) {#
+		stop("Not all species from tree are in cladeTable.");#
+	}
+if (nrow(cladeTable) == length(tree$tip.label)) {#
+		if (is.null(cladeRichness)) {#
+			stop("If cladeTable only contains species from tree, then cladeRichness must be provided.");#
+		}#
+	}
+if (nrow(cladeTable) > length(tree$tip.label)) {#
+		if (!is.null(cladeRichness)) {#
+			warning("cladeTable contains more species than in tree, so cladeRichness vector will be ignored.");#
+		}#
+	}
+!is.null(cladeRichness)
+if (!is.null(cladeRichness)) {#
+		if (length(cladeRichness) != length(unique(cladeTable[,2]))) {#
+			stop("The cladeRichness vector must contain the same number of clades as are described in the cladeTable.");#
+		}#
+	}
+!is.vector(cladeRichness) & !is.null(cladeRichness)
+ncol(cladeTable) > 2
+!is.vector(cladeRichness)
+#####################################################
+##
+#		samplingProbs <- function(...)#
+##
+#		tree = object of class phylo#
+#		cladeTable = a dataframe with 1 column of species names and a second column of group assignment#
+#			Must either be a table for all species in tree, or a table of greater species richness, including those species in the tree.#
+#		cladeRichness = either NULL or a vector of species counts, named by group names.#
+#		globalSampling = percent sampling of the backbone of the phylogeny#
+#		output = path + output file name (.txt)#
+#		writeToDisk = boolean, should the table be written to disk, defaults to TRUE#
+samplingProbs <- function(tree, cladeTable, cladeRichness = NULL, globalSampling, output, writeToDisk = TRUE) {#
+	if (length(intersect(tree$tip.label,cladeTable[,1])) != length(tree$tip.label)) {#
+		stop("Not all species from tree are in cladeTable.");#
+	}#
+	if (nrow(cladeTable) == length(tree$tip.label)) {#
+		if (is.null(cladeRichness)) {#
+			stop("If cladeTable only contains species from tree, then cladeRichness must be provided.");#
+		}#
+	}#
+	if (nrow(cladeTable) > length(tree$tip.label)) {#
+		if (!is.null(cladeRichness)) {#
+			warning("cladeTable contains more species than in tree, so cladeRichness vector will be ignored.");#
+		}#
+	}#
+	if (!is.null(cladeRichness)) {#
+		if (length(cladeRichness) != length(unique(cladeTable[,2]))) {#
+			stop("The cladeRichness vector must contain the same number of clades as are described in the cladeTable.");#
+		}#
+	}#
+	if (!is.vector(cladeRichness) & !is.null(cladeRichness)) {#
+		stop("Error: cladeRichness must either be NULL or an integer vector named with clade names.");#
+	}#
+	if (ncol(cladeTable) > 2) {#
+		stop("cladeTable must contain 2 columns: one of species, and one of clade assignment.");#
+	}#
+	if (is.matrix(cladeTable)) {#
+		cladeTable <- as.data.frame(cladeTable, stringsAsFactors=FALSE);#
+	}#
+	if (nrow(cladeTable) > length(tree$tip.label)) {#
+		probs <- as.data.frame(matrix(nrow=length(tree$tip.label),ncol=3));#
+		colnames(probs) <- c('sp','clade','prob');#
+		for (i in 1:length(tree$tip.label)) {#
+			probs[i,1] <- tree$tip.label[i];#
+			clade <- cladeTable[cladeTable[,1] == tree$tip.label[i],2];#
+			inTree <- intersect(cladeTable[cladeTable[,2] == clade,1],tree$tip.label);#
+			probs[i,2] <- clade;#
+			probs[i,3] <- length(inTree) / length(cladeTable[cladeTable[,2] == clade,1]);#
+		}#
+		probs <- rbind(c(globalSampling,'','',''),probs);#
+	}#
+	if (nrow(cladeTable) == length(tree$tip.label) & !is.null(cladeRichness)) {#
+		probs <- as.data.frame(matrix(nrow=length(tree$tip.label),ncol=3));#
+		colnames(probs) <- c('sp','clade','prob');#
+		for (i in 1:length(tree$tip.label)) {#
+			probs[i,1] <- tree$tip.label[i];#
+			clade <- cladeTable[cladeTable[,1] == tree$tip.label[i],2];#
+			probs[i,2] <- clade;#
+			probs[i,3] <- nrow(cladeTable[cladeTable[,2] == clade,]) / cladeRichness[clade];#
+		}#
+		probs <- rbind(c(globalSampling,'','',''),probs);#
+	}#
+	if (writeToDisk) {#
+		write.table(probs, file=output, quote=F, col.names=F, row.names=F, sep='\t');#
+	} else {#
+		return(probs);#
+	}#
+}
+tree <- read.tree(text="(((t1:2,(t2:1,t3:1):1):1,((t4:1,t5:1):1,t6:2):1):1,#
+(t7:3,(t8:2,t9:2):1):1);")#
+tree$tip.label <- paste(rep('Species',9),1:9,sep='')#
+#
+spTable <- as.data.frame(matrix(nrow=9,ncol=2))#
+spTable[,1] <- tree$tip.label#
+spTable[1:3,2] <- 'cladeA'#
+spTable[4:6,2] <- 'cladeB'#
+spTable[7:9,2] <- 'cladeC'#
+richnessVec <- c(cladeA=5, cladeB=4, cladeC=12)#
+#
+# Option 1: We have a table of clade assignment for the species in the tree, #
+#	along with a vector of known clade richness#
+spTable#
+richnessVec#
+samplingProbs(tree, cladeTable = spTable, cladeRichness = richnessVec, #
+	globalSampling = 1, writeToDisk = FALSE)#
+#
+# Option 2: We have a table of known species, beyond the sampling in the phylogeny#
+spTable <- rbind(spTable, c('Species10','cladeA'),c('Species11','cladeA'),#
+	c('Species12','cladeC'), c('Species13','cladeC'),c('Species14','cladeC'))#
+#
+spTable
+samplingProbs(tree, cladeTable = spTable, cladeRichness = NULL, #
+	globalSampling = 0.9, writeToDisk = FALSE)
+require(BAMMtools)
+?getEventData()
+ata(primates)#
+data(events.primates)#
+xx <- getEventData(primates, events.primates, burnin=0.25, type = 'trait')
+data(primates)#
+data(events.primates)#
+xx <- getEventData(primates, events.primates, burnin=0.25, type = 'trait')
+class(xx)
+inherits('bammdata', xx)
+inherits(xx, 'bammdata')
+inherits(xx, 'phylo')
+inherits(xx, 'bammdata', which=T)
+?plot.bammdata
+data(whales, events.whales)#
+ed <- getEventData(whales, events.whales, burnin=0.25)
+ed <- dtRates(ed, tau = 0.01)
+class(ed)
+plot.bammdata
+class(ed)
+update.packages(ask=F)
+require(rasdter)
+require(raster)
+showTmpFiles()
+update.packages(ask=FALSE)
+require(raster)
+?terrain()
+elevation <- getData('alt', country='CHE')#
+x <- terrain(elevation, opt=c('slope', 'aspect'), unit='degrees')#
+plot(x)
+# TPI for different neighborhood size:#
+tpiw <- function(x, w=5) {#
+	m <- matrix(1/(w^2-1), nc=w, nr=w)#
+	m[ceiling(0.5 * length(m))] <- 0#
+	f <- focal(x, m)#
+	x - f#
+}#
+tpi5 <- tpiw(elevation, w=5)
+tpi5
+plot(tpi5)
+## Not run: #
+alt <- getData('alt', country='CHE')#
+slope <- terrain(alt, opt='slope')#
+aspect <- terrain(alt, opt='aspect')#
+hill <- hillShade(slope, aspect, 40, 270)
+plot(hill, col=grey(0:100/100), legend=FALSE, main='Switzerland')
+plot(alt, col=rainbow(25, alpha=0.35), add=TRUE)
+showTmpFiles()
+?showTmpFiles
+rasterTmpFile()
+125*20
+update.packages(ask=FALSE)
+require(raster)
+?getData()
+cbind(runif(100, min=-180, max=180), runif(100, min=-90, max=90))
+data(wrld_simpl)
+require(maptools)
+data(wrld_simpl)
+coords <- cbind(runif(100, min=-180, max=180), runif(100, min=-90, max=90))
+plot(wrld_simpl)
+points(coords)
+points(coords, pch=20, col='blue')
+srtm <- getData(name='SRTM', lon=coords[1,1], lat=coords[1,2])
+head(coords)
+srtm <- getData(name='SRTM', lon=coords[2,1], lat=coords[2,2])
+srtm
+plot(srtm)
+require(geiger)#
+require(ape)#
+require(laser)#
+#
+getSis <- function(tree, node) {#
+	return(list(node=tree$edge[which(tree$edge[,2] == node),1], sp=setdiff(tips(tree, tree$edge[which(tree$edge[,2] == node),1]), tips(tree, node))))#
+}#
+#
+bammratesfile <- '~/Dropbox/megaphylogeniesForPrimeTime/BAMM/bammRates.csv'#
+#
+#---------------------------#
+#read in phylogenies#
+pyron <- read.tree('~/Dropbox/megaphylogeniesForPrimeTime/trees/Pyron.tre')#
+wright <- read.tree('~/Dropbox/megaphylogeniesForPrimeTime/trees/Wright_squam.tre')#
+ttol <- read.tree('~/Dropbox/megaphylogeniesForPrimeTime/trees/10.TTOL_squamates_unsmoothed.tre')#
+#
+dat <- read.csv('~/Dropbox/megaphylogeniesForPrimeTime/cladeDetails.csv', stringsAsFactors=FALSE)
+dat
+require(BAMMtools)
+tree <- read.tree('~/Downloads/sampleprobabilityfileerrorspeciesnameisnotin/grunter.tre')
+tre
+tree
+tree$tip.label
+update.packages(ask=FALSE)
+require(geiger)#
+require(ape)#
+require(laser)#
+#
+getSis <- function(tree, node) {#
+	return(list(node=tree$edge[which(tree$edge[,2] == node),1], sp=setdiff(tips(tree, tree$edge[which(tree$edge[,2] == node),1]), tips(tree, node))))#
+}#
+#
+bammratesfile <- '~/Dropbox/megaphylogeniesForPrimeTime/BAMM/bammRates.csv'#
+#
+#---------------------------#
+#read in phylogenies#
+pyron <- read.tree('~/Dropbox/megaphylogeniesForPrimeTime/trees/Pyron.tre')#
+wright <- read.tree('~/Dropbox/megaphylogeniesForPrimeTime/trees/Wright_squam.tre')#
+ttol <- read.tree('~/Dropbox/megaphylogeniesForPrimeTime/trees/10.TTOL_squamates_unsmoothed.tre')#
+#
+dat <- read.csv('~/Dropbox/megaphylogeniesForPrimeTime/cladeDetails.csv', stringsAsFactors=FALSE)
+bammRates <- read.csv(bammratesfile, stringsAsFactors=FALSE, row.names=1)#
+#
+divTable <- as.data.frame(matrix(nrow = 12*4, ncol = 7))#
+colnames(divTable) <- c('clade','dataset','cladeAge','richness','netDiv','specRate','BAMM')#
+#
+relativeExtinctionRate <- 0.75#
+#
+counter <- 1#
+for (i in 1:nrow(dat)) {#
+	divTable[counter:(counter + 3),1] <- dat[i,1]#
+	divTable[counter,2] <- 'Pyron'#
+	divTable[counter + 1,2] <- 'Wright'#
+	divTable[counter + 2,2] <- 'TTOL'#
+	divTable[counter + 3,2] <- 'cladeLiterature'#
+	#clade ages#
+	divTable[counter, 3] <- dat[i, 5]#
+	divTable[counter + 1, 3] <- dat[i, 6]#
+	divTable[counter + 2, 3] <- dat[i, 7]#
+	divTable[counter + 3, 3] <- dat[i, 8]#
+	#richness#
+	divTable[counter:(counter + 3), 4] <- dat[i, 9]#
+#
+	#net div#
+	divTable[counter,5] <- log(dat[i,9]) / dat[i,5]#
+	divTable[counter + 1,5] <- log(dat[i,9]) / dat[i,6]#
+	divTable[counter + 2,5] <- log(dat[i,9]) / dat[i,7]#
+	divTable[counter + 3,5] <- log(dat[i,9]) / dat[i,8]#
+	#speciation rate#
+	divTable[counter,6] <- lambda.crown.ms01(n = dat[i,9], tb = dat[i,5], eps = relativeExtinctionRate)$lambda#
+	divTable[counter + 1,6] <- lambda.crown.ms01(n = dat[i,9], tb = dat[i,6], eps = relativeExtinctionRate)$lambda#
+	divTable[counter + 2,6] <- lambda.crown.ms01(n = dat[i,9], tb = dat[i,7], eps = relativeExtinctionRate)$lambda#
+	divTable[counter + 3,6] <- lambda.crown.ms01(n = dat[i,9], tb = dat[i,8], eps = relativeExtinctionRate)$lambda#
+	#BAMM mean clade rates#
+	divTable[counter, 7] <- bammRates[dat[i,1], 'pyron']#
+	divTable[counter + 1, 7] <- bammRates[dat[i,1], 'wright']#
+	divTable[counter + 2, 7] <- bammRates[dat[i,1], 'ttol']#
+	divTable[counter + 3, 7] <- bammRates[dat[i,1], 'wright_rescaled']#
+	counter <- counter + 4#
+}#
+#
+divTable[,5:7] <- round(divTable[,5:7], 3)#
+#
+#Block out clades that are not comparable for TTOL#
+#
+bad <- dat[which(dat$comparableWithTTOL == 'no'), 'clade']#
+divTable[intersect(which(divTable$clade %in% bad), which(divTable$dataset == 'TTOL')), 3:7] <- NA
+divTable
+pyronInd <- which(divTable$dataset == 'Pyron')#
+wrightInd <- which(divTable$dataset == 'Wright')#
+ttolInd <- which(divTable$dataset == 'TTOL')#
+litInd <- which(divTable$dataset == 'cladeLiterature')
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[pyronInd, 'BAMM']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[wrightInd, 'BAMM']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[ttolInd, 'BAMM']))
+summary(lm(log(divTable[pyronInd, 'richness']) ~ divTable[litInd, 'BAMM']))
+head(divTable)
+plot(divTable$specRate, divTable$BAMM)
+which.max(divTable$BAMM)
+divTable[44,]
+abline(a=0.5, b=``)
+abline(a=0.5, b=`1)
+abline(a=0.5, b=1)
+abline(a=0, b=0.5)
+require(ape)
+tree <- read.tree('~/Desktop/tmp/grunter.tre')
+tre
+tree
+'Terapon.puta' %in% tree$tip.label
+tree <- read.tree('~/Desktop/tmp/grunter.tre')
+tree
+tree$tip.label
+require(geiger)#
+require(ape)#
+require(laser)#
+#
+getSis <- function(tree, node) {#
+	return(list(node=tree$edge[which(tree$edge[,2] == node),1], sp=setdiff(tips(tree, tree$edge[which(tree$edge[,2] == node),1]), tips(tree, node))))#
+}#
+#
+bammratesfile <- '~/Dropbox/megaphylogeniesForPrimeTime/BAMM/bammRates.csv'#
+#
+#---------------------------#
+#read in phylogenies#
+pyron <- read.tree('~/Dropbox/megaphylogeniesForPrimeTime/trees/Pyron.tre')#
+wright <- read.tree('~/Dropbox/megaphylogeniesForPrimeTime/trees/Wright_squam.tre')#
+ttol <- read.tree('~/Dropbox/megaphylogeniesForPrimeTime/trees/10.TTOL_squamates_unsmoothed.tre')
+pyron
+wright
+ttol <- read.tree('~/Dropbox/megaphylogeniesForPrimeTime/trees/10.TTOL_squamates_unsmoothed.tre')
+ttol
+require(devtools)
+require(BAMMtools)
+build_win('BAMMtools', version='R-devel')
+setwd('~/bammtools/BAMMtools')
+build_win('BAMMtools', version='R-devel')
+setwd('../')
+build_win('BAMMtools', version='R-devel')

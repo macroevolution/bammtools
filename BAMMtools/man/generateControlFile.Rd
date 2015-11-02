@@ -11,11 +11,11 @@
 generateControlFile(file = "controlfile.txt", type = "diversification", params = NULL)
 }
 \arguments{
-	\item{type}{
-		\code{diversification} or \code{trait}, depending on the desired BAMM analysis
-	}
 	\item{file}{
 		destination file name with or without path
+	}
+	\item{type}{
+		\code{diversification} or \code{trait}, depending on the desired BAMM analysis
 	}
 	\item{params}{
 		list of parameters, see Details.

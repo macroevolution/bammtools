@@ -32,7 +32,7 @@ generateControlFile <- function(file = "controlfile.txt", type = "diversificatio
 	# Whether to perform the MCMC simulation. If runMCMC = 0, the program will only
 	# check whether the data file can be read and the initial likelihood computed
 	
-	simulatePriorShifts = 1
+	simulatePriorShifts = 0
 	# Whether to simulate the prior distribution of the number of shift events,
 	# given the hyperprior on the Poisson rate parameter. This is necessary to
 	# compute Bayes factors
@@ -210,7 +210,7 @@ generateControlFile <- function(file = "controlfile.txt", type = "diversificatio
 	numberOfChains = 4
 	# Number of Markov chains to run
 	
-	deltaT = 0.01
+	deltaT = 0.1
 	# Temperature increment parameter. This value should be > 0
 	# The temperature for the i-th chain is computed as 1 / [1 + deltaT * (i - 1)]
 	
@@ -279,7 +279,7 @@ generateControlFile <- function(file = "controlfile.txt", type = "diversificatio
 	# Whether to perform the MCMC simulation. If runMCMC = 0, the program will only
 	# check whether the data file can be read and the initial likelihood computed
 	
-	simulatePriorShifts = 1
+	simulatePriorShifts = 0
 	# Whether to simulate the prior distribution of the number of shift events,
 	# given the hyperprior on the Poisson rate parameter. This is necessary to
 	# compute Bayes factors
@@ -460,7 +460,7 @@ generateControlFile <- function(file = "controlfile.txt", type = "diversificatio
 	numberOfChains = 4
 	# Number of Markov chains to run
 	
-	deltaT = 0.01
+	deltaT = 0.1
 	# Temperature increment parameter. This value should be > 0
 	# The temperature for the i-th chain is calculated as 1 / [1 + deltaT * (i - 1)]
 	

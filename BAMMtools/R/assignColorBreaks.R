@@ -1,6 +1,6 @@
 assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE, method = c("linear","quantile","jenks"), JenksSubset = NULL) {
 	method = match.arg(method, c("linear", "quantile", "jenks"));
-	if (mode(rates) == "numeric") {
+		if (mode(rates) == "numeric") {
 		if (logcolor == FALSE) {
 			if (method == "quantile") {
 				bks <- quantile(rates, seq(0,1, length.out=(NCOLORS+1)));

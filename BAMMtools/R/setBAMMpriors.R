@@ -5,7 +5,7 @@
 # 
 # 
 
-setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPriors.txt', Nmax = 1000){
+setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPriors.txt', Nmax = 1000, suppressWarning = FALSE){
 	
 	if (is.ultrametric(phy)) {
 		mbt <- max(branching.times(phy));
@@ -26,10 +26,10 @@ setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPrio
 	if (is.null(traits)){
 		
 		pb <- (log(total.taxa) - log(2)) / mbt;
-		lamprior <- 1/(pb * 5);
-		lamrootprior <- 1/(pb * 1);
+		lamprior <- 1 / (pb * 5);
+		lamrootprior <- 1 / (pb * 1);
 		k1 <- log(0.1) / mbt;
-		kprior <- -1*(k1/2);	
+		kprior <- -1 * (k1 / 2);	
 		
 		s1 <- '###############################################';
 		s2 <- '# Prior block chosen by BAMMtools::setBAMMpriors';
@@ -74,7 +74,7 @@ setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPrio
 		betarootprior <- 1/(pmean * 1);		
 		
 		k1 <- log(0.1) / mbt;
-		kprior <- -1*(k1/2);	
+		kprior <- -1 * (k1 / 2);	
 		
 		s1 <- '###############################################';
 		s2 <- '# Prior block chosen by BAMMtools::setBAMMpriors';
@@ -100,11 +100,14 @@ setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPrio
 		cat('priors block of your BAMM input file\n');
 	}
 
-	cat('\nThis function simply sets the poissonRatePrior to 1;\n');
-	cat('This is a parameter you may need to vary to achieve good convergence\n');
-	cat('with your data.\n');
+	if (!suppressWarning & !is.null(outfile)) {
+		cat('\nThis function simply sets the poissonRatePrior to 1;\n');
+		cat('This is a parameter you may need to vary to achieve good convergence\n');
+		cat('with your data.\n');
+	}
 
 	if (is.null(outfile)) {
+		res <- setNames(res[,2], res[,1])
 		return(res);
 	}	
 }

@@ -11,6 +11,11 @@
 
 getJenksBreaks <- function(var, k, subset = NULL) {
 	k <- k - 1;
+	
+	#if more breaks than unique values, segfault, so avoid
+	if (k > length(unique(var))) {
+		k <- length(unique(var));
+	}
 	brks <- rep(1, k + 1);
 	
 	#if requested, regularly sample subset values

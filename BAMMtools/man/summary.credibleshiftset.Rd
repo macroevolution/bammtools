@@ -52,13 +52,10 @@ Dan Rabosky
  
  
 \examples{
-data(events.whales)
-data(whales)
+data(whales, events.whales)
+
 ed <- getEventData(whales, events.whales)
- 
-data(prior.whales)
-bp <- getBranchShiftPriors(whales, prior.whales)
-cset <- credibleShiftSet(ed, bp)
+cset <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
 summary(cset)
 
 }

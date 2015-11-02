@@ -9,8 +9,8 @@ Set priors for BAMM analysis
 
 }
 \usage{
-setBAMMpriors(phy, total.taxa = NULL, traits=NULL, 
-	outfile = 'myPriors.txt', Nmax = 1000)
+setBAMMpriors(phy, total.taxa = NULL, traits=NULL, outfile = 'myPriors.txt', 
+	Nmax = 1000, suppressWarning = FALSE)
 }
 
 \arguments{
@@ -24,12 +24,14 @@ If doing speciation-extinction analysis, the total number of taxa in your clade.
 A filename where the trait data (BAMM format) are stored. Leave NULL if doing a speciation-extinction analysis.
 }
   \item{outfile}{
-Filename for outputting the sample priors block. If \code{NULL}, then a dataframe is returned instead.
+Filename for outputting the sample priors block. If \code{NULL}, then a vector is returned instead.
 }
   \item{Nmax}{
 If analyzing a very large tree for phenotypic evolution, uses only this many taxa to estimate priors for your dataset. Avoid matrix inversion issues with large numbers of tips. 
-
 }
+	\item{suppressWarning}{
+if \code{TRUE}, then the warning about setting the Poisson rate prior is suppressed. Only applies if \code{outfile = NULL}.
+	}
 }
 
 \details{
@@ -51,11 +53,20 @@ This function generates an output file containing a prior parameters block that 
 
 \value{
 The function does not return anything. It simply performs some calculations and writes formatted output to a file.
+However, if \code{outfile = NULL}, then a named vector is returned. 
 
 }
  
 \author{
 Dan Rabosky
+}
+
+\examples{
+data(whales)
+
+setBAMMpriors(phy = whales, total.taxa = 89, outfile = NULL)
+
+
 }
  
  

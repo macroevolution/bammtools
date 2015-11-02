@@ -1,26 +1,10 @@
 
 # Feb 28 2014
-credibleShiftSet <- function(ephy, prior, BFcriterion = 5, set.limit=0.95, ...){
+credibleShiftSet <- function(ephy, expectedNumberOfShifts, threshold = 5, set.limit = 0.95, ...){
 	
-	if (hasArg("threshold")){
-		cat("Argument < threshold > has been deprecated. It is \nreplaced");
-		cat(" by the argument < BFcriterion >, \nwhich uses an explicit Bayes factor")
-		cat(" criterion to identify core shifts.\n Please see help on this function")
-		cat(" ( ?credibleShiftSet )\n\n");
-		cat("Apologies for the change, but the new way is much better...\n")
-		stop();
-		
-	}
-
-	if (class(prior) != 'branchprior'){
-		stop("object bprior is not of class branchprior\n");
-	}
-
-	if (length(setdiff(prior$tip.label, ephy$tip.label)) != 0 | length(setdiff(ephy$tip.label, prior$tip.label)) != 0) {
-		stop("Different tips in bammdata and branchprior objects. If x is a subset of a bammdata object, you must generate a new branchprior object with a pruned phylogeny.");
-	}
+	prior <- getBranchShiftPriors(ephy, expectedNumberOfShifts)
 	
-	dsc <- distinctShiftConfigurations(ephy, prior, BFcriterion);
+	dsc <- distinctShiftConfigurations(ephy, expectedNumberOfShifts, threshold);
 	cfreq <- cumsum(dsc$frequency);
 	cut <- min(which(cfreq >= set.limit));
 	nodeset <- NULL;
@@ -37,7 +21,7 @@ credibleShiftSet <- function(ephy, prior, BFcriterion = 5, set.limit=0.95, ...){
  	ephy$frequency <- frequency;
  	ephy$cumulative <- cumulative;
  	ephy$coreshifts <- dsc$coreshifts;
- 	ephy$BFcriterion <- BFcriterion;
+ 	ephy$threshold <- threshold;
  	ephy$set.limit <- set.limit;
  	ephy$number.distinct <- length(indices);
  	

@@ -1,0 +1,3094 @@
+axis(2)
+par('usr')
+grconvertX(89.44, from='ndc', to='user')
+x <- 1:100#
+y <- x +rnorm(100, 0,10)#
+plot(x,y, xlab="", main="Shrink and Enlarge This Graph")#
+abline(0,1 ,lty=2)
+legend(x=grconvertX(1, from = "ndc", to = "user"),#
+        y=grconvertY(0, from = "ndc", to = "user"),#
+        lty=2,#
+        legend="The legend doesn't rescale nicely",#
+        xjust=1, yjust=0,#
+        bty="n",#
+        xpd=TRUE)
+mtext("This example has some text in the outer margin.\nIt rescales
+nicely.",
+side = 1, line=3.5, adj=0)
+par('usr')
+grconvertX(par('usr')[1], from = "ndc", to = "user")
+grconvertX(par('usr')[2], from = "ndc", to = "user")
+lineVal <- 0
+par('usr')[1] - lineVal * diff(grconvertX(0:1, 'inches', 'user')) * par('cin')[2] * par('cex') * par('lheight')
+lineVal <- 1
+par('usr')[1] - lineVal * diff(grconvertX(0:1, 'inches', 'user')) * par('cin')[2] * par('cex') * par('lheight')
+par('usr')[1]
+plot(ephy, lwd=2)
+par('usr')[1]
+par('usr')[1] - lineVal * diff(grconvertX(0:1, 'inches', 'user')) * par('cin')[2] * par('cex') * par('lheight')
+lineVal
+grconvertX(0:1, 'inches', 'user')
+diff(grconvertX(0:1, 'inches', 'user'))
+par('cin')
+par('cex')
+par('lheight')
+lineVal <- 2
+par('usr')[1] - lineVal * diff(grconvertX(0:1, 'inches', 'user')) * par('cin')[2] * par('cex') * par('lheight')
+##############################################################
+##
+#	addBAMMlegend(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.05, longFrac = 0.2, axisOffset = 0.4, ...)#
+##
+#		x = saved plot.bammdata object#
+#		location = 'topleft', 'topright', 'bottomleft','bottomright','top','bottom','left','right' OR coordinates for legend c(xmin, xmax, ymin, ymax)#
+#		side = side for tick marks, see axis() documentation, if NULL, automatically inferred#
+#		nTicks = number of ticks, outside of min and max#
+#		direction#
+#		shortFrac#
+#		longFrac#
+#		axisOffset = distance from color bar for labels#
+#		... additional parameters to be passed to axis()#
+##
+#
+# topleft (horiz/vert), topright (horiz/vert), bottomleft (horiz, vert), bottomright (horiz, vert), left (vert), right (vert), top (horiz), bottom (horiz)#
+#
+addBAMMlegend <- function(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, ...) {#
+	#location xmin,xmax,ymin,ymax#
+	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {#
+		stop("x must be a saved plot.bammdata object.");#
+	}#
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {#
+		stop("direction must be auto, vertical or horizontal.");#
+	}#
+	if (is.character(location)) {#
+		if (!location %in% c('bottomleft','bottomright','topleft','topright','bottom','top','left','right')) {#
+			stop('location is not recognized.');#
+		}#
+	}#
+	colorbreaks <- x$colorbreaks;#
+	pal <- x$palette;#
+#
+	n <- length(colorbreaks);#
+#
+	minX <- par('usr')[1]#
+	maxX <- par('usr')[2]#
+	minY <- par('usr')[3]#
+	maxY <- par('usr')[4]#
+	if (location == 'topleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+	if (location == 'topleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'bottomleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+	} else#
+#
+	if (location == 'bottomright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac #
+	} else#
+	if (location == 'left') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+#
+	if (location == 'right') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+	if (location == 'top') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+		direction <- 'horizontal'#
+	} else#
+#
+	if (location == 'bottom') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+		direction <- 'horizontal'#
+	}#
+	# infer direction based on dimensions of legend box#
+	if (direction == 'auto') {#
+		if (((location[2] - location[1]) / (par('usr')[2] - par('usr')[1])) >= ((location[4] - location[3]) / (par('usr')[4] - par('usr')[3]))) {#
+			direction <- 'horizontal';#
+		} else {#
+			direction <- 'vertical';#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		axisOffset <- axisOffset * (par('usr')[4] - par('usr')[3]);#
+	} else if (direction == 'vertical') {#
+		axisOffset <- axisOffset * (par('usr')[2] - par('usr')[1]);#
+	}#
+	#determine side for labels based on location in plot and direction#
+	if (side == 'auto') {#
+		if (direction == 'vertical') { #side = 1 or 4#
+			if (mean(location[1:2]) <= mean(par('usr')[1:2])) {#
+				side <- 4;#
+			} else {#
+				side <- 2;#
+			}#
+		}#
+		if (direction == 'horizontal') { #side = 2 or 3#
+			if (mean(location[3:4]) > mean(par('usr')[3:4])) {#
+				side <- 1;#
+			} else {#
+				side <- 3;#
+			}#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		x <- seq(from = location[1], to = location[2], length.out = n);#
+		width <- location[3:4];#
+	} else {#
+		x <- seq(from = location[3], to = location[4], length.out = n);#
+		width <- location[1:2];#
+	}#
+	#get bin coordinates#
+	x <- rep(x,each = 2);#
+	x <- x[-c(1,length(x))];#
+	x <- matrix(x, ncol = 2, byrow = TRUE);#
+	#find tick locations#
+	#get equivalent rate bins#
+	z <- rep(colorbreaks,each = 2);#
+	z <- z[-c(1,length(z))];#
+	z <- matrix(z, ncol = 2, byrow = TRUE);#
+#
+	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));#
+	tickLocs <- x[tx,1]#
+	tx <- z[tx,1]#
+	tickLocs[length(tickLocs)] <- max(x[,2])#
+	tx[length(tx)] <- max(z[,2])	#
+	#plot bar#
+	if (direction == 'horizontal') {#
+		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal);#
+	} else {#
+		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal);#
+	}#
+	#add tickmarks#
+	if (side == 1) { #bottom#
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), las = 1, cex.axis = cex.axis, ...);#
+	} #
+	if (side == 3) { #top#
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 2) { #left#
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 4) { #right#
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), las = 1, cex.axis = cex.axis, ...);#
+	}#
+	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))#
+}
+x <- plot(ephy, lwd=3)#
+addBAMMlegend(x, location = 'topleft')#
+addBAMMlegend(x, location = 'topright')#
+addBAMMlegend(x, location = 'bottomleft')#
+addBAMMlegend(x, location = 'bottomright')#
+addBAMMlegend(x, location = 'bottom')#
+addBAMMlegend(x, location = 'top')#
+addBAMMlegend(x, location = 'left')#
+addBAMMlegend(x, location = 'right')
+##############################################################
+##
+#	addBAMMlegend(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.05, longFrac = 0.2, axisOffset = 0.4, ...)#
+##
+#		x = saved plot.bammdata object#
+#		location = 'topleft', 'topright', 'bottomleft','bottomright','top','bottom','left','right' OR coordinates for legend c(xmin, xmax, ymin, ymax)#
+#		side = side for tick marks, see axis() documentation, if NULL, automatically inferred#
+#		nTicks = number of ticks, outside of min and max#
+#		direction#
+#		shortFrac#
+#		longFrac#
+#		axisOffset = distance from color bar for labels#
+#		... additional parameters to be passed to axis()#
+##
+#
+# topleft (horiz/vert), topright (horiz/vert), bottomleft (horiz, vert), bottomright (horiz, vert), left (vert), right (vert), top (horiz), bottom (horiz)#
+#
+addBAMMlegend <- function(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, ...) {#
+	#location xmin,xmax,ymin,ymax#
+	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {#
+		stop("x must be a saved plot.bammdata object.");#
+	}#
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {#
+		stop("direction must be auto, vertical or horizontal.");#
+	}#
+	if (is.character(location)) {#
+		if (!location %in% c('bottomleft','bottomright','topleft','topright','bottom','top','left','right')) {#
+			stop('location is not recognized.');#
+		}#
+	}#
+	colorbreaks <- x$colorbreaks;#
+	pal <- x$palette;#
+#
+	n <- length(colorbreaks);#
+#
+	#give some buffer to have legends plot in outer margin#
+	minX <- par('usr')[1] - (par('usr')[2] - par('usr')[1]) * 0.05#
+	maxX <- par('usr')[2] + (par('usr')[2] - par('usr')[1]) * 0.05#
+	minY <- par('usr')[3] - (par('usr')[4] - par('usr')[3]) * 0.05#
+	maxY <- par('usr')[4] + (par('usr')[4] - par('usr')[3]) * 0.05#
+	if (location == 'topleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+	if (location == 'topleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'bottomleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+	} else#
+#
+	if (location == 'bottomright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac #
+	} else#
+	if (location == 'left') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+#
+	if (location == 'right') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+	if (location == 'top') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+		direction <- 'horizontal'#
+	} else#
+#
+	if (location == 'bottom') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+		direction <- 'horizontal'#
+	}#
+	# infer direction based on dimensions of legend box#
+	if (direction == 'auto') {#
+		if (((location[2] - location[1]) / (par('usr')[2] - par('usr')[1])) >= ((location[4] - location[3]) / (par('usr')[4] - par('usr')[3]))) {#
+			direction <- 'horizontal';#
+		} else {#
+			direction <- 'vertical';#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		axisOffset <- axisOffset * (par('usr')[4] - par('usr')[3]);#
+	} else if (direction == 'vertical') {#
+		axisOffset <- axisOffset * (par('usr')[2] - par('usr')[1]);#
+	}#
+	#determine side for labels based on location in plot and direction#
+	if (side == 'auto') {#
+		if (direction == 'vertical') { #side = 1 or 4#
+			if (mean(location[1:2]) <= mean(par('usr')[1:2])) {#
+				side <- 4;#
+			} else {#
+				side <- 2;#
+			}#
+		}#
+		if (direction == 'horizontal') { #side = 2 or 3#
+			if (mean(location[3:4]) > mean(par('usr')[3:4])) {#
+				side <- 1;#
+			} else {#
+				side <- 3;#
+			}#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		x <- seq(from = location[1], to = location[2], length.out = n);#
+		width <- location[3:4];#
+	} else {#
+		x <- seq(from = location[3], to = location[4], length.out = n);#
+		width <- location[1:2];#
+	}#
+	#get bin coordinates#
+	x <- rep(x,each = 2);#
+	x <- x[-c(1,length(x))];#
+	x <- matrix(x, ncol = 2, byrow = TRUE);#
+	#find tick locations#
+	#get equivalent rate bins#
+	z <- rep(colorbreaks,each = 2);#
+	z <- z[-c(1,length(z))];#
+	z <- matrix(z, ncol = 2, byrow = TRUE);#
+#
+	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));#
+	tickLocs <- x[tx,1]#
+	tx <- z[tx,1]#
+	tickLocs[length(tickLocs)] <- max(x[,2])#
+	tx[length(tx)] <- max(z[,2])	#
+	#plot bar#
+	if (direction == 'horizontal') {#
+		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal);#
+	} else {#
+		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal);#
+	}#
+	#add tickmarks#
+	if (side == 1) { #bottom#
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), las = 1, cex.axis = cex.axis, ...);#
+	} #
+	if (side == 3) { #top#
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 2) { #left#
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 4) { #right#
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), las = 1, cex.axis = cex.axis, ...);#
+	}#
+	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))#
+}
+x <- plot(ephy, lwd=3)#
+addBAMMlegend(x, location = 'topleft')#
+addBAMMlegend(x, location = 'topright')#
+addBAMMlegend(x, location = 'bottomleft')#
+addBAMMlegend(x, location = 'bottomright')#
+addBAMMlegend(x, location = 'bottom')#
+addBAMMlegend(x, location = 'top')#
+addBAMMlegend(x, location = 'left')#
+addBAMMlegend(x, location = 'right')
+?par
+##############################################################
+##
+#	addBAMMlegend(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.05, longFrac = 0.2, axisOffset = 0.4, ...)#
+##
+#		x = saved plot.bammdata object#
+#		location = 'topleft', 'topright', 'bottomleft','bottomright','top','bottom','left','right' OR coordinates for legend c(xmin, xmax, ymin, ymax)#
+#		side = side for tick marks, see axis() documentation, if NULL, automatically inferred#
+#		nTicks = number of ticks, outside of min and max#
+#		direction#
+#		shortFrac#
+#		longFrac#
+#		axisOffset = distance from color bar for labels#
+#		... additional parameters to be passed to axis()#
+##
+#
+# topleft (horiz/vert), topright (horiz/vert), bottomleft (horiz, vert), bottomright (horiz, vert), left (vert), right (vert), top (horiz), bottom (horiz)#
+#
+addBAMMlegend <- function(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, ...) {#
+	#location xmin,xmax,ymin,ymax#
+	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {#
+		stop("x must be a saved plot.bammdata object.");#
+	}#
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {#
+		stop("direction must be auto, vertical or horizontal.");#
+	}#
+	if (is.character(location)) {#
+		if (!location %in% c('bottomleft','bottomright','topleft','topright','bottom','top','left','right')) {#
+			stop('location is not recognized.');#
+		}#
+	}#
+	colorbreaks <- x$colorbreaks;#
+	pal <- x$palette;#
+#
+	n <- length(colorbreaks);#
+#
+	#give some buffer to have legends plot in outer margin#
+	minX <- par('usr')[1] - (par('usr')[2] - par('usr')[1]) * 0.05#
+	maxX <- par('usr')[2] + (par('usr')[2] - par('usr')[1]) * 0.05#
+	minY <- par('usr')[3] - (par('usr')[4] - par('usr')[3]) * 0.05#
+	maxY <- par('usr')[4] + (par('usr')[4] - par('usr')[3]) * 0.05#
+	if (location == 'topleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+	if (location == 'topleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'bottomleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+	} else#
+#
+	if (location == 'bottomright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac #
+	} else#
+	if (location == 'left') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+#
+	if (location == 'right') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+	if (location == 'top') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+		direction <- 'horizontal'#
+	} else#
+#
+	if (location == 'bottom') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+		direction <- 'horizontal'#
+	}#
+	# infer direction based on dimensions of legend box#
+	if (direction == 'auto') {#
+		if (((location[2] - location[1]) / (par('usr')[2] - par('usr')[1])) >= ((location[4] - location[3]) / (par('usr')[4] - par('usr')[3]))) {#
+			direction <- 'horizontal';#
+		} else {#
+			direction <- 'vertical';#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		axisOffset <- axisOffset * (par('usr')[4] - par('usr')[3]);#
+	} else if (direction == 'vertical') {#
+		axisOffset <- axisOffset * (par('usr')[2] - par('usr')[1]);#
+	}#
+	#determine side for labels based on location in plot and direction#
+	if (side == 'auto') {#
+		if (direction == 'vertical') { #side = 1 or 4#
+			if (mean(location[1:2]) <= mean(par('usr')[1:2])) {#
+				side <- 4;#
+			} else {#
+				side <- 2;#
+			}#
+		}#
+		if (direction == 'horizontal') { #side = 2 or 3#
+			if (mean(location[3:4]) > mean(par('usr')[3:4])) {#
+				side <- 1;#
+			} else {#
+				side <- 3;#
+			}#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		x <- seq(from = location[1], to = location[2], length.out = n);#
+		width <- location[3:4];#
+	} else {#
+		x <- seq(from = location[3], to = location[4], length.out = n);#
+		width <- location[1:2];#
+	}#
+	#get bin coordinates#
+	x <- rep(x,each = 2);#
+	x <- x[-c(1,length(x))];#
+	x <- matrix(x, ncol = 2, byrow = TRUE);#
+	#find tick locations#
+	#get equivalent rate bins#
+	z <- rep(colorbreaks,each = 2);#
+	z <- z[-c(1,length(z))];#
+	z <- matrix(z, ncol = 2, byrow = TRUE);#
+#
+	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));#
+	tickLocs <- x[tx,1]#
+	tx <- z[tx,1]#
+	tickLocs[length(tickLocs)] <- max(x[,2])#
+	tx[length(tx)] <- max(z[,2])	#
+	#plot bar#
+	if (direction == 'horizontal') {#
+		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal, xpd = NA);#
+	} else {#
+		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal, xpd = NA);#
+	}#
+	#add tickmarks#
+	if (side == 1) { #bottom#
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	} #
+	if (side == 3) { #top#
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 2) { #left#
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 4) { #right#
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))#
+}
+x <- plot(ephy, lwd=3)
+addBAMMlegend(x, location = 'topleft')
+addBAMMlegend(x, location = 'topright')
+addBAMMlegend(x, location = 'bottomleft')
+addBAMMlegend(x, location = 'bottomright')
+addBAMMlegend(x, location = 'bottom')
+addBAMMlegend(x, location = 'top')
+##############################################################
+##
+#	addBAMMlegend(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.05, longFrac = 0.2, axisOffset = 0.4, ...)#
+##
+#		x = saved plot.bammdata object#
+#		location = 'topleft', 'topright', 'bottomleft','bottomright','top','bottom','left','right' OR coordinates for legend c(xmin, xmax, ymin, ymax)#
+#		side = side for tick marks, see axis() documentation, if NULL, automatically inferred#
+#		nTicks = number of ticks, outside of min and max#
+#		direction#
+#		shortFrac#
+#		longFrac#
+#		axisOffset = distance from color bar for labels#
+#		... additional parameters to be passed to axis()#
+##
+#
+# topleft (horiz/vert), topright (horiz/vert), bottomleft (horiz, vert), bottomright (horiz, vert), left (vert), right (vert), top (horiz), bottom (horiz)#
+#
+addBAMMlegend <- function(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, ...) {#
+	#location xmin,xmax,ymin,ymax#
+	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {#
+		stop("x must be a saved plot.bammdata object.");#
+	}#
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {#
+		stop("direction must be auto, vertical or horizontal.");#
+	}#
+	if (is.character(location)) {#
+		if (!location %in% c('bottomleft','bottomright','topleft','topright','bottom','top','left','right')) {#
+			stop('location is not recognized.');#
+		}#
+	}#
+	colorbreaks <- x$colorbreaks;#
+	pal <- x$palette;#
+#
+	n <- length(colorbreaks);#
+#
+	#give some buffer to have legends plot in outer margin#
+	minX <- par('usr')[1] - (par('usr')[2] - par('usr')[1]) * 0.1#
+	maxX <- par('usr')[2] + (par('usr')[2] - par('usr')[1]) * 0.1#
+	minY <- par('usr')[3] - (par('usr')[4] - par('usr')[3]) * 0.1#
+	maxY <- par('usr')[4] + (par('usr')[4] - par('usr')[3]) * 0.1#
+	if (location == 'topleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+	if (location == 'topleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'bottomleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+	} else#
+#
+	if (location == 'bottomright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac #
+	} else#
+	if (location == 'left') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+#
+	if (location == 'right') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+	if (location == 'top') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+		direction <- 'horizontal'#
+	} else#
+#
+	if (location == 'bottom') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+		direction <- 'horizontal'#
+	}#
+	# infer direction based on dimensions of legend box#
+	if (direction == 'auto') {#
+		if (((location[2] - location[1]) / (par('usr')[2] - par('usr')[1])) >= ((location[4] - location[3]) / (par('usr')[4] - par('usr')[3]))) {#
+			direction <- 'horizontal';#
+		} else {#
+			direction <- 'vertical';#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		axisOffset <- axisOffset * (par('usr')[4] - par('usr')[3]);#
+	} else if (direction == 'vertical') {#
+		axisOffset <- axisOffset * (par('usr')[2] - par('usr')[1]);#
+	}#
+	#determine side for labels based on location in plot and direction#
+	if (side == 'auto') {#
+		if (direction == 'vertical') { #side = 1 or 4#
+			if (mean(location[1:2]) <= mean(par('usr')[1:2])) {#
+				side <- 4;#
+			} else {#
+				side <- 2;#
+			}#
+		}#
+		if (direction == 'horizontal') { #side = 2 or 3#
+			if (mean(location[3:4]) > mean(par('usr')[3:4])) {#
+				side <- 1;#
+			} else {#
+				side <- 3;#
+			}#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		x <- seq(from = location[1], to = location[2], length.out = n);#
+		width <- location[3:4];#
+	} else {#
+		x <- seq(from = location[3], to = location[4], length.out = n);#
+		width <- location[1:2];#
+	}#
+	#get bin coordinates#
+	x <- rep(x,each = 2);#
+	x <- x[-c(1,length(x))];#
+	x <- matrix(x, ncol = 2, byrow = TRUE);#
+	#find tick locations#
+	#get equivalent rate bins#
+	z <- rep(colorbreaks,each = 2);#
+	z <- z[-c(1,length(z))];#
+	z <- matrix(z, ncol = 2, byrow = TRUE);#
+#
+	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));#
+	tickLocs <- x[tx,1]#
+	tx <- z[tx,1]#
+	tickLocs[length(tickLocs)] <- max(x[,2])#
+	tx[length(tx)] <- max(z[,2])	#
+	#plot bar#
+	if (direction == 'horizontal') {#
+		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal, xpd = NA);#
+	} else {#
+		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal, xpd = NA);#
+	}#
+	#add tickmarks#
+	if (side == 1) { #bottom#
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	} #
+	if (side == 3) { #top#
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 2) { #left#
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 4) { #right#
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))#
+}
+x <- plot(ephy, lwd=3)#
+addBAMMlegend(x, location = 'topleft')#
+addBAMMlegend(x, location = 'topright')#
+addBAMMlegend(x, location = 'bottomleft')#
+addBAMMlegend(x, location = 'bottomright')#
+addBAMMlegend(x, location = 'bottom')#
+addBAMMlegend(x, location = 'top')#
+addBAMMlegend(x, location = 'left')#
+addBAMMlegend(x, location = 'right')
+?par
+par('plt')
+par('fig')
+##############################################################
+##
+#	addBAMMlegend(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.05, longFrac = 0.2, axisOffset = 0.4, ...)#
+##
+#		x = saved plot.bammdata object#
+#		location = 'topleft', 'topright', 'bottomleft','bottomright','top','bottom','left','right' OR coordinates for legend c(xmin, xmax, ymin, ymax)#
+#		side = side for tick marks, see axis() documentation, if NULL, automatically inferred#
+#		nTicks = number of ticks, outside of min and max#
+#		direction#
+#		shortFrac#
+#		longFrac#
+#		axisOffset = distance from color bar for labels#
+#		... additional parameters to be passed to axis()#
+##
+#
+# topleft (horiz/vert), topright (horiz/vert), bottomleft (horiz, vert), bottomright (horiz, vert), left (vert), right (vert), top (horiz), bottom (horiz)#
+#
+addBAMMlegend <- function(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, ...) {#
+	#location xmin,xmax,ymin,ymax#
+	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {#
+		stop("x must be a saved plot.bammdata object.");#
+	}#
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {#
+		stop("direction must be auto, vertical or horizontal.");#
+	}#
+	if (is.character(location)) {#
+		if (!location %in% c('bottomleft','bottomright','topleft','topright','bottom','top','left','right')) {#
+			stop('location is not recognized.');#
+		}#
+	}#
+	colorbreaks <- x$colorbreaks;#
+	pal <- x$palette;#
+#
+	n <- length(colorbreaks);#
+#
+	#give some buffer to have legends plot in outer margin#
+	minX <- par('usr')[1] - (par('usr')[2] - par('usr')[1]) * 0.05#
+	maxX <- par('usr')[2] + (par('usr')[2] - par('usr')[1]) * 0.05#
+	minY <- par('usr')[3] - (par('usr')[4] - par('usr')[3]) * 0.05#
+	maxY <- par('usr')[4] + (par('usr')[4] - par('usr')[3]) * 0.05#
+	if (location == 'topleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+	if (location == 'topleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'bottomleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+	} else#
+#
+	if (location == 'bottomright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac #
+	} else#
+	if (location == 'left') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+#
+	if (location == 'right') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+	if (location == 'top') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+		direction <- 'horizontal'#
+	} else#
+#
+	if (location == 'bottom') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+		direction <- 'horizontal'#
+	}#
+	# infer direction based on dimensions of legend box#
+	if (direction == 'auto') {#
+		if (((location[2] - location[1]) / (par('usr')[2] - par('usr')[1])) >= ((location[4] - location[3]) / (par('usr')[4] - par('usr')[3]))) {#
+			direction <- 'horizontal';#
+		} else {#
+			direction <- 'vertical';#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		axisOffset <- axisOffset * (par('usr')[4] - par('usr')[3]);#
+	} else if (direction == 'vertical') {#
+		axisOffset <- axisOffset * (par('usr')[2] - par('usr')[1]);#
+	}#
+	#determine side for labels based on location in plot and direction#
+	if (side == 'auto') {#
+		if (direction == 'vertical') { #side = 1 or 4#
+			if (mean(location[1:2]) <= mean(par('usr')[1:2])) {#
+				side <- 4;#
+			} else {#
+				side <- 2;#
+			}#
+		}#
+		if (direction == 'horizontal') { #side = 2 or 3#
+			if (mean(location[3:4]) > mean(par('usr')[3:4])) {#
+				side <- 1;#
+			} else {#
+				side <- 3;#
+			}#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		x <- seq(from = location[1], to = location[2], length.out = n);#
+		width <- location[3:4];#
+	} else {#
+		x <- seq(from = location[3], to = location[4], length.out = n);#
+		width <- location[1:2];#
+	}#
+	#get bin coordinates#
+	x <- rep(x,each = 2);#
+	x <- x[-c(1,length(x))];#
+	x <- matrix(x, ncol = 2, byrow = TRUE);#
+	#find tick locations#
+	#get equivalent rate bins#
+	z <- rep(colorbreaks,each = 2);#
+	z <- z[-c(1,length(z))];#
+	z <- matrix(z, ncol = 2, byrow = TRUE);#
+#
+	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));#
+	tickLocs <- x[tx,1]#
+	tx <- z[tx,1]#
+	tickLocs[length(tickLocs)] <- max(x[,2])#
+	tx[length(tx)] <- max(z[,2])	#
+	#plot bar#
+	if (direction == 'horizontal') {#
+		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal, xpd = NA);#
+	} else {#
+		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal, xpd = NA);#
+	}#
+	#add tickmarks#
+	if (side == 1) { #bottom#
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	} #
+	if (side == 3) { #top#
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 2) { #left#
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 4) { #right#
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))#
+}
+x <- plot(ephy, lwd=3)#
+addBAMMlegend(x, location = 'topleft')#
+addBAMMlegend(x, location = 'topright')#
+addBAMMlegend(x, location = 'bottomleft')#
+addBAMMlegend(x, location = 'bottomright')#
+addBAMMlegend(x, location = 'bottom')#
+addBAMMlegend(x, location = 'top')#
+addBAMMlegend(x, location = 'left')#
+addBAMMlegend(x, location = 'right')
+?plot.bammdata
+x <- plot(ephy, lwd=3, mar=c(1,1,1,1))
+x <- plot(ephy, lwd=3, mar=c(2,2,2,2))
+x <- plot(ephy, lwd=3, mar=c(3,3,3,3))
+addBAMMlegend(x, location = 'topleft')#
+addBAMMlegend(x, location = 'topright')#
+addBAMMlegend(x, location = 'bottomleft')#
+addBAMMlegend(x, location = 'bottomright')#
+addBAMMlegend(x, location = 'bottom')#
+addBAMMlegend(x, location = 'top')#
+addBAMMlegend(x, location = 'left')#
+addBAMMlegend(x, location = 'right')
+x <- plot(ephy, lwd=3, mar=c(3,3,3,5))
+addBAMMlegend(x, location = 'topleft')#
+addBAMMlegend(x, location = 'topright')#
+addBAMMlegend(x, location = 'bottomleft')#
+addBAMMlegend(x, location = 'bottomright')#
+addBAMMlegend(x, location = 'bottom')#
+addBAMMlegend(x, location = 'top')#
+addBAMMlegend(x, location = 'left')#
+addBAMMlegend(x, location = 'right')
+par(mfrow=c(1,2))
+x <- plot(ephy, lwd=3, mar=c(3,3,3,5))
+addBAMMlegend(x, location = 'topleft')
+addBAMMlegend(x, location = 'topright')
+addBAMMlegend(x, location = 'bottomleft')
+addBAMMlegend(x, location = 'bottomright')
+##############################################################
+##
+#	addBAMMlegend(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.05, longFrac = 0.2, axisOffset = 0.4, ...)#
+##
+#		x = saved plot.bammdata object#
+#		location = 'topleft', 'topright', 'bottomleft','bottomright','top','bottom','left','right' OR coordinates for legend c(xmin, xmax, ymin, ymax)#
+#		side = side for tick marks, see axis() documentation, if NULL, automatically inferred#
+#		nTicks = number of ticks, outside of min and max#
+#		direction#
+#		shortFrac#
+#		longFrac#
+#		axisOffset = distance from color bar for labels#
+#		... additional parameters to be passed to axis()#
+##
+#
+# topleft (horiz/vert), topright (horiz/vert), bottomleft (horiz, vert), bottomright (horiz, vert), left (vert), right (vert), top (horiz), bottom (horiz)#
+#
+addBAMMlegend <- function(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, ...) {#
+	#location xmin,xmax,ymin,ymax#
+	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {#
+		stop("x must be a saved plot.bammdata object.");#
+	}#
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {#
+		stop("direction must be auto, vertical or horizontal.");#
+	}#
+	if (is.character(location)) {#
+		if (!location %in% c('bottomleft','bottomright','topleft','topright','bottom','top','left','right')) {#
+			stop('location is not recognized.');#
+		}#
+	}#
+	colorbreaks <- x$colorbreaks;#
+	pal <- x$palette;#
+#
+	n <- length(colorbreaks);#
+#
+	#give some buffer to have legends plot in outer margin#
+	minX <- par('usr')[1] - (par('usr')[2] - par('usr')[1]) * 0.1#
+	maxX <- par('usr')[2] + (par('usr')[2] - par('usr')[1]) * 0.1#
+	minY <- par('usr')[3] - (par('usr')[4] - par('usr')[3]) * 0.1#
+	maxY <- par('usr')[4] + (par('usr')[4] - par('usr')[3]) * 0.1#
+	if (location == 'topleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+	if (location == 'topleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'bottomleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+	} else#
+#
+	if (location == 'bottomright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac #
+	} else#
+	if (location == 'left') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+#
+	if (location == 'right') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+	if (location == 'top') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+		direction <- 'horizontal'#
+	} else#
+#
+	if (location == 'bottom') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+		direction <- 'horizontal'#
+	}#
+	# infer direction based on dimensions of legend box#
+	if (direction == 'auto') {#
+		if (((location[2] - location[1]) / (par('usr')[2] - par('usr')[1])) >= ((location[4] - location[3]) / (par('usr')[4] - par('usr')[3]))) {#
+			direction <- 'horizontal';#
+		} else {#
+			direction <- 'vertical';#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		axisOffset <- axisOffset * (par('usr')[4] - par('usr')[3]);#
+	} else if (direction == 'vertical') {#
+		axisOffset <- axisOffset * (par('usr')[2] - par('usr')[1]);#
+	}#
+	#determine side for labels based on location in plot and direction#
+	if (side == 'auto') {#
+		if (direction == 'vertical') { #side = 1 or 4#
+			if (mean(location[1:2]) <= mean(par('usr')[1:2])) {#
+				side <- 4;#
+			} else {#
+				side <- 2;#
+			}#
+		}#
+		if (direction == 'horizontal') { #side = 2 or 3#
+			if (mean(location[3:4]) > mean(par('usr')[3:4])) {#
+				side <- 1;#
+			} else {#
+				side <- 3;#
+			}#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		x <- seq(from = location[1], to = location[2], length.out = n);#
+		width <- location[3:4];#
+	} else {#
+		x <- seq(from = location[3], to = location[4], length.out = n);#
+		width <- location[1:2];#
+	}#
+	#get bin coordinates#
+	x <- rep(x,each = 2);#
+	x <- x[-c(1,length(x))];#
+	x <- matrix(x, ncol = 2, byrow = TRUE);#
+	#find tick locations#
+	#get equivalent rate bins#
+	z <- rep(colorbreaks,each = 2);#
+	z <- z[-c(1,length(z))];#
+	z <- matrix(z, ncol = 2, byrow = TRUE);#
+#
+	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));#
+	tickLocs <- x[tx,1]#
+	tx <- z[tx,1]#
+	tickLocs[length(tickLocs)] <- max(x[,2])#
+	tx[length(tx)] <- max(z[,2])	#
+	#plot bar#
+	if (direction == 'horizontal') {#
+		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal, xpd = NA);#
+	} else {#
+		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal, xpd = NA);#
+	}#
+	#add tickmarks#
+	if (side == 1) { #bottom#
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	} #
+	if (side == 3) { #top#
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 2) { #left#
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 4) { #right#
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))#
+}
+par(mfrow=c(1,2))#
+x <- plot(ephy, lwd=3, mar=c(3,3,3,5))
+x <- plot(ephy, lwd=3, mar=c(3,3,3,5))
+addBAMMlegend(x, location = 'topleft')#
+addBAMMlegend(x, location = 'topright')#
+addBAMMlegend(x, location = 'bottomleft')#
+addBAMMlegend(x, location = 'bottomright')#
+addBAMMlegend(x, location = 'bottom')#
+addBAMMlegend(x, location = 'top')#
+addBAMMlegend(x, location = 'left')#
+addBAMMlegend(x, location = 'right')
+x <- plot(ephy, lwd=3, mar=c(3,3,3,5))
+par('usr')[1]
+par('usr')
+par('fig')
+abline(v=par('usr')[1])
+abline(v=par('usr')[2])
+abline(h=par('usr')[3:4])
+par(mfrow=c(1,2))
+x <- plot(ephy, lwd=3, mar=c(3,3,3,5))
+abline(v=par('usr')[1])
+abline(v=par('usr')[2])
+abline(h=par('usr')[3:4])
+?par
+par('fig')
+grconvertX(0.5, from='ndc', to='usr')
+grconvertX(0.5, from='ndc', to='user')
+abline(v=grconvertX(0.5, from='ndc', to='user'))
+abline(v=grconvertX(0.5, from='ndc', to='user'), xpd=NA)
+grconvertX(par('fig')[1], from='ndc', to='user')
+minX <- grconvertX(par('fig')[1], from = 'ndc', to = 'user')#
+	maxX <- grconvertX(par('fig')[2], from = 'ndc', to = 'user')#
+	minY <- grconvertY(par('fig')[3], from = 'ndc', to = 'user')#
+	maxY <- grconvertY(par('fig')[4], from = 'ndc', to = 'user')
+x <- plot(ephy, lwd=3, mar=c(3,3,3,5))
+abline(v=c(minX, maxX))
+abline(v=c(minX, maxX), xpd=NA)
+minX
+##############################################################
+##
+#	addBAMMlegend(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.05, longFrac = 0.2, axisOffset = 0.4, ...)#
+##
+#		x = saved plot.bammdata object#
+#		location = 'topleft', 'topright', 'bottomleft','bottomright','top','bottom','left','right' OR coordinates for legend c(xmin, xmax, ymin, ymax)#
+#		side = side for tick marks, see axis() documentation, if NULL, automatically inferred#
+#		nTicks = number of ticks, outside of min and max#
+#		direction#
+#		shortFrac#
+#		longFrac#
+#		axisOffset = distance from color bar for labels#
+#		... additional parameters to be passed to axis()#
+##
+#
+# topleft (horiz/vert), topright (horiz/vert), bottomleft (horiz, vert), bottomright (horiz, vert), left (vert), right (vert), top (horiz), bottom (horiz)#
+#
+addBAMMlegend <- function(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, ...) {#
+	#location xmin,xmax,ymin,ymax#
+	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {#
+		stop("x must be a saved plot.bammdata object.");#
+	}#
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {#
+		stop("direction must be auto, vertical or horizontal.");#
+	}#
+	if (is.character(location)) {#
+		if (!location %in% c('bottomleft','bottomright','topleft','topright','bottom','top','left','right')) {#
+			stop('location is not recognized.');#
+		}#
+	}#
+	colorbreaks <- x$colorbreaks;#
+	pal <- x$palette;#
+#
+	n <- length(colorbreaks);#
+#
+	#give some buffer to have legends plot in outer margin#
+	minX <- grconvertX(par('fig')[1], from = 'ndc', to = 'user')#
+	maxX <- grconvertX(par('fig')[2], from = 'ndc', to = 'user')#
+	minY <- grconvertY(par('fig')[3], from = 'ndc', to = 'user')#
+	maxY <- grconvertY(par('fig')[4], from = 'ndc', to = 'user')#
+#
+	# minX <- par('usr')[1] - (par('usr')[2] - par('usr')[1]) * 0.1#
+	# maxX <- par('usr')[2] + (par('usr')[2] - par('usr')[1]) * 0.1#
+	# minY <- par('usr')[3] - (par('usr')[4] - par('usr')[3]) * 0.1#
+	# maxY <- par('usr')[4] + (par('usr')[4] - par('usr')[3]) * 0.1#
+	if (location == 'topleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+	if (location == 'topleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'bottomleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+	} else#
+#
+	if (location == 'bottomright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac #
+	} else#
+	if (location == 'left') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+#
+	if (location == 'right') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+	if (location == 'top') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+		direction <- 'horizontal'#
+	} else#
+#
+	if (location == 'bottom') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+		direction <- 'horizontal'#
+	}#
+	# infer direction based on dimensions of legend box#
+	if (direction == 'auto') {#
+		if (((location[2] - location[1]) / (par('usr')[2] - par('usr')[1])) >= ((location[4] - location[3]) / (par('usr')[4] - par('usr')[3]))) {#
+			direction <- 'horizontal';#
+		} else {#
+			direction <- 'vertical';#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		axisOffset <- axisOffset * (par('usr')[4] - par('usr')[3]);#
+	} else if (direction == 'vertical') {#
+		axisOffset <- axisOffset * (par('usr')[2] - par('usr')[1]);#
+	}#
+	#determine side for labels based on location in plot and direction#
+	if (side == 'auto') {#
+		if (direction == 'vertical') { #side = 1 or 4#
+			if (mean(location[1:2]) <= mean(par('usr')[1:2])) {#
+				side <- 4;#
+			} else {#
+				side <- 2;#
+			}#
+		}#
+		if (direction == 'horizontal') { #side = 2 or 3#
+			if (mean(location[3:4]) > mean(par('usr')[3:4])) {#
+				side <- 1;#
+			} else {#
+				side <- 3;#
+			}#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		x <- seq(from = location[1], to = location[2], length.out = n);#
+		width <- location[3:4];#
+	} else {#
+		x <- seq(from = location[3], to = location[4], length.out = n);#
+		width <- location[1:2];#
+	}#
+	#get bin coordinates#
+	x <- rep(x,each = 2);#
+	x <- x[-c(1,length(x))];#
+	x <- matrix(x, ncol = 2, byrow = TRUE);#
+	#find tick locations#
+	#get equivalent rate bins#
+	z <- rep(colorbreaks,each = 2);#
+	z <- z[-c(1,length(z))];#
+	z <- matrix(z, ncol = 2, byrow = TRUE);#
+#
+	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));#
+	tickLocs <- x[tx,1]#
+	tx <- z[tx,1]#
+	tickLocs[length(tickLocs)] <- max(x[,2])#
+	tx[length(tx)] <- max(z[,2])	#
+	#plot bar#
+	if (direction == 'horizontal') {#
+		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal, xpd = NA);#
+	} else {#
+		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal, xpd = NA);#
+	}#
+	#add tickmarks#
+	if (side == 1) { #bottom#
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	} #
+	if (side == 3) { #top#
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 2) { #left#
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 4) { #right#
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))#
+}
+x <- plot(ephy, lwd=3, mar=c(3,3,3,5))
+addBAMMlegend(x, location = 'topleft')
+addBAMMlegend(x, location = 'topright')
+addBAMMlegend(x, location = 'bottomleft')
+addBAMMlegend(x, location = 'bottomright')
+addBAMMlegend(x, location = 'bottom')
+addBAMMlegend(x, location = 'top')
+par(mfrow=c(1,2))
+x <- plot(ephy, lwd=3, mar=c(3,3,3,5))
+addBAMMlegend(x, location = 'topleft')
+addBAMMlegend(x, location = 'topright')
+addBAMMlegend(x, location = 'bottomleft')
+addBAMMlegend(x, location = 'bottomright')
+addBAMMlegend(x, location = 'bottom')
+addBAMMlegend(x, location = 'top')
+addBAMMlegend(x, location = 'left')
+addBAMMlegend(x, location = 'right')
+xrange <- maxX - minX
+yrange <- maxY - minY
+xrange
+yrange
+##############################################################
+##
+#	addBAMMlegend(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.05, longFrac = 0.2, axisOffset = 0.4, ...)#
+##
+#		x = saved plot.bammdata object#
+#		location = 'topleft', 'topright', 'bottomleft','bottomright','top','bottom','left','right' OR coordinates for legend c(xmin, xmax, ymin, ymax)#
+#		side = side for tick marks, see axis() documentation, if NULL, automatically inferred#
+#		nTicks = number of ticks, outside of min and max#
+#		direction#
+#		shortFrac#
+#		longFrac#
+#		axisOffset = distance from color bar for labels#
+#		... additional parameters to be passed to axis()#
+##
+#
+# topleft (horiz/vert), topright (horiz/vert), bottomleft (horiz, vert), bottomright (horiz, vert), left (vert), right (vert), top (horiz), bottom (horiz)#
+#
+addBAMMlegend <- function(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, ...) {#
+	#location xmin,xmax,ymin,ymax#
+	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {#
+		stop("x must be a saved plot.bammdata object.");#
+	}#
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {#
+		stop("direction must be auto, vertical or horizontal.");#
+	}#
+	if (is.character(location)) {#
+		if (!location %in% c('bottomleft','bottomright','topleft','topright','bottom','top','left','right')) {#
+			stop('location is not recognized.');#
+		}#
+	}#
+	colorbreaks <- x$colorbreaks;#
+	pal <- x$palette;#
+#
+	n <- length(colorbreaks);#
+#
+	#return plot region extremes and define outer coordinates#
+	minX <- grconvertX(par('fig')[1], from = 'ndc', to = 'user') #
+	maxX <- grconvertX(par('fig')[2], from = 'ndc', to = 'user')#
+	minY <- grconvertY(par('fig')[3], from = 'ndc', to = 'user')#
+	maxY <- grconvertY(par('fig')[4], from = 'ndc', to = 'user')#
+	xrange <- maxX - minX#
+	yrange <- maxY - minY#
+	minX <- minX + xrange * 0.05#
+	maxX <- maxX - xrange * 0.05#
+	minY <- minY + yrange * 0.05#
+	maxY <- minY - yrange * 0.05#
+	if (location == 'topleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+	if (location == 'topleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'bottomleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+	} else#
+#
+	if (location == 'bottomright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac #
+	} else#
+	if (location == 'left') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+#
+	if (location == 'right') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+	if (location == 'top') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+		direction <- 'horizontal'#
+	} else#
+#
+	if (location == 'bottom') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+		direction <- 'horizontal'#
+	}#
+	# infer direction based on dimensions of legend box#
+	if (direction == 'auto') {#
+		if (((location[2] - location[1]) / (par('usr')[2] - par('usr')[1])) >= ((location[4] - location[3]) / (par('usr')[4] - par('usr')[3]))) {#
+			direction <- 'horizontal';#
+		} else {#
+			direction <- 'vertical';#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		axisOffset <- axisOffset * (par('usr')[4] - par('usr')[3]);#
+	} else if (direction == 'vertical') {#
+		axisOffset <- axisOffset * (par('usr')[2] - par('usr')[1]);#
+	}#
+	#determine side for labels based on location in plot and direction#
+	if (side == 'auto') {#
+		if (direction == 'vertical') { #side = 1 or 4#
+			if (mean(location[1:2]) <= mean(par('usr')[1:2])) {#
+				side <- 4;#
+			} else {#
+				side <- 2;#
+			}#
+		}#
+		if (direction == 'horizontal') { #side = 2 or 3#
+			if (mean(location[3:4]) > mean(par('usr')[3:4])) {#
+				side <- 1;#
+			} else {#
+				side <- 3;#
+			}#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		x <- seq(from = location[1], to = location[2], length.out = n);#
+		width <- location[3:4];#
+	} else {#
+		x <- seq(from = location[3], to = location[4], length.out = n);#
+		width <- location[1:2];#
+	}#
+	#get bin coordinates#
+	x <- rep(x,each = 2);#
+	x <- x[-c(1,length(x))];#
+	x <- matrix(x, ncol = 2, byrow = TRUE);#
+	#find tick locations#
+	#get equivalent rate bins#
+	z <- rep(colorbreaks,each = 2);#
+	z <- z[-c(1,length(z))];#
+	z <- matrix(z, ncol = 2, byrow = TRUE);#
+#
+	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));#
+	tickLocs <- x[tx,1]#
+	tx <- z[tx,1]#
+	tickLocs[length(tickLocs)] <- max(x[,2])#
+	tx[length(tx)] <- max(z[,2])	#
+	#plot bar#
+	if (direction == 'horizontal') {#
+		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal, xpd = NA);#
+	} else {#
+		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal, xpd = NA);#
+	}#
+	#add tickmarks#
+	if (side == 1) { #bottom#
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	} #
+	if (side == 3) { #top#
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 2) { #left#
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 4) { #right#
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))#
+}
+par(mfrow=c(1,2))#
+x <- plot(ephy, lwd=3, mar=c(3,3,3,5))
+x <- plot(ephy, lwd=3, mar=c(3,3,3,5))
+addBAMMlegend(x, location = 'topleft')
+addBAMMlegend(x, location = 'topright')
+addBAMMlegend(x, location = 'bottomleft')
+addBAMMlegend(x, location = 'bottomright')
+addBAMMlegend(x, location = 'bottom')
+addBAMMlegend(x, location = 'top')
+addBAMMlegend(x, location = 'left')
+#return plot region extremes and define outer coordinates#
+	minX <- grconvertX(par('fig')[1], from = 'ndc', to = 'user') #
+	maxX <- grconvertX(par('fig')[2], from = 'ndc', to = 'user')#
+	minY <- grconvertY(par('fig')[3], from = 'ndc', to = 'user')#
+	maxY <- grconvertY(par('fig')[4], from = 'ndc', to = 'user')
+minX
+maxX
+xrange <- maxX - minX#
+	yrange <- maxY - minY
+xrange
+yrange
+minX
+xrange * 0.05
+minX + xrange * 0.05
+maxX - xrange * 0.05
+maxX
+##############################################################
+##
+#	addBAMMlegend(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.05, longFrac = 0.2, axisOffset = 0.4, ...)#
+##
+#		x = saved plot.bammdata object#
+#		location = 'topleft', 'topright', 'bottomleft','bottomright','top','bottom','left','right' OR coordinates for legend c(xmin, xmax, ymin, ymax)#
+#		side = side for tick marks, see axis() documentation, if NULL, automatically inferred#
+#		nTicks = number of ticks, outside of min and max#
+#		direction#
+#		shortFrac#
+#		longFrac#
+#		axisOffset = distance from color bar for labels#
+#		... additional parameters to be passed to axis()#
+##
+#
+# topleft (horiz/vert), topright (horiz/vert), bottomleft (horiz, vert), bottomright (horiz, vert), left (vert), right (vert), top (horiz), bottom (horiz)#
+#
+addBAMMlegend <- function(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, ...) {#
+	#location xmin,xmax,ymin,ymax#
+	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {#
+		stop("x must be a saved plot.bammdata object.");#
+	}#
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {#
+		stop("direction must be auto, vertical or horizontal.");#
+	}#
+	if (is.character(location)) {#
+		if (!location %in% c('bottomleft','bottomright','topleft','topright','bottom','top','left','right')) {#
+			stop('location is not recognized.');#
+		}#
+	}#
+	colorbreaks <- x$colorbreaks;#
+	pal <- x$palette;#
+#
+	n <- length(colorbreaks);#
+#
+	#return plot region extremes and define outer coordinates#
+	minX <- grconvertX(par('fig')[1], from = 'ndc', to = 'user') #
+	maxX <- grconvertX(par('fig')[2], from = 'ndc', to = 'user')#
+	minY <- grconvertY(par('fig')[3], from = 'ndc', to = 'user')#
+	maxY <- grconvertY(par('fig')[4], from = 'ndc', to = 'user')#
+	xrange <- maxX - minX#
+	yrange <- maxY - minY#
+	minX <- minX + xrange * 0.05#
+	maxX <- maxX - xrange * 0.05#
+	minY <- minY + yrange * 0.05#
+	maxY <- maxY - yrange * 0.05#
+	if (location == 'topleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+	if (location == 'topleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'bottomleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+	} else#
+#
+	if (location == 'bottomright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac #
+	} else#
+	if (location == 'left') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+#
+	if (location == 'right') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+	if (location == 'top') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+		direction <- 'horizontal'#
+	} else#
+#
+	if (location == 'bottom') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+		direction <- 'horizontal'#
+	}#
+	# infer direction based on dimensions of legend box#
+	if (direction == 'auto') {#
+		if (((location[2] - location[1]) / (par('usr')[2] - par('usr')[1])) >= ((location[4] - location[3]) / (par('usr')[4] - par('usr')[3]))) {#
+			direction <- 'horizontal';#
+		} else {#
+			direction <- 'vertical';#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		axisOffset <- axisOffset * (par('usr')[4] - par('usr')[3]);#
+	} else if (direction == 'vertical') {#
+		axisOffset <- axisOffset * (par('usr')[2] - par('usr')[1]);#
+	}#
+	#determine side for labels based on location in plot and direction#
+	if (side == 'auto') {#
+		if (direction == 'vertical') { #side = 1 or 4#
+			if (mean(location[1:2]) <= mean(par('usr')[1:2])) {#
+				side <- 4;#
+			} else {#
+				side <- 2;#
+			}#
+		}#
+		if (direction == 'horizontal') { #side = 2 or 3#
+			if (mean(location[3:4]) > mean(par('usr')[3:4])) {#
+				side <- 1;#
+			} else {#
+				side <- 3;#
+			}#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		x <- seq(from = location[1], to = location[2], length.out = n);#
+		width <- location[3:4];#
+	} else {#
+		x <- seq(from = location[3], to = location[4], length.out = n);#
+		width <- location[1:2];#
+	}#
+	#get bin coordinates#
+	x <- rep(x,each = 2);#
+	x <- x[-c(1,length(x))];#
+	x <- matrix(x, ncol = 2, byrow = TRUE);#
+	#find tick locations#
+	#get equivalent rate bins#
+	z <- rep(colorbreaks,each = 2);#
+	z <- z[-c(1,length(z))];#
+	z <- matrix(z, ncol = 2, byrow = TRUE);#
+#
+	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));#
+	tickLocs <- x[tx,1]#
+	tx <- z[tx,1]#
+	tickLocs[length(tickLocs)] <- max(x[,2])#
+	tx[length(tx)] <- max(z[,2])	#
+	#plot bar#
+	if (direction == 'horizontal') {#
+		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal, xpd = NA);#
+	} else {#
+		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal, xpd = NA);#
+	}#
+	#add tickmarks#
+	if (side == 1) { #bottom#
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	} #
+	if (side == 3) { #top#
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 2) { #left#
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	if (side == 4) { #right#
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, ...);#
+	}#
+	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))#
+}
+par(mfrow=c(1,2))
+x <- plot(ephy, lwd=3, mar=c(3,3,3,5))
+addBAMMlegend(x, location = 'topleft')
+addBAMMlegend(x, location = 'topright')
+addBAMMlegend(x, location = 'bottomleft')
+addBAMMlegend(x, location = 'bottomright')
+addBAMMlegend(x, location = 'bottom')
+addBAMMlegend(x, location = 'top')
+addBAMMlegend(x, location = 'left')
+addBAMMlegend(x, location = 'right')
+addBAMMlegend(x, location = 'topleft', direction = 'horizontal')
+addBAMMlegend(x, location = 'top', direction = 'vertical')
+x <- plot(ephy, lwd=3)
+addBAMMlegend(x, location = 'topleft')
+addBAMMlegend(x, location = 'topright')
+addBAMMlegend(x, location = 'bottomleft')
+addBAMMlegend(x, location = 'bottomright')
+addBAMMlegend(x, location = 'bottom')
+?par
+x <- plot.bammdata(ephy, lwd=2, mar = c(5,4,4,2))
+x <- plot.bammdata(ephy, lwd=2, mar = c(5,4,4,4))
+addBAMMlegend(x, location = 'topleft')
+addBAMMlegend(x, location = 'bottom')
+addBAMMlegend(x, location = 'right')
+?par
+##############################################################
+##
+#	addBAMMlegend(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.05, longFrac = 0.2, axisOffset = 0.4, ...)#
+##
+#		x = saved plot.bammdata object#
+#		location = 'topleft', 'topright', 'bottomleft','bottomright','top','bottom','left','right' OR coordinates for legend c(xmin, xmax, ymin, ymax)#
+#		side = side for tick marks, see axis() documentation, if NULL, automatically inferred#
+#		nTicks = number of ticks, outside of min and max#
+#		direction#
+#		shortFrac#
+#		longFrac#
+#		axisOffset = distance from color bar for labels#
+#		... additional parameters to be passed to axis()#
+##
+#
+# topleft (horiz/vert), topright (horiz/vert), bottomleft (horiz, vert), bottomright (horiz, vert), left (vert), right (vert), top (horiz), bottom (horiz)#
+#
+addBAMMlegend <- function(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, labelDist = 0.5...) {#
+	#location xmin,xmax,ymin,ymax#
+	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {#
+		stop("x must be a saved plot.bammdata object.");#
+	}#
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {#
+		stop("direction must be auto, vertical or horizontal.");#
+	}#
+	if (is.character(location)) {#
+		if (!location %in% c('bottomleft','bottomright','topleft','topright','bottom','top','left','right')) {#
+			stop('location is not recognized.');#
+		}#
+	}#
+	colorbreaks <- x$colorbreaks;#
+	pal <- x$palette;#
+#
+	n <- length(colorbreaks);#
+#
+	#return plot region extremes and define outer coordinates#
+	minX <- grconvertX(par('fig')[1], from = 'ndc', to = 'user') #
+	maxX <- grconvertX(par('fig')[2], from = 'ndc', to = 'user')#
+	minY <- grconvertY(par('fig')[3], from = 'ndc', to = 'user')#
+	maxY <- grconvertY(par('fig')[4], from = 'ndc', to = 'user')#
+	xrange <- maxX - minX#
+	yrange <- maxY - minY#
+	minX <- minX + xrange * 0.05#
+	maxX <- maxX - xrange * 0.05#
+	minY <- minY + yrange * 0.05#
+	maxY <- maxY - yrange * 0.05#
+	if (location == 'topleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+	if (location == 'topleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'bottomleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+	} else#
+#
+	if (location == 'bottomright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac #
+	} else#
+	if (location == 'left') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+#
+	if (location == 'right') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+	if (location == 'top') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+		direction <- 'horizontal'#
+	} else#
+#
+	if (location == 'bottom') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+		direction <- 'horizontal'#
+	}#
+	# infer direction based on dimensions of legend box#
+	if (direction == 'auto') {#
+		if (((location[2] - location[1]) / (par('usr')[2] - par('usr')[1])) >= ((location[4] - location[3]) / (par('usr')[4] - par('usr')[3]))) {#
+			direction <- 'horizontal';#
+		} else {#
+			direction <- 'vertical';#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		axisOffset <- axisOffset * (par('usr')[4] - par('usr')[3]);#
+	} else if (direction == 'vertical') {#
+		axisOffset <- axisOffset * (par('usr')[2] - par('usr')[1]);#
+	}#
+	#determine side for labels based on location in plot and direction#
+	if (side == 'auto') {#
+		if (direction == 'vertical') { #side = 1 or 4#
+			if (mean(location[1:2]) <= mean(par('usr')[1:2])) {#
+				side <- 4;#
+			} else {#
+				side <- 2;#
+			}#
+		}#
+		if (direction == 'horizontal') { #side = 2 or 3#
+			if (mean(location[3:4]) > mean(par('usr')[3:4])) {#
+				side <- 1;#
+			} else {#
+				side <- 3;#
+			}#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		x <- seq(from = location[1], to = location[2], length.out = n);#
+		width <- location[3:4];#
+	} else {#
+		x <- seq(from = location[3], to = location[4], length.out = n);#
+		width <- location[1:2];#
+	}#
+	#get bin coordinates#
+	x <- rep(x,each = 2);#
+	x <- x[-c(1,length(x))];#
+	x <- matrix(x, ncol = 2, byrow = TRUE);#
+	#find tick locations#
+	#get equivalent rate bins#
+	z <- rep(colorbreaks,each = 2);#
+	z <- z[-c(1,length(z))];#
+	z <- matrix(z, ncol = 2, byrow = TRUE);#
+#
+	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));#
+	tickLocs <- x[tx,1]#
+	tx <- z[tx,1]#
+	tickLocs[length(tickLocs)] <- max(x[,2])#
+	tx[length(tx)] <- max(z[,2])	#
+	#plot bar#
+	if (direction == 'horizontal') {#
+		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal, xpd = NA);#
+	} else {#
+		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal, xpd = NA);#
+	}#
+	#add tickmarks#
+	if (side == 1) { #bottom#
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	} #
+	if (side == 3) { #top#
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	}#
+	if (side == 2) { #left#
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	}#
+	if (side == 4) { #right#
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	}#
+	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))#
+}
+##############################################################
+##
+#	addBAMMlegend(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.05, longFrac = 0.2, axisOffset = 0.4, ...)#
+##
+#		x = saved plot.bammdata object#
+#		location = 'topleft', 'topright', 'bottomleft','bottomright','top','bottom','left','right' OR coordinates for legend c(xmin, xmax, ymin, ymax)#
+#		side = side for tick marks, see axis() documentation, if NULL, automatically inferred#
+#		nTicks = number of ticks, outside of min and max#
+#		direction#
+#		shortFrac#
+#		longFrac#
+#		axisOffset = distance from color bar for labels#
+#		... additional parameters to be passed to axis()#
+##
+#
+# topleft (horiz/vert), topright (horiz/vert), bottomleft (horiz, vert), bottomright (horiz, vert), left (vert), right (vert), top (horiz), bottom (horiz)#
+#
+addBAMMlegend <- function(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, labelDist = 0.5, ...) {#
+	#location xmin,xmax,ymin,ymax#
+	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {#
+		stop("x must be a saved plot.bammdata object.");#
+	}#
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {#
+		stop("direction must be auto, vertical or horizontal.");#
+	}#
+	if (is.character(location)) {#
+		if (!location %in% c('bottomleft','bottomright','topleft','topright','bottom','top','left','right')) {#
+			stop('location is not recognized.');#
+		}#
+	}#
+	colorbreaks <- x$colorbreaks;#
+	pal <- x$palette;#
+#
+	n <- length(colorbreaks);#
+#
+	#return plot region extremes and define outer coordinates#
+	minX <- grconvertX(par('fig')[1], from = 'ndc', to = 'user') #
+	maxX <- grconvertX(par('fig')[2], from = 'ndc', to = 'user')#
+	minY <- grconvertY(par('fig')[3], from = 'ndc', to = 'user')#
+	maxY <- grconvertY(par('fig')[4], from = 'ndc', to = 'user')#
+	xrange <- maxX - minX#
+	yrange <- maxY - minY#
+	minX <- minX + xrange * 0.05#
+	maxX <- maxX - xrange * 0.05#
+	minY <- minY + yrange * 0.05#
+	maxY <- maxY - yrange * 0.05#
+	if (location == 'topleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+	if (location == 'topleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'bottomleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+	} else#
+#
+	if (location == 'bottomright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac #
+	} else#
+	if (location == 'left') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+#
+	if (location == 'right') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+	if (location == 'top') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+		direction <- 'horizontal'#
+	} else#
+#
+	if (location == 'bottom') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+		direction <- 'horizontal'#
+	}#
+	# infer direction based on dimensions of legend box#
+	if (direction == 'auto') {#
+		if (((location[2] - location[1]) / (par('usr')[2] - par('usr')[1])) >= ((location[4] - location[3]) / (par('usr')[4] - par('usr')[3]))) {#
+			direction <- 'horizontal';#
+		} else {#
+			direction <- 'vertical';#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		axisOffset <- axisOffset * (par('usr')[4] - par('usr')[3]);#
+	} else if (direction == 'vertical') {#
+		axisOffset <- axisOffset * (par('usr')[2] - par('usr')[1]);#
+	}#
+	#determine side for labels based on location in plot and direction#
+	if (side == 'auto') {#
+		if (direction == 'vertical') { #side = 1 or 4#
+			if (mean(location[1:2]) <= mean(par('usr')[1:2])) {#
+				side <- 4;#
+			} else {#
+				side <- 2;#
+			}#
+		}#
+		if (direction == 'horizontal') { #side = 2 or 3#
+			if (mean(location[3:4]) > mean(par('usr')[3:4])) {#
+				side <- 1;#
+			} else {#
+				side <- 3;#
+			}#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		x <- seq(from = location[1], to = location[2], length.out = n);#
+		width <- location[3:4];#
+	} else {#
+		x <- seq(from = location[3], to = location[4], length.out = n);#
+		width <- location[1:2];#
+	}#
+	#get bin coordinates#
+	x <- rep(x,each = 2);#
+	x <- x[-c(1,length(x))];#
+	x <- matrix(x, ncol = 2, byrow = TRUE);#
+	#find tick locations#
+	#get equivalent rate bins#
+	z <- rep(colorbreaks,each = 2);#
+	z <- z[-c(1,length(z))];#
+	z <- matrix(z, ncol = 2, byrow = TRUE);#
+#
+	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));#
+	tickLocs <- x[tx,1]#
+	tx <- z[tx,1]#
+	tickLocs[length(tickLocs)] <- max(x[,2])#
+	tx[length(tx)] <- max(z[,2])	#
+	#plot bar#
+	if (direction == 'horizontal') {#
+		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal, xpd = NA);#
+	} else {#
+		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal, xpd = NA);#
+	}#
+	#add tickmarks#
+	if (side == 1) { #bottom#
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	} #
+	if (side == 3) { #top#
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	}#
+	if (side == 2) { #left#
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	}#
+	if (side == 4) { #right#
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	}#
+	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))#
+}
+x <- plot.bammdata(ephy, lwd = 2, mar = c(5,4,4,4))
+addBAMMlegend(x, location = 'topleft')
+addBAMMlegend(x, location = 'bottom')
+addBAMMlegend(x, location = 'right')
+##############################################################
+##
+#	addBAMMlegend(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.05, longFrac = 0.2, axisOffset = 0.4, ...)#
+##
+#		x = saved plot.bammdata object#
+#		location = 'topleft', 'topright', 'bottomleft','bottomright','top','bottom','left','right' OR coordinates for legend c(xmin, xmax, ymin, ymax)#
+#		side = side for tick marks, see axis() documentation, if NULL, automatically inferred#
+#		nTicks = number of ticks, outside of min and max#
+#		direction#
+#		shortFrac#
+#		longFrac#
+#		axisOffset = distance from color bar for labels#
+#		... additional parameters to be passed to axis()#
+##
+#
+# topleft (horiz/vert), topright (horiz/vert), bottomleft (horiz, vert), bottomright (horiz, vert), left (vert), right (vert), top (horiz), bottom (horiz)#
+#
+addBAMMlegend <- function(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, labelDist = 0.7, ...) {#
+	#location xmin,xmax,ymin,ymax#
+	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {#
+		stop("x must be a saved plot.bammdata object.");#
+	}#
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {#
+		stop("direction must be auto, vertical or horizontal.");#
+	}#
+	if (is.character(location)) {#
+		if (!location %in% c('bottomleft','bottomright','topleft','topright','bottom','top','left','right')) {#
+			stop('location is not recognized.');#
+		}#
+	}#
+	colorbreaks <- x$colorbreaks;#
+	pal <- x$palette;#
+#
+	n <- length(colorbreaks);#
+#
+	#return plot region extremes and define outer coordinates#
+	minX <- grconvertX(par('fig')[1], from = 'ndc', to = 'user') #
+	maxX <- grconvertX(par('fig')[2], from = 'ndc', to = 'user')#
+	minY <- grconvertY(par('fig')[3], from = 'ndc', to = 'user')#
+	maxY <- grconvertY(par('fig')[4], from = 'ndc', to = 'user')#
+	xrange <- maxX - minX#
+	yrange <- maxY - minY#
+	minX <- minX + xrange * 0.05#
+	maxX <- maxX - xrange * 0.05#
+	minY <- minY + yrange * 0.05#
+	maxY <- maxY - yrange * 0.05#
+	if (location == 'topleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+	if (location == 'topleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * longFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'topright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+	} else#
+#
+	if (location == 'bottomleft' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomleft' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * longFrac#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+	} else#
+#
+	if (location == 'bottomright' & direction %in% c('auto', 'vertical')) {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * longFrac#
+	} else#
+	if (location == 'bottomright' & direction == 'horizontal') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * longFrac#
+		location[2] <- maxX#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac #
+	} else#
+	if (location == 'left') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- minX#
+		location[2] <- minX + (maxX - minX) * shortFrac#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+#
+	if (location == 'right') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- maxX - (maxX - minX) * shortFrac#
+		location[2] <- maxX#
+		location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+		location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+		direction <- 'vertical'#
+	} else#
+	if (location == 'top') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- maxY - (maxY - minY) * shortFrac#
+		location[4] <- maxY#
+		direction <- 'horizontal'#
+	} else#
+#
+	if (location == 'bottom') {#
+		location <- vector('numeric', length = 4);#
+		location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+		location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+		location[3] <- minY#
+		location[4] <- minY + (maxY - minY) * shortFrac#
+		direction <- 'horizontal'#
+	}#
+	# infer direction based on dimensions of legend box#
+	if (direction == 'auto') {#
+		if (((location[2] - location[1]) / (par('usr')[2] - par('usr')[1])) >= ((location[4] - location[3]) / (par('usr')[4] - par('usr')[3]))) {#
+			direction <- 'horizontal';#
+		} else {#
+			direction <- 'vertical';#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		axisOffset <- axisOffset * (par('usr')[4] - par('usr')[3]);#
+	} else if (direction == 'vertical') {#
+		axisOffset <- axisOffset * (par('usr')[2] - par('usr')[1]);#
+	}#
+	#determine side for labels based on location in plot and direction#
+	if (side == 'auto') {#
+		if (direction == 'vertical') { #side = 1 or 4#
+			if (mean(location[1:2]) <= mean(par('usr')[1:2])) {#
+				side <- 4;#
+			} else {#
+				side <- 2;#
+			}#
+		}#
+		if (direction == 'horizontal') { #side = 2 or 3#
+			if (mean(location[3:4]) > mean(par('usr')[3:4])) {#
+				side <- 1;#
+			} else {#
+				side <- 3;#
+			}#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		x <- seq(from = location[1], to = location[2], length.out = n);#
+		width <- location[3:4];#
+	} else {#
+		x <- seq(from = location[3], to = location[4], length.out = n);#
+		width <- location[1:2];#
+	}#
+	#get bin coordinates#
+	x <- rep(x,each = 2);#
+	x <- x[-c(1,length(x))];#
+	x <- matrix(x, ncol = 2, byrow = TRUE);#
+	#find tick locations#
+	#get equivalent rate bins#
+	z <- rep(colorbreaks,each = 2);#
+	z <- z[-c(1,length(z))];#
+	z <- matrix(z, ncol = 2, byrow = TRUE);#
+#
+	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));#
+	tickLocs <- x[tx,1]#
+	tx <- z[tx,1]#
+	tickLocs[length(tickLocs)] <- max(x[,2])#
+	tx[length(tx)] <- max(z[,2])	#
+	#plot bar#
+	if (direction == 'horizontal') {#
+		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal, xpd = NA);#
+	} else {#
+		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal, xpd = NA);#
+	}#
+	#add tickmarks#
+	if (side == 1) { #bottom#
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	} #
+	if (side == 3) { #top#
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	}#
+	if (side == 2) { #left#
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	}#
+	if (side == 4) { #right#
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	}#
+	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))#
+}
+# plot phylorate with extra margin space#
+x <- plot.bammdata(ephy, lwd = 2, mar = c(5,4,4,4)) #
+# presets
+addBAMMlegend(x, location = 'topleft')
+addBAMMlegend(x, location = 'bottom')
+addBAMMlegend(x, location = 'right')
+axis(1); axis(2)
+x <- plot.bammdata(ephy, lwd = 2, mar = c(5,4,4,4))
+axis(1); axis(2)
+addBAMMlegend(x, corners = c(-1, -0.5, 40, 80), nTicks = 4, side = 4, las = 1)
+addBAMMlegend(x, corners = c(5, 20, 60, 61), nTicks = 4, side = 3, las = 1, cex.axis = 0.7)
+addBAMMlegend(x, location = c(-1, -0.5, 40, 80), nTicks = 4, side = 4, las = 1)
+x <- plot.bammdata(ephy, lwd = 2, mar = c(5,4,4,4))
+axis(1); axis(2)
+addBAMMlegend(x, location = c(-1, -0.5, 40, 80), nTicks = 4, side = 4, las = 1)
+warnings()
+location = c(-1, -0.5, 40, 80)
+is.character(location)
+##############################################################
+##
+#	addBAMMlegend(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.05, longFrac = 0.2, axisOffset = 0.4, ...)#
+##
+#		x = saved plot.bammdata object#
+#		location = 'topleft', 'topright', 'bottomleft','bottomright','top','bottom','left','right' OR coordinates for legend c(xmin, xmax, ymin, ymax)#
+#		side = side for tick marks, see axis() documentation, if NULL, automatically inferred#
+#		nTicks = number of ticks, outside of min and max#
+#		direction#
+#		shortFrac#
+#		longFrac#
+#		axisOffset = distance from color bar for labels#
+#		... additional parameters to be passed to axis()#
+##
+#
+# topleft (horiz/vert), topright (horiz/vert), bottomleft (horiz, vert), bottomright (horiz, vert), left (vert), right (vert), top (horiz), bottom (horiz)#
+#
+addBAMMlegend <- function(x, location = 'topleft', side = 'auto', nTicks = 2, direction = 'auto', shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, labelDist = 0.7, ...) {#
+	#location xmin,xmax,ymin,ymax#
+	if (!identical(names(x), c('coords', 'colorbreaks', 'palette', 'colordens'))) {#
+		stop("x must be a saved plot.bammdata object.");#
+	}#
+	if (!direction %in% c('auto', 'vertical', 'horizontal')) {#
+		stop("direction must be auto, vertical or horizontal.");#
+	}#
+	if (is.character(location)) {#
+		if (!location %in% c('bottomleft','bottomright','topleft','topright','bottom','top','left','right')) {#
+			stop('location is not recognized.');#
+		}#
+	}#
+	colorbreaks <- x$colorbreaks;#
+	pal <- x$palette;#
+#
+	n <- length(colorbreaks);#
+#
+	#return plot region extremes and define outer coordinates#
+	minX <- grconvertX(par('fig')[1], from = 'ndc', to = 'user') #
+	maxX <- grconvertX(par('fig')[2], from = 'ndc', to = 'user')#
+	minY <- grconvertY(par('fig')[3], from = 'ndc', to = 'user')#
+	maxY <- grconvertY(par('fig')[4], from = 'ndc', to = 'user')#
+	xrange <- maxX - minX#
+	yrange <- maxY - minY#
+	minX <- minX + xrange * 0.05#
+	maxX <- maxX - xrange * 0.05#
+	minY <- minY + yrange * 0.05#
+	maxY <- maxY - yrange * 0.05#
+	if (is.character(location)) {#
+		if (location == 'topleft' & direction %in% c('auto', 'vertical')) {#
+			location <- vector('numeric', length = 4);#
+			location[1] <- minX#
+			location[2] <- minX + (maxX - minX) * shortFrac#
+			location[3] <- maxY - (maxY - minY) * longFrac#
+			location[4] <- maxY#
+		} else#
+		if (location == 'topleft' & direction == 'horizontal') {#
+			location <- vector('numeric', length = 4);#
+			location[1] <- minX#
+			location[2] <- minX + (maxX - minX) * longFrac#
+			location[3] <- maxY - (maxY - minY) * shortFrac#
+			location[4] <- maxY#
+		} else#
+		if (location == 'topright' & direction %in% c('auto', 'vertical')) {#
+			location <- vector('numeric', length = 4);#
+			location[1] <- maxX - (maxX - minX) * shortFrac#
+			location[2] <- maxX#
+			location[3] <- maxY - (maxY - minY) * longFrac#
+			location[4] <- maxY#
+		} else#
+		if (location == 'topright' & direction == 'horizontal') {#
+			location <- vector('numeric', length = 4);#
+			location[1] <- maxX - (maxX - minX) * longFrac#
+			location[2] <- maxX#
+			location[3] <- maxY - (maxY - minY) * shortFrac#
+			location[4] <- maxY#
+		} else#
+		if (location == 'bottomleft' & direction %in% c('auto', 'vertical')) {#
+			location <- vector('numeric', length = 4);#
+			location[1] <- minX#
+			location[2] <- minX + (maxX - minX) * shortFrac#
+			location[3] <- minY#
+			location[4] <- minY + (maxY - minY) * longFrac#
+		} else#
+		if (location == 'bottomleft' & direction == 'horizontal') {#
+			location <- vector('numeric', length = 4);#
+			location[1] <- minX#
+			location[2] <- minX + (maxX - minX) * longFrac#
+			location[3] <- minY#
+			location[4] <- minY + (maxY - minY) * shortFrac#
+		} else#
+		if (location == 'bottomright' & direction %in% c('auto', 'vertical')) {#
+			location <- vector('numeric', length = 4);#
+			location[1] <- maxX - (maxX - minX) * shortFrac#
+			location[2] <- maxX#
+			location[3] <- minY#
+			location[4] <- minY + (maxY - minY) * longFrac#
+		} else#
+		if (location == 'bottomright' & direction == 'horizontal') {#
+			location <- vector('numeric', length = 4);#
+			location[1] <- maxX - (maxX - minX) * longFrac#
+			location[2] <- maxX#
+			location[3] <- minY#
+			location[4] <- minY + (maxY - minY) * shortFrac #
+		} else#
+		if (location == 'left') {#
+			location <- vector('numeric', length = 4);#
+			location[1] <- minX#
+			location[2] <- minX + (maxX - minX) * shortFrac#
+			location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+			location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+			direction <- 'vertical'#
+		} else#
+		if (location == 'right') {#
+			location <- vector('numeric', length = 4);#
+			location[1] <- maxX - (maxX - minX) * shortFrac#
+			location[2] <- maxX#
+			location[3] <- mean(par('usr')[3:4]) - ((maxY - minY) * longFrac)/2#
+			location[4] <- mean(par('usr')[3:4]) + ((maxY - minY) * longFrac)/2#
+			direction <- 'vertical'#
+		} else#
+		if (location == 'top') {#
+			location <- vector('numeric', length = 4);#
+			location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+			location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+			location[3] <- maxY - (maxY - minY) * shortFrac#
+			location[4] <- maxY#
+			direction <- 'horizontal'#
+		} else#
+		if (location == 'bottom') {#
+			location <- vector('numeric', length = 4);#
+			location[1] <- mean(par('usr')[1:2]) - ((maxX - minX) * longFrac)/2#
+			location[2] <- mean(par('usr')[1:2]) + ((maxX - minX) * longFrac)/2#
+			location[3] <- minY#
+			location[4] <- minY + (maxY - minY) * shortFrac#
+			direction <- 'horizontal'#
+		}#
+	}#
+	# infer direction based on dimensions of legend box#
+	if (direction == 'auto') {#
+		if (((location[2] - location[1]) / (par('usr')[2] - par('usr')[1])) >= ((location[4] - location[3]) / (par('usr')[4] - par('usr')[3]))) {#
+			direction <- 'horizontal';#
+		} else {#
+			direction <- 'vertical';#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		axisOffset <- axisOffset * (par('usr')[4] - par('usr')[3]);#
+	} else if (direction == 'vertical') {#
+		axisOffset <- axisOffset * (par('usr')[2] - par('usr')[1]);#
+	}#
+	#determine side for labels based on location in plot and direction#
+	if (side == 'auto') {#
+		if (direction == 'vertical') { #side = 1 or 4#
+			if (mean(location[1:2]) <= mean(par('usr')[1:2])) {#
+				side <- 4;#
+			} else {#
+				side <- 2;#
+			}#
+		}#
+		if (direction == 'horizontal') { #side = 2 or 3#
+			if (mean(location[3:4]) > mean(par('usr')[3:4])) {#
+				side <- 1;#
+			} else {#
+				side <- 3;#
+			}#
+		}#
+	}#
+	if (direction == 'horizontal') {#
+		x <- seq(from = location[1], to = location[2], length.out = n);#
+		width <- location[3:4];#
+	} else {#
+		x <- seq(from = location[3], to = location[4], length.out = n);#
+		width <- location[1:2];#
+	}#
+	#get bin coordinates#
+	x <- rep(x,each = 2);#
+	x <- x[-c(1,length(x))];#
+	x <- matrix(x, ncol = 2, byrow = TRUE);#
+	#find tick locations#
+	#get equivalent rate bins#
+	z <- rep(colorbreaks,each = 2);#
+	z <- z[-c(1,length(z))];#
+	z <- matrix(z, ncol = 2, byrow = TRUE);#
+#
+	tx <- trunc(seq(from = 1, to = nrow(x), length.out = nTicks + 2));#
+	tickLocs <- x[tx,1]#
+	tx <- z[tx,1]#
+	tickLocs[length(tickLocs)] <- max(x[,2])#
+	tx[length(tx)] <- max(z[,2])	#
+	#plot bar#
+	if (direction == 'horizontal') {#
+		rect(xleft = x[,1], ybottom = width[1], xright = x[,2], ytop = width[2], border = pal, col = pal, xpd = NA);#
+	} else {#
+		rect(xleft = width[1], ybottom = x[,1], xright = width[2], ytop = x[,2], border = pal, col = pal, xpd = NA);#
+	}#
+	#add tickmarks#
+	if (side == 1) { #bottom#
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	} #
+	if (side == 3) { #top#
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	}#
+	if (side == 2) { #left#
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	}#
+	if (side == 4) { #right#
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);#
+	}#
+	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))#
+}
+data(whales, events.whales)#
+ephy <- getEventData(whales, events.whales, burnin=0.25)#
+#
+# plot phylorate with extra margin space#
+x <- plot.bammdata(ephy, lwd = 2, mar = c(5,4,4,4)) #
+# presets#
+addBAMMlegend(x, location = 'topleft')#
+addBAMMlegend(x, location = 'bottom')#
+addBAMMlegend(x, location = 'right')
+x <- plot.bammdata(ephy, lwd = 2, mar = c(5,4,4,4))
+axis(1); axis(2)
+addBAMMlegend(x, location = c(-1, -0.5, 40, 80), nTicks = 4, side = 4, las = 1)
+addBAMMlegend(x, location = c(5, 20, 60, 61), nTicks = 4, side = 3, las = 1, cex.axis = 0.7)
+x <- plot.bammdata(ephy, lwd = 2, mar = c(5,4,4,4))
+axis(1); axis(2)
+addBAMMlegend(x, location = c(-1, -0.5, 40, 80), nTicks = 4)
+addBAMMlegend(x, location = c(5, 20, 60, 61), nTicks = 4, cex.axis = 0.7)
+addBAMMlegend(x, location = c(5, 20, 60, 61), nTicks = 4, side = 3, cex.axis = 0.7)
+data(primates, events.primates)
+ephy <- getEventData(primates, events.primates, burnin=0.25, type = 'trait')
+x <- plot.bammdata(ephy, breaksmethod = 'linear', color.interval = c(NA, 0.12), lwd = 2)
+addBAMMlegend(x, location = c(0, 30, 200, 205), nTicks = 1, side = 3)
+#### EXAMPLES#
+data(whales, events.whales)#
+ephy <- getEventData(whales, events.whales, burnin = 0.25)#
+#
+# plot phylorate with extra margin space#
+x <- plot.bammdata(ephy, lwd = 2, mar = c(5,4,4,4)) #
+# presets#
+addBAMMlegend(x, location = 'topleft')#
+addBAMMlegend(x, location = 'bottom')#
+addBAMMlegend(x, location = 'right')
+require(BAMMtools)
+data(events.whales)
+head(events.whales)
+class(events.whales)
+mcmc <- events.whales
+expectedNumberOfShifts = 1
+burnin = 0.15
+if (!class(mcmc) %in% c('character', 'data.frame')) {#
+		stop('mcmc must be either a dataframe or the path to the mcmc_out file.')#
+	}
+if (is.character(mcmc)) {#
+		mcmc <- read.csv(mcmc, stringsAsFactors = FALSE)#
+	}
+mcmc2 <- mcmc[floor(burnin * nrow(mcmc)):nrow(mcmc),]
+head(mcmc2)
+obsK <- seq(from = 0, to = max(mcmc2[,"N_shifts"]), by = 1)
+data(mcmc.whales)
+mcmc <- mcmc.whales
+head(mcmc)
+class(mcmc)
+if (!class(mcmc) %in% c('character', 'data.frame', 'matrix')) {#
+		stop('mcmc must be either a dataframe or the path to the mcmc_out file.')#
+	}#
+	if (is.character(mcmc)) {#
+		mcmc <- read.csv(mcmc, stringsAsFactors = FALSE)#
+	}#
+	#drop burnin#
+	mcmc2 <- mcmc[floor(burnin * nrow(mcmc)):nrow(mcmc),]
+head(mcmc)
+head(mcmc2)
+obsK <- seq(from = 0, to = max(mcmc2[,"N_shifts"]), by = 1)
+prior <- sapply(obsK, prob.k, poissonRatePrior = 1/expectedNumberOfShifts)
+prior <- data.frame(N_shifts = obsK, prob = prior)
+obsK <- seq(from = 0, to = max(mcmc2[,"N_shifts"]), by = 1)
+prior <- sapply(obsK, prob.k, poissonRatePrior = 1/expectedNumberOfShifts)
+prior <- data.frame(N_shifts = obsK, prob = prior)
+posterior <- sapply(obsK, function(x) length(which(mcmc2[,'N_shifts'] == x))) / nrow(mcmc2)
+names(posterior) <- obsK
+posterior <- data.frame(N_shifts = names(posterior), prob = posterior)
+barplot(prior[,2], names.arg = prior[,1], ylim = c(0, max(c(prior[,2], posterior[,2]))), border = 'black', col = 'light blue', xlab = 'n shifts')
+barplot(posterior[,2], add = TRUE, border = 'black', col = BAMMtools::transparentColor('red', 0.4), axes=FALSE)
+legend('topright', legend = c('prior','posterior'), fill = c('light blue', BAMMtools::transparentColor('red', 0.4)), bty = 'n', cex=1.5)
+prior
+posterior
+cbind(N_shifts=prior$N_shifts, priorProbs=prior$prob, postProbs=posterior$prob)
+plotPriorAndPost <- function(mcmc, expectedNumberOfShifts = 1, burnin = 0.15, priorCol = 'light blue', postCol = 'red', legendPos = 'topright') {#
+	if (!class(mcmc) %in% c('character', 'data.frame', 'matrix')) {#
+		stop('mcmc must be either a dataframe or the path to the mcmc_out file.')#
+	}#
+	if (is.character(mcmc)) {#
+		mcmc <- read.csv(mcmc, stringsAsFactors = FALSE)#
+	}#
+	#drop burnin#
+	mcmc2 <- mcmc[floor(burnin * nrow(mcmc)):nrow(mcmc),]#
+	#get prior distribution of shifts#
+	obsK <- seq(from = 0, to = max(mcmc2[,"N_shifts"]), by = 1)#
+	prior <- sapply(obsK, prob.k, poissonRatePrior = 1/expectedNumberOfShifts)#
+	prior <- data.frame(N_shifts = obsK, prob = prior)#
+	#get posterior distribution of shifts#
+	posterior <- sapply(obsK, function(x) length(which(mcmc2[,'N_shifts'] == x))) / nrow(mcmc2)#
+	names(posterior) <- obsK#
+	posterior <- data.frame(N_shifts = names(posterior), prob = posterior)#
+#
+	barplot(prior[,2], names.arg = prior[,1], ylim = c(0, max(c(prior[,2], posterior[,2]))), border = 'black', col = priorCol, xlab = 'n shifts')#
+	barplot(posterior[,2], add = TRUE, border = 'black', col = BAMMtools::transparentColor(postCol, 0.4), axes=FALSE)#
+	legend(x = legendPos, y = NULL, legend = c('prior','posterior'), fill = c(priorCol, BAMMtools::transparentColor(postCol, 0.4)), bty = 'n', cex=1.5)#
+	invisible(cbind(N_shifts = prior$N_shifts, priorProbs = prior$prob, postProbs = posterior$prob))	#
+}
+mcmc
+plotPriorAndPost(mcmc)
+plotPriorAndPost(mcmc) -> q
+q
+require(BAMMtools)#
+#
+source('~/bammDevel/plotPriorAndPost.R')#
+#
+data(mcmc.whales)#
+#
+plotPriorAndPost(mcmc.whales)
+plotPrior(mcmc, expectedNumberofShifts=1, burnin=0.15)
+plotPriorAndPost(mcmc.whales)
+plotPrior(mcmc, expectedNumberofShifts=1, burnin=0.15)
+plotPriorAndPost(mcmc.whales)
+plotPrior(mcmc, expectedNumberofShifts=1, burnin=0.15)
+par(mfrow=c(1,2))
+plotPriorAndPost(mcmc.whales)
+plotPrior(mcmc, expectedNumberofShifts=1, burnin=0.15)
+plotPrior(mcmc, expectedNumberofShifts=1, burnin=0.15, pts=T)
+plotPrior(mcmc, expectedNumberofShifts=1, burnin=0.15, pts=T, poly=F)
+require(BAMMtools)
+?BAMMlikelihood
+BAMMlikelihood()
+BAMMlikelihood
