@@ -303,7 +303,9 @@ D_func <- function(lam, mu, E0, D0, dt) {
 #             case (iii): if finish branch and if identical in state to other branch
 #                         set E0 for parent node equal to this value
 #             case (iv): if finish branch and not identical in state to other branch
-#						 multiply, thus conditioning on occurrence of speciation event 
+#						 multiply, thus conditioning the extinction probability on the occurrence 
+#				         of two lineages at this time
+ 
 #       
 #        Compute D_t given this E_0 and add log to likelihood.
 #        Compute E_t for segment 
@@ -320,7 +322,7 @@ D_func <- function(lam, mu, E0, D0, dt) {
 #       1. always recomputed E0 for each segment
 #       2. do it using segments (the segment advantage is key for time-varying process)
 
-computeBAMMlikelihood <- function(phy, sf = 1, alwaysRecomputeE0 = FALSE, e_prob_condition, TOL = 0.001) {
+computeBAMMlikelihood <- function(phy, sf = 1, alwaysRecomputeE0 = FALSE, e_prob_condition = "if_different", TOL = 0.001) {
 	
 	# initial calculation: lets us start with D_0 = 1 at all nodes.
 	logLik <- length(phy$tip.label) * log(sf)
@@ -490,7 +492,7 @@ computeBAMMlikelihood <- function(phy, sf = 1, alwaysRecomputeE0 = FALSE, e_prob
 	return(phy)
 	
 }
-
+ 
 meanExponentialRate <- function(rate_init, rate_shift, t_start, t_end) {
 	
 	delta_T = t_end - t_start;
@@ -509,7 +511,7 @@ meanExponentialRate <- function(rate_init, rate_shift, t_start, t_end) {
 } 
 
 
-BAMMlikelihood <- function(phy, eventdata, gen = 'last', segLength = 0.02, sf = 1, return.intermediates=F, e_prob_condition = 'if_different', ...) {
+BAMMlikelihood <- function(phy, eventdata, gen = 'last', segLength = 0.02, sf = 1, return.intermediates=F, e_prob_condition = "if_different", ...) {
 	#gen can be a number 1 -> numberOfGenerations, or 'last', or 'all'
 	#segLength is segLength value used in BAMM
 	#sf is sampling fraction
@@ -563,7 +565,7 @@ BAMMlikelihood <- function(phy, eventdata, gen = 'last', segLength = 0.02, sf = 
 			eMat <- eventMatrix(eventList[[i]], phy)
 			phy2 <- buildTreeWithEventList(phy, eMat)
 			phy2 <- buildSegmentMatrix(phy2, segLength)	
-			res[[i]] <- computeBAMMlikelihood(phy2, sf, ...)
+			res[[i]] <- computeBAMMlikelihood(phy2, sf, e_prob_condition = e_prob_condition, ...)
 		}		
 		return(res)		
 	}else{
@@ -573,11 +575,52 @@ BAMMlikelihood <- function(phy, eventdata, gen = 'last', segLength = 0.02, sf = 
 			eMat <- eventMatrix(eventList[[i]], phy)
 			phy2 <- buildTreeWithEventList(phy, eMat)
 			phy2 <- buildSegmentMatrix(phy2, segLength)	
-			res[i] <- computeBAMMlikelihood(phy2, sf, ...)$logLik
+			res[i] <- computeBAMMlikelihood(phy2, sf, e_prob_condition = e_prob_condition, ...)$logLik
 		}		
 		return(res)
 	}
  
+}
+
+
+ 
+
+# x is event data frame with locations 
+# parameters (lambda, mu etc) are not used.
+optimize1shiftBAMM <- function( phy, x , rel_seg = 1, e_prob_condition = "if_different"){
+	
+	emat <- eventMatrix(x, phy)
+	phy2 <- buildTreeWithEventList(phy, emat)
+	phy2 <- buildSegmentMatrix(phy2, rel_seg)
+	
+	lfx <- function(x){
+		phy2$events$lambdainit[1:2] <- exp(x[1:2])
+		phy2$events$muinit[1:2] <- exp(x[3:4])
+		phy2$events$lambdashift[1:2] <- c(0,0)
+		phy2$events$mushift[1:2] <- c(0,0)
+
+		tmp <- computeBAMMlikelihood(phy2, sf=1, e_prob_condition = e_prob_condition) 
+		return(tmp$logLik)
+	}
+	
+	# usually right here I would sample random parameters:
+	# like runif(2, 0, 0.5) for lambda
+	#  then eps <- runif(2, 0, 1) for relative extinction
+	#  then back-compute the extinction rates by multiplying eps * lambda
+	
+	# the danger is that you need a try statement to catch 
+	# if the function cannot be evaluated at the initial parameters
+	
+	#pars_init <- c(0.1, 0.1, 0.01, 0.01)
+	
+	lam_init <- runif(2, 0, 0.5)
+	mu_init <- runif(2, 0, 1) * lam_init
+	pars_init <- c(lam_init, mu_init)
+	
+	res <- optim(log(pars_init), fn=lfx, method = "Nelder", control=list(fnscale = -1))
+ 
+	rr <- list(logLik = res$value, lambda = exp(res$par[1:2]), mu = exp(res$par[3:4]), conv=res$convergence, e_prob_condition = e_prob_condition)
+	return(rr)
 }
 
 
