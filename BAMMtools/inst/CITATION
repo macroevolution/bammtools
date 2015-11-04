@@ -1,4 +1,4 @@
-citHeader("To cite package BAMMtools in publications use:")
+citHeader("To cite the BAMMtools package in publications, please use:")
 
 citEntry(entry="Article",
          title = "BAMMtools: an R package for the analysis of evolutionary dynamics on phylogenetic trees",

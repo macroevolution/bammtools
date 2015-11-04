@@ -34,9 +34,6 @@ plotPrior(mcmc, expectedNumberOfShifts = 1, burnin = 0.15,
 	}
 }
 
-\details{
-
-}
 
 \value{
 Invisibly returns a matrix with the probability of each shift number

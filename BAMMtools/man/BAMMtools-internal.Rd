@@ -30,6 +30,7 @@
 \alias{mkdtsegsPolar}
 \alias{mkdtsegsPhylo}
 \alias{NU.branching.times}
+\alias{optimize1shiftBAMM}
 \alias{prob.k}
 \alias{richColors}
 \alias{recursiveAddEventsToTree}

@@ -43,17 +43,15 @@ data(whales)
 
 #get bamm priors to supply to control file
 priors <- setBAMMpriors(whales, outfile = NULL)
-rownames(priors) <- priors[,1]
-priors[,2] <- round(priors[,2], 4)
 
 generateControlFile(file = 'divcontrol.txt', params = list(
 	treefile = 'whales.tre',
 	globalSamplingFraction = '1',
 	numberOfGenerations = '100000',
 	overwrite = '1',
-	lambdaInitPrior = priors['lambdaInitPrior', 2],
-	lambdaShiftPrior = priors['lambdaShiftPrior', 2],
-	muInitPrior = priors['muInitPrior', 2],
+	lambdaInitPrior = as.numeric(priors['lambdaInitPrior']),
+	lambdaShiftPrior = as.numeric(priors['lambdaShiftPrior']),
+	muInitPrior = as.numeric(priors['muInitPrior']),
 	poissonRatePrior = '1'))
 }
 
