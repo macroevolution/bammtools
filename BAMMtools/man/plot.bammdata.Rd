@@ -9,12 +9,11 @@ Plot \code{BAMM}-estimated macroevolutionary rates on a phylogeny
 colors each branch by the estimated rate of speciation, extinction, or trait evolution. Rates are not assumed to be constant in time, and the function can plot continuously-varying rates along individual branches. 
 }
 \usage{
-\method{plot}{bammdata}(x, tau = 0.01, method = "phylogram", 
-    xlim = NULL, ylim = NULL, vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, 
-    legend = FALSE, spex="s", lwd = 1, cex = 1, pal = "RdYlBu", 
-    mask = integer(0), mask.color = gray(0.5), colorbreaks = NULL, logcolor = FALSE, 
-    breaksmethod = "linear", color.interval = NULL, JenksSubset = 20000, 
-    par.reset = FALSE, direction = "rightwards", ...)
+\method{plot}{bammdata}(x, tau = 0.01, method = "phylogram", xlim = NULL, ylim = NULL, 
+   vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE, legend = FALSE, spex="s", 
+   lwd = 1, cex = 1, pal = "RdYlBu", mask = integer(0), mask.color = gray(0.5), 
+   colorbreaks = NULL, logcolor = FALSE, breaksmethod = "linear", color.interval = NULL, 
+   JenksSubset = 20000, par.reset = FALSE, direction = "rightwards", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -224,7 +223,7 @@ title(main="jenks")
 # plot(sed, lwd = 3, colorbreaks = xx$colorbreaks)
 #
 ## multi-panel plotting and adding shifts of specific posterior samples
-# par(mfrow=c(2,3),mar=c(5,1,1,1))
+# par(mfrow=c(2,3))
 # samples <- sample(1:length(ed$eventData), 6)
 # ed <- dtRates(ed, 0.005)
 # xx <- plot(ed, show=FALSE) #individual plots will have a color map relative to the mean

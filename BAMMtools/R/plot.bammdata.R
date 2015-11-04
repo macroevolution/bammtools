@@ -99,7 +99,8 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
             par(...);
         }
         if (legend) {
-            par(fig=c(0,0.9,0,1));
+            #par(fig=c(0,0.9,0,1));
+            par(mar = c(5, 4, 4, 5))
         }
         plot.new();
         ofs <- 0;
@@ -204,14 +205,14 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
                     text(ret$segs[isTip, 3], ret$segs[isTip, 4], phy$tip.label[phy$edge[isTip[-1],2]], cex = cex, pos = 2, srt = 90, offset = 0);
             }
         }
-        if (legend) {
-            #rateLegend(colorobj$colsdensity, logcolor);
-            if (is.null(color.interval)) {
-            	barLegend(pal, colorbreaks, fig=c(0.9,1,0.25,0.75), side=2);
-        	} else {
-        		barLegend(pal, colorbreaks, fig=c(0.9,1,0.25,0.75), side=2, colpalette=colorobj$colpalette);
-        	}
-        }
+        # if (legend) {
+            # #rateLegend(colorobj$colsdensity, logcolor);
+            # if (is.null(color.interval)) {
+            	# barLegend(pal, colorbreaks, fig=c(0.9,1,0.25,0.75), side=2);
+        	# } else {
+        		# barLegend(pal, colorbreaks, fig=c(0.9,1,0.25,0.75), side=2, colpalette=colorobj$colpalette);
+        	# }
+        # }
     }
     index <- order(as.numeric(rownames(ret$segs)));
     if (show) {
@@ -220,9 +221,22 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
 		} else if (method == "polar") {
         	assign("last_plot.phylo", list(type = "fan", Ntip = phy$Nnode + 1, Nnode = phy$Nnode, edge = phy$edge, xx = ret$segs[index, 3], yy = ret$segs[index, 4], theta = ret$segs[index, 5], rb = rb, pp = par(no.readonly = TRUE)), envir = .PlotPhyloEnv);
 		}
+	if (legend) {
+		addBAMMlegend(x = list(coords = ret$segs[-1, ], colorbreaks = colorbreaks, palette = colorobj$colpalette, colordens = colorobj$colsdensity), location = 'right')
+	}
 	}
     if (par.reset) {
         par(op);
     }
     invisible(list(coords = ret$segs[-1, ], colorbreaks = colorbreaks, palette = colorobj$colpalette, colordens = colorobj$colsdensity));
 }
+
+
+
+
+
+
+
+
+
+
