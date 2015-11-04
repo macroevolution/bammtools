@@ -472,20 +472,24 @@ computeBAMMlikelihood <- function(phy, sf = 1, alwaysRecomputeE0 = FALSE, e_prob
  
  
  	## To condition on survival:
- 	#  Need the extinction probability of the process at the root of the tree
-	#  this will be set at the penultimate node in the postorder sequence
+ 	#  Need the extinction probs of process at 2 basal branches:
+	
+	dset <- phy$edge[phy$edge[,1] == (length(phy$tip.label) + 1), 2]
+	e1 <- phy$branchsegs[[dset[1]]]
+	e2 <- phy$branchsegs[[dset[2]]]
  
- 	nn <- phy$postorder[(length(phy$postorder) - 1)]
- 	em <- phy$branchsegs[[nn]]
- 	E_prob_root <- em[nrow(em), 5]
- 	# This is the probability that a single lineage
+ 	
+ 	E_prob_1  <- e1[nrow(e1), 5]
+ 	E_prob_2 <- e2[nrow(e2), 5]
+ 	# These are the probability that a single lineage
  	#    does not go extinct.
  	#  So probability that both basal branches persist 
  	#  is (1 - p(extinct))^2
  	#  This is exactly isometric with the diversitree likelihood
   	#  
+  	# But treat R and L branches separately as may have different values
   
- 	logLik <- logLik - 2*log(1 - E_prob_root)
+ 	logLik <- logLik - log(1 - E_prob_1) - log(1 - E_prob_2)
 	
 	phy$logLik <- logLik
 	
