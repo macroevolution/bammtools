@@ -515,7 +515,7 @@ meanExponentialRate <- function(rate_init, rate_shift, t_start, t_end) {
 } 
 
 
-BAMMlikelihood <- function(phy, eventdata, gen = 'last', segLength = 0.02, sf = 1, return.intermediates=F, e_prob_condition = "if_different", ...) {
+BAMMlikelihood <- function(phy, eventdata, gen = 'last', segLength = 0.02, sf = 1, return.intermediates = FALSE, e_prob_condition = "if_different", ...) {
 	#gen can be a number 1 -> numberOfGenerations, or 'last', or 'all'
 	#segLength is segLength value used in BAMM
 	#sf is sampling fraction

@@ -7,7 +7,7 @@ Calculate BAMM likelihood
 Calculates the likelihood of a phylogeny exactly as is done by BAMM, given a set of events.
 }
 \usage{
-BAMMlikelihood <- function(phy, eventdata, gen = 'last', segLength = 0.02, sf = 1, 
+BAMMlikelihood(phy, eventdata, gen = 'last', segLength = 0.02, sf = 1, 
 	return.intermediates = FALSE, e_prob_condition = "if_different", ...)
 }
 \arguments{
@@ -30,7 +30,7 @@ BAMMlikelihood <- function(phy, eventdata, gen = 'last', segLength = 0.02, sf = 
 		debugging option, returns augmented \code{phylo} objects for each generation, see Details.
 	}
 	\item{e_prob_condition}{
-
+		approach for how extinction probabilities are handled at nodes
 	}
 	\item{...}{
 		additional arguments that will be passed to an internal function \code{computeBAMMlikelihood}

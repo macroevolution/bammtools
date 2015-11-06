@@ -8,7 +8,8 @@
 	Plots a histogram of the frequency of rate values across the phylogeny.
 }
 \usage{
-ratesHistogram(phylorates, plotBrks = TRUE, xlab = 'speciation rate', ylab = 'density', lwd = 0.2, lty = 1, brksCol = 'black', ...) 
+ratesHistogram(phylorates, plotBrks = TRUE, xlab = 'speciation rate', 
+	ylab = 'density', lwd = 0.2, lty = 1, brksCol = 'black', ...) 
 }
 \arguments{
 	\item{phylorates}{
