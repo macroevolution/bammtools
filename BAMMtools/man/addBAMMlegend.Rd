@@ -82,7 +82,7 @@ longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, labelDist = 0.7, ...)
 }
 \examples{
 data(whales, events.whales)
-ephy <- getEventData(whales, events.whales, burnin = 0.25, nsamples = 500)
+ephy <- getEventData(whales, events.whales, burnin = 0.25, nsamples = 300)
 
 # plot phylorate with extra margin space
 x <- plot.bammdata(ephy, lwd = 2, mar = c(5,4,4,4)) 
@@ -99,7 +99,7 @@ addBAMMlegend(x, location = c(5, 20, 60, 61), nTicks = 4, side = 3, cex.axis = 0
 
 #addBAMMlegend also automatically detects the use of color.interval
 data(primates, events.primates)
-ephy <- getEventData(primates, events.primates, burnin=0.25, nsamples = 500, type = 'trait')
+ephy <- getEventData(primates, events.primates, burnin=0.25, nsamples = 300, type = 'trait')
 
 x <- plot.bammdata(ephy, breaksmethod = 'linear', color.interval = c(NA, 0.12), lwd = 2)
 addBAMMlegend(x, location = c(0, 30, 200, 205), nTicks = 1, side = 3)
