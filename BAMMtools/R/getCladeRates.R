@@ -16,12 +16,22 @@ getCladeRates <- function(ephy, node = NULL, nodetype='include', verbose=FALSE) 
 	
 	if (is.null(node)) {
 		nodeset <- ephy$edge[,2];
-	} else if (!is.null(node) & nodetype == 'include') {
+	} else if (!is.null(node[1]) & nodetype[1] == 'include' & length(node) == 1) {
 		nodeset <- getDesc(ephy, node)$desc_set;
-	} else if (!is.null(node) & nodetype == 'exclude') {
+	} else if (!is.null(node[1]) & nodetype[1] == 'exclude' & length(node) == 1) {
 		nodeset <- setdiff( ephy$edge[,2],  getDesc(ephy, node)$desc_set);
+	} else if (!is.null(node[1]) & length(nodetype) == length(node) & length(node) > 1) {
+		nodesets <- lapply(node, function(x) getDesc(ephy, x)$desc_set);
+		Drop <- which(nodetype == 'exclude');
+		nodeset_toRemove <- unique(unlist(lapply(nodesets[Drop], function(x) x)));
+		Keep <- which(nodetype == 'include');
+		nodeset_toKeep <- unique(unlist(nodesets[Keep]));
+		nodeset <- setdiff(nodeset_toKeep, nodeset_toRemove);
+		if (length(nodeset) == 0) {
+			stop('Error: the combination of nodes and nodetypes has resulted in no remaining nodes!')
+		}
 	} else {
-		stop('error in getRateThroughTimeMatrix\n');
+		stop('Error: Please make sure you have specified a nodetype for every node');
 	}
 	
 	lambda_vector <- numeric(length(ephy$eventBranchSegs));

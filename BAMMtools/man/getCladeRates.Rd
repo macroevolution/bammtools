@@ -14,10 +14,10 @@ getCladeRates(ephy, node = NULL, nodetype = "include", verbose = FALSE)
 an object of class \code{bammdata}
 }
   \item{node}{
-If computing rates for a specific portion of tree, the node subtending the relevant subtree
+If computing rates for a specific portion of tree, the node subtending the relevant subtree. If multiple nodes are supplied, then the equivalent number of \code{nodetype} must be supplied.
 }
   \item{nodetype}{
-Either "include" or "exclude". If \code{nodetype = "include"}, the rates returned by the function will be for the subtree defined by \code{node}. If \code{nodetype = "exclude"}, will compute mean rates for the tree after excluding the subtree defined by \code{node}.
+Either "include" or "exclude". If \code{nodetype = "include"}, the rates returned by the function will be for the subtree defined by \code{node}. If \code{nodetype = "exclude"}, will compute mean rates for the tree after excluding the subtree defined by \code{node}. If multiple nodes are specified, there must be a \code{nodetype} for each node. 
 }
   \item{verbose}{
 If \code{TRUE}, will print the sample index as mean rates are computed for each sample from posterior. Potentially useful for extremely large trees.
@@ -61,6 +61,9 @@ plot(all_rates$mu ~ all_rates$lambda)
 dol_rates <- getCladeRates(ed, node=140)
 mean(dol_rates$lambda)
 mean(dol_rates$mu)
+
+# defining multiple nodes
+mean(getCladeRates(ed, node=c(132, 140), nodetype=c('include','exclude'))$lambda)
 
 }
  
