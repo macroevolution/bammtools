@@ -47,7 +47,7 @@ Dan Rabosky
 \examples{
 data(whales)
 data(events.whales)
-ed <- getEventData(whales, events.whales)
+ed <- getEventData(whales, events.whales, nsamples = 500)
 
 # computing the marginal shift probs tree:
 mst <- marginalShiftProbsTree(ed)

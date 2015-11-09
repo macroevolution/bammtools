@@ -33,7 +33,7 @@ Dan Rabosky
  
 \examples{
 data(whales, events.whales)
-ed <- getEventData(whales, events.whales)
+ed <- getEventData(whales, events.whales, nsamples=500)
 ed2 <- subsetEventData(ed, index=1)
 plot.bammdata(ed2) 
 addBAMMshifts(ed2, cex=2)

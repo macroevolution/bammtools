@@ -48,9 +48,8 @@ Dan Rabosky
 }
  
 \examples{
-data(events.whales)
-data(whales)
-ed <- getEventData(whales, events.whales)
+data(events.whales, whales)
+ed <- getEventData(whales, events.whales, nsamples=500)
 all_rates <- getCladeRates(ed)
 
 mean(all_rates$lambda)

@@ -20,7 +20,7 @@ The expected number of shifts under the prior.
 }
 \details{
 
-This function computes the prior odds on the distribution of numbers of rate shift events per branch under the prior. It returns an object of class 'branchprior', which is nothing more than a copy of the original phylogenetic tree but where each branch length has been replaced by the prior probability of a rate shift on each branch.
+This function computes the prior odds on the distribution of numbers of rate shift events per branch under the prior. It returns an object which is nothing more than a copy of the original phylogenetic tree but where each branch length has been replaced by the prior probability of a rate shift on each branch.
 
 The significance of this function is that it lets us explicitly determine which branches have shift probabilities that are elevated relative to the prior expectation.
  

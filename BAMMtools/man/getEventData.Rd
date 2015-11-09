@@ -136,9 +136,8 @@ Currently the function does not check for duplicate tip labels in \code{phy}, wh
 \code{\link{summary.bammdata}}, \code{\link{plot.bammdata}}, \code{\link{dtRates}}.
 }
 \examples{
-data(primates)
-data(events.primates)
-xx <- getEventData(primates, events.primates, burnin=0.25, type = 'trait')
+data(primates, events.primates)
+xx <- getEventData(primates, events.primates, burnin=0.25, nsamples=500, type = 'trait')
 
 # compute mean phenotypic rate for primate body size evolution:
 brates <- getCladeRates(xx)

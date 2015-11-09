@@ -33,7 +33,7 @@ Dan Rabosky
 }
 \examples{
 data(whales, events.whales)
-ed <- getEventData(whales, events.whales)
+ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=500)
 
 # Get the maximum shift credibility configuration:
 msc <- maximumShiftCredibility(ed)

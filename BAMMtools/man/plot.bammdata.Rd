@@ -181,7 +181,7 @@ Mike Grundler, Pascal Title
 }
 \examples{
 data(whales, events.whales)
-ed <- getEventData(whales, events.whales, burnin=0.25)
+ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 
 #the first call to plot.bammdata. No calculations or assignments of rates have been made
 plot(ed, lwd = 3, spex = "s") #internally calls dtRates and assignColorBreaks

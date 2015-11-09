@@ -23,7 +23,7 @@ This function returns a copy of a phylogenetic tree where each branch length is 
 }
 
 \value{
-A object of class \code{phylo} but where each branch length is equal to the marginal shift  odds on each branch.
+A object of class \code{phylo} but where each branch length is equal to the marginal shift odds on each branch.
 }
 
 \author{
@@ -35,7 +35,7 @@ Dan Rabosky
 }
 \examples{
 data(whales, events.whales)
-ed <- getEventData(whales, events.whales, burnin = 0.1)
+ed <- getEventData(whales, events.whales, burnin = 0.1, nsamples = 500)
 bftree <- marginalOddsRatioBranches(ed, expectedNumberOfShifts = 1)
 margprobs <- marginalShiftProbsTree(ed)
 plot.new()

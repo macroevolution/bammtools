@@ -82,7 +82,7 @@ Mike Grundler
 \examples{
 data(events.whales)
 data(whales)
-ed <- getEventData(whales, events.whales)
+ed <- getEventData(whales, events.whales, nsamples=500)
 
 cset <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
 plot(cset)

@@ -52,7 +52,7 @@ generateControlFile(file = 'divcontrol.txt', params = list(
 	lambdaInitPrior = as.numeric(priors['lambdaInitPrior']),
 	lambdaShiftPrior = as.numeric(priors['lambdaShiftPrior']),
 	muInitPrior = as.numeric(priors['muInitPrior']),
-	poissonRatePrior = '1'))
+	expectedNumberOfShifts = '1'))
 }
 
 

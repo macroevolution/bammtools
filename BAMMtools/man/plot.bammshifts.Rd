@@ -83,7 +83,7 @@ Points are added to the branches subtending the nodes of each rate configuration
 \examples{
 data(whales, events.whales)
 
-ed <- getEventData(whales, events.whales, burnin=0.25)
+ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 
 sc <- distinctShiftConfigurations(ed, expectedNumberOfShifts = 1, threshold = 5)
 

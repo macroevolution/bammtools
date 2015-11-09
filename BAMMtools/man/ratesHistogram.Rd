@@ -61,7 +61,7 @@ library(BAMMtools)
 
 #load data
 data(primates, events.primates)
-ed <- getEventData(primates, events.primates, burnin=0.25, type = 'trait')
+ed <- getEventData(primates, events.primates, burnin=0.25, nsamples=500, type = 'trait')
 
 #create phylorate plot with the jenks breaks method to generate output
 phylorates <- plot.bammdata(ed, breaksmethod='jenks', show = FALSE)

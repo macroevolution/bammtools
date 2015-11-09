@@ -63,7 +63,7 @@ Requires an object of class \code{bammdata} as obtained with \code{\link{getEven
 }
 \examples{
 data(whales, events.whales)
-ephy <- getEventData(whales, events.whales, burnin=0.25)
+ephy <- getEventData(whales, events.whales, burnin=0.25, nsamples = 500)
 
 #return a vector of average species-specific speciation rates.
 meanlam <- getTipRates(ephy, returnNetDiv = FALSE, statistic = 'mean')$lambda.avg

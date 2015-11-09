@@ -43,7 +43,7 @@ Dan Rabosky
 \examples{
 data(mcmc.whales)
  
-computeBayesFactors(mcmc.whales, expectedNumberOfShifts = 1, burnin=0.1)
+computeBayesFactors(mcmc.whales, expectedNumberOfShifts = 1, burnin = 0.1)
 }
 
 \keyword{ models }

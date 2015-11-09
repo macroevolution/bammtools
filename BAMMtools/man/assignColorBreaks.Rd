@@ -54,7 +54,7 @@
 }
 \examples{
 	data(whales, events.whales)
-	ed <- getEventData(whales,events.whales,0.2)
+	ed <- getEventData(whales, events.whales, burnin = 0.2, nsamples = 500)
 	
 	ed <- dtRates(ed, 0.01)
 	colors <- assignColorBreaks(ed$dtrates$rates, spex="s") #speciation rates

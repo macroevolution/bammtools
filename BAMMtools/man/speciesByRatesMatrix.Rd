@@ -44,7 +44,7 @@
 }
 \examples{
 data(whales, events.whales)
-ed <- getEventData(whales,events.whales,burnin=0.25)
+ed <- getEventData(whales,events.whales,burnin=0.25, nsamples=500)
 ratemat <- speciesByRatesMatrix(ed, nslices = 100)
 
 dolphins <- extract.clade(whales,140)$tip.label

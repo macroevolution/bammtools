@@ -37,7 +37,7 @@ Huateng Huang
 }
 \examples{
 data(whales, events.whales)
-ephy <- getEventData(whales, events.whales, burnin=0.25)
+ephy <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 
 #specify a set of tips for the subtree
 tips <- sample(ephy$tip.label,size=20,replace=FALSE)

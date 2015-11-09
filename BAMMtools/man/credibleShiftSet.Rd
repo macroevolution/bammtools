@@ -158,9 +158,8 @@ Dan Rabosky
 } 
  
 \examples{
-data(events.whales)
-data(whales)
-ed <- getEventData(whales, events.whales)
+data(events.whales, whales)
+ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=500)
 
 cset <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
 

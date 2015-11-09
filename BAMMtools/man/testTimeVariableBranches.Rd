@@ -47,8 +47,7 @@ An object of class \code{phylo}, but where branch lengths are replaced with the 
 
 \examples{
 # Load whale data:
-data(whales)
-data(events.whales)
+data(whales, events.whales)
 ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=200)
 
 # compute the posterior probability of 

@@ -68,7 +68,7 @@ Mike Grundler
 \examples{
 library(BAMMtools)
 data(whales, events.whales)
-ed <- getEventData(whales, events.whales, 0.1)
+ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=500)
 x <- getCohortMatrix(ed)
 cohorts(x, ed)
 cohorts(x, ed, col=richColors(64))

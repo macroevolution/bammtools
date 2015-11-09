@@ -92,9 +92,9 @@ Daniel L. Rabosky, Huateng Huang
 }
 \examples{
 # using a small subset of the fish data set (300 taxa) in Rabosky et al. 2013. Nat. Com. paper
-data(fishes)
-data(events.fishes)
-xx <- getEventData(phy = fishes, eventdata = events.fishes, type = "diversification")
+data(fishes, events.fishes)
+xx <- getEventData(phy = fishes, eventdata = events.fishes, 
+  nsamples = 500, type = "diversification")
 #traits.fishes is the trait -- body size
 data(traits.fishes)
 x <- traitDependentBAMM(ephy = xx, traits = traits.fishes, reps = 1000, return.full = TRUE, 

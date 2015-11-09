@@ -72,7 +72,7 @@ Mike Grundler
 \examples{
 
 data(whales, events.whales)
-ed <- getEventData(whales, events.whales, burnin=0.25)
+ed <- getEventData(whales, events.whales, burnin=0.25, nsamples = 500)
 
 #adding shifts to tree for specific posterior samples
 plot(ed, method="polar")

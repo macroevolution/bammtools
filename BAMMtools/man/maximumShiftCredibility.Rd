@@ -49,9 +49,8 @@ Dan Rabosky
 \link[BAMMtools]{marginalShiftProbsTree}, \link[BAMMtools]{addBAMMshifts}, \link{cumulativeShiftProbsTree}, \link[BAMMtools]{credibleShiftSet}, \link[BAMMtools]{getBestShiftConfiguration}
 }
 \examples{
-data(whales)
-data(events.whales)
-ed <- getEventData(whales, events.whales, burnin=0.25)
+data(whales, events.whales)
+ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 best_config <- maximumShiftCredibility(ed)
 plot.bammdata(ed)
 addBAMMshifts(ed, method='phylogram', index=best_config$sampleindex)

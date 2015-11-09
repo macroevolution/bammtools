@@ -56,7 +56,7 @@ Pascal Title
 \examples{
 #load whales dataset
 data(whales, events.whales)
-ed <- getEventData(whales, events.whales, burnin=0.25)
+ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 
 #for demonstration purposes, we will extract the vector of speciation rates
 ed <- dtRates(ed, tau=0.01)

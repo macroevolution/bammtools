@@ -1,7 +1,5 @@
 \name{getCohortMatrix}
 \alias{getCohortMatrix}
-\alias{getBAMMCorrelationMatrix}
-\alias{getMacroevolutionaryCohortMatrix}
 \title{
 Compute the pairwise correlation in rate regimes between all tips in a bammdata object
 }
@@ -39,9 +37,8 @@ Dan Rabosky
 
 
 \examples{
-data(whales)
-data(events.whales)
-ed <- getEventData(whales, events.whales)
+data(whales, events.whales)
+ed <- getEventData(whales, events.whales, nsamples=500)
 
 cormat <- getCohortMatrix(ed)
 
