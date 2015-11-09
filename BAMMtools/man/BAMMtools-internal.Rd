@@ -37,7 +37,6 @@
 \alias{safeLog}
 \alias{segMap}
 \alias{timeIntegratedBranchRate}
-\alias{transparentColor}
 \alias{getDesc}
 \alias{getSpanningTaxonPair}
 \alias{print.bammdata}
