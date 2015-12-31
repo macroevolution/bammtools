@@ -33,7 +33,7 @@ setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPrio
 		
 		s1 <- '###############################################';
 		s2 <- '# Prior block chosen by BAMMtools::setBAMMpriors';
-		s3 <- 'poissonRatePrior = 1.0';
+		s3 <- 'expectedNumberOfShifts = 1.0';
 		s4 <- paste('lambdaInitPrior = ', lamprior, sep='');
 		s5 <- paste('lambdaShiftPrior = ', kprior, sep='');
 		s6 <- paste('muInitPrior = ', lamprior, sep='');
@@ -42,14 +42,18 @@ setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPrio
 		if (!is.null(outfile)) {
 			write(ss, file = outfile, sep='');
 		} else {
-			res <- as.data.frame(cbind(c('poissonRatePrior', 'lambdaInitPrior', 'lambdaShiftPrior', 'muInitPrior'), c(1.0, lamprior, kprior, lamprior)), stringsAsFactors=FALSE);
+			res <- as.data.frame(cbind(c('expectedNumberOfShifts', 'lambdaInitPrior', 'lambdaShiftPrior', 'muInitPrior'), c(1.0, lamprior, kprior, lamprior)), stringsAsFactors=FALSE);
 			res[,2] <- as.numeric(res[,2]);
 			colnames(res) <- c('param','value');
 		}
-	}else{
-		x <- read.table(file = traits, sep='\t', stringsAsFactors=F, header=F);
-		tvec <- x[,2];
-		names(tvec) <- x[,1];
+	} else {
+		if (is.character(traits)) {
+			x <- read.table(file = traits, sep = '\t', stringsAsFactors = FALSE, header = FALSE);
+			tvec <- x[,2];
+			names(tvec) <- x[,1];
+		} else {
+			tvec <- traits;
+		}
 		not.in.tree <- setdiff(phy$tip.label, names(tvec));
 		not.in.traits <- setdiff(names(tvec), phy$tip.label);
 		bad <- c(not.in.tree, not.in.traits);
@@ -60,6 +64,14 @@ setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPrio
 				cat(i, '\n');
 			}
 			stop('Names in trait dataset must match those in tree\n');
+		}
+		bad <- which(is.na(tvec)) #check for missing data
+		if (length(bad) > 0) {
+			cat('\nSome taxa are missing data:\n\n');
+			for (i in bad) {
+				cat(names(tvec)[i], '\n');
+			}
+			stop('All taxa must have trait data.');
 		}
 		tvec <- tvec[phy$tip.label];
 		if (length(phy$tip.label) > Nmax){
@@ -78,7 +90,7 @@ setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPrio
 		
 		s1 <- '###############################################';
 		s2 <- '# Prior block chosen by BAMMtools::setBAMMpriors';
-		s3 <- 'poissonRatePrior = 1.0';
+		s3 <- 'expectedNumberOfShifts = 1.0';
 		s4 <- paste('betaInitPrior = ', betaprior, sep='');
 		s5 <- paste('betaShiftPrior = ', kprior, sep='');
 		s6 <- paste('useObservedMinMaxAsTraitPriors = 1');
@@ -87,7 +99,7 @@ setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPrio
 		if (!is.null(outfile)) {
 			write(ss, file = outfile, sep='');
 		} else {
-			res <- as.data.frame(cbind(c('poissonRatePrior', 'betaInitPrior', 'betaShiftPrior', 'useObservedMinMaxAsTraitPriors'), c(1.0, betaprior, kprior, 1)), stringsAsFactors=FALSE);
+			res <- as.data.frame(cbind(c('expectedNumberOfShifts', 'betaInitPrior', 'betaShiftPrior', 'useObservedMinMaxAsTraitPriors'), c(1.0, betaprior, kprior, 1)), stringsAsFactors=FALSE);
 			res[,2] <- as.numeric(res[,2]);
 			colnames(res) <- c('param','value');
 		}

@@ -21,7 +21,7 @@ an object of class \code{phylo}, e.g., the phylogenetic tree you will analyze wi
 If doing speciation-extinction analysis, the total number of taxa in your clade. If your tree contains all taxa in the clade (100\% sampling), then leave this as NULL
 }
   \item{traits}{
-A filename where the trait data (BAMM format) are stored. Leave NULL if doing a speciation-extinction analysis.
+A filename where the trait data (BAMM format) are stored, or a numeric vector named according to the tips in \code{phy}. Leave NULL if doing a speciation-extinction analysis.
 }
   \item{outfile}{
 Filename for outputting the sample priors block. If \code{NULL}, then a vector is returned instead.
