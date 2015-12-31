@@ -25,7 +25,7 @@ longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, labelDist = 0.7, ...)
 		either a location name (see \code{Details}), or coordinates for the corners of the bar legend \code{c(xmin, xmax, ymin, ymax)}.	
 	}
 	\item{nTicks}{
-		number of tick marks, besides of min and max.
+		number of tick marks, besides min and max.
 	}
 	\item{shortFrac}{
 		Percent of the plot width range that will be used as the short dimention of the legend. Only applies to preset location options. 
