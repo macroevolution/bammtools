@@ -1,5 +1,6 @@
 \name{traitDependentBAMM}
 \alias{traitDependentBAMM}
+\alias{strapp}
 
 \title{
 STRAPP: STructured Rate Permutations on Phylogenies
@@ -42,7 +43,7 @@ a logical, used for cotinuous trait data. If \code{TRUE}, perform a two tailed s
 a character string specifying the direction of correlation for the alternative hypothesis. For continuous traits, it must be either "positive" or "negative"; only the initial letter is needed. For binary traits, it must be a string indicating states with increasing rate under the alternative hypothesis, separated by comma (e.g., 'A, B'). One-tailed test for categorical data with more than two states is not supported.
   }
   	\item{nthreads}{
-number of threads to use for parallelization of the function. The R package \code{snow} must be loaded for \code{nthreads > 1}.
+number of threads to use for parallelization of the function. The R package \code{parallel} must be loaded for \code{nthreads > 1}.
   	}
 }
 
