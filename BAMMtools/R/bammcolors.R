@@ -38,7 +38,19 @@ RdYlGn =   rev(c("#a50026","#d73027","#f46d43","#fdae61","#fee08b",
                  "#006837")),
 Spectral = rev(c("#9e0142","#d53e4f","#f46d43","#fdae61","#fee08b",
              "#ffffbf","#e6f598","#abdda4","#66c2a5","#3288bd",
-             "#5e4fa2"))
+             "#5e4fa2")),
+grayscale = c("#ffffff","#f0f0f0","#d9d9d9","#bdbdbd","#969696","#737373","#525252",
+        "#252525",
+        "#000000"),
+revgray = rev(c("#ffffff","#f0f0f0","#d9d9d9","#bdbdbd","#969696","#737373","#525252",
+        "#252525",
+        "#000000")),
+greyscale = c("#ffffff","#f0f0f0","#d9d9d9","#bdbdbd","#969696","#737373","#525252",
+        "#252525",
+        "#000000"),
+revgrey = rev(c("#ffffff","#f0f0f0","#d9d9d9","#bdbdbd","#969696","#737373","#525252",
+        "#252525",
+        "#000000"))
 );
 .colorEnv <- new.env();
 assign("palettes", palettes, env = .colorEnv);
