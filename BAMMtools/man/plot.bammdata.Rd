@@ -136,6 +136,11 @@ Some color-blind unfriendly options include
 \code{temperature} \cr
 \code{terrain} \cr
 }
+Some grayscale options include
+\tabular{r}{
+\code{grayscale} \cr
+\code{revgray} \cr
+}
 For more information about these color palettes visit \code{colorbrewer2.org} and
 
 \code{geography.uoregon.edu/datagraphics/color_scales.htm} 

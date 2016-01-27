@@ -37,7 +37,7 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 		cat("Reading event datafile: ", eventdata, "\n\t\t...........");
 		eventdata <- read.csv(eventdata, header=TRUE, stringsAsFactors=FALSE);
  		uniquegens <- sort(unique(eventdata[,1]));
- 		cat("\nRead a total of ", length(uniquegens), " samples from posterior\n");				
+ 		cat("\nRead a total of", length(uniquegens), "samples from posterior\n");				
 	} 
 	else {
 		err.string = c('eventdata arg invalid\n\nType is ', class(eventdata), '\n', sep='');
