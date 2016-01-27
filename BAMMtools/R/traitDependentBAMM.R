@@ -59,7 +59,11 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 			stop("none of the taxa with trait data is in the bammdata object\n");
 		}
 	}
-
+	
+	# check if species in ephy and traits match
+	if (!identical(sort(names(traits)), sort(ephy$tip.label))) {
+		stop('Species names in the bamm-data object and trait data are not identical. You may want to run subtreeBAMM and subset the trait data in order to reduce the two datasets to a common taxon set.')
+	}
 
 	method.option <- c("spearman",  "pearson", "mann-whitney", "kruskal");
 	method <- method.option[grep(paste("^", method, sep = ''), method.option, ignore.case = TRUE)];

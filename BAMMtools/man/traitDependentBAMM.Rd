@@ -49,6 +49,8 @@ number of threads to use for parallelization of the function. The R package \cod
 
 \details{
 Tip rates-- speciation, extinction or net diversification rates-- are permuted in a way such that pairwise covariances in rates between species are maintained. That is, tips with the same \code{tipStates} still have the same rate after permutation. Posterior samples are randomly selected with replacement from the \code{bammdata} object, so \code{reps} could be smaller or larger than the total number of samples in the object.
+
+This function expects that the bamm-data object and the trait data have the same taxon set. It may be necessary to subset the trait data and/or run \code{\link{subtreeBAMM}} on the bamm-data object in order to meet this requirement. 
 }
 \value{
   \item{estimate}{
