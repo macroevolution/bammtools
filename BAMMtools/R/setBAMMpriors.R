@@ -113,7 +113,7 @@ setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPrio
 	}
 
 	if (!suppressWarning & !is.null(outfile)) {
-		cat('\nThis function simply sets the poissonRatePrior to 1;\n');
+		cat('\nThis function simply sets the expectedNumberOfShifts to 1;\n');
 		cat('This is a parameter you may need to vary to achieve good convergence\n');
 		cat('with your data.\n');
 	}
