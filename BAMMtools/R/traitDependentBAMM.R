@@ -48,16 +48,8 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
     stop("Rate must be one of 'speciation', 'extinction', or 'net diversification', only the initial letter is needed\n")
   }
   
-  if (ratetype == "net diversification" & logrates == TRUE) {
-    cat("WARNING: Net diversification might be negative and logged rates would then produce NaNs.\n");
-  }
-  
-	if (sum(! names(traits) %in% ephy$tip.label) > 0) {
-		cat("ignored taxa with trait but not in the bammdata object\n");
-		traits <- traits[names(traits) %in% ephy$tip.label];
-		if (length(traits) == 0) {
-			stop("none of the taxa with trait data is in the bammdata object\n");
-		}
+	if (ratetype == "net diversification" & logrates == TRUE) {
+		cat("WARNING: Net diversification might be negative and logged rates would then produce NaNs.\n");
 	}
 	
 	# check if species in ephy and traits match
@@ -122,13 +114,13 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 			}
 		}
 	}
-  if (ratetype == 'speciation') {
-	  tiprates <- ephy$tipLambda;
-  } else if (ratetype == "extinction") {
-    tiprates <- ephy$tipMu;
-  } else {
-    tiprates <- lapply(1:length(ephy$tipLambda), function(i) {ephy$tipLambda[[i]] - ephy$tipMu[[i]]});
-  }
+	if (ratetype == 'speciation') {
+		tiprates <- ephy$tipLambda;
+	} else if (ratetype == "extinction") {
+		tiprates <- ephy$tipMu;
+	} else {
+		tiprates <- lapply(1:length(ephy$tipLambda), function(i) {ephy$tipLambda[[i]] - ephy$tipMu[[i]]});
+	}
 	tipstates <- ephy$tipStates;
 	#tiprates <- tiprates[ephy$tip.label];
 	traits <- traits[ephy$tip.label];
@@ -137,7 +129,7 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 		trait.stat.count <- table(traits);
 		trait.stat.count <- trait.stat.count[! is.na(names(trait.stat.count))];
 		stat.mu <- prod(trait.stat.count) / 2;
-  }
+	}
 
 	if (logrates) {
 		tiprates <- lapply(1:length(tiprates), function(x){ log(tiprates[[x]]) });
@@ -255,7 +247,7 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 		names(l) <- as.character(unique(traits[! is.na(traits)]));
 		obj <- list(estimate = l, p.value = pval, method = method, two.tailed = two.tailed);
 	}
-  obj$rate <- ratetype;
+	obj$rate <- ratetype;
 	if (return.full) {
 		obj$obs.corr <- as.numeric(obs);
 		obj$gen <- gen;
