@@ -81,6 +81,8 @@ a numeric vector. The null distribution of correlation coefficients (or centered
 \references{
 \url{bamm-project.org}
 
+Rabosky, D. L. and Huang, H., 2015. A Robust Semi-Parametric Test for Detecting Trait-Dependent Diversification. Systematic Biology 65: 181-193.
+
 Rabosky, D. L. 2014. Automatic detection of key innovations, rate shifts, and diversity-dependence on phylogenetic trees. PLoS ONE 9:e89543
 
 Rabosky, D. L., F. Santini, J. T. Eastman, S. A. Smith, B. L. Sidlauskas, J. Chang, and M. E. Alfaro. 2013. Rates of speciation and morphological evolution are correlated across the largest vertebrate radiation. Nature Communications DOI: 10.1038/ncomms2958 
