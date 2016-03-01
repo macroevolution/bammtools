@@ -42,7 +42,7 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 			stop("Please load package 'parallel' for using the multi-thread option\n");
 		}
 	}
-	ratetype.option<-c("speciation", "extinction", "net diversification");
+	ratetype.option <- c("speciation", "extinction", "net diversification");
 	ratetype <- ratetype.option[grep(paste("^", rate, sep = ''), ratetype.option,ignore.case = TRUE, perl = TRUE)];
   if (length(ratetype) == 0) {
     stop("Rate must be one of 'speciation', 'extinction', or 'net diversification', only the initial letter is needed\n")
@@ -65,12 +65,12 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 
 	# check if the trait is right class
 
-	if (method == 'spearman' | method=="pearson") {
+	if (method == 'spearman' | method == "pearson") {
 		if (! is.numeric(traits)){
 			cat(paste("selected ", method, ", but the trait is not numeric, converted the trait into a numeric vector\n",sep=''));
 			traits <- as.numeric(traits);
 		}
-	} else if (method =="mann-whitney"| method=="kruskal") {
+	} else if (method == "mann-whitney"| method == "kruskal") {
       
 		if (length(unique(traits[! is.na(traits)])) == 1) {
 			stop(paste("selected ", method, ", but the trait only has one level\n", sep = ''));
