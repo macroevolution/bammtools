@@ -1,0 +1,12 @@
+language: r
+
+sudo: required
+
+before_install:
+  cd ./BAMMtools
+
+r_binary_packages:
+  - ape
+
+after_script:
+ - ./travis-tool.sh dump_logs
