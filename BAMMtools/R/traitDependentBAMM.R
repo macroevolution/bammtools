@@ -43,7 +43,7 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 		}
 	}
 	ratetype.option <- c("speciation", "extinction", "net diversification");
-	ratetype <- ratetype.option[grep(paste("^", rate, sep = ''), ratetype.option,ignore.case = TRUE, perl = TRUE)];
+	ratetype <- ratetype.option[grep(paste("^", rate, sep = ''), ratetype.option, ignore.case = TRUE, perl = TRUE)];
   if (length(ratetype) == 0) {
     stop("Rate must be one of 'speciation', 'extinction', or 'net diversification', only the initial letter is needed\n")
   }
@@ -240,7 +240,13 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 	if (method == "spearman" | method == "pearson") {
 		obj <- list(estimate = mean(as.numeric(obs)), p.value = pval, method = method, two.tailed = two.tailed);
 	} else {
-		ave.tiprate <- getTipRates(ephy)$lambda.avg;
+		if (ratetype == 'speciation') {
+			ave.tiprate <- getTipRates(ephy)$lambda.avg;
+		} else if (ratetype == 'extinction') {
+			ave.tiprate <- getTipRates(ephy)$mu.avg;
+		} else {
+			ave.tiprate <- getTipRates(ephy)$lambda.avg - getTipRates(ephy)$mu.avg;
+		}
 		l <- lapply(unique(traits[! is.na(traits)]), function(x) {
 			median(ave.tiprate[which(traits == x)], na.rm = TRUE);
 		});
@@ -256,61 +262,4 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 
 	return(obj);
 }
-
-# traitDependentBAMM <- function(ephy, traits, reps=1000, return.null=FALSE, method='spearman', logrates=T, two.tailed = TRUE){
-#
-# 	tiprates <- getTipRates(ephy)$lambda.avg;
-#
-# 	if (length(intersect(names(traits), ephy$tip.label)) != length(traits)){
-# 		stop("names of trait vector and taxa in bammdata object must match\n")
-# 	}
-# 	traits <- traits[ephy$tip.label];
-# 	tiprates <- tiprates[ephy$tip.label];
-#
-# 	if (logrates){
-# 		tiprates <- log(tiprates);
-# 	}
-#
-# 	obs <- cor.test(tiprates, traits, method=method);
-# 	bootreps <- permuteTipRates(ephy, reps=reps);
-# 	if (logrates){
-# 		bootreps$tipLambda <- log(bootreps$tipLambda);
-# 	}
-#
-# 	nullvec <- numeric(reps);
-# 	for (i in 1:reps){
-# 		nullvec[i] <- cor.test(bootreps$tipLambda[,i], traits, method=method)$estimate;
-# 	}
-#
-# 	pval <- (sum(obs$estimate <= nullvec)+1) / (length(nullvec) + 1);
-#
-# 	if (pval > 0.5){
-# 		pval <- 1 - pval;
-# 	}
-#
-# 	if (two.tailed){
-# 		pval <- 2*pval;
-# 	}
-#
-# 	obj <- list(estimate = obs$estimate, p.value = pval, method=method, two.tailed=two.tailed);
-# 	if (return.null){
-# 		obj$null <- nullvec;
-# 	}
-#
-# 	return(obj);
-# }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
