@@ -1,3 +1,5 @@
+[![CRAN version](http://www.r-pkg.org/badges/version/rangeBuilder)](http://cran.rstudio.com/web/packages/BAMMtools/index.html)
+
 BAMMtools
 =========
 
