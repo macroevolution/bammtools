@@ -1,5 +1,5 @@
 [![CRAN version](http://www.r-pkg.org/badges/version/rangeBuilder)](http://cran.rstudio.com/web/packages/BAMMtools/index.html)
-
+[![Build Status](https://travis-ci.org/josephwb/bammtools.svg?branch=master)](https://travis-ci.org/josephwb/bammtools)
 BAMMtools
 =========
 
