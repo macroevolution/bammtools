@@ -19,9 +19,9 @@ it must correspond to an innernode on the tree.}
 an object of class \code{bammdata}.
 }
 \description{
-Given a set of tips or a node, this function extracts the corresponding subtree
-from the \code{bammdata} object. User should specify either a set of tips or a
-node, and the node will overwrite the tips if both are given.
+Given a set of tips or a node, this function extracts the corresponding
+subtree from the \code{bammdata} object. User should specify either a set of tips or
+a node, and the node will overwrite the tips if both are given.
 }
 \details{
 This function allows users to extract a subtree from a big \code{bammdata}

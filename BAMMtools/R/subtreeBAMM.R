@@ -1,8 +1,8 @@
-##' Given a set of tips or a node, this function extracts the corresponding subtree
-##' from the \code{bammdata} object. User should specify either a set of tips or a
-##' node, and the node will overwrite the tips if both are given.
-##'
 ##' @title Pulls out a subtree from bammdata object
+##'
+##' @description Given a set of tips or a node, this function extracts the corresponding
+##' subtree from the \code{bammdata} object. User should specify either a set of tips or
+##' a node, and the node will overwrite the tips if both are given.
 ##'
 ##' @param ephy an object of class \code{bammdata}.
 ##' @param tips an integer or character vector indicating which tips (more than one)
