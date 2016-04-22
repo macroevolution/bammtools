@@ -15,6 +15,9 @@ to be included in the subtree.}
 \item{node}{an integer indicating the root of the subtree to be extracted, and
 it must correspond to an innernode on the tree.}
 }
+\value{
+an object of class \code{bammdata}.
+}
 \description{
 Given a set of tips or a node, this function extracts the corresponding subtree
 from the \code{bammdata} object. User should specify either a set of tips or a

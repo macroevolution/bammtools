@@ -13,6 +13,8 @@
 ##' @details This function allows users to extract a subtree from a big \code{bammdata}
 ##' object, and examine the subset using \code{\link{plot.bammdata}}
 ##'
+##' @return an object of class \code{bammdata}.
+##'
 ##' @author Huateng Huang
 ##'
 ##' @seealso \code{\link{getmrca}}, \code{\link{plot.bammdata}}
