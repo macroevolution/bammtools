@@ -25,7 +25,7 @@ Dan Rabosky, Mike Grundler, Pascal Title, Jonathan Mitchell, Carlos Anderson, Je
 Maintainer: {Pascal Title <ptitle@umich.edu}>
 }
 \references{
-\url{bamm-project.org}
+\url{http://bamm-project.org}
 
 Rabosky, D., M. Grundler, C. Anderson, P. Title, J. Shi, J. Brown, H. Huang and J. Larson. 2014. BAMMtools: an R package for the analysis of evolutionary dynamics on phylogenetic trees. Methods in Ecology and Evolution 5: 701-707.
 
