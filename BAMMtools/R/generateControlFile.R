@@ -1,3 +1,45 @@
+##' @title Generate control file for BAMM
+##'
+##' @description enerates a template diversification or trait control files for BAMM,
+##' while allowing the user to specify parameter values.
+##'
+##' @param file destination file name with or without path
+##' @param type character, either \dQuote{\code{diversification}} or 
+##' \dQuote{\code{trait}}, depending on the desired BAMM analysis
+##' @param params list of parameters, see \code{Details}.
+##'
+##' @details The user can supply parameters as a list, where the name of the list item
+##' is the name of the parameter as it appears in the control file, and the value of the
+##' list item is what will be placed in the contol file.
+##' 
+##' If a parameter is specified by the user, it will automatically be uncommented if it
+##' was commented in the template.
+##'
+##' @author Pascal Title
+##'
+##' @references \url{http://bamm-project.org}
+##'
+##' @examples
+##' \dontrun{
+##' #Produce a blank template control file
+##' generateControlFile(file = 'traitcontrol.txt', type='trait')
+##' 
+##' #Produce a customized control file
+##' data(whales)
+##' 
+##' #get bamm priors to supply to control file
+##' priors <- setBAMMpriors(whales, outfile = NULL)
+##' 
+##' generateControlFile(file = 'divcontrol.txt', params = list(
+##' 	treefile = 'whales.tre',
+##' 	globalSamplingFraction = '1',
+##' 	numberOfGenerations = '100000',
+##' 	overwrite = '1',
+##' 	lambdaInitPrior = as.numeric(priors['lambdaInitPrior']),
+##' 	lambdaShiftPrior = as.numeric(priors['lambdaShiftPrior']),
+##' 	muInitPrior = as.numeric(priors['muInitPrior']),
+##' 	expectedNumberOfShifts = '1'))}
+##' @export
 generateControlFile <- function(file = "controlfile.txt", type = "diversification", params = NULL) {
 	
 	templates <- list(diversification = 
