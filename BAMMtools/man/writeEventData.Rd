@@ -13,12 +13,12 @@ writeEventData(ephy, outtreefile, outeventfile)
 
 \item{outeventfile}{the file name for outputting the event csv file}
 
-\item{...}{additional arguments to pass to \code{write.csv}
-
-\seealso{
-\code{\link{subtreeBAMM}}}}
+\item{...}{additional arguments to pass to \code{write.csv}}
 }
 \description{
 Takes a bammdata object and re-writes it back into a treefile and an event csv file.
+}
+\seealso{
+\code{\link{subtreeBAMM}}
 }
 

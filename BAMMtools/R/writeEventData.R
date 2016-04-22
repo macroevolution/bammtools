@@ -7,8 +7,7 @@
 ##' @param outeventfile the file name for outputting the event csv file
 ##' @param ... additional arguments to pass to \code{write.csv}
 ##'
-##' \seealso{
-##' \code{\link{subtreeBAMM}}}
+##' @seealso \code{\link{subtreeBAMM}}
 ##' @export
 writeEventData <- function(ephy, outtreefile, outeventfile){
   
