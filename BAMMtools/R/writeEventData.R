@@ -1,5 +1,15 @@
-# a function takes bammdata object and re-write it back into a tree file and an event csv file
-
+##' Takes a bammdata object and re-writes it back into a treefile and an event csv file.
+##'
+##' @title Write a \code{bammdata} object to disk
+##'
+##' @param ephy a \code{bammdata} object
+##' @param outtreefile the file name for outputting the tree
+##' @param outeventfile the file name for outputting the event csv file
+##' @param ... additional arguments to pass to \code{write.csv}
+##'
+##' \seealso{
+##' \code{\link{subtreeBAMM}}}
+##' @export
 writeEventData <- function(ephy, outtreefile, outeventfile){
   
 	if(! "bammdata" %in% class(ephy)) {
@@ -41,5 +51,5 @@ writeEventData <- function(ephy, outtreefile, outeventfile){
 				stringsAsFactors = FALSE
 			))
 	}
-	write.csv(eventdata, file = outeventfile, row.names = FALSE, quote = FALSE);
+	write.csv(eventdata, file = outeventfile, row.names = FALSE, quote = FALSE, ...);
 }
