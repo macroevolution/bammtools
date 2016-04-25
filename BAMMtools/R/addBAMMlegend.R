@@ -15,16 +15,9 @@
 #		... additional parameters to be passed to axis()
 #
 
-##' Add a legend to a phylorate plot, with greater manual control.
-##'
 ##' @title Add a color legend to a phylo-rate plot
 ##'
-##' @details A number of predefined locations exist in this function to make it easy
-##' to add a legend to a phylorate plot. Preset \code{locations} are: \code{topleft},
-##' \code{topright}, \code{bottomleft}, \code{bottomright}, \code{left}, \code{right},
-##' \code{top} and \code{bottom}. If more fine-tuned control is desired, then a numeric
-##' vector of length 4 can be supplied to \code{location}, specifying the min x, max x,
-##' min y and max y values for the legend. See \code{examples}.
+##' @description Add a legend to a phylorate plot, with greater manual control.
 ##'
 ##' @param x a plot.bammdata object.
 ##' @param direction direction of color ramp. If omitted, then direction is 
@@ -42,6 +35,13 @@
 ##' @param cex.axis size of axis labels
 ##' @param labelDist distance from axis to axis labels (passed to mgp)
 ##' @param ... additional parameters to be passed to axis.
+##'
+##' @details A number of predefined locations exist in this function to make it easy
+##' to add a legend to a phylorate plot. Preset \code{locations} are: \code{topleft},
+##' \code{topright}, \code{bottomleft}, \code{bottomright}, \code{left}, \code{right},
+##' \code{top} and \code{bottom}. If more fine-tuned control is desired, then a numeric
+##' vector of length 4 can be supplied to \code{location}, specifying the min x, max x,
+##' min y and max y values for the legend. See \code{examples}.
 ##'
 ##' @return Invisibly returns a list with the following components:
 ##'
