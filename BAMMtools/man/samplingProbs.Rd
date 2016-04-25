@@ -40,7 +40,7 @@ species in the phylogeny, then a vector \code{cladeRichness} must be provided th
 contains known clade richness. If the cladeTable contains more than the species in the
 phylogeny, then cladeRichness should be set to \code{NULL}. The \code{globalSampling}
 value should represent the overall completeness of species sampling in terms of major
-clades. See \url{http://www.bamm-project.org} for additional details.
+clades. See \url{http://bamm-project.org} for additional details.
 }
 \examples{
 \dontrun{
