@@ -18,6 +18,53 @@
 #	Returns: an ephy object with a list appended containing a vector of branch
 #			 rates and the step size used for calculation.
 
+##' @title Calculate macroevolutionary rate changes on a phylogeny from \code{BAMM} output
+##'
+##' @description \code{dtRates} calculates the mean of the marginal posterior density 
+##' of the rate of speciation/extinction or trait evolution for small segments
+##' along each branch in a phylogeny.
+##'
+##' @param ephy an object of class \code{bammdata}.
+##' @param tau a numeric that specifies the size (as a fraction of tree height) of the 
+##' segments that each branch will be discretized into.
+##' @param ism an integer vector indexing which posterior samples to include in the calculation.
+##' @param tmat a logical. If \code{TRUE} the matrix of branch segments is returned.
+##'
+##' @details \code{dtRates} bins the phylogeny into windows of time and calculates average
+##' rates of speciation/extinction or phenotypic evolution along each segment of a branch
+##' within a window. The width of each window is determined by \code{tau}. \code{tau} is a
+##' fraction of the root to tip distance so a value of \code{tau = 0.01} bins the phylogeny
+##' into 100 time windows of equal width. 
+##'
+##' @return A \code{bammdata} object with a new component named "dtrates", which is a list with
+##' two or three components:	
+##' \item{tau}{the parameter value of \code{tau} used in the calculation.}
+##' \item{rates}{if \code{ephy$type = "trait"}: a numeric vector with the phenotypic rates of
+##' each segment on each branch. if \code{ephy$type = "diversification"}: a list with two
+##' components. The first component is a numeric vector of speciation rates. The second
+##' component is a numeric vector of extinction rates.}
+##' \item{tmat}{a matrix of the starting and ending times of the segments on each branch.
+##' Only if \code{tmat = TRUE}.}
+##'
+##' @note If there are zero length branches in the input tree \code{NA}s will result.
+##'
+##' @author Mike Grundler
+##'
+##' @seealso \code{\link{plot.bammdata}}
+##'
+##' @references \url{http://bamm-project.org}
+##'
+##' @examples
+##' \dontrun{
+##' data(whales, events.whales)
+##' ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
+##' 
+##' # use all posterior samples
+##' ed <- dtRates(ed, tau=0.01)
+##' 
+##' # use specified range of posterior samples
+##' ed <- dtRates(ed, tau=0.01, ism=50:150)}
+##' @export
 dtRates <- function (ephy, tau, ism = NULL, tmat = FALSE) {
     if (!"bammdata" %in% class(ephy)) {
         stop("Object ephy must be of class bammdata");

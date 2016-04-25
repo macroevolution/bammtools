@@ -73,6 +73,6 @@ Dan Rabosky
 \url{http://bamm-project.org}
 }
 \seealso{
-\link[BAMMtools]{maximumShiftCredibility}
+\code{\link{maximumShiftCredibility}}
 }
 
