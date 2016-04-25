@@ -4,7 +4,7 @@
 \alias{writeEventData}
 \title{Write a \code{bammdata} object to disk}
 \usage{
-writeEventData(ephy, outtreefile, outeventfile)
+writeEventData(ephy, outtreefile, outeventfile, ...)
 }
 \arguments{
 \item{ephy}{a \code{bammdata} object}

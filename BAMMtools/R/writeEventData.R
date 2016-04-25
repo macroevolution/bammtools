@@ -10,7 +10,7 @@
 ##'
 ##' @seealso \code{\link{subtreeBAMM}}
 ##' @export
-writeEventData <- function(ephy, outtreefile, outeventfile){
+writeEventData <- function(ephy, outtreefile, outeventfile, ...){
   
 	if(! "bammdata" %in% class(ephy)) {
 		stop("Input has to be a bammdata object.\n");
