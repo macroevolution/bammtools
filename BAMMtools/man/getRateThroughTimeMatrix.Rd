@@ -88,7 +88,7 @@ polygon(xv, yv, col='gray80', border=FALSE)
 ## Add the median rate line:
 lines(rmat$times, qq[2,], lwd=3, col='red')
 
-Add axes
+## Add axes
 axis(1, at=seq(-5, 35, by=5))
 axis(2, at=seq(-0.2, 1, by=0.2), las=1)
 
