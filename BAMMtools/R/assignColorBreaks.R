@@ -30,7 +30,7 @@
 ##'
 ##' @return A numeric vector of rate percentiles/intervals.
 ##'
-##' @author Mike Grundler, Pascal Titl
+##' @author Mike Grundler, Pascal Title
 ##'
 ##' @seealso \code{\link{plot.bammdata}}
 ##'
