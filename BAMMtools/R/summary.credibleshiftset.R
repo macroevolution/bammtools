@@ -75,4 +75,7 @@ summary.credibleshiftset <- function(object, ...) {
 	invisible(dd);
 }
 
-
+##' @export
+print.credibleshiftset <- function(x, ...){
+	summary.credibleshiftset(x, ...);
+}
