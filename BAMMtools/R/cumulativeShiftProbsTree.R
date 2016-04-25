@@ -14,6 +14,8 @@
 #					dynamics that are decoupled from the root of the tree 
 #							
 
+##' @export
+##' @rdname ShiftProbsTree
 cumulativeShiftProbsTree <- function(ephy) {
 	
 	if (!'bammdata' %in% class(ephy)) {
