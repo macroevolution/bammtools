@@ -33,7 +33,6 @@
 ##' @description Generates a plot of diversification or phenotypic rate through time
 ##' with confidence intervals.
 ##'
-##'
 ##' @param ephy object of class \code{bammdata} or \code{bamm-ratematrix}
 ##' @param useMedian a logical: will plot median if TRUE, mean if FALSE
 ##' @param intervals if NULL, no intervals will be plotted, otherwise a vector of
