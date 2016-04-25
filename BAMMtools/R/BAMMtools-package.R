@@ -31,4 +31,5 @@
 ##' @docType package
 ##' @useDynLib BAMMtools
 ##' @importFrom Rcpp evalCpp
+##' @import ape
 NULL
