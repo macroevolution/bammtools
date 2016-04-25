@@ -33,6 +33,7 @@
 ##' ed <- getEventData(whales, events.whales, nsamples = 500)
 ##' cset <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
 ##' summary(cset)}
+##' @rdname summary.credibleshiftset
 ##' @export
 summary.credibleshiftset <- function(object, ...) {
 
@@ -76,6 +77,7 @@ summary.credibleshiftset <- function(object, ...) {
 }
 
 ##' @export
+##' @rdname summary.credibleshiftset
 print.credibleshiftset <- function(x, ...){
 	summary.credibleshiftset(x, ...);
 }
