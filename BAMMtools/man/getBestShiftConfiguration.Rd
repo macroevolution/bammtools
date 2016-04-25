@@ -17,7 +17,7 @@ distinguishing between "core" and "non-core" rate shifts.}
 \value{
 A class \code{bammdata} object with a single sample, corresponding to the
 diversification rate shift configuration with the maximum a posteriori probability. See
-\link[BAMMtools]{getEventData} for details.
+\code{\link{getEventData}} for details.
 }
 \description{
 Get the rate shift configuration with the maximum a posteriori probability,
@@ -27,7 +27,7 @@ e.g., the shift configuration that was sampled most frequently with \code{BAMM}.
 This function estimates the rate shift configuration with the highest maximum
 a posteriori (MAP) probability. It returns a \code{bammdata} object with a single sample.
 This can be plotted with \link[BAMMtools]{plot.bammdata}, and individual rate shifts can
-then be added with \link[BAMMtools]{addBAMMshifts}. 
+then be added with \code{\link{addBAMMshifts}}. 
 
 The parameters of this object are averaged over all samples in the posterior that were
 assignable to the MAP shift configuration. All non-core shifts have been excluded, such that
