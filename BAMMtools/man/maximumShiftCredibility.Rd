@@ -16,7 +16,7 @@ branch-specific shifts}
 A list with the following components:
 
 \itemize{
-    \item{bestconfigs}{ A vector of the index values of MCMC samples with shift
+    \item{bestconfigs}{A vector of the index values of MCMC samples with shift
     configurations equal to the maximum. Usually, more than one state sampled during
     the MCMC simulation will have an identical (maximized) marginal probability. All
     samples given in this vector will have an identical shift configuration.}
