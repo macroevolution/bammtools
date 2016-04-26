@@ -1,7 +1,7 @@
 ##' @title Evaluate evidence for temporal rate variation across tree
 ##'
 ##' @description For each branch in a phylogenetic tree, evaluates the evidence (posterior
-##' probability or Bayes factor) that macroevolutionary rates have varied through time 
+##' probability or Bayes factor) that macroevolutionary rates have varied through time
 ##'
 ##' @param ephy an object of class \code{bammdata}.
 ##' @param prior_tv The prior probability that rate shifts lead to a new time-varying rate
