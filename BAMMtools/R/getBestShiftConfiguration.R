@@ -1,34 +1,42 @@
-##' @title Get the best (sampled) rate shift configuration from a BAMM analysis
+##' @title Get the best (sampled) rate shift configuration from a BAMM
+##'     analysis
 ##'
-##' @description Get the rate shift configuration with the maximum a posteriori probability,
-##' e.g., the shift configuration that was sampled most frequently with \code{BAMM}.
+##' @description Get the rate shift configuration with the maximum a
+##'     posteriori probability, e.g., the shift configuration that was sampled
+##'     most frequently with \code{BAMM}.
 ##'
-##' @param x either a \code{bammdata} object or a \code{credibleshiftset} object
-##' @param expectedNumberOfShifts The expected number of shifts under the prior
-##' @param threshold The marginal posterior-to-prior odds ratio used as a cutoff for
-##' distinguishing between "core" and "non-core" rate shifts.
+##' @param x Either a \code{bammdata} object or a \code{credibleshiftset}
+##'     object.
+##' @param expectedNumberOfShifts The expected number of shifts under the
+##'     prior.
+##' @param threshold The marginal posterior-to-prior odds ratio used as a
+##'     cutoff for distinguishing between "core" and "non-core" rate shifts.
 ##'
-##' @details This function estimates the rate shift configuration with the highest maximum
-##' a posteriori (MAP) probability. It returns a \code{bammdata} object with a single sample.
-##' This can be plotted with \link[BAMMtools]{plot.bammdata}, and individual rate shifts can
-##' then be added with \code{\link{addBAMMshifts}}. 
+##' @details This function estimates the rate shift configuration with the
+##'     highest maximum a posteriori (MAP) probability. It returns a
+##'     \code{bammdata} object with a single sample. This can be plotted with
+##'     \link[BAMMtools]{plot.bammdata}, and individual rate shifts can then
+##'     be added with \code{\link{addBAMMshifts}}. 
 ##'
-##' The parameters of this object are averaged over all samples in the posterior that were
-##' assignable to the MAP shift configuration. All non-core shifts have been excluded, such that
-##' the only shift information contained in the object is from the "significant" rate shifts, as
-##' determined by the relevant marginal posterior-to-prior odds ratio \code{threshold}.
+##'     The parameters of this object are averaged over all samples in the
+##'     posterior that were assignable to the MAP shift configuration. All
+##'     non-core shifts have been excluded, such that the only shift
+##'     information contained in the object is from the "significant" rate
+##'     shifts, as determined by the relevant marginal posterior-to-prior odds
+##'     ratio \code{threshold}.
 ##'
-##' You can extract the same information from the credible set of shift configurations. See
-##' \code{\link{credibleShiftSet}} for more information.
+##'     You can extract the same information from the credible set of shift
+##'     configurations. See \code{\link{credibleShiftSet}} for more
+##'     information.
 ##'
-##' @return A class \code{bammdata} object with a single sample, corresponding to the
-##' diversification rate shift configuration with the maximum a posteriori probability. See
-##' \code{\link{getEventData}} for details.
+##' @return A class \code{bammdata} object with a single sample, corresponding
+##'     to the diversification rate shift configuration with the maximum a
+##'     posteriori probability. See \code{\link{getEventData}} for details.
 ##'
 ##' @author Dan Rabosky
 ##'
-##' @seealso \link{getEventData},  \link{credibleShiftSet}, \link{plot.credibleshiftset},
-##' \link{plot.bammdata}
+##' @seealso \link{getEventData},  \link{credibleShiftSet},
+##'     \link{plot.credibleshiftset}, \link{plot.bammdata}
 ##'
 ##' @examples
 ##' \dontrun{
@@ -39,12 +47,13 @@
 ##' bp <- getBranchShiftPriors(whales, expectedNumberOfShifts = 1)
 ##' 
 ##' # Pass the event data object in to the function:
-##' best <- getBestShiftConfiguration(ed, expectedNumberOfShifts = 1, threshold = 5)
+##' best <- getBestShiftConfiguration(ed, expectedNumberOfShifts = 1,
+##'                                   threshold = 5)
 ##' plot.bammdata(best, lwd=2)
 ##' addBAMMshifts(best, cex=2)
 ##' 
 ##' # Now we can also work with the credible shift set:
-##' css <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5) 
+##' css <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
 ##' 
 ##' summary(css)
 ##' 
@@ -55,7 +64,8 @@
 ##' css$eventData[[1]];
 ##' 
 ##' # Get bammdata representation of MAP configuration:
-##' best <- getBestShiftConfiguration(css, expectedNumberOfShifts = 1, threshold = 5);
+##' best <- getBestShiftConfiguration(css, expectedNumberOfShifts = 1,
+##'                                   threshold = 5)
 ##' 
 ##' plot.bammdata(best)
 ##' addBAMMshifts(best)}

@@ -1,22 +1,26 @@
 ##' @title Create \code{bammdata} object from MCMC output
 ##'
-##' @description \code{getEventData} reads shift configuration data (the "event data" output)
+##' @description \code{getEventData} Reads shift configuration data (the "event data" output)
 ##' from a \code{BAMM} analysis and creates a \code{bammdata} object. The \code{bammdata}
 ##' object is fundamental for extracting information about macroevolutionary rate variation
 ##' through time and among lineages.
 ##'
-##' @param phy an object of class \code{phylo} - specifically, the time calibrated tree that
+##' @param phy An object of class \code{phylo} - specifically, the time calibrated tree that
 ##' was analyzed with \code{BAMM}. Alternatively, a character string specifying the path to
 ##' a newick-formatted tree.
-##' @param eventdata a character string specifying the path to a \code{BAMM} event-data
+##'
+##' @param eventdata A character string specifying the path to a \code{BAMM} event-data
 ##' file. Alternatively, an object of class \code{data.frame} that includes the event data
 ##' from a \code{BAMM} run.
+##'
 ##' @param burnin a numeric indicating the fraction of posterior samples to discard as burn-in.
 ##' @param nsamples an integer indicating the number of posterior samples to include in the
 ##' \code{bammdata} object. May be \code{NULL}.
-##' @param verbose a logical. If \code{TRUE} progess is outputted to the console. Defaults
+##'
+##' @param verbose A logical. If \code{TRUE} progess is outputted to the console. Defaults
 ##' to \code{FALSE}.
-##' @param type a character string. Either "diversification" or "trait" depending on your
+##'
+##' @param type A character string. Either "diversification" or "trait" depending on your
 ##' BAMM analysis.
 ##'
 ##' @details In the BAMM framework, an "event" defines a macroevolutionary process of
@@ -51,17 +55,17 @@
 ##' @return A list with many components:
 ##'
 ##' \itemize{
-##'     \item{edge}{See documentation for class \code{phylo} in package ape.}
-##'     \item{Nnode}{See documentation for class \code{phylo} in package ape.}
-##'     \item{tip.label}{See documentation for class \code{phylo} in package ape.}
-##'     \item{edge.length}{See documentation for class \code{phylo} in package ape.}
-##'     \item{begin}{The beginning time of each branch in absolute time (the root is set
+##'     \item{edge} {See documentation for class \code{phylo} in package ape.}
+##'     \item{Nnode} {See documentation for class \code{phylo} in package ape.}
+##'     \item{tip.label} {See documentation for class \code{phylo} in package ape.}
+##'     \item{edge.length} {See documentation for class \code{phylo} in package ape.}
+##'     \item{begin} {The beginning time of each branch in absolute time (the root is set
 ##'     to time zero)}
-##'     \item{end}{The ending time of each branch in absolute time.}
-##'     \item{numberEvents}{An integer vector with the number of events contained in
+##'     \item{end} {The ending time of each branch in absolute time.}
+##'     \item{numberEvents} {An integer vector with the number of events contained in
 ##'     \code{phy} for each posterior sample. The length of this vector is equal to the
 ##'     number of posterior samples in the \code{bammdata} object.}
-##'     \item{eventData}{A list of dataframes. Each element is a single posterior sample.
+##'     \item{eventData} {A list of dataframes. Each element is a single posterior sample.
 ##'     Each row in a dataframe holds the data for a single event. Data associated with an
 ##'     event are: \code{node} - a node number. This identifies the branch where the event
 ##'     originates. \code{time} - this is the absolute time on that branch where the event
@@ -69,36 +73,36 @@
 ##'     trait evolution. \code{lam2} - a decay/growth parameter. \code{mu1} - an initial
 ##'     rate of extinction. \code{mu2} - a decay/growth parameter. \code{index} - a unique
 ##'     integer associated with the event. See 'Details'.}
-##'     \item{eventVectors}{A list of integer vectors. Each element is a single posterior
+##'     \item{eventVectors} {A list of integer vectors. Each element is a single posterior
 ##'     sample. For each branch in \code{phy} the index of the event that occurs along
 ##'     that branch. Branches are ordered increasing here and elsewhere.}
-##'     \item{eventBranchSegs}{A list of matrices. Each element is a single posterior sample.
+##'     \item{eventBranchSegs} {A list of matrices. Each element is a single posterior sample.
 ##'     Each matrix has four columns: \code{Column 1} identifies a node in \code{phy}. 
 ##'     \code{Column 2} identifies the beginning time of the branch or segment of the branch
 ##'     that subtends the node in \code{Column 1}. \code{Column 3} identifies the ending
 ##'     time of the branch or segment of the branch that subtends the node in \code{Column 1}. 
 ##'     \code{Column 4} identifies the index of the event that occurs along the branch or
 ##'     segment of the branch that subtends the node in \code{Column 1}.}
-##'     \item{tipStates}{A list of integer vectors. Each element is a single posterior sample.
+##'     \item{tipStates} {A list of integer vectors. Each element is a single posterior sample.
 ##'     For each tip the index of the event that occurs along the branch subtending the tip.
 ##'     Tips are ordered increasing here and elsewhere.}
-##'     \item{tipLambda}{A list of numeric vectors. Each element is a single posterior sample.
+##'     \item{tipLambda} {A list of numeric vectors. Each element is a single posterior sample.
 ##'     For each tip the rate of speciation or trait evolution at the end of 
 ##'     the terminal branch subtending that tip.}
-##'     \item{tipMu}{A list of numeric vectors. Each element is a single posterior sample.
+##'     \item{tipMu} {A list of numeric vectors. Each element is a single posterior sample.
 ##'     For each tip the rate of extinction at the end of the terminal branch
 ##'     subtending that tip. Meaningless if working with \code{BAMM} trait results.}
-##'     \item{meanTipLambda}{For each tip the mean of the marginal posterior density of the
+##'     \item{meanTipLambda} {For each tip the mean of the marginal posterior density of the
 ##'     rate of speciation or trait evolution at the end of the terminal branch subtending
 ##'     that tip.}
-##'     \item{meanTipMu}{For each tip the mean of the marginal posterior density of the rate
+##'     \item{meanTipMu} {For each tip the mean of the marginal posterior density of the rate
 ##'     of extinction at the end of the terminal branch subtending that tip. Meaningless if
 ##'     working with BAMM trait results.}
-##'     \item{type}{A character string. Either "diversification" or "trait" depending on
+##'     \item{type} {A character string. Either "diversification" or "trait" depending on
 ##'     your BAMM analysis.}
-##'     \item{downseq}{An integer vector holding the nodes of \code{phy}. The order corresponds
+##'     \item{downseq} {An integer vector holding the nodes of \code{phy}. The order corresponds
 ##'     to the order in which nodes are visited by a pre-order tree traversal.}
-##'     \item{lastvisit}{An integer vector giving the index of the last node visited by the
+##'     \item{lastvisit} {An integer vector giving the index of the last node visited by the
 ##'     node in the corresponding position in \code{downseq}. \code{downseq} and
 ##'     \code{lastvisit} can be used to quickly retrieve the descendants of any node. e.g.
 ##'     the descendants of node 89 can be found by 

@@ -5,7 +5,7 @@
 \title{Plot \code{BAMM}-estimated macroevolutionary rates on a phylogeny}
 \source{
 \url{http://colorbrewer2.org},
-\url{http://geography.uoregon.edu/datagraphics/color_scales.htm}
+    \url{http://geography.uoregon.edu/datagraphics/color_scales.htm}
 }
 \usage{
 \method{plot}{bammdata}(x, tau = 0.01, method = "phylogram", xlim = NULL,
@@ -16,180 +16,207 @@
   JenksSubset = 20000, par.reset = FALSE, direction = "rightwards", ...)
 }
 \arguments{
-\item{x}{an object of class \code{bammdata}.}
+\item{x}{An object of class \code{bammdata}.}
 
-\item{tau}{a numeric indicating the grain size for the calculations. See documentation
-for \code{\link{dtRates}}.}
+\item{tau}{A numeric indicating the grain size for the calculations. See
+documentation for \code{\link{dtRates}}.}
 
-\item{method}{a character string indicating the method for plotting the phylogenetic tree. 
-\code{method = "phylogram"} (default) plots the phylogenetic tree using rectangular 
-coordinates. \code{method = "polar"} plots the phylogenetic tree using polar coordinates.}
+\item{method}{A character string indicating the method for plotting the
+phylogenetic tree. \code{method = "phylogram"} (default) plots the
+phylogenetic tree using rectangular coordinates.
+\code{method = "polar"} plots the phylogenetic tree using polar
+coordinates.}
 
-\item{xlim}{a numeric vector of coordinates for the x-axis endpoints. Defaults to
-\code{NULL}, in which case they are calculated automatically. The x-axis corresponds to
-time when the phylogeny is plotted facing to the left or to the right. The time at the
-root equals zero.}
+\item{xlim}{A numeric vector of coordinates for the x-axis endpoints.
+Defaults to \code{NULL}, in which case they are calculated
+automatically. The x-axis corresponds to time when the phylogeny is
+plotted facing to the left or to the right. The time at the root
+equals zero.}
 
-\item{ylim}{a numeric vector of coordinates for the y-axis endpoints. Defaults to
-\code{NULL}, in which case they are calculated automatically. Tips are plotted at integer
-values beginning from zero and stepping by one when the phylogeny is plotted facing to the
-left or to the right.}
+\item{ylim}{A numeric vector of coordinates for the y-axis endpoints.
+Defaults to \code{NULL}, in which case they are calculated
+automatically. Tips are plotted at integer values beginning from zero
+and stepping by one when the phylogeny is plotted facing to the left
+or to the right.}
 
-\item{vtheta}{a numeric indicating the angular separation (in degrees) of the first and last
-terminal nodes. Ignored if \code{method = "phylogram"}.}
+\item{vtheta}{A numeric indicating the angular separation (in degrees) of
+the first and last terminal nodes. Ignored if
+\code{method = "phylogram"}.}
 
-\item{rbf}{a numeric indicating the length of the root branch as a fraction of total tree
-height. Ignored if \code{method = "phylogram"}.}
+\item{rbf}{a numeric indicating the length of the root branch as a
+fraction of total tree height. Ignored if \code{method = "phylogram"}.}
 
-\item{show}{a logical indicating whether or not to plot the tree. Defaults to \code{TRUE}.}
+\item{show}{A logical indicating whether or not to plot the tree. Defaults
+to \code{TRUE}.}
 
-\item{labels}{a logical indicating whether or not to plot the tip labels. Defaults to
+\item{labels}{A logical indicating whether or not to plot the tip labels.
+Defaults to \code{FALSE}.}
+
+\item{legend}{A logical indicating whether or not to plot a legend for
+interpreting the mapping of evolutionary rates to colors. Defaults to
 \code{FALSE}.}
 
-\item{legend}{a logical indicating whether or not to plot a legend for interpreting the 
-mapping of evolutionary rates to colors. Defaults to \code{FALSE}.}
+\item{spex}{A character string indicating what type of macroevolutionary
+rates should be plotted. "s" (default) indicates speciation rates, "e"
+indicates extinction rates, and "netdiv" indicates net diversification
+rates. Ignored if \code{ephy$type = "trait"}.}
 
-\item{spex}{a character string indicating what type of macroevolutionary rates should be
-plotted. "s" (default) indicates speciation rates, "e" indicates extinction rates, and
-"netdiv" indicates net diversification rates. Ignored if \code{ephy$type = "trait"}.}
+\item{lwd}{A numeric specifying the line width for branches.}
 
-\item{lwd}{a numeric specifying the line width for branches.}
+\item{cex}{A numeric specifying the size of tip labels.}
 
-\item{cex}{a numeric specifying the size of tip labels.}
+\item{pal}{A character string or vector of mode character that describes
+the color palette. See Details for explanation of options.}
 
-\item{pal}{a character string or vector of mode character that describes the color
-palette. See Details for explanation of options.}
+\item{mask}{An optional integer vector of node numbers specifying branches
+that will be masked with \code{mask.color} when plotted.}
 
-\item{mask}{an optional integer vector of node numbers specifying branches that will be
-masked with \code{mask.color} when plotted.}
+\item{mask.color}{The color for the mask.}
 
-\item{mask.color}{the color for the mask.}
+\item{colorbreaks}{A numeric vector of percentiles delimiting the bins for
+mapping rates to colors. If \code{NULL} (default) bins are calculated
+from the rates that are passed with the \code{bammdata} object.}
 
-\item{colorbreaks}{a numeric vector of percentiles delimiting the bins for mapping rates
-to colors. If \code{NULL} (default) bins are calculated from the rates that are passed
-with the \code{bammdata} object.}
+\item{logcolor}{Should colors be plotted on a log scale.}
 
-\item{logcolor}{should colors be plotted on a log scale.}
-
-\item{breaksmethod}{method used for determining color breaks. See help file for
-\code{\link{assignColorBreaks}}.}
-
-\item{color.interval}{Min and max value for the mapping of rates. If \code{NULL}, then
-min and max are inferred from the data. NA can also be supplied for one of the two
-values. See details.}
-
-\item{JenksSubset}{If \code{breaksmethod = "jenks"}, the number of regularly spaced
-samples to subset from the full rates vector. Only relevant for large datasets. See help
+\item{breaksmethod}{Method used for determining color breaks. See help
 file for \code{\link{assignColorBreaks}}.}
 
-\item{par.reset}{a logical indicating whether or not to reset the graphical parameters
-when the function exits. Defaults to \code{FALSE}.}
+\item{color.interval}{Min and max value for the mapping of rates. If
+\code{NULL}, then min and max are inferred from the data. NA can also
+be supplied for one of the two values. See details.}
 
-\item{direction}{a character string. Options are "rightwards", "leftwards", "upwards",
-and "downwards", which determine the orientation of the tips when the phylogeny plotted.}
+\item{JenksSubset}{If \code{breaksmethod = "jenks"}, the number of
+regularly spaced samples to subset from the full rates vector. Only
+relevant for large datasets. See help file for
+\code{\link{assignColorBreaks}}.}
 
-\item{\dots}{further arguments passed to \code{par}.}
+\item{par.reset}{A logical indicating whether or not to reset the
+graphical parameters when the function exits. Defaults to
+\code{FALSE}.}
+
+\item{direction}{A character string. Options are "rightwards",
+"leftwards", "upwards", and "downwards", which determine the
+orientation of the tips when the phylogeny plotted.}
+
+\item{\dots}{Further arguments passed to \code{par}.}
 }
 \value{
 Returns (invisibly) a list with three components. 
-
-\itemize{
-    \item{coords}{A matrix of plot coordinates. Rows correspond to branches. Columns 1-2
-    are starting (x,y) coordinates of each branch and columns 3-4 are ending (x,y)
-    coordinates of each branch. If \code{method = "polar"} a fifth column gives the angle
-    (in radians) of each branch.}
-    \item{colorbreaks}{A vector of percentiles used to group macroevolutionary rates into
-    color bins.}
-    \item{colordens}{A matrix of the kernel density estimates (column 2) of evolutionary
-    rates (column 1) and the color (column 3) corresponding to each rate value.}
-}
+    \itemize{
+        \item{coords} {A matrix of plot coordinates. Rows correspond to
+            branches. Columns 1-2 are starting (x,y) coordinates of each
+            branch and columns 3-4 are ending (x,y) coordinates of each
+            branch. If \code{method = "polar"} a fifth column gives the
+            angle(in radians) of each branch.}
+        \item{colorbreaks} {A vector of percentiles used to group
+            macroevolutionary rates into color bins.}
+        \item{colordens} {A matrix of the kernel density estimates (column
+            2) of evolutionary rates (column 1) and the color (column 3)
+            corresponding to each rate value.}
+    }
 }
 \description{
-\code{plot.bammdata} plots a phylogenetic tree from a \code{bammdata} object
-and colors each branch by the estimated rate of speciation, extinction, or trait
-evolution. Rates are not assumed to be constant in time, and the function can plot
-continuously-varying rates along individual branches.
+\code{plot.bammdata} plots a phylogenetic tree from a
+    \code{bammdata} object and colors each branch by the estimated rate of
+    speciation, extinction, or trait evolution. Rates are not assumed to
+    be constant in time, and the function can plot continuously-varying
+    rates along individual branches.
 }
 \details{
-To calculate rates, each branch of the phylogeny is discretized into a number of
-small segments, and the mean of the marginal posterior density of the rate of
-speciation/extinction or trait evolution is calculated for each such segment. Rates are
-mapped to colors such that cool colors represent slow rates and warm colors represent fast
-rates. When the tree is plotted each of these small segments is plotted so that changes in
-rates through time and shifts in rates are visible as gradients of color. The \code{spex}
-argument determines the type of rate that will be calculated. \code{spex = "s"} will plot
-speciation rates, \code{spex = "e"} will plot extinction rates, and \code{spex = "netdiv"}
-will plot diversification rates (speciation - extinction). Note that if
-\code{x$type = "trait"} the \code{spex} argument is ignored and rates of phenotypic
-evolution are plotted instead. If \code{legend = TRUE} the function will plot a legend
-that contains the mapping of colors to numerical values.  
+To calculate rates, each branch of the phylogeny is discretized
+    into a number of small segments, and the mean of the marginal
+    posterior density of the rate of speciation/extinction or trait
+    evolution is calculated for each such segment. Rates are mapped to
+    colors such that cool colors represent slow rates and warm colors
+    represent fast rates. When the tree is plotted each of these small
+    segments is plotted so that changes in rates through time and shifts
+    in rates are visible as gradients of color. The \code{spex} argument
+    determines the type of rate that will be calculated. \code{spex = "s"}
+    will plot speciation rates, \code{spex = "e"} will plot extinction
+    rates, and \code{spex = "netdiv"} will plot diversification rates
+    (speciation - extinction). Note that if \code{x$type = "trait"} the
+    \code{spex} argument is ignored and rates of phenotypic evolution are
+    plotted instead. If \code{legend = TRUE} the function will plot a
+    legend that contains the mapping of colors to numerical values.  
 
-A number of color palettes come built in with BAMMtools. Color-blind friendly options
-include:
-\itemize{
-\item{BrBG}
-\item{PiYG}
-\item{PRGn}
-\item{PuOr}
-\item{RdBu}
-\item{RdYlBu}
-\item{BuOr}
-\item{BuOrRd}
-\item{DkRdBu}
-\item{BuDkOr}
-\item{GnPu}
-}
-Some color-blind unfriendly options include:
-\itemize{
-\item{RdYlGn}
-\item{Spectral}
-\item{temperature}
-\item{terrain}
-}
-Some grayscale options include:
-\itemize{
-\item{grayscale}
-\item{revgray}
-}
-For more information about these color palettes visit \url{http://colorbrewer2.org} and
-\url{http://geography.uoregon.edu/datagraphics/color_scales.htm} or use the help files
-of the R packages \code{RColorBrewer} and \code{dichromat}.
+    A number of color palettes come built in with BAMMtools. Color-blind
+    friendly options include:
+    \itemize{
+        \item{BrBG}
+        \item{PiYG}
+        \item{PRGn}
+        \item{PuOr}
+        \item{RdBu}
+        \item{RdYlBu}
+        \item{BuOr}
+        \item{BuOrRd}
+        \item{DkRdBu}
+        \item{BuDkOr}
+        \item{GnPu}
+    }
+    Some color-blind unfriendly options include:
+    \itemize{
+        \item{RdYlGn}
+        \item{Spectral}
+        \item{temperature}
+        \item{terrain}
+    }
+    Some grayscale options include:
+    \itemize{
+        \item{grayscale}
+        \item{revgray}
+    }
+    For more information about these color palettes visit
+    \url{http://colorbrewer2.org} and
+    \url{http://geography.uoregon.edu/datagraphics/color_scales.htm} or
+    use the help files of the R packages \code{RColorBrewer} and
+    \code{dichromat}.
 
-Additionally, any vector of valid named colors may also be used. The only restriction is
-that the length of this vector be greater than or equal to three (you can provide a single
-color, but in this case the entire tree will be assigned the same color). The colors should
-be ordered from cool to warm as the colors will be mapped from low rates to high rates in
-the order supplied (e.g. \code{pal=c("darkgreen","yellow2","red")}). The option
-\code{pal = "temperature"} uses the \code{rich.colors} function written by Arni Magnusson
-for the R package \code{gplots}.
+    Additionally, any vector of valid named colors may also be used. The
+    only restriction is that the length of this vector be greater than or
+    equal to three (you can provide a single color, but in this case the
+    entire tree will be assigned the same color). The colors should be
+    ordered from cool to warm as the colors will be mapped from low rates
+    to high rates in the order supplied (e.g. \code{pal=c("darkgreen",
+    "yellow2", "red")}). The option \code{pal = "temperature"} uses the
+    \code{rich.colors} function written by Arni Magnusson for the R
+    package \code{gplots}.
 
-Internally \code{plot.bammdata} checks whether or not rates have been calculated by looking
-for a component named "dtrates" in the \code{bammdata} object. If rates have not been
-calculated \code{plot.bammdata} calls \code{dtRates} with \code{tau}. Specifying smaller
-values for \code{tau} will result in smoother-looking rate changes on the tree. Note that
-smaller values of \code{tau} require more computation. If the \code{colorbreaks} argument
-is \code{NULL} a map of rates to colors is also made by calling \code{assignColorBreaks}
-with \code{NCOLORS = 64}. A user supplied \code{colorbreaks} argument can be passed as well.
-This allows one to plot parts of a tree while preserving the map of rates to colors that
-was made using rates for the entire tree.
+    Internally \code{plot.bammdata} checks whether or not rates have been
+    calculated by looking for a component named "dtrates" in the
+    \code{bammdata} object. If rates have not been calculated
+    \code{plot.bammdata} calls \code{dtRates} with \code{tau}. Specifying
+    smaller values for \code{tau} will result in smoother-looking rate
+    changes on the tree. Note that smaller values of \code{tau} require
+    more computation. If the \code{colorbreaks} argument
+    is \code{NULL} a map of rates to colors is also made by calling
+    \code{assignColorBreaks} with \code{NCOLORS = 64}. A user supplied
+    \code{colorbreaks} argument can be passed as well. This allows one to
+    plot parts of a tree while preserving the map of rates to colors that
+    was made using rates for the entire tree.
 
-If color.interval is defined, then those min and max values override the automatic detection
-of min and max. This might be useful if some small number of lineages have very high or very
-low rates, such that the map of colors is being skewed towards these extremes, resulting in
-other rate variation being drowned out. If specified, the color ramp will be built between
-these two color.interval values, and the rates outside of the color interval range will be
-set to the highest and lowest color. 
+    If color.interval is defined, then those min and max values override
+    the automatic detection of min and max. This might be useful if some
+    small number of lineages have very high or very low rates, such that
+    the map of colors is being skewed towards these extremes, resulting in
+    other rate variation being drowned out. If specified, the color ramp
+    will be built between these two color.interval values, and the rates
+    outside of the color interval range will be set to the highest and
+    lowest color. 
 
-If \code{plot.bammdata} is called repeatedly with the same \code{bammdata} object,
-computation can be reduced by first calling \code{dtRates} in the global environment.
+    If \code{plot.bammdata} is called repeatedly with the same
+    \code{bammdata} object, computation can be reduced by first calling
+    \code{dtRates} in the global environment.
 }
 \examples{
 \dontrun{
 data(whales, events.whales)
 ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 
-# the first call to plot.bammdata. No calculations or assignments of rates have been made
-plot(ed, lwd = 3, spex = "s") #internally calls dtRates and assignColorBreaks
+# The first call to plot.bammdata
+# No calculations or assignments of rates have been made
+plot(ed, lwd = 3, spex = "s") # calls dtRates & assignColorBreaks
 
 # Compare the different color breaks methods
 par(mfrow=c(1,3))
@@ -216,7 +243,8 @@ title(main="jenks")
 ## distinct from the original
 # plot(sed, lwd = 3)
 #
-## if you want to change the value of tau and the rates to colors map for the entire tree
+## if you want to change the value of tau and the rates to colors map for
+## the entire tree
 # ed <- dtRates(ed, tau = 0.002)
 # xx <- plot(ed, lwd = 3, spex = "s")
 ## now you can re-plot the subtrees using this finer tau partition
@@ -231,7 +259,8 @@ title(main="jenks")
 # par(mfrow=c(2,3))
 # samples <- sample(1:length(ed$eventData), 6)
 # ed <- dtRates(ed, 0.005)
-# xx <- plot(ed, show=FALSE) #individual plots will have a color map relative to the mean
+# individual plots will have a color map relative to the mean
+# xx <- plot(ed, show=FALSE)
 # for (i in 1:6) {
 # 	ed <- dtRates(ed, 0.005, samples[i])
 # 	plot(ed, colorbreaks=xx$colorbreaks)
@@ -253,7 +282,8 @@ title(main="jenks")
 Mike Grundler, Pascal Title
 }
 \seealso{
-\code{\link{dtRates}}, \code{\link{addBAMMshifts}}, \code{\link{assignColorBreaks}},
-\code{\link{subtreeBAMM}}, \code{\link{colorRampPalette}}
+\code{\link{dtRates}}, \code{\link{addBAMMshifts}},
+    \code{\link{assignColorBreaks}}, \code{\link{subtreeBAMM}},
+    \code{\link{colorRampPalette}}
 }
 

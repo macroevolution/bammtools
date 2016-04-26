@@ -14,104 +14,117 @@ plotRateThroughTime(ephy, useMedian = TRUE, intervals = seq(from = 0, to =
   add = FALSE, axis.labels = TRUE)
 }
 \arguments{
-\item{ephy}{object of class \code{bammdata} or \code{bamm-ratematrix}}
+\item{ephy}{Object of class \code{bammdata} or \code{bamm-ratematrix}.}
 
-\item{useMedian}{a logical: will plot median if TRUE, mean if FALSE}
+\item{useMedian}{A logical: will plot median if \code{TRUE}, mean if
+\code{FALSE}.}
 
-\item{intervals}{if NULL, no intervals will be plotted, otherwise a vector of
-quantiles must be supplied (these will define shaded polygons)}
+\item{intervals}{If \code{NULL}, no intervals will be plotted, otherwise a
+vector of quantiles must be supplied (these will define shaded
+polygons).}
 
-\item{ratetype}{if 'auto', defaults to speciation (for diversification) or beta
-(for traits). Can alternatively specify 'netdiv' or 'extinction'.}
+\item{ratetype}{If 'auto', defaults to speciation (for diversification) or
+beta (for traits). Can alternatively specify 'netdiv' or 'extinction'.}
 
-\item{nBins}{number of time slices used to generate rates through time.}
+\item{nBins}{Number of time slices used to generate rates through time.}
 
-\item{smooth}{a logical: whether or not to apply loess smoothing.}
+\item{smooth}{A logical: whether or not to apply loess smoothing.}
 
-\item{smoothParam}{loess smoothing parameter, ignored if smooth = FALSE.}
+\item{smoothParam}{Loess smoothing parameter, ignored if
+\code{smooth = FALSE}.}
 
-\item{opacity}{opacity of color for interval polygons.}
+\item{opacity}{Opacity of color for interval polygons.}
 
-\item{intervalCol}{color for interval polygons.}
+\item{intervalCol}{Color for interval polygons.}
 
-\item{avgCol}{color for mean/median line (line will not be plotted if
+\item{avgCol}{Color for mean/median line (line will not be plotted if
 \code{avgCol = NULL}).}
 
-\item{start.time}{start time (in units before present). If NULL, starts at root.}
+\item{start.time}{Start time (in units before present). If \code{NULL},
+starts at root.}
 
-\item{end.time}{end time (in units before present). If NULL, ends at present.}
+\item{end.time}{End time (in units before present). If \code{NULL}, ends
+at present.}
 
-\item{node}{if supplied, the clade descended from this node will be used or
-ignored, depending on \code{nodetype}.}
+\item{node}{If supplied, the clade descended from this node will be used
+or ignored, depending on \code{nodetype}.}
 
-\item{nodetype}{if 'include', rates will be plotted only for the clade descended
-from \code{node}. If 'exclude', the clade descended from \code{node} will be
-left out of the calculation of rates.}
+\item{nodetype}{If 'include', rates will be plotted only for the clade
+descended from \code{node}. If 'exclude', the clade descended from
+\code{node} will be left out of the calculation of rates.}
 
-\item{plot}{a logical: if TRUE, a plot will be returned, if FALSE, the data
-for the plot will be returned.}
+\item{plot}{A logical: if \code{TRUE}, a plot will be returned, if
+\code{FALSE}, the data for the plot will be returned.}
 
-\item{cex.axis}{size of axis tick labels.}
+\item{cex.axis}{Size of axis tick labels.}
 
-\item{cex.lab}{size of axis labels.}
+\item{cex.lab}{Size of axis labels.}
 
-\item{lwd}{line width of the average rate.}
+\item{lwd}{Line width of the average rate.}
 
-\item{xline}{margin line for placing x-axis label.}
+\item{xline}{Margin line for placing x-axis label.}
 
-\item{yline}{margin line for placing y-axis label.}
+\item{yline}{Margin line for placing y-axis label.}
 
-\item{mar}{passed to \code{par()} to set plot margins.}
+\item{mar}{Passed to \code{par()} to set plot margins.}
 
-\item{xticks}{number of ticks on the x-axis, automatically inferred if \code{NULL}.}
+\item{xticks}{Number of ticks on the x-axis, automatically inferred if
+\code{NULL}.}
 
-\item{yticks}{number of ticks on the y-axis, automatically inferred if \code{NULL}.}
+\item{yticks}{Number of ticks on the y-axis, automatically inferred if
+\code{NULL}.}
 
-\item{xlim}{vector of length 2 with min and max times for x axis. X axis is
-time since present, so if plotting till the present, \code{xlim[2]==0}. Can
-also be 'auto'.}
+\item{xlim}{Vector of length 2 with min and max times for x axis. X axis
+is time since present, so if plotting till the present,
+\code{xlim[2]==0}. Can also be 'auto'.}
 
-\item{ylim}{vector of length 2 with min and max rates for y axis. Can also be 'auto'.}
+\item{ylim}{Vector of length 2 with min and max rates for y axis. Can also
+be 'auto'.}
 
-\item{add}{a logical: should rates be added to an existing plot.}
+\item{add}{A logical: should rates be added to an existing plot.}
 
-\item{axis.labels}{a logical: if TRUE, axis labels will be plotted.}
+\item{axis.labels}{A logical: if TRUE, axis labels will be plotted.}
 }
 \value{
-If \code{plot = FALSE}, then a list is returned with the following components:
-
-\itemize{
-    \item{poly}{a list of matrices, where each matrix contains the coordinates that 
-    define each overlapping confidence interval polygon.}
-    \item{avg}{a vector of y-coordinates for mean or median rates used to plot 
-    the average rates line.}
-    \item{times}{a vector of time values, used as x-coordinates in this plot function.}
-}
+If \code{plot = FALSE}, then a list is returned with the following
+    components:
+    \itemize{
+        \item{poly} {A list of matrices, where each matrix contains the
+            coordinates that define each overlapping confidence interval
+            polygon.}
+        \item{avg} {A vector of y-coordinates for mean or median rates
+            used to plot the average rates line.}
+        \item{times} {A vector of time values, used as x-coordinates in
+            this plot function.}
+    }
 }
 \description{
-Generates a plot of diversification or phenotypic rate through time
-with confidence intervals.
+Generates a plot of diversification or phenotypic rate through
+    time with confidence intervals.
 }
 \details{
-If the input \code{ephy} object has been generated by \code{\link{getEventData}} and 
-is of class \code{bammdata}, then \code{start.time}, \code{end.time}, \code{node} 
-and \code{nodetype} can be specified. 
-If the input \code{ephy} object has been generated 
-by \code{\link{getRateThroughTimeMatrix}} and 
-is of class \code{bamm-ratematrix}, then those arguments cannot be specified because they 
-are needed to generate the rate matrix, which in this case has already happened. 
+If the input \code{ephy} object has been generated by
+    \code{\link{getEventData}} and is of class \code{bammdata}, then
+    \code{start.time}, \code{end.time}, \code{node}, and \code{nodetype}
+    can be specified. If the input \code{ephy} object has been generated
+    by \code{\link{getRateThroughTimeMatrix}} and is of class
+    \code{bamm-ratematrix}, then those arguments cannot be specified
+    because they are needed to generate the rate matrix, which in this
+    case has already happened. 
 
-The user has complete control of the plotting of the confidence intervals. 
-Confidence intervals will not be plotted at all if \code{intervals=NULL}. 
-If a single confidence interval polygon is desired, rather than overlapping polygons, 
-then \code{intervals} can specify the confidence interval bounds, and \code{opacity} 
-should be set to 1 (see examples).
+    The user has complete control of the plotting of the confidence
+    intervals. Confidence intervals will not be plotted at all if
+    \code{intervals=NULL}. If a single confidence interval polygon is
+    desired, rather than overlapping polygons, then \code{intervals} can
+    specify the confidence interval bounds, and \code{opacity} should be
+    set to 1 (see examples).
 
-If working with a large dataset, we recommend first creating a \code{bamm-ratematrix} 
-object with \code{\link{getRateThroughTimeMatrix}} and then using that object as input 
-for \code{plotRateThroughTime}. This way, the computation of rates has already happened 
-and will not slow the plotting function down, making it easier to adjust 
-plotting parameters.
+    If working with a large dataset, we recommend first creating a
+    \code{bamm-ratematrix} object with
+    \code{\link{getRateThroughTimeMatrix}} and then using that object as
+    input for \code{plotRateThroughTime}. This way, the computation of
+    rates has already happened and will not slow the plotting function
+    down, making it easier to adjust plotting parameters.
 }
 \examples{
 \dontrun{
@@ -123,14 +136,16 @@ ephy <- getEventData(whales,events.whales)
 plotRateThroughTime(ephy)
 
 ## Plot two processes separately with 90\% CI and loess smoothing
-plotRateThroughTime(ephy, intervals=seq(from=0,0.9,by=0.01), smooth=TRUE, 
-    node=141, nodetype='exclude', ylim=c(0,1.2))
+plotRateThroughTime(ephy, intervals=seq(from=0,0.9,by=0.01), smooth=TRUE,
+                    node=141, nodetype='exclude', ylim=c(0,1.2))
 
 plotRateThroughTime(ephy, intervals=seq(from=0,0.9,by=0.01), smooth=TRUE, 
-    node=141, nodetype='include', add=TRUE, intervalCol='orange')
+                    node=141, nodetype='include', add=TRUE,
+                    intervalCol='orange')
 
 legend('topleft', legend=c('Dolphins','Whales'), col='red',
-    fill=c('orange','blue'), border=FALSE, lty=1, lwd=2, merge=TRUE, seg.len=0.6)
+    fill=c('orange','blue'), border=FALSE, lty=1, lwd=2, merge=TRUE,
+           seg.len=0.6)
 
 ## Same plot, but from bamm-ratematrix objects
 rmat1 <- getRateThroughTimeMatrix(ephy, node=141, nodetype='exclude')
@@ -149,15 +164,15 @@ plotRateThroughTime(ephy,useMedian=FALSE, intervals=NULL)
 plotRateThroughTime(ephy,useMedian=FALSE, intervals=c(0.05,0.95),
     intervalCol='gray70', avgCol='black', opacity=1)
 
-## To not plot, but instead return the plotting data generated in this function,
-## we can make plot=FALSE
+## To not plot, but instead return the plotting data generated in this
+## function, we can make plot=FALSE
 plotRateThroughTime(ephy, plot=FALSE)}
 }
 \author{
 Pascal Title
 }
 \seealso{
-See \code{\link{getEventData}} and \code{\link{getRateThroughTimeMatrix}} to
-generate input data.
+See \code{\link{getEventData}} and
+    \code{\link{getRateThroughTimeMatrix}} to generate input data.
 }
 

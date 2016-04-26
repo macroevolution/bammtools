@@ -7,7 +7,7 @@
 getCladeRates(ephy, node = NULL, nodetype = "include", verbose = FALSE)
 }
 \arguments{
-\item{ephy}{An object of class \code{bammdata}}
+\item{ephy}{An object of class \code{bammdata}.}
 
 \item{node}{If computing rates for a specific portion of tree, the node subtending the relevant
 subtree. If multiple nodes are supplied, then the equivalent number of \code{nodetype} must be
@@ -26,11 +26,11 @@ each sample from posterior. Potentially useful for extremely large trees.}
 A list with the following components:
 
 \itemize{
-    \item{lambda}{A vector of speciation rates (if applicable), with the i'th rate
+    \item{lambda} {A vector of speciation rates (if applicable), with the i'th rate
     corresponding to the mean rate from the i'th sample in the posterior}
-    \item{mu}{A vector of extinction rates (if applicable), with the i'th rate corresponding
+    \item{mu} {A vector of extinction rates (if applicable), with the i'th rate corresponding
     to the mean rate from the i'th sample in the posterior}
-    \item{beta}{A vector of phenotypic rates (if applicable), with the i'th rate
+    \item{beta} {A vector of phenotypic rates (if applicable), with the i'th rate
     corresponding to the mean rate from the i'th sample in the posterior}
 }
 }

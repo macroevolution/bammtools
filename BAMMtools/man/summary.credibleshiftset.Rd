@@ -3,36 +3,41 @@
 \name{summary.credibleshiftset}
 \alias{print.credibleshiftset}
 \alias{summary.credibleshiftset}
-\title{Summary of credible set of shift configurations from a \code{BAMM} analysis.}
+\title{Summary of credible set of shift configurations from a \code{BAMM}
+    analysis}
 \usage{
 \method{summary}{credibleshiftset}(object, ...)
 
 \method{print}{credibleshiftset}(x, ...)
 }
 \arguments{
-\item{object, x}{an object of class \code{credibleshiftset}.}
+\item{object, x}{An object of class \code{credibleshiftset}.}
 
-\item{...}{additional arguments (unused).}
+\item{\dots}{Additional arguments (unused).}
 }
 \value{
-\code{summary.credibleshiftset} returns (invisibly) a dataframe with a
-number of rows equal to the number of shift configurations in the credible set
-and four columns:
-\item{rank}{The ranked index of each shift configuration (ranked by posterior probability)}
-\item{probability}{the posterior probability of each shift configuration}
-\item{cumulative}{the cumulative probability of each shift configuration}
-\item{N_shifts}{the number of rate shifts in each shift configuration (can be zero).}
+\code{summary.credibleshiftset} returns (invisibly) a dataframe
+    with a number of rows equal to the number of shift configurations in
+    the credible set and four columns:
+    \item{rank}{The ranked index of each shift configuration (ranked by
+        posterior probability).}
+    \item{probability}{The posterior probability of each shift
+        configuration.}
+    \item{cumulative}{The cumulative probability of each shift
+        configuration.}
+    \item{N_shifts}{The number of rate shifts in each shift
+        configuration (can be zero).}
 }
 \description{
-Prints summary attributes of the \code{BAMM} credible set of shift
-configurations.
+Prints summary attributes of the \code{BAMM} credible set of
+    shift configurations.
 }
 \details{
-Prints to console summary attributes of the XX\% credible set of shift
-configurations sampled using \code{BAMM}. Attributes printed include: the number
-of distinct configurations in the XX\% credible set and the posterior probability,
-cumulative probability, and number of rate shifts in the 9 most-probable shift
-configurations.
+Prints to console summary attributes of the XX\% credible set of
+    shift configurations sampled using \code{BAMM}. Attributes printed
+    include: the number of distinct configurations in the XX\% credible
+    set and the posterior probability, cumulative probability, and number
+    of rate shifts in the 9 most-probable shift configurations.
 }
 \examples{
 \dontrun{
@@ -48,7 +53,7 @@ Dan Rabosky
 \url{http://bamm-project.org}
 }
 \seealso{
-\code{\link{distinctShiftConfigurations}}, \code{\link{plot.bammshifts}},
-\code{\link{credibleShiftSet}}
+\code{\link{distinctShiftConfigurations}},
+    \code{\link{plot.bammshifts}}, \code{\link{credibleShiftSet}}
 }
 

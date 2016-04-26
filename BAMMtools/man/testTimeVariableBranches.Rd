@@ -7,12 +7,12 @@
 testTimeVariableBranches(ephy, prior_tv = 0.5, return.type = "posterior")
 }
 \arguments{
-\item{ephy}{an object of class \code{bammdata}.}
+\item{ephy}{An object of class \code{bammdata}.}
 
 \item{prior_tv}{The prior probability that rate shifts lead to a new time-varying rate
-process (versus a time-constant process)}
+process (versus a time-constant process).}
 
-\item{return.type}{either \code{"posterior"} or \code{"bayesfactor"}, depending on which
+\item{return.type}{Either \code{"posterior"} or \code{"bayesfactor"}, depending on which
 form of evidence you would like.}
 }
 \value{

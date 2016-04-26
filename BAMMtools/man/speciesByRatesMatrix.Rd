@@ -7,28 +7,33 @@
 speciesByRatesMatrix(ephy, nslices, index = NULL, spex = "s")
 }
 \arguments{
-\item{ephy}{an object of class \code{bammdata}}
+\item{ephy}{An object of class \code{bammdata}.}
 
-\item{nslices}{an integer number of time slices. This determines the number of equally
-spaced points in time at which rates are computed for each species}
+\item{nslices}{An integer number of time slices. This determines the
+number of equally spaced points in time at which rates are computed
+for each species.}
 
-\item{index}{an integer or vector of mode integer indicating which posterior samples to
-use in the calculation. If \code{NULL} (default) all samples are used}
+\item{index}{An integer or vector of mode integer indicating which
+posterior samples to use in the calculation. If \code{NULL} (default)
+all samples are used.}
 
-\item{spex}{a character string. "s" (default) calculates speciation rates; "e" calculates
-extinction rates; "netdiv" calculates diversification rates. Ignored if \code{ephy$type = "trait"}}
+\item{spex}{A character string. "s" (default) calculates speciation rates;
+"e" calculates extinction rates; "netdiv" calculates diversification
+rates. Ignored if \code{ephy$type = "trait"}}
 }
 \value{
 A list with two components:
-
-\itemize{
-    \item{times}{A vector of time points where rates were calculated}
-    \item{rates}{A species X times matrix of rate through time trajectories}
-}
+    \itemize{
+        \item{times} {A vector of time points where rates were
+            calculated.}
+        \item{rates} {A species X times matrix of rate through time
+            trajectories.}
+    }
 }
 \description{
-Computes the mean of the marginal posterior density of speciation/extinction
-or phenotypic rates for equally spaced points along the root to tip path for each species
+Computes the mean of the marginal posterior density of
+    speciation/extinction or phenotypic rates for equally spaced points
+    along the root to tip path for each species
 }
 \examples{
 \dontrun{

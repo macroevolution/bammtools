@@ -3,10 +3,12 @@
 ##' @description For each branch in a phylogenetic tree, evaluates the evidence (posterior
 ##' probability or Bayes factor) that macroevolutionary rates have varied through time
 ##'
-##' @param ephy an object of class \code{bammdata}.
+##' @param ephy An object of class \code{bammdata}.
+##'
 ##' @param prior_tv The prior probability that rate shifts lead to a new time-varying rate
-##' process (versus a time-constant process)
-##' @param return.type either \code{"posterior"} or \code{"bayesfactor"}, depending on which
+##' process (versus a time-constant process).
+##'
+##' @param return.type Either \code{"posterior"} or \code{"bayesfactor"}, depending on which
 ##' form of evidence you would like.
 ##'
 ##' @details In \code{BAMM 2.0}, rate shifts on trees can lead to time-varying or constant-rate

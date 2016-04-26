@@ -13,15 +13,18 @@
 ##' @description Computes marginal clade-specific rates of speciation, extinction, or (if
 ##' relevant) trait evolution from \code{BAMM} output.
 ##'
-##' @param ephy An object of class \code{bammdata}
+##' @param ephy An object of class \code{bammdata}.
+##'
 ##' @param node If computing rates for a specific portion of tree, the node subtending the relevant
 ##' subtree. If multiple nodes are supplied, then the equivalent number of \code{nodetype} must be
 ##' supplied.
+##'
 ##' @param nodetype Either "include" or "exclude". If \code{nodetype = "include"}, the rates
 ##' returned by the function will be for the subtree defined by \code{node}. If
 ##' \code{nodetype = "exclude"}, will compute mean rates for the tree after excluding the subtree
 ##' defined by \code{node}. If multiple nodes are specified, there must be a \code{nodetype} for
-##' each node. 
+##' each node.
+##'
 ##' @param verbose If \code{TRUE}, will print the sample index as mean rates are computed for
 ##' each sample from posterior. Potentially useful for extremely large trees.
 ##'
@@ -43,11 +46,11 @@
 ##' @return A list with the following components:
 ##'
 ##' \itemize{
-##'     \item{lambda}{A vector of speciation rates (if applicable), with the i'th rate
+##'     \item{lambda} {A vector of speciation rates (if applicable), with the i'th rate
 ##'     corresponding to the mean rate from the i'th sample in the posterior}
-##'     \item{mu}{A vector of extinction rates (if applicable), with the i'th rate corresponding
+##'     \item{mu} {A vector of extinction rates (if applicable), with the i'th rate corresponding
 ##'     to the mean rate from the i'th sample in the posterior}
-##'     \item{beta}{A vector of phenotypic rates (if applicable), with the i'th rate
+##'     \item{beta} {A vector of phenotypic rates (if applicable), with the i'th rate
 ##'     corresponding to the mean rate from the i'th sample in the posterior}
 ##' }
 ##'
