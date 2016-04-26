@@ -44,16 +44,16 @@
 ##'
 ##' @details This is one point estimate of the overall "best" rate shift configuration.
 ##' Following an MCMC simulation, the marginal shift probabilities on each individual branch
-##' are computed using \link[BAMMtools]{marginalShiftProbsTree}. The shift configuration
+##' are computed using \code{\link{marginalShiftProbsTree}}. The shift configuration
 ##' that maximizes the product (or sum, if specified) of these marginal branch-specific
 ##' shift probabilities is the \emph{maximum shift credibility configuration}.  
 ##' 
 ##' This option is only recommended if you have no clear "winner" in your credible set of
-##' shift configurations (see \link[BAMMtools]{credibleShiftSet}). If you have a number of
+##' shift configurations (see \code{\link{credibleShiftSet}}). If you have a number of
 ##' largely-equiprobable shift configurations in your 95\% credible set, you may wish to try
 ##' this function as an alternative for identifying a single best shift configuration.
 ##' Otherwise, it is recommended that you present the shift configuration with the maximum
-##' a posteriori probability (see \link[BAMMtools]{getBestShiftConfiguration}).
+##' a posteriori probability (see \code{\link{getBestShiftConfiguration}}).
 ##'
 ##' @return A list with the following components:
 ##'
@@ -67,7 +67,7 @@
 ##'     \item{optimalityType}{Whether the product or sum of marginal shift probabilities was
 ##'     used to compute the maximum shift credibility configuration} 
 ##'     \item{sampleindex}{A representative sample that is equal to the maximum shift
-##'     credibility configuration (e.g., this can be plotted with \link[BAMMtools]{addBAMMshifts})}
+##'     credibility configuration (e.g., this can be plotted with \code{\link{addBAMMshifts}})}
 ##' }
 ##'
 ##' @author Dan Rabosky
