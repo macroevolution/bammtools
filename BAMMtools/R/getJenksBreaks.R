@@ -29,7 +29,7 @@
 ##' than when using the entirety of \code{var} but is unlikely to make much of a difference. If 
 ##' \code{subset} is defined but \code{length(var) < subset}, then \code{subset} has no effect.  
 ##' 
-##' The Jenks natural breaks method was ported to C from code found in the classInt R package.  
+##' The Jenks natural breaks method was ported to C from code found in the classInt R package.
 ##'
 ##' @return A numeric vector of intervals.
 ##'
