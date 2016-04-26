@@ -246,7 +246,8 @@ title(main="jenks")
 # plot(ed, pal=c("darkgreen","yellow2","red"),lwd=3)
 # plot(ed,method="polar",pal="Spectral", lwd=3)
 # plot(ed,method="polar",pal="RdYlBu", lwd=3)
-##END##}
+##END##
+}
 }
 \author{
 Mike Grundler, Pascal Title
