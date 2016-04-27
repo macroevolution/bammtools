@@ -9,58 +9,69 @@
 
 ##' @title Plot distinct rate shift configurations on a phylogeny
 ##'
-##' @description Plots a random distinct rate shift configuration sampled by BAMM on a
-##' phylogeny.
+##' @description Plots a random distinct rate shift configuration sampled by
+##'     BAMM on a phylogeny.
 ##'
-##' @param x an object of class \code{bammshifts}.
-##' @param ephy an object of class \code{bammdata}.
-##' @param method a character string for which plotting method to use. "phylogram" uses
-##' rectangular coordinates. "polar" uses polar coordinates.
-##' @param pal the color palette to use in \code{plot.bammdata}.
-##' @param rank the rank of the core shift configuration to plot. For the default
-##' (\code{NULL}) a random configuration is chosen. 
-##' @param index the posterior sample to plot. For the default (\code{NULL}) a random
-##' sample is chosen.
-##' @param spex a character string indicating what type of macroevolutionary rates should
-##' be plotted. "s" (default) indicates speciation rates, "e" indicates extinction rates,
-##' and 'netdiv' indicates net diversification rates. Ignored if \code{ephy$type = "trait"}.
-##' @param legend a logical indicating whether to plot a legend.
-##' @param add.freq.text a logical indicating whether the frequency of each sampled shift
-##' configuration should be added to each plot.
-##' @param logcolor should colors be plotted on a log scale.
-##' @param breaksmethod method used for determining color breaks. See help file for
-##' \code{\link{assignColorBreaks}}.
-##' @param color.interval Min and max value for the mapping of rates. One of the two values
-##' can be \code{NA}. See details in \code{\link{plot.bammdata}} for further details. 
-##' @param JenksSubset If \code{breaksmethod = "jenks"}, the number of regularly spaced
-##' samples to subset from the full rates vector. Only relevant for large datasets. See help
-##' file for \code{\link{assignColorBreaks}}.
-##' @param \dots other arguments to \code{plot.bammdata}.
+##' @param x An object of class \code{bammshifts}.
+##' @param ephy An object of class \code{bammdata}.
+##' @param method A character string for which plotting method to use.
+##'     "phylogram" uses rectangular coordinates. "polar" uses polar
+##'     coordinates.
+##' @param pal The color palette to use in \code{plot.bammdata}.
+##' @param rank The rank of the core shift configuration to plot. For the
+##'     default (\code{NULL}) a random configuration is chosen. 
+##' @param index The posterior sample to plot. For the default (\code{NULL})
+##'     a random sample is chosen.
+##' @param spex A character string indicating what type of macroevolutionary
+##'     rates should be plotted. "s" (default) indicates speciation rates, "e"
+##'     indicates extinction rates, and 'netdiv' indicates net diversification
+##'     rates. Ignored if \code{ephy$type = "trait"}.
+##' @param legend Logical indicating whether to plot a legend.
+##' @param add.freq.text a logical indicating whether the frequency of each
+##'     sampled shift configuration should be added to each plot.
+##' @param logcolor Logical. Should colors be plotted on a log scale.
+##' @param breaksmethod Method used for determining color breaks. See help
+##'     file for \code{\link{assignColorBreaks}}.
+##' @param color.interval Min and max value for the mapping of rates. One of
+##'     the two values can be \code{NA}. See details in
+##'     \code{\link{plot.bammdata}} for further details. 
+##' @param JenksSubset If \code{breaksmethod = "jenks"}, the number of
+##'     regularly-spaced samples to subset from the full rates vector. Only
+##'     relevant for large datasets. See help file for
+##'     \code{\link{assignColorBreaks}}.
+##' @param \dots Other arguments to \code{plot.bammdata}.
 ##'
-##' @details A rate shift configuration is the set of nodes of the phylogeny where a shift
-##' occurs in the macroevolutionary rate dynamic of diversification or trait evolution. Each
-##' posterior sample is a potentially distinct rate shift configuration. Different
-##' configurations may imply different macroevolutionary scenarios. This function helps
-##' visualize the different distinct rate shift configurations sampled by BAMM.
+##' @details A rate shift configuration is the set of nodes of the phylogeny
+##'     where a shift occurs in the macroevolutionary rate dynamic of
+##'     diversification or trait evolution. Each posterior sample is a
+##'     potentially distinct rate shift configuration. Different
+##'     configurations may imply different macroevolutionary scenarios. This
+##'     function helps visualize the different distinct rate shift
+##'     configurations sampled by BAMM.
 ##'
-##' A core shift configuration is defined by a set of nodes that have shift probabilities
-##' that are substantially elevated relative to what you expect under the prior alone. These
-##' core configurations are inferred in \code{\link{distinctShiftConfigurations}}. It is almost
-##' certain that more than one core shift configuration will be sampled by BAMM. Moreover,
-##' each core shift configuration may contain many subconfigurations. A subconfiguration
-##' contains the core shift node configuration and zero or more additional shift nodes that
-##' occur with low marginal probability.  
-##' 
-##' Points are added to the branches subtending the nodes of each rate configuration. The size
-##' of the point is proportional to the marginal probability that a shift occurs on a specific
-##' branch. If the instantaneous rate at a shift's origin represents an initial increase above
-##' the ancestral instantaneous rate the point is red. If the instantaneous rate at a shift's
-##' origin represents an initial decrease below the ancestral instantaneous rate the point is blue.
+##'     A core shift configuration is defined by a set of nodes that have
+##'     shift probabilities that are substantially elevated relative to what
+##'     you expect under the prior alone. These core configurations are
+##'     inferred in \code{\link{distinctShiftConfigurations}}. It is almost
+##'     certain that more than one core shift configuration will be sampled by
+##'     BAMM. Moreover, each core shift configuration may contain many
+##'     subconfigurations. A subconfiguration contains the core shift node
+##'     configuration and zero or more additional shift nodes that occur with
+##'     low marginal probability.  
+##'
+##'     Points are added to the branches subtending the nodes of each rate
+##'     configuration. The size of the point is proportional to the marginal
+##'     probability that a shift occurs on a specific branch. If the
+##'     instantaneous rate at a shift's origin represents an initial increase
+##'     above the ancestral instantaneous rate the point is red. If the
+##'     instantaneous rate at a shift's origin represents an initial decrease
+##'     below the ancestral instantaneous rate the point is blue.
 ##'
 ##' @author Mike Grundler, Dan Rabosky
 ##'
-##' @seealso \code{\link{distinctShiftConfigurations}}, \code{\link{plot.bammdata}}
-##' 
+##' @seealso \code{\link{distinctShiftConfigurations}},
+##'     \code{\link{plot.bammdata}}
+##'
 ##' @references \url{http://bamm-project.org}
 ##'
 ##' @examples
@@ -69,7 +80,8 @@
 ##' 
 ##' ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 ##' 
-##' sc <- distinctShiftConfigurations(ed, expectedNumberOfShifts = 1, threshold = 5)
+##' sc <- distinctShiftConfigurations(ed, expectedNumberOfShifts = 1,
+##'                                   threshold = 5)
 ##' 
 ##' plot(sc, ed)}
 ##' @export
