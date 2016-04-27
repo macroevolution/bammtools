@@ -148,7 +148,6 @@
 ##'     radiation. Nature Communications DOI: 10.1038/ncomms2958.
 ##'
 ##' @examples
-##' \dontrun{
 ##' # using a small subset of the fish data set (300 taxa) in Rabosky et al.
 ##' # 2013. Nat. Com. paper
 ##' data(fishes, events.fishes)
@@ -158,7 +157,7 @@
 ##' data(traits.fishes)
 ##' x <- traitDependentBAMM(ephy = xx, traits = traits.fishes, reps = 1000,
 ##'                         return.full = TRUE, method = 's', logrates = TRUE,
-##'                         two.tailed = TRUE)}
+##'                         two.tailed = TRUE)
 ##' @aliases strapp
 ##' @export
 traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.full = FALSE, method = 'spearman', logrates = TRUE, two.tailed = TRUE, traitorder = NA, nthreads = 1) {

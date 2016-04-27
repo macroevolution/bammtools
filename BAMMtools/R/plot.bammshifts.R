@@ -75,7 +75,6 @@
 ##' @references \url{http://bamm-project.org}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales, events.whales)
 ##' 
 ##' ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
@@ -83,7 +82,7 @@
 ##' sc <- distinctShiftConfigurations(ed, expectedNumberOfShifts = 1,
 ##'                                   threshold = 5)
 ##' 
-##' plot(sc, ed)}
+##' plot(sc, ed)
 ##' @export
 plot.bammshifts <- function(x, ephy, method="phylogram", pal="RdYlBu", 
 rank=NULL, index=NULL, spex="s", legend=TRUE, add.freq.text=TRUE, logcolor=FALSE, breaksmethod="linear", color.interval=NULL, JenksSubset=20000, ...) 

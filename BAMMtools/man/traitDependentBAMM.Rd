@@ -117,7 +117,6 @@ Tip rates --speciation, extinction, or net diversification
     order to meet this requirement.
 }
 \examples{
-\dontrun{
 # using a small subset of the fish data set (300 taxa) in Rabosky et al.
 # 2013. Nat. Com. paper
 data(fishes, events.fishes)
@@ -127,7 +126,7 @@ xx <- getEventData(phy = fishes, eventdata = events.fishes,
 data(traits.fishes)
 x <- traitDependentBAMM(ephy = xx, traits = traits.fishes, reps = 1000,
                         return.full = TRUE, method = 's', logrates = TRUE,
-                        two.tailed = TRUE)}
+                        two.tailed = TRUE)
 }
 \author{
 Dan Rabosky, Huateng Huang

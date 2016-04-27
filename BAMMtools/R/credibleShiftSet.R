@@ -187,7 +187,6 @@
 ##' @references \url{http://bamm-project.org}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(events.whales, whales)
 ##' ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=500)
 ##' 
@@ -215,7 +214,7 @@
 ##' cset$indices[[1]]
 ##'
 ##' # Now we can plot the credible set:
-##' plot.credibleshiftset(cset, plotmax=4)}
+##' plot.credibleshiftset(cset, plotmax=4)
 ##' @export
 credibleShiftSet <- function(ephy, expectedNumberOfShifts, threshold = 5, set.limit = 0.95, ...){
 	
@@ -246,9 +245,5 @@ credibleShiftSet <- function(ephy, expectedNumberOfShifts, threshold = 5, set.li
 	return(ephy);	
 	
 }
-
-
-
-
 
 

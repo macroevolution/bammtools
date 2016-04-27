@@ -57,7 +57,6 @@ The plotting function creates an image of the BAMM correlation
     shown in the margin if \code{use.plot.bammdata=TRUE}.
 }
 \examples{
-\dontrun{
 data(whales, events.whales)
 ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=500)
 x <- getCohortMatrix(ed)
@@ -66,7 +65,8 @@ cohorts(x, ed, col=richColors(64))
 cohorts(x, ed, ofs=0.05, col=richColors(64))
 cohorts(x, ed, pal="temperature", col=richColors(64))
 # gray scale
-cohorts(x, ed, col=gray(seq(0.2,0.9,length.out=128)), use.plot.bammdata=FALSE)}
+cohorts(x, ed, col=gray(seq(0.2,0.9,length.out=128)),
+        use.plot.bammdata=FALSE)
 }
 \author{
 Mike Grundler

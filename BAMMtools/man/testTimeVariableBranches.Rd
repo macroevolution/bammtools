@@ -71,7 +71,6 @@ In \code{BAMM 2.0}, rate shifts on trees can lead to time-varying
     below).
 }
 \examples{
-\dontrun{
 # Load whale data:
 data(whales, events.whales)
 ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=200)
@@ -115,7 +114,7 @@ mtext(side = 2, text = "Bayes factor: uniform prior odds", line=3,
 # rates.
 # IF the evidence is present in your data to support time variation.
 # To be clear, the Bayes factors in this example were computed from the
-#  same posterior probabilities: it is only the prior odds that differed.}
+#  same posterior probabilities: it is only the prior odds that differed.
 }
 \author{
 Dan Rabosky

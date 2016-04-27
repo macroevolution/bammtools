@@ -43,7 +43,6 @@
 ##'     \code{\link{image}}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales, events.whales)
 ##' ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=500)
 ##' x <- getCohortMatrix(ed)
@@ -52,7 +51,8 @@
 ##' cohorts(x, ed, ofs=0.05, col=richColors(64))
 ##' cohorts(x, ed, pal="temperature", col=richColors(64))
 ##' # gray scale
-##' cohorts(x, ed, col=gray(seq(0.2,0.9,length.out=128)), use.plot.bammdata=FALSE)}
+##' cohorts(x, ed, col=gray(seq(0.2,0.9,length.out=128)),
+##'         use.plot.bammdata=FALSE)
 ##' @export
 cohorts <- function(x, ephy, col, pal, lwd = 1, ofs = 0, use.plot.bammdata = FALSE, useraster = FALSE, LARGE = 500,...) {
 	

@@ -65,7 +65,6 @@
 ##' @references \url{http://bamm-project.org}
 ##'
 ##' @examples
-##' \dontrun{
 ##' # Load whale data:
 ##' data(whales, events.whales)
 ##' ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=200)
@@ -109,7 +108,7 @@
 ##' # rates.
 ##' # IF the evidence is present in your data to support time variation.
 ##' # To be clear, the Bayes factors in this example were computed from the
-##' #  same posterior probabilities: it is only the prior odds that differed.}
+##' #  same posterior probabilities: it is only the prior odds that differed.
 ##' @export
 testTimeVariableBranches <- function(ephy, prior_tv = 0.5, return.type = 'posterior'){
 

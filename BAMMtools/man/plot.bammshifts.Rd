@@ -84,7 +84,6 @@ A rate shift configuration is the set of nodes of the phylogeny
     below the ancestral instantaneous rate the point is blue.
 }
 \examples{
-\dontrun{
 data(whales, events.whales)
 
 ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
@@ -92,7 +91,7 @@ ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 sc <- distinctShiftConfigurations(ed, expectedNumberOfShifts = 1,
                                   threshold = 5)
 
-plot(sc, ed)}
+plot(sc, ed)
 }
 \author{
 Mike Grundler, Dan Rabosky
