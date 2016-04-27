@@ -23,10 +23,9 @@
 ##' @references \url{http://bamm-project.org}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales, events.whales)
-##' ephy <- getEventData(whales,events.whales,nsamples=100)
-##' summary(ephy)}
+##' ephy <- getEventData(whales, events.whales, nsamples=100)
+##' summary(ephy)
 ##' @export
 summary.bammdata = function(object, display=10, print=T, ...) {
 

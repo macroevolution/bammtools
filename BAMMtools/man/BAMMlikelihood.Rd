@@ -65,7 +65,6 @@ This function allows the user to check the likelihoods computed
     likelihood returned by BAMM, please inform the BAMM development team.
 }
 \examples{
-\dontrun{
 # a global sampling fraction of 0.98 was used in generating the whales
 # dataset.
 data(whales, events.whales, mcmc.whales)
@@ -78,7 +77,7 @@ identical(round(x, 3), mcmc.whales[nrow(mcmc.whales), 'logLik'])
 # an example with a constant-rate birth-death process:
 pars <- c(0.5, 0.45)
 names(pars) <- c("lambda", "mu")
-BAMMlikelihood(whales, pars, sf = 0.98)}
+BAMMlikelihood(whales, pars, sf = 0.98)
 }
 \author{
 Dan Rabosky, Pascal Title

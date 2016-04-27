@@ -53,7 +53,6 @@ If there are zero length branches in the input tree \code{NA}s will
     result.
 }
 \examples{
-\dontrun{
 data(whales, events.whales)
 ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 
@@ -61,7 +60,7 @@ ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 ed <- dtRates(ed, tau=0.01)
 
 # use specified range of posterior samples
-ed <- dtRates(ed, tau=0.01, ism=50:150)}
+ed <- dtRates(ed, tau=0.01, ism=50:150)
 }
 \author{
 Mike Grundler

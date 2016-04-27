@@ -53,13 +53,12 @@
 ##'
 ##' @references \url{http://bamm-project.org}
 ##'
-##' @examples \dontrun{
+##' @examples
 ##' data(events.whales)
 ##' data(whales)
 ##' ed <- getEventData(whales, events.whales, nsamples=500)
-##' 
 ##' cset <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
-##' plot(cset)}
+##' plot(cset)
 ##' @export
 plot.credibleshiftset <- function(x, plotmax=9, method='phylogram', pal = 'RdYlBu', shiftColor = 'black', spex = "s", add.freq.text = TRUE, use.plot.bammdata = TRUE, border = TRUE, legend = FALSE, send2pdf = FALSE, logcolor=FALSE, breaksmethod='linear', color.interval=NULL, JenksSubset=20000, ...)
 {

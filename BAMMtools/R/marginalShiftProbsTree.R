@@ -60,7 +60,6 @@
 ##' @references \url{http://bamm-project.org}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales)
 ##' data(events.whales)
 ##' ed <- getEventData(whales, events.whales, nsamples = 500)
@@ -75,7 +74,7 @@
 ##' plot.new()
 ##' par(mfrow=c(1,2))
 ##' plot.phylo(mst, no.margin=TRUE, show.tip.label=FALSE)
-##' plot.phylo(cst, no.margin=TRUE, show.tip.label=FALSE)}
+##' plot.phylo(cst, no.margin=TRUE, show.tip.label=FALSE)
 ##' @rdname ShiftProbsTree
 ##' @export
 marginalShiftProbsTree <- function(ephy) {

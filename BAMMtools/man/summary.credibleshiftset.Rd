@@ -40,11 +40,10 @@ Prints to console summary attributes of the XX\% credible set of
     of rate shifts in the 9 most-probable shift configurations.
 }
 \examples{
-\dontrun{
 data(whales, events.whales)
 ed <- getEventData(whales, events.whales, nsamples = 500)
 cset <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
-summary(cset)}
+summary(cset)
 }
 \author{
 Dan Rabosky

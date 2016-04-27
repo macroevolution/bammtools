@@ -51,7 +51,6 @@ If \code{method = "quantile"} macroevolutionary rates are binned
     The Jenks natural breaks method was ported to C from code found in the classInt R package.
 }
 \examples{
-\dontrun{
 data(whales, events.whales)
 ed <- getEventData(whales, events.whales, burnin = 0.2, nsamples = 500)
 
@@ -67,7 +66,7 @@ colors <- assignColorBreaks(ed$dtrates$rates, spex="netdiv")
 #colors <- assignColorBreaks(ed$dtrates$rates[[1]] - ed$dtrates$rates[[2]]) 
 #this also works for diversification rates
 
-plot(ed, colorbreaks = colors, spex="netdiv")}
+plot(ed, colorbreaks = colors, spex="netdiv")
 }
 \author{
 Mike Grundler, Pascal Title

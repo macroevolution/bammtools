@@ -74,10 +74,8 @@
 ##' @author Dan Rabosky
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales)
-##' 
-##' setBAMMpriors(phy = whales, total.taxa = 89, outfile = NULL)}
+##' setBAMMpriors(phy = whales, total.taxa = 89, outfile = NULL)
 ##' @export
 setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPriors.txt', Nmax = 1000, suppressWarning = FALSE){
 	

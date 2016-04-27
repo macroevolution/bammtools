@@ -39,12 +39,11 @@ If a \code{type = 'diversification'} \code{bammdata} object is
     length of the branch.
 }
 \examples{
-\dontrun{
 data(whales)
 data(events.whales)
 ed <- getEventData(whales, events.whales, nsamples = 10)
 mbr <- getMarginalBranchRateMatrix(ed)
-dim(mbr$lambda_branch_matrix)}
+dim(mbr$lambda_branch_matrix)
 }
 \author{
 Dan Rabosky

@@ -33,11 +33,10 @@
 ##' @references \url{http://bamm-project.org}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales, events.whales)
 ##' ed <- getEventData(whales, events.whales, nsamples = 500)
 ##' cset <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
-##' summary(cset)}
+##' summary(cset)
 ##' @rdname summary.credibleshiftset
 ##' @export
 summary.credibleshiftset <- function(object, ...) {

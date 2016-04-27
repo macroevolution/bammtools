@@ -81,10 +81,8 @@ This is a "quick and dirty" tool for identifying approximately
     \code{BAMM} control file.
 }
 \examples{
-\dontrun{
 data(whales)
-
-setBAMMpriors(phy = whales, total.taxa = 89, outfile = NULL)}
+setBAMMpriors(phy = whales, total.taxa = 89, outfile = NULL)
 }
 \author{
 Dan Rabosky

@@ -36,7 +36,6 @@ Computes the mean of the marginal posterior density of
     along the root to tip path for each species
 }
 \examples{
-\dontrun{
 data(whales, events.whales)
 ed <- getEventData(whales,events.whales,burnin=0.25, nsamples=500)
 ratemat <- speciesByRatesMatrix(ed, nslices = 100)
@@ -54,7 +53,7 @@ for (i in 1:nrow(ratemat$rates)) {
 axis(1,seq(-5,35,5))
 axis(2,seq(-0.2,0.8,0.2),las=1)
 mtext("Time since root",1,line=2.5)
-mtext("Speciation rate",2,line=2.5)}
+mtext("Speciation rate",2,line=2.5)
 }
 \author{
 Mike Grundler

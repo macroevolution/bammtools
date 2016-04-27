@@ -25,11 +25,11 @@ This will result in an error if you attempt to access samples
     with index values 1:100.
 }
 \examples{
-\dontrun{
+data(whales, events.whales)
 ed <- getEventData(whales, events.whales, nsamples=500)
 ed2 <- subsetEventData(ed, index=1)
-plot.bammdata(ed2) 
-addBAMMshifts(ed2, cex=2)}
+plot(ed2) 
+addBAMMshifts(ed2, cex=2)
 }
 \author{
 Dan Rabosky

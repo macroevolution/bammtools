@@ -21,7 +21,6 @@
 ##' @references \url{http://bamm-project.org}
 ##'
 ##' @examples
-##' \dontrun{
 ##' #Produce a blank template control file
 ##' generateControlFile(file = 'traitcontrol.txt', type='trait')
 ##' 
@@ -39,7 +38,7 @@
 ##'     lambdaInitPrior = as.numeric(priors['lambdaInitPrior']),
 ##'     lambdaShiftPrior = as.numeric(priors['lambdaShiftPrior']),
 ##'     muInitPrior = as.numeric(priors['muInitPrior']),
-##'     expectedNumberOfShifts = '1'))}
+##'     expectedNumberOfShifts = '1'))
 ##' @export
 generateControlFile <- function(file = "controlfile.txt", type = "diversification", params = NULL) {
 	

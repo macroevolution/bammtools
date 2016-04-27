@@ -30,7 +30,6 @@ This function allows users to extract a subtree from a big
     \code{\link{plot.bammdata}}
 }
 \examples{
-\dontrun{
 data(whales, events.whales)
 ephy <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 
@@ -42,7 +41,7 @@ subphy <- subtreeBAMM(ephy,tips=tips)
 subphy <- subtreeBAMM(ephy,node=103)
 
 # plot the subtree
-plot(subphy)}
+plot(subphy)
 }
 \author{
 Huateng Huang

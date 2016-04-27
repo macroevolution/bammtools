@@ -49,7 +49,6 @@ This function handles two types of input: The cladeTable can
     \url{http://bamm-project.org} for additional details.
 }
 \examples{
-\dontrun{
 # Generate dummy data
 tree <- read.tree(text="(((t1:2,(t2:1,t3:1):1):1,((t4:1,t5:1):1,t6:2):1)
                   :1,(t7:3,(t8:2,t9:2):1):1);")
@@ -78,7 +77,7 @@ spTable <- rbind(spTable, c('Species10','cladeA'),c('Species11','cladeA'),
 spTable
 
 samplingProbs(tree, cladeTable = spTable, cladeRichness = NULL, 
-              globalSampling = 0.9, writeToDisk = FALSE)}
+              globalSampling = 0.9, writeToDisk = FALSE)
 }
 \author{
 Pascal Title

@@ -67,7 +67,6 @@
 ##'     \code{\link{getEventData}}.
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales, events.whales)
 ##' ephy <- getEventData(whales, events.whales, burnin=0.25, nsamples = 500)
 ##' 
@@ -83,7 +82,7 @@
 ##' # Return mean species-specific speciation rates from all posterior 
 ##' # samples in the \code{bamm-data} object.
 ##' lam <- getTipRates(ephy, returnNetDiv = FALSE, statistic = 'mean')$lambda
-##' rowMeans(lam)}
+##' rowMeans(lam)
 ##' @export
 getTipRates <- function(ephy, returnNetDiv = FALSE, statistic = 'mean') {
 	

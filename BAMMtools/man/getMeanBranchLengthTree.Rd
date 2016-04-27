@@ -31,13 +31,12 @@ Takes a \code{bammdata} object and computes a phylogenetic
     visualize rate variation across a phylogeny.
 }
 \examples{
-\dontrun{
 data(whales)
 data(events.whales)
 ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=500)
 ed2 <- subsetEventData(ed, index = 1:20)
 ratetree <- getMeanBranchLengthTree(ed2, rate='speciation')
-plot(ratetree$phy, show.tip.label=FALSE)}
+plot(ratetree$phy, show.tip.label=FALSE)
 }
 \author{
 Dan Rabosky

@@ -32,10 +32,9 @@ Prints to console the number of posterior samples and the
     fraction of samples in the posterior having 0, 1, 2,...n shifts.
 }
 \examples{
-\dontrun{
 data(whales, events.whales)
-ephy <- getEventData(whales,events.whales,nsamples=100)
-summary(ephy)}
+ephy <- getEventData(whales, events.whales, nsamples=100)
+summary(ephy)
 }
 \author{
 Mike Grundler, Dan Rabosky

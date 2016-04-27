@@ -55,7 +55,6 @@ The \emph{marginal shift probability tree} is a copy of the
     the rate dynamics on a branch are decoupled from the "root process".
 }
 \examples{
-\dontrun{
 data(whales)
 data(events.whales)
 ed <- getEventData(whales, events.whales, nsamples = 500)
@@ -70,7 +69,7 @@ cst <- cumulativeShiftProbsTree(ed)
 plot.new()
 par(mfrow=c(1,2))
 plot.phylo(mst, no.margin=TRUE, show.tip.label=FALSE)
-plot.phylo(cst, no.margin=TRUE, show.tip.label=FALSE)}
+plot.phylo(cst, no.margin=TRUE, show.tip.label=FALSE)
 }
 \author{
 Dan Rabosky

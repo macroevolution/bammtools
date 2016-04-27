@@ -64,19 +64,18 @@
 ##' @seealso Requires an object created with \code{\link{plot.bammdata}}.
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales, events.whales)
 ##' ephy <- getEventData(whales, events.whales, burnin = 0.25, nsamples = 300)
 ##' 
 ##' # plot phylorate with extra margin space
-##' x <- plot.bammdata(ephy, lwd = 2, mar = c(5,4,4,4)) 
+##' x <- plot(ephy, lwd = 2, mar = c(5,4,4,4)) 
 ##' # presets
 ##' addBAMMlegend(x, location = 'topleft')
 ##' addBAMMlegend(x, location = 'bottom')
 ##' addBAMMlegend(x, location = 'right')
 ##' 
 ##' #fine-tune placement
-##' x <- plot.bammdata(ephy, lwd = 2, mar = c(5,4,4,4)) 
+##' x <- plot(ephy, lwd = 2, mar = c(5,4,4,4)) 
 ##' axis(1); axis(2)
 ##' addBAMMlegend(x, location = c(-1, -0.5, 40, 80), nTicks = 4)
 ##' addBAMMlegend(x, location = c(5, 20, 60, 61), nTicks = 4, side = 3,
@@ -87,9 +86,9 @@
 ##' ephy <- getEventData(primates, events.primates, burnin=0.25,
 ##'                      nsamples = 300, type = 'trait')
 ##' 
-##' x <- plot.bammdata(ephy, breaksmethod = 'linear',
-##'                    color.interval = c(NA, 0.12), lwd = 2)
-##' addBAMMlegend(x, location = c(0, 30, 200, 205), nTicks = 1, side = 3)}
+##' x <- plot(ephy, breaksmethod = 'linear',
+##'           color.interval = c(NA, 0.12), lwd = 2)
+##' addBAMMlegend(x, location = c(0, 30, 200, 205), nTicks = 1, side = 3)
 ##' @export
 addBAMMlegend <- function(x, direction, side, location = 'topleft', nTicks = 2, shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, labelDist = 0.7, ...) {
 	#location xmin,xmax,ymin,ymax

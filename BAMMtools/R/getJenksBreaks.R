@@ -47,7 +47,6 @@
 ##'     \code{\link{plot.bammdata}}.
 ##'
 ##' @examples
-##' \dontrun{
 ##' # load whales dataset
 ##' data(whales, events.whales)
 ##' ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
@@ -57,7 +56,7 @@
 ##' vec <- ed$dtrates$rates[[1]]
 ##' 
 ##' # Return breaks for the binning of speciation rates into 64 groups
-##' getJenksBreaks(vec, 64)}
+##' getJenksBreaks(vec, 64)
 ##' @export
 getJenksBreaks <- function(var, k, subset = NULL) {
 	k <- k - 1;

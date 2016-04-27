@@ -151,7 +151,6 @@ Currently the function does not check for duplicate tip labels in
     \code{phy}, which may cause the function to choke.
 }
 \examples{
-\dontrun{
 data(primates, events.primates)
 xx <- getEventData(primates, events.primates, burnin=0.25, nsamples=500,
                    type = 'trait')
@@ -161,7 +160,7 @@ brates <- getCladeRates(xx)
 mean(brates$beta)
 
 # Plot rates:
-plot.bammdata(xx)}
+plot(xx)
 }
 \author{
 Dan Rabosky, Mike Grundler

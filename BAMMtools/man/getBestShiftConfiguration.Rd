@@ -46,7 +46,6 @@ This function estimates the rate shift configuration with the
     information.
 }
 \examples{
-\dontrun{
 data(whales, events.whales)
 ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=500)
 
@@ -56,7 +55,7 @@ bp <- getBranchShiftPriors(whales, expectedNumberOfShifts = 1)
 # Pass the event data object in to the function:
 best <- getBestShiftConfiguration(ed, expectedNumberOfShifts = 1,
                                   threshold = 5)
-plot.bammdata(best, lwd=2)
+plot(best, lwd=2)
 addBAMMshifts(best, cex=2)
 
 # Now we can also work with the credible shift set:
@@ -74,8 +73,8 @@ css$eventData[[1]];
 best <- getBestShiftConfiguration(css, expectedNumberOfShifts = 1,
                                   threshold = 5)
 
-plot.bammdata(best)
-addBAMMshifts(best)}
+plot(best)
+addBAMMshifts(best)
 }
 \author{
 Dan Rabosky

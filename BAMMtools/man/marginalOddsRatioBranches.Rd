@@ -30,7 +30,6 @@ This function returns a copy of a phylogenetic tree where each
     for the purpose of distinguishing core and non-core shifts.
 }
 \examples{
-\dontrun{
 #Produce a blank template control file
 generateControlFile(file = 'traitcontrol.txt', type='trait')
 
@@ -48,7 +47,7 @@ generateControlFile(file = 'divcontrol.txt', params = list(
 	lambdaInitPrior = as.numeric(priors['lambdaInitPrior']),
 	lambdaShiftPrior = as.numeric(priors['lambdaShiftPrior']),
 	muInitPrior = as.numeric(priors['muInitPrior']),
-	expectedNumberOfShifts = '1'))}
+	expectedNumberOfShifts = '1'))
 }
 \author{
 Dan Rabosky

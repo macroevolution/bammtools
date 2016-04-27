@@ -63,7 +63,6 @@
 ##' @references \url{http://bamm-project.org}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(events.whales, whales)
 ##' ed <- getEventData(whales, events.whales, nsamples=500)
 ##' all_rates <- getCladeRates(ed)
@@ -80,7 +79,7 @@
 ##' 
 ##' # defining multiple nodes
 ##' mean(getCladeRates(ed, node=c(132, 140),
-##'      nodetype=c('include','exclude'))$lambda)}
+##'      nodetype=c('include','exclude'))$lambda)
 ##' @export
 getCladeRates <- function(ephy, node = NULL, nodetype='include', verbose=FALSE) {
 	

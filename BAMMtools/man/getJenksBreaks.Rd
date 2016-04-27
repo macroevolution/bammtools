@@ -44,7 +44,6 @@ Given a vector of numeric values and the number of desired
     classInt R package.
 }
 \examples{
-\dontrun{
 # load whales dataset
 data(whales, events.whales)
 ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
@@ -54,7 +53,7 @@ ed <- dtRates(ed, tau=0.01)
 vec <- ed$dtrates$rates[[1]]
 
 # Return breaks for the binning of speciation rates into 64 groups
-getJenksBreaks(vec, 64)}
+getJenksBreaks(vec, 64)
 }
 \author{
 Pascal Title

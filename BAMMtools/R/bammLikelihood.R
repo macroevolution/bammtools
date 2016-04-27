@@ -566,7 +566,6 @@ meanExponentialRate <- function(rate_init, rate_shift, t_start, t_end) {
 ##' @author Dan Rabosky, Pascal Title
 ##'
 ##' @examples
-##' \dontrun{
 ##' # a global sampling fraction of 0.98 was used in generating the whales
 ##' # dataset.
 ##' data(whales, events.whales, mcmc.whales)
@@ -579,7 +578,7 @@ meanExponentialRate <- function(rate_init, rate_shift, t_start, t_end) {
 ##' # an example with a constant-rate birth-death process:
 ##' pars <- c(0.5, 0.45)
 ##' names(pars) <- c("lambda", "mu")
-##' BAMMlikelihood(whales, pars, sf = 0.98)}
+##' BAMMlikelihood(whales, pars, sf = 0.98)
 ##' @export
 BAMMlikelihood <- function(phy, eventdata, gen = 'last', segLength = 0.02, sf = 1, return.intermediates = FALSE, e_prob_condition = "if_different", ...) {
 	#gen can be a number 1 -> numberOfGenerations, or 'last', or 'all'

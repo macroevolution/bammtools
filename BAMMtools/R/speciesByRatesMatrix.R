@@ -30,7 +30,6 @@
 ##' @references \url{http://bamm-project.org}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales, events.whales)
 ##' ed <- getEventData(whales,events.whales,burnin=0.25, nsamples=500)
 ##' ratemat <- speciesByRatesMatrix(ed, nslices = 100)
@@ -48,7 +47,7 @@
 ##' axis(1,seq(-5,35,5))
 ##' axis(2,seq(-0.2,0.8,0.2),las=1)
 ##' mtext("Time since root",1,line=2.5)
-##' mtext("Speciation rate",2,line=2.5)}
+##' mtext("Speciation rate",2,line=2.5)
 ##' @export
 speciesByRatesMatrix = function(ephy, nslices, index = NULL, spex = "s") {
 	if (!spex %in% c('s', 'e', 'netdiv')) {

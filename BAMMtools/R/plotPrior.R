@@ -19,9 +19,8 @@
 ##' @author Pascal Title
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(mcmc.whales)
-##' plotPrior(mcmc.whales, expectedNumberOfShifts = 1, burnin = 0.15)}
+##' plotPrior(mcmc.whales, expectedNumberOfShifts = 1, burnin = 0.15)
 ##' @export
 plotPrior <- function(mcmc, expectedNumberOfShifts = 1, burnin = 0.15, priorCol = 'light blue', postCol = 'red', legendPos = 'topright', ...) {
 	

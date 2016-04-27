@@ -61,7 +61,6 @@ If a \code{shiftnodes} argument is passed care should be taken to
     the sample index.
 }
 \examples{
-\dontrun{
 data(whales, events.whales)
 ed <- getEventData(whales, events.whales, burnin=0.25, nsamples = 500)
 
@@ -76,7 +75,7 @@ for (i in 1:6) {
   sed <- subsetEventData(ed, samples[i])
   plot(sed, par.reset=FALSE)
   addBAMMshifts(sed,index=1,method="phylogram",par.reset=FALSE)	
-}}
+}
 }
 \author{
 Mike Grundler

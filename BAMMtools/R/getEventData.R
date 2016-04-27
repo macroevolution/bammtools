@@ -141,7 +141,6 @@
 ##' @references \url{http:bamm-project.org}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(primates, events.primates)
 ##' xx <- getEventData(primates, events.primates, burnin=0.25, nsamples=500,
 ##'                    type = 'trait')
@@ -151,7 +150,7 @@
 ##' mean(brates$beta)
 ##' 
 ##' # Plot rates:
-##' plot.bammdata(xx)}
+##' plot(xx)
 ##' @export
 getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALSE, type = 'diversification')
 {	

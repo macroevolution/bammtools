@@ -72,14 +72,13 @@
 ##' @references \url{http://bamm-project.org}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales, events.whales)
 ##' ed <- getEventData(whales, events.whales, nsamples=500)
 ##' 
 ##' cormat <- getCohortMatrix(ed)
 ##' 
 ##' dim(cormat)
-##' hist(cormat, breaks=50)}
+##' hist(cormat, breaks=50)
 ##' @export
 getCohortMatrix <- function(ephy) {
 	if (!'bammdata' %in% class(ephy)) {

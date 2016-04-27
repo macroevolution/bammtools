@@ -22,11 +22,11 @@
 ##'     \code{\link{image}}
 ##'
 ##' @examples
-##' \dontrun{
+##' data(whales, events.whales)
 ##' ed <- getEventData(whales, events.whales, nsamples=500)
 ##' ed2 <- subsetEventData(ed, index=1)
-##' plot.bammdata(ed2) 
-##' addBAMMshifts(ed2, cex=2)}
+##' plot(ed2) 
+##' addBAMMshifts(ed2, cex=2)
 ##' @export
 subsetEventData <- function(ephy, index) {
 	

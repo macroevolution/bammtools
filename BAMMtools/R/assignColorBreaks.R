@@ -39,7 +39,6 @@
 ##' @seealso \code{\link{plot.bammdata}}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales, events.whales)
 ##' ed <- getEventData(whales, events.whales, burnin = 0.2, nsamples = 500)
 ##'
@@ -55,7 +54,7 @@
 ##' #colors <- assignColorBreaks(ed$dtrates$rates[[1]] - ed$dtrates$rates[[2]]) 
 ##' #this also works for diversification rates
 ##'
-##' plot(ed, colorbreaks = colors, spex="netdiv")}
+##' plot(ed, colorbreaks = colors, spex="netdiv")
 ##' @export
 assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE, method = c("linear","quantile","jenks"), JenksSubset = NULL) {
 	method = match.arg(method, c("linear", "quantile", "jenks"));

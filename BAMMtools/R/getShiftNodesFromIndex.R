@@ -39,7 +39,6 @@
 ##' \code{\link{maximumShiftCredibility}}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales, events.whales)
 ##' ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=500)
 ##' 
@@ -49,7 +48,7 @@
 ##' # Get the nodes at which shifts occurred in the 
 ##' # maximum shift credibility configuration:
 ##' 
-##' getShiftNodesFromIndex(ed, index=msc$sampleindex)}
+##' getShiftNodesFromIndex(ed, index=msc$sampleindex)
 ##' @export
 getShiftNodesFromIndex <- function(ephy, index) {
 	

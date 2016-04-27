@@ -75,13 +75,11 @@ This produces phylorate plots for the \code{plotmax}
     probability that a shift occurs on a specific branch.
 }
 \examples{
-\dontrun{
 data(events.whales)
 data(whales)
 ed <- getEventData(whales, events.whales, nsamples=500)
-
 cset <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
-plot(cset)}
+plot(cset)
 }
 \author{
 Mike Grundler

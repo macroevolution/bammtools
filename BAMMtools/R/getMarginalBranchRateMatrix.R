@@ -38,12 +38,11 @@
 ##' @author Dan Rabosky
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales)
 ##' data(events.whales)
 ##' ed <- getEventData(whales, events.whales, nsamples = 10)
 ##' mbr <- getMarginalBranchRateMatrix(ed)
-##' dim(mbr$lambda_branch_matrix)}
+##' dim(mbr$lambda_branch_matrix)
 ##' @export
 getMarginalBranchRateMatrix <- function(ephy, verbose=FALSE) {
 	

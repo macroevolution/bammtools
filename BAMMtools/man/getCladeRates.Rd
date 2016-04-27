@@ -62,7 +62,6 @@ Computes the time-weighted mean evolutionary rate for a given
     means, medians, quantiles, etc from these vectors.
 }
 \examples{
-\dontrun{
 data(events.whales, whales)
 ed <- getEventData(whales, events.whales, nsamples=500)
 all_rates <- getCladeRates(ed)
@@ -79,7 +78,7 @@ mean(dol_rates$mu)
 
 # defining multiple nodes
 mean(getCladeRates(ed, node=c(132, 140),
-     nodetype=c('include','exclude'))$lambda)}
+     nodetype=c('include','exclude'))$lambda)
 }
 \author{
 Dan Rabosky

@@ -132,10 +132,10 @@ data(events.whales)
 data(whales)
 ephy <- getEventData(whales,events.whales)
 
-## Simple plot of rates through time with default settings
+# Simple plot of rates through time with default settings
 plotRateThroughTime(ephy)
 
-## Plot two processes separately with 90\% CI and loess smoothing
+# Plot two processes separately with 90\% CI and loess smoothing
 plotRateThroughTime(ephy, intervals=seq(from=0,0.9,by=0.01), smooth=TRUE,
                     node=141, nodetype='exclude', ylim=c(0,1.2))
 
@@ -147,7 +147,7 @@ legend('topleft', legend=c('Dolphins','Whales'), col='red',
     fill=c('orange','blue'), border=FALSE, lty=1, lwd=2, merge=TRUE,
            seg.len=0.6)
 
-## Same plot, but from bamm-ratematrix objects
+# Same plot, but from bamm-ratematrix objects
 rmat1 <- getRateThroughTimeMatrix(ephy, node=141, nodetype='exclude')
 rmat2 <- getRateThroughTimeMatrix(ephy, node=141, nodetype='include')
 
@@ -157,15 +157,15 @@ plotRateThroughTime(rmat1, intervals=seq(from=0,0.9,by=0.01),
 plotRateThroughTime(rmat2, intervals=seq(from=0,0.9,by=0.01), 
     smooth=TRUE, add=TRUE, intervalCol='orange')
 
-## To plot the mean rate without the confidence envelope
+# To plot the mean rate without the confidence envelope
 plotRateThroughTime(ephy,useMedian=FALSE, intervals=NULL)
 
-## To plot the mean rate, with a single 95\% confidence envelope, grayscale
+# To plot the mean rate, with a single 95\% confidence envelope, grayscale
 plotRateThroughTime(ephy,useMedian=FALSE, intervals=c(0.05,0.95),
     intervalCol='gray70', avgCol='black', opacity=1)
 
-## To not plot, but instead return the plotting data generated in this
-## function, we can make plot=FALSE
+# To not plot, but instead return the plotting data generated in this
+# function, we can make plot=FALSE
 plotRateThroughTime(ephy, plot=FALSE)}
 }
 \author{

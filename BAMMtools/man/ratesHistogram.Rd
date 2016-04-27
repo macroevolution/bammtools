@@ -44,15 +44,14 @@ With this function, a histogram is plotted that shows the
     website for more information on the utility of this function.
 }
 \examples{
-\dontrun{
 data(primates, events.primates)
 ed <- getEventData(primates, events.primates, burnin=0.25, nsamples=500,
                    type = 'trait')
 
 # create phylorate plot with the jenks breaks method to generate output
-phylorates <- plot.bammdata(ed, breaksmethod='jenks', show = FALSE)
+phylorates <- plot(ed, breaksmethod='jenks', show = FALSE)
 
-ratesHistogram(phylorates, plotBrks = TRUE, xlab = 'trait rates')}
+ratesHistogram(phylorates, plotBrks = TRUE, xlab = 'trait rates')
 }
 \author{
 Pascal Title

@@ -39,11 +39,8 @@
 ##' @author Dan Rabosky
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(mcmc.whales)
-##'
 ##' computeBayesFactors(mcmc.whales, expectedNumberOfShifts = 1, burnin = 0.1)
-##' }
 ##' @export
 computeBayesFactors <- function(postdata, expectedNumberOfShifts, burnin = 0.1, ...){
 

@@ -47,7 +47,6 @@
 ##' @author Pascal Title
 ##'
 ##' @examples
-##' \dontrun{
 ##' # Generate dummy data
 ##' tree <- read.tree(text="(((t1:2,(t2:1,t3:1):1):1,((t4:1,t5:1):1,t6:2):1)
 ##'                   :1,(t7:3,(t8:2,t9:2):1):1);")
@@ -76,7 +75,7 @@
 ##' spTable
 ##'
 ##' samplingProbs(tree, cladeTable = spTable, cladeRichness = NULL, 
-##'               globalSampling = 0.9, writeToDisk = FALSE)}
+##'               globalSampling = 0.9, writeToDisk = FALSE)
 ##' @export
 samplingProbs <- function(tree, cladeTable, cladeRichness = NULL, globalSampling, output, writeToDisk = TRUE) {
 	

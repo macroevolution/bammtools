@@ -44,15 +44,14 @@
 ##' @references \url{http://bamm-project.org}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(primates, events.primates)
 ##' ed <- getEventData(primates, events.primates, burnin=0.25, nsamples=500,
 ##'                    type = 'trait')
 ##'
 ##' # create phylorate plot with the jenks breaks method to generate output
-##' phylorates <- plot.bammdata(ed, breaksmethod='jenks', show = FALSE)
+##' phylorates <- plot(ed, breaksmethod='jenks', show = FALSE)
 ##'
-##' ratesHistogram(phylorates, plotBrks = TRUE, xlab = 'trait rates')}
+##' ratesHistogram(phylorates, plotBrks = TRUE, xlab = 'trait rates')
 ##' @export
 ratesHistogram <- function(phylorates, plotBrks = TRUE, xlab = 'speciation rate', ylab = 'density', lwd = 0.2, lty = 1, brksCol = 'black', ...) {
 	

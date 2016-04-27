@@ -73,14 +73,13 @@
 ##' @seealso \code{\link{plot.bammshifts}}, \code{\link{credibleShiftSet}}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales, events.whales)
 ##' ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 ##' 
 ##' sc <- distinctShiftConfigurations(ed, expectedNumberOfShifts = 1,
 ##'                                   threshold = 5)
 ##' 
-##' plot.bammshifts(sc, ed, rank=1)}
+##' plot(sc, ed, rank=1)
 ##' @export
 distinctShiftConfigurations <- function(ephy, expectedNumberOfShifts, threshold, ... ) {
   

@@ -33,9 +33,8 @@ Generates a barplot of the prior and posterior distributions
     of the number of shifts.
 }
 \examples{
-\dontrun{
 data(mcmc.whales)
-plotPrior(mcmc.whales, expectedNumberOfShifts = 1, burnin = 0.15)}
+plotPrior(mcmc.whales, expectedNumberOfShifts = 1, burnin = 0.15)
 }
 \author{
 Pascal Title

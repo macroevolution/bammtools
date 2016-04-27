@@ -124,10 +124,10 @@
 ##' data(whales)
 ##' ephy <- getEventData(whales,events.whales)
 ##'
-##' ## Simple plot of rates through time with default settings
+##' # Simple plot of rates through time with default settings
 ##' plotRateThroughTime(ephy)
 ##' 
-##' ## Plot two processes separately with 90% CI and loess smoothing
+##' # Plot two processes separately with 90% CI and loess smoothing
 ##' plotRateThroughTime(ephy, intervals=seq(from=0,0.9,by=0.01), smooth=TRUE,
 ##'                     node=141, nodetype='exclude', ylim=c(0,1.2))
 ##' 
@@ -139,7 +139,7 @@
 ##'     fill=c('orange','blue'), border=FALSE, lty=1, lwd=2, merge=TRUE,
 ##'            seg.len=0.6)
 ##' 
-##' ## Same plot, but from bamm-ratematrix objects
+##' # Same plot, but from bamm-ratematrix objects
 ##' rmat1 <- getRateThroughTimeMatrix(ephy, node=141, nodetype='exclude')
 ##' rmat2 <- getRateThroughTimeMatrix(ephy, node=141, nodetype='include')
 ##'
@@ -149,15 +149,15 @@
 ##' plotRateThroughTime(rmat2, intervals=seq(from=0,0.9,by=0.01), 
 ##'     smooth=TRUE, add=TRUE, intervalCol='orange')
 ##'
-##' ## To plot the mean rate without the confidence envelope
+##' # To plot the mean rate without the confidence envelope
 ##' plotRateThroughTime(ephy,useMedian=FALSE, intervals=NULL)
 ##'
-##' ## To plot the mean rate, with a single 95% confidence envelope, grayscale
+##' # To plot the mean rate, with a single 95% confidence envelope, grayscale
 ##' plotRateThroughTime(ephy,useMedian=FALSE, intervals=c(0.05,0.95),
 ##'     intervalCol='gray70', avgCol='black', opacity=1)
 ##'
-##' ## To not plot, but instead return the plotting data generated in this
-##' ## function, we can make plot=FALSE
+##' # To not plot, but instead return the plotting data generated in this
+##' # function, we can make plot=FALSE
 ##' plotRateThroughTime(ephy, plot=FALSE)}
 ##' @export
 plotRateThroughTime <- function(ephy, useMedian = TRUE, intervals=seq(from = 0,to = 1,by = 0.01), ratetype = 'auto', nBins = 100, smooth = FALSE, smoothParam = 0.20, opacity = 0.01, intervalCol='blue', avgCol='red',start.time = NULL, end.time = NULL, node = NULL, nodetype='include', plot = TRUE, cex.axis=1, cex.lab=1.3, lwd=3, xline=3.5, yline=3.5, mar=c(6,6,1,1), xticks=NULL, yticks=NULL, xlim='auto', ylim='auto',add=FALSE, axis.labels=TRUE) {

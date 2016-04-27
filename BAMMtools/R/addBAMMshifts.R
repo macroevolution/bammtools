@@ -45,7 +45,6 @@
 ##' @seealso \code{\link{getShiftNodesFromIndex}}, \code{\link{plot.bammdata}}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales, events.whales)
 ##' ed <- getEventData(whales, events.whales, burnin=0.25, nsamples = 500)
 ##' 
@@ -60,7 +59,7 @@
 ##'   sed <- subsetEventData(ed, samples[i])
 ##'   plot(sed, par.reset=FALSE)
 ##'   addBAMMshifts(sed,index=1,method="phylogram",par.reset=FALSE)	
-##' }}
+##' }
 ##' @export
 addBAMMshifts = function(ephy, index = 1, method = 'phylogram', cex=1, pch=21, col=1, bg=2, msp = NULL, shiftnodes = NULL, par.reset=TRUE) {
 	if (!'bammdata' %in% class(ephy)) stop("Object ephy must be of class bammdata");

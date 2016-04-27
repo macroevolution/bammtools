@@ -50,11 +50,8 @@ This function returns a matrix of pairwise Bayes factors, where
     probabilities in the tails of the distribution.
 }
 \examples{
-\dontrun{
 data(mcmc.whales)
-
 computeBayesFactors(mcmc.whales, expectedNumberOfShifts = 1, burnin = 0.1)
-}
 }
 \author{
 Dan Rabosky

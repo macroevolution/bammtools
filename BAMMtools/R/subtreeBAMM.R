@@ -22,7 +22,6 @@
 ##' @seealso \code{\link{getmrca}}, \code{\link{plot.bammdata}}
 ##'
 ##' @examples
-##' \dontrun{
 ##' data(whales, events.whales)
 ##' ephy <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 ##' 
@@ -34,7 +33,7 @@
 ##' subphy <- subtreeBAMM(ephy,node=103)
 ##' 
 ##' # plot the subtree
-##' plot(subphy)}
+##' plot(subphy)
 ##' @export
 subtreeBAMM <- function(ephy,tips=NULL,node=NULL)
 {

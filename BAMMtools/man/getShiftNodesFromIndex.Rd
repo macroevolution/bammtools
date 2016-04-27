@@ -28,7 +28,6 @@ Find the node numbers associated with rate shifts for a
     \code{bammdata} object.
 }
 \examples{
-\dontrun{
 data(whales, events.whales)
 ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=500)
 
@@ -38,7 +37,7 @@ msc <- maximumShiftCredibility(ed)
 # Get the nodes at which shifts occurred in the 
 # maximum shift credibility configuration:
 
-getShiftNodesFromIndex(ed, index=msc$sampleindex)}
+getShiftNodesFromIndex(ed, index=msc$sampleindex)
 }
 \author{
 Dan Rabosky

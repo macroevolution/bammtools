@@ -58,12 +58,11 @@ This is one point estimate of the overall "best" rate shift
     probability (see \code{\link{getBestShiftConfiguration}}).
 }
 \examples{
-\dontrun{
 data(whales, events.whales)
 ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 best_config <- maximumShiftCredibility(ed)
-plot.bammdata(ed)
-addBAMMshifts(ed, method='phylogram', index=best_config$sampleindex)}
+plot(ed)
+addBAMMshifts(ed, method='phylogram', index=best_config$sampleindex)
 }
 \author{
 Dan Rabosky
