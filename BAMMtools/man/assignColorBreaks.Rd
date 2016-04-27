@@ -8,23 +8,25 @@ assignColorBreaks(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
   method = c("linear", "quantile", "jenks"), JenksSubset = NULL)
 }
 \arguments{
-\item{rates}{a numeric vector of phenotypic rates or a list of numeric vectors of
-speciation and extinction rates.}
+\item{rates}{A numeric vector of phenotypic rates or a list of numeric
+vectors of speciation and extinction rates.}
 
-\item{NCOLORS}{an integer number of colors to use for the mapping. Larger numbers do not 
-necessarily result in smoother looking color ramps. The default is 64 and is probably
-sufficient for most purposes.}
+\item{NCOLORS}{An integer number of colors to use for the mapping. Larger
+numbers do not necessarily result in smoother looking color ramps. The
+default is 64 and is probably sufficient for most purposes.}
 
-\item{spex}{a character string. "s" means that speciation rates are used to make the
-map, "e" means that extinction rates are used. "netdiv" means that diversification
-rates are used. Ignored for BAMM trait data.}
+\item{spex}{A character string. "s" means that speciation rates are used
+to make the map, "e" means that extinction rates are used. "netdiv"
+means that diversification rates are used. Ignored for BAMM trait
+data.}
 
-\item{logcolor}{should the natural logarithm of rates be used for the color map.}
+\item{logcolor}{Logical. Should the natural logarithm of rates be used for
+the color map.}
 
-\item{method}{determines how the color breaks are created. See details.}
+\item{method}{Determines how the color breaks are created. See Details.}
 
-\item{JenksSubset}{Number of regularly spaced samples to subset from \code{rates}.
-Only relevant when \code{method = "jenks"}. See Details.}
+\item{JenksSubset}{Number of regularly spaced samples to subset from
+\code{rates}. Only relevant when \code{method = "jenks"}. See Details.}
 }
 \value{
 A numeric vector of rate percentiles/intervals.
@@ -33,18 +35,20 @@ A numeric vector of rate percentiles/intervals.
 Maps macroevolutionary rates to a set of \code{NCOLORS}.
 }
 \details{
-If \code{method = "quantile"} macroevolutionary rates are binned into
-\code{NCOLORS+1} percentiles and rates in each bin are mapped to a color determined by
-the \code{pal} argument in \code{plot.bammdata}. Alternatively, if \code{method = "linear"}
-macroevolutionary rates are binned into \code{NCOLORS+1} equal length intervals between the
-minimum and maximum. 
+If \code{method = "quantile"} macroevolutionary rates are binned
+    into \code{NCOLORS+1} percentiles and rates in each bin are mapped to
+    a color determined by the \code{pal} argument in \code{plot.bammdata}.
+    Alternatively, if \code{method = "linear"} macroevolutionary rates are
+    binned into \code{NCOLORS+1} equal length intervals between the
+    minimum and maximum. 
 
-If \code{method = "jenks"}, macroevolutionary rates are binned into \code{NCOLORS+1}
-categories, according to the Jenks natural breaks classification method. This method is
-borrowed from the field of cartography, and seeks to minimize the variance within
-categories, while maximizing the variance between categories. 
+    If \code{method = "jenks"}, macroevolutionary rates are binned into
+    \code{NCOLORS+1} categories, according to the Jenks natural breaks
+    classification method. This method is borrowed from the field of
+    cartography, and seeks to minimize the variance within categories,
+    while maximizing the variance between categories. 
 
-The Jenks natural breaks method was ported to C from code found in the classInt R package.
+    The Jenks natural breaks method was ported to C from code found in the classInt R package.
 }
 \examples{
 \dontrun{

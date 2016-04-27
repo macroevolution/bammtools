@@ -8,24 +8,25 @@ generateControlFile(file = "controlfile.txt", type = "diversification",
   params = NULL)
 }
 \arguments{
-\item{file}{destination file name with or without path}
+\item{file}{Destination file name with or without path.}
 
-\item{type}{character, either \dQuote{\code{diversification}} or 
-\dQuote{\code{trait}}, depending on the desired BAMM analysis}
+\item{type}{Character, either \dQuote{\code{diversification}} or 
+\dQuote{\code{trait}}, depending on the desired BAMM analysis.}
 
-\item{params}{list of parameters, see \code{Details}.}
+\item{params}{List of parameters, see \code{Details}.}
 }
 \description{
-enerates a template diversification or trait control files for BAMM,
-while allowing the user to specify parameter values.
+enerates a template diversification or trait control files
+    for BAMM, while allowing the user to specify parameter values.
 }
 \details{
-The user can supply parameters as a list, where the name of the list item
-is the name of the parameter as it appears in the control file, and the value of the
-list item is what will be placed in the contol file.
+The user can supply parameters as a list, where the name of the
+    list item is the name of the parameter as it appears in the control
+    file, and the value of the list item is what will be placed in the
+    contol file.
 
-If a parameter is specified by the user, it will automatically be uncommented if it
-was commented in the template.
+    If a parameter is specified by the user, it will automatically be
+    uncommented if it was commented in the template.
 }
 \examples{
 \dontrun{
@@ -39,14 +40,14 @@ data(whales)
 priors <- setBAMMpriors(whales, outfile = NULL)
 
 generateControlFile(file = 'divcontrol.txt', params = list(
-	treefile = 'whales.tre',
-	globalSamplingFraction = '1',
-	numberOfGenerations = '100000',
-	overwrite = '1',
-	lambdaInitPrior = as.numeric(priors['lambdaInitPrior']),
-	lambdaShiftPrior = as.numeric(priors['lambdaShiftPrior']),
-	muInitPrior = as.numeric(priors['muInitPrior']),
-	expectedNumberOfShifts = '1'))}
+    treefile = 'whales.tre',
+    globalSamplingFraction = '1',
+    numberOfGenerations = '100000',
+    overwrite = '1',
+    lambdaInitPrior = as.numeric(priors['lambdaInitPrior']),
+    lambdaShiftPrior = as.numeric(priors['lambdaShiftPrior']),
+    muInitPrior = as.numeric(priors['muInitPrior']),
+    expectedNumberOfShifts = '1'))}
 }
 \author{
 Pascal Title

@@ -1,12 +1,12 @@
 ##' @title Write a \code{bammdata} object to disk
 ##'
-##' @description Takes a bammdata object and re-writes it back into a treefile and
-##' an event csv file.
+##' @description Takes a bammdata object and re-writes it back into a treefile
+##'     and an event csv file.
 ##'
-##' @param ephy a \code{bammdata} object
-##' @param outtreefile the file name for outputting the tree
-##' @param outeventfile the file name for outputting the event csv file
-##' @param ... additional arguments to pass to \code{write.csv}
+##' @param ephy A \code{bammdata} object.
+##' @param outtreefile The file name for outputting the tree.
+##' @param outeventfile The file name for outputting the event csv file.
+##' @param \dots Additional arguments to pass to \code{write.csv}.
 ##'
 ##' @seealso \code{\link{subtreeBAMM}}
 ##' @export

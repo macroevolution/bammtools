@@ -2,30 +2,32 @@
 % Please edit documentation in R/marginalOddsRatioBranches.R
 \name{marginalOddsRatioBranches}
 \alias{marginalOddsRatioBranches}
-\title{Ratio of (marginal) posterior-to-prior probabilities on individual branches}
+\title{Ratio of (marginal) posterior-to-prior probabilities on individual
+    branches}
 \usage{
 marginalOddsRatioBranches(ephy, expectedNumberOfShifts)
 }
 \arguments{
-\item{ephy}{an object of class \code{bammdata}}
+\item{ephy}{An object of class \code{bammdata}.}
 
-\item{expectedNumberOfShifts}{Expected number of shifts under the prior alone}
+\item{expectedNumberOfShifts}{Expected number of shifts under the prior
+alone.}
 }
 \value{
-A object of class \code{phylo} but where each branch length is equal to
-the marginal shift odds on each branch.
+A object of class \code{phylo} but where each branch length is
+    equal to the marginal shift odds on each branch.
 }
 \description{
-Compute marginal posterior-to-prior odds ratio associated with
-observing one or more rate shift on a given branch.
+Compute marginal posterior-to-prior odds ratio associated
+    with observing one or more rate shift on a given branch.
 }
 \details{
-This function returns a copy of a phylogenetic tree where each branch
-length is equal to the marginal odds ratio in favor of a rate shift on a
-particular branch. These cannot be interpreted as evidence for a rate shift in
-an absolute sense. As explained on the website, they are a marginal odds ratio.
-This function is provided primarily for the purpose of distinguishing core and
-non-core shifts.
+This function returns a copy of a phylogenetic tree where each
+    branch length is equal to the marginal odds ratio in favor of a rate
+    shift on a particular branch. These cannot be interpreted as evidence
+    for a rate shift in an absolute sense. As explained on the website,
+    they are a marginal odds ratio. This function is provided primarily
+    for the purpose of distinguishing core and non-core shifts.
 }
 \examples{
 \dontrun{
@@ -52,7 +54,8 @@ generateControlFile(file = 'divcontrol.txt', params = list(
 Dan Rabosky
 }
 \seealso{
-\code{\link{getBranchShiftPriors}}, \code{\link{distinctShiftConfigurations}},
-\code{\link{credibleShiftSet}}
+\code{\link{getBranchShiftPriors}},
+    \code{\link{distinctShiftConfigurations}},
+    \code{\link{credibleShiftSet}}
 }
 

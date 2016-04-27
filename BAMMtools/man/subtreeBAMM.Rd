@@ -2,44 +2,46 @@
 % Please edit documentation in R/subtreeBAMM.R
 \name{subtreeBAMM}
 \alias{subtreeBAMM}
-\title{Pulls out a subtree from bammdata object}
+\title{Pulls out a subtree from \code{bammdata} object}
 \usage{
 subtreeBAMM(ephy, tips = NULL, node = NULL)
 }
 \arguments{
-\item{ephy}{an object of class \code{bammdata}.}
+\item{ephy}{An object of class \code{bammdata}.}
 
-\item{tips}{an integer or character vector indicating which tips (more than one)
-to be included in the subtree.}
+\item{tips}{An integer or character vector indicating which tips (more
+than one) to be included in the subtree.}
 
-\item{node}{an integer indicating the root of the subtree to be extracted, and
-it must correspond to an innernode on the tree.}
+\item{node}{An integer indicating the root of the subtree to be extracted,
+and it must correspond to an innernode on the tree.}
 }
 \value{
-an object of class \code{bammdata}.
+An object of class \code{bammdata}.
 }
 \description{
-Given a set of tips or a node, this function extracts the corresponding
-subtree from the \code{bammdata} object. User should specify either a set of tips or
-a node, and the node will overwrite the tips if both are given.
+Given a set of tips or a node, this function extracts the
+    corresponding subtree from the \code{bammdata} object. User should
+    specify either a set of tips or a node, and the node will overwrite
+    the tips if both are given.
 }
 \details{
-This function allows users to extract a subtree from a big \code{bammdata}
-object, and examine the subset using \code{\link{plot.bammdata}}
+This function allows users to extract a subtree from a big
+    \code{bammdata} object, and examine the subset using
+    \code{\link{plot.bammdata}}
 }
 \examples{
 \dontrun{
 data(whales, events.whales)
 ephy <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 
-#specify a set of tips for the subtree
+# specify a set of tips for the subtree
 tips <- sample(ephy$tip.label,size=20,replace=FALSE)
 subphy <- subtreeBAMM(ephy,tips=tips)
 
-#specify a innernode for subsetting
+# specify a innernode for subsetting
 subphy <- subtreeBAMM(ephy,node=103)
 
-#plot the subtree
+# plot the subtree
 plot(subphy)}
 }
 \author{
