@@ -214,7 +214,7 @@
 ##' cset$indices[[1]]
 ##'
 ##' # Now we can plot the credible set:
-##' plot.credibleshiftset(cset, plotmax=4)
+##' plot(cset, plotmax=4)
 ##' @export
 credibleShiftSet <- function(ephy, expectedNumberOfShifts, threshold = 5, set.limit = 0.95, ...){
 	
