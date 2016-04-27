@@ -1,4 +1,5 @@
 #Author: Arni Magnusson, normally distributed in gplots library
+##' @export
 richColors <- function (n, alpha = 1, rgb = FALSE) 
 {
     if (n <= 0) 
