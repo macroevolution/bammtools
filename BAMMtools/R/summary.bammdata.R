@@ -1,20 +1,22 @@
 ##' @title Summary of rate shift results from \code{BAMM} analysis
 ##'
-##' @description Summarizes the posterior distribution on the number of shifts.
+##' @description Summarizes the posterior distribution on the number of
+##'     shifts.
 ##'
-##' @param object an object of class \code{bammdata}.
-##' @param display an integer for the number of rows of the posterior to display.
-##' @param print rint summary of shift distribution in console window?
-##' @param ... additional arguments (currently unused).
+##' @param object An object of class \code{bammdata}.
+##' @param display An integer for the number of rows of the posterior to
+##'     display.
+##' @param print Print summary of shift distribution in console window?
+##' @param \dots Additional arguments (currently unused).
 ##'
-##' @details Prints to console the number of posterior samples and the posterior 
-##' distribution on the number of shifts, which is just the fraction of 
-##' samples in the posterior having 0, 1, 2,...n shifts.
+##' @details Prints to console the number of posterior samples and the
+##'     posterior distribution on the number of shifts, which is just the
+##'     fraction of samples in the posterior having 0, 1, 2,...n shifts.
 ##'
 ##' @return Returns (invisibly) a dataframe with 2 components:
-##' \item{shifts}{the number of shifts}
-##' \item{prob}{the corresponding posterior probability of a model with a given
-##' number of rate shifts.}
+##'     \item{shifts}{The number of shifts.}
+##'     \item{prob}{The corresponding posterior probability of a model with a
+##'     given number of rate shifts.}
 ##'
 ##' @author Mike Grundler, Dan Rabosky
 ##'

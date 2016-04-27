@@ -8,12 +8,15 @@
 
 ##' @title Define colors with transparency
 ##'
-##' @description Converts a named color and opacity and returns the proper RGB code.
+##' @description Converts a named color and opacity and returns the proper RGB
+##'     code.
 ##'
-##' @param namedColor a color name
-##' @param alpha a transparency value between 0 and 1, where 0 is fully transparent
+##' @param namedColor A color name
+##' @param alpha A transparency value between 0 and 1, where 0 is fully
+##'     transparent.
 ##'
-##' @details This function is used internally by \code{\link{plotRateThroughTime}}.
+##' @details This function is used internally by
+##'     \code{\link{plotRateThroughTime}}.
 ##'
 ##' @return Returns the transparent color in RGB format.
 ##'

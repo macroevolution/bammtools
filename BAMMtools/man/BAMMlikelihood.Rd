@@ -8,64 +8,67 @@ BAMMlikelihood(phy, eventdata, gen = "last", segLength = 0.02, sf = 1,
   return.intermediates = FALSE, e_prob_condition = "if_different", ...)
 }
 \arguments{
-\item{phy}{either an object of class \code{phylo} or the path to a tree file in
-newick format.}
+\item{phy}{Either an object of class \code{phylo} or the path to a tree
+file in newick format.}
 
-\item{eventdata}{a table of event data, as returned by BAMM, either as an object
-of class \code{dataframe} or as the path to an event_data file. Alternatively, a
-named numeric vector of length two holding speciation ("lambda") and extinction
-("mu") rates for the constant-rate birth-death process.}
+\item{eventdata}{A table of event data, as returned by BAMM, either as an
+object of class \code{dataframe} or as the path to an event_data file.
+Alternatively, a named numeric vector of length two holding speciation
+("lambda") and extinction ("mu") rates for the constant-rate
+birth-death process.}
 
-\item{gen}{the BAMM generation for which the likelihood should be calculated. Can
-be an integer specifying a specific generation, or \code{last}, specifying the
-last generation, or \code{all}, in which case the likelihood will be calculated
-for all generations.}
+\item{gen}{The BAMM generation for which the likelihood should be
+calculated. Can be an integer specifying a specific generation, or
+\code{last}, specifying the last generation, or \code{all}, in which
+case the likelihood will be calculated for all generations.}
 
-\item{segLength}{The relative segment length, exactly as defined for BAMM}
+\item{segLength}{The relative segment length, exactly as defined for BAMM.}
 
-\item{sf}{sampling fraction.}
+\item{sf}{The sampling fraction.}
 
-\item{return.intermediates}{debugging option, returns augmented \code{phylo}
-objects for each generation, see Details.}
+\item{return.intermediates}{Debugging option, returns augmented
+\code{phylo} objects for each generation, see Details.}
 
-\item{e_prob_condition}{approach for how extinction probabilities are handled at
-nodes}
+\item{e_prob_condition}{Approach for how extinction probabilities are
+handled at nodes.}
 
-\item{...}{additional arguments that will be passed to an internal function
-\code{computeBAMMlikelihood}}
+\item{\dots}{Additional arguments that will be passed to an internal
+function \code{computeBAMMlikelihood}.}
 }
 \value{
-If \code{return.intermediates == TRUE}, then \code{phylo} objects are
-returned with the following components:
+If \code{return.intermediates == TRUE}, then \code{phylo} objects
+    are returned with the following components:
 
-\item{event_times}{a list of length (number of nodes), where event_times[[k]] is 
-the vector of absolute times, in order, of events that happened on a focal branch.
-If no event, it is NULL}
-\item{event_id}{a list of length equal to number of nodes, as event_times, but
-holding the corresponding event id}
-\item{events}{a dataframe giving parameters and associated nodes (and unique
-index values) of the event data.}
-\item{node_event}{The event governing the process realized at the node. This will
-be the first event encountered as one moves rootwards towards the tips from the
-focal node}
+    \item{event_times}{A list of length (number of nodes), where
+        event_times[[k]] is the vector of absolute times, in order, of
+        events that happened on a focal branch. If no event, it is
+        \code{NULL}.}
+    \item{event_id}{A list of length equal to number of nodes, as
+        event_times, but holding the corresponding event id.}
+    \item{events}{A dataframe giving parameters and associated nodes (and
+        unique index values) of the event data.}
+    \item{node_event}{The event governing the process realized at the
+        node. This will be the first event encountered as one moves
+        rootwards towards the tips from the focal node.}
 }
 \description{
-Calculates the likelihood of a phylogeny exactly as is done by BAMM,
-given a set of events.
+Calculates the likelihood of a phylogeny exactly as is done
+    by \code{BAMM}, given a set of events.
 }
 \details{
-This function allows the user to check the likelihoods computed by BAMM
-using an independent R-based implementation. This is designed to provide a check
-on potential software bugs that might be introduced during future BAMM development
-and which might compromise the likelihood calculation. If you observe measurable
-discrepancies between the likelihood computed by this function and the
-corresponding likelihood returned by BAMM, please inform the BAMM development team.
+This function allows the user to check the likelihoods computed
+    by BAMM using an independent R-based implementation. This is designed
+    to provide a check on potential software bugs that might be introduced
+    during future BAMM development and which might compromise the
+    likelihood calculation. If you observe measurable discrepancies
+    between the likelihood computed by this function and the corresponding
+    likelihood returned by BAMM, please inform the BAMM development team.
 }
 \examples{
 \dontrun{
+# a global sampling fraction of 0.98 was used in generating the whales
+# dataset.
 data(whales, events.whales, mcmc.whales)
-
-# a global sampling fraction of 0.98 was used in generating the whales dataset.
 
 x <- BAMMlikelihood(whales, events.whales, gen = 'last', sf = 0.98)
 

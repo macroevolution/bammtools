@@ -8,27 +8,29 @@ plotPrior(mcmc, expectedNumberOfShifts = 1, burnin = 0.15,
   priorCol = "light blue", postCol = "red", legendPos = "topright", ...)
 }
 \arguments{
-\item{mcmc}{a dataframe of the mcmc_out file from a BAMM run, or the filename}
+\item{mcmc}{A dataframe of the mcmc_out file from a BAMM run, or the
+filename.}
 
-\item{expectedNumberOfShifts}{Expected number of shifts under the prior}
+\item{expectedNumberOfShifts}{Expected number of shifts under the prior.}
 
-\item{burnin}{the fraction of samples to discard as burn-in}
+\item{burnin}{The fraction of samples to discard as burn-in.}
 
-\item{priorCol}{color for the prior distribution}
+\item{priorCol}{Color for the prior distribution.}
 
-\item{postCol}{color for the posterior distribution}
+\item{postCol}{Color for the posterior distribution.}
 
-\item{legendPos}{placement of the legend, see \code{\link{legend}}}
+\item{legendPos}{Placement of the legend, see \code{\link{legend}}.}
 
-\item{...}{additional parameters that are passed to \code{\link{barplot}}}
+\item{\dots}{Additional parameters that are passed to
+\code{\link{barplot}}.}
 }
 \value{
-Invisibly returns a matrix with the probability of each shift number
-under the prior and the posterior.
+Invisibly returns a matrix with the probability of each shift
+    number under the prior and the posterior.
 }
 \description{
-Generates a barplot of the prior and posterior distributions of the
-number of shifts.
+Generates a barplot of the prior and posterior distributions
+    of the number of shifts.
 }
 \examples{
 \dontrun{
