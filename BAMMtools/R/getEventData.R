@@ -138,7 +138,7 @@
 ##' @seealso \code{\link{summary.bammdata}}, \code{\link{plot.bammdata}},
 ##'     \code{\link{dtRates}}.
 ##' 
-##' @references \url{http:bamm-project.org}
+##' @references \url{http://bamm-project.org/}
 ##'
 ##' @examples
 ##' data(primates, events.primates)

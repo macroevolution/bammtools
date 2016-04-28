@@ -166,7 +166,7 @@ plot(xx)
 Dan Rabosky, Mike Grundler
 }
 \references{
-\url{http:bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \seealso{
 \code{\link{summary.bammdata}}, \code{\link{plot.bammdata}},
