@@ -27,7 +27,7 @@
 ##'     indicates extinction rates, and 'netdiv' indicates net diversification
 ##'     rates. Ignored if \code{ephy$type = "trait"}.
 ##' @param legend Logical indicating whether to plot a legend.
-##' @param add.freq.text a logical indicating whether the frequency of each
+##' @param add.freq.text A logical indicating whether the frequency of each
 ##'     sampled shift configuration should be added to each plot.
 ##' @param logcolor Logical. Should colors be plotted on a log scale.
 ##' @param breaksmethod Method used for determining color breaks. See help

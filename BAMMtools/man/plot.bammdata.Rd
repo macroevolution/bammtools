@@ -77,7 +77,7 @@ that will be masked with \code{mask.color} when plotted.}
 mapping rates to colors. If \code{NULL} (default) bins are calculated
 from the rates that are passed with the \code{bammdata} object.}
 
-\item{logcolor}{Should colors be plotted on a log scale.}
+\item{logcolor}{Logical. Should colors be plotted on a log scale.}
 
 \item{breaksmethod}{Method used for determining color breaks. See help
 file for \code{\link{assignColorBreaks}}.}

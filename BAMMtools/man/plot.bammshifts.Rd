@@ -33,7 +33,7 @@ rates. Ignored if \code{ephy$type = "trait"}.}
 
 \item{legend}{Logical indicating whether to plot a legend.}
 
-\item{add.freq.text}{a logical indicating whether the frequency of each
+\item{add.freq.text}{A logical indicating whether the frequency of each
 sampled shift configuration should be added to each plot.}
 
 \item{logcolor}{Logical. Should colors be plotted on a log scale.}

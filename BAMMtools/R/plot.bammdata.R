@@ -61,7 +61,7 @@ redirect <- function(coord, theta) {
 ##' @param colorbreaks A numeric vector of percentiles delimiting the bins for
 ##'     mapping rates to colors. If \code{NULL} (default) bins are calculated
 ##'     from the rates that are passed with the \code{bammdata} object.  	
-##' @param logcolor Should colors be plotted on a log scale.
+##' @param logcolor Logical. Should colors be plotted on a log scale.
 ##' @param breaksmethod Method used for determining color breaks. See help
 ##'     file for \code{\link{assignColorBreaks}}.
 ##' @param color.interval Min and max value for the mapping of rates. If
