@@ -14,28 +14,25 @@
 \alias{traits.fishes}
 \alias{whales}
 \title{BAMMtools datasets}
-\format{\code{geospiza} is a \code{phylo4d} object; \code{geospiza_raw} is a
-list containing \code{tree}, a \code{phylo} object (the tree), \code{data},
-and a data frame with the data (for showing examples of how to merge tree
-and data)}
 \source{
-Vos R.A., Mooers A.O. 2006. A new dated supertree of the Primates.
+Vos R.A., A.O. Mooers. 2006. A new dated supertree of the Primates.
     Chapter 5. In Inferring large phylogenies: the big tree problem (R
     Vos, Ph.D. thesis) Simon Fraser University.
 
-    Redding D.W., DeWolff C., Mooers A.O. 2010. Evolutionary
+    Redding D.W., C. DeWolff, A.O. Mooers. 2010. Evolutionary
     distinctiveness, threat status and ecological oddity in primates.
-    Conserv. Biol. 24:1052-1058.
+    Conservation Biology 24: 1052-1058. DOI:
+    10.1111/j.1523-1739.2010.01532.x
 
-    Steeman, M. E., M. B. Hebsgaard, R. E. Fordyce, S. W. Y. Ho, D. L.
-    Rabosky, R. Nielsen, C. Rahbek, H.  Glenner, M. V. Sorensen, E.
-    Willerslev.  2009. Evolution and radiation of extant whales.
-    Systematic Biology. 58:573-585.
+    Steeman, M.E., M.B. Hebsgaard, R.E. Fordyce, S.W.Y. Ho, D.L. Rabosky,
+    R. Nielsen, C. Rahbek, H. Glenner, M.V. Sorensen, E. Willerslev. 2009.
+    Radiation of Extant Cetaceans Driven by Restructuring of the Oceans.
+    Systematic Biology. 58: 573-585. DOI: 10.1093/sysbio/syp060
 
-    Rabosky, D. L., F. Santini, J. T. Eastman, S. A. Smith, B. L.
-    Sidlauskas, J. Chang, and M. E. Alfaro. 2013. Rates of speciation and
-    morphological evolution are correlated across the largest vertebrate
-    radiation. Nature Communications DOI: 10.1038/ncomms2958.
+    Rabosky, D. L., F. Santini, J.T. Eastman, S. . Smith, B.L. Sidlauskas,
+    J. Chang, and M.E. Alfaro. 2013. Rates of speciation and morphological
+    evolution are correlated across the largest vertebrate radiation.
+    Nature Communications DOI: 10.1038/ncomms2958.
 }
 \description{
 Example datasets and sample \code{BAMM} output for the
