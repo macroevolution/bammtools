@@ -258,7 +258,7 @@ plot(sed, lwd = 3, colorbreaks = xx$colorbreaks)
 par(mfrow=c(2,3))
 samples <- sample(1:length(ed$eventData), 6)
 ed <- dtRates(ed, 0.005)
-#individual plots will have a color map relative to the mean
+# individual plots will have a color map relative to the mean
 xx <- plot(ed, show=FALSE)
 for (i in 1:6) {
     ed <- dtRates(ed, 0.005, samples[i])
