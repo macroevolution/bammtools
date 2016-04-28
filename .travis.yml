@@ -3,10 +3,15 @@ language: r
 sudo: required
 
 before_install:
-  cd ./BAMMtools
+ - cd ./BAMMtools
+ - echo "options(repos=c(CRAN = 'http://cran.rstudio.com'))" > ~/.Rprofile
+
+warnings_are_errors: true
+
+r_check_args: --as-cran --run-dontrun
 
 r_binary_packages:
-  - ape
+ - ape
 
 after_script:
  - ./travis-tool.sh dump_logs
