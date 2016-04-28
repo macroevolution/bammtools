@@ -13,7 +13,7 @@ colorMap <- function(x, pal, breaks, logcolor = FALSE, color.interval = NULL) {
 	} else if (pal %in% names(dpal)) {
 		colpalette <- colorRampPalette(dpal[[pal]],space='Lab')(NCOLORS);
 	} else if (tolower(pal) == "temperature") {
-		colpalette <- richColors(NCOLORS);	
+		colpalette <- rich.colors(NCOLORS);	
 	} else if (tolower(pal) == "terrain") {
 		colpalette <- terrain.colors(NCOLORS);
 	} else {
@@ -43,7 +43,7 @@ colorMap <- function(x, pal, breaks, logcolor = FALSE, color.interval = NULL) {
 			} else if (pal %in% names(dpal)) {
 				colpalette2 <- colorRampPalette(dpal[[pal]],space='Lab')(NCOLORS);
 			} else if (tolower(pal) == "temperature") {
-				colpalette2 <- richColors(NCOLORS);	
+				colpalette2 <- rich.colors(NCOLORS);	
 			} else if (tolower(pal) == "terrain") {
 				colpalette2 <- terrain.colors(NCOLORS);
 			}
@@ -70,7 +70,7 @@ colorMap <- function(x, pal, breaks, logcolor = FALSE, color.interval = NULL) {
 			} else if (pal %in% names(dpal)) {
 				colpalette2 <- colorRampPalette(dpal[[pal]],space='Lab')(NCOLORS);
 			} else if (tolower(pal) == "temperature") {
-				colpalette2 <- richColors(NCOLORS);	
+				colpalette2 <- rich.colors(NCOLORS);	
 			} else if (tolower(pal) == "terrain") {
 				colpalette2 <- terrain.colors(NCOLORS);
 			}
@@ -118,7 +118,7 @@ colorMap <- function(x, pal, breaks, logcolor = FALSE, color.interval = NULL) {
 	# }
 	# else if(pal == 'temperature')
 	# {
-		# colpalette = richColors(NCOLORS);	
+		# colpalette = rich.colors(NCOLORS);	
 	# }
 	
 	# bks = quantile(x, seq(0,1,length.out=(NCOLORS+1)));

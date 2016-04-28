@@ -10,7 +10,7 @@ barLegend <- function(pal, colorbreaks, fig, side, mar = rep(0,4), colpalette = 
 		pal <- colorRampPalette(dpal[[pal]],space='Lab')(NCOLORS);
 	}
 	else if (tolower(pal) == "temperature") {
-		pal <- richColors(NCOLORS);	
+		pal <- rich.colors(NCOLORS);	
 	}
 	else if (tolower(pal) == "terrain") {
 		pal <- terrain.colors(NCOLORS);

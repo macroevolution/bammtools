@@ -30,5 +30,6 @@
 ##' @docType package
 ##' @useDynLib BAMMtools
 ##' @importFrom Rcpp evalCpp
+##' @importFrom gplots rich.colors
 ##' @import ape
 NULL

@@ -1,6 +1,6 @@
 \name{BAMMtools-internal}
 \alias{richColors}
-\alias{print.bammdata}
+
 
 \title{Internal BAMMtools functions}
 \description{
