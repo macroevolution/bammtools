@@ -54,3 +54,21 @@ revgrey = rev(c("#ffffff","#f0f0f0","#d9d9d9","#bdbdbd","#969696","#737373","#52
 );
 .colorEnv <- new.env();
 assign("palettes", palettes, env = .colorEnv);
+
+
+# for backwards compatibility
+
+##' @title Rich color palette
+##'
+##' @description Deprecated function. Please use
+##'     \code{\link[gplots]{rich.colors}} instead.
+##'
+##' @param n The number of desired colors.
+##'
+##' @seealso \code{\link[gplots]{rich.colors}}
+##' @export
+richColors <- function (n) {
+    cat("NOTE: function `richColors` is deprecated. Please use `rich.colors` instead.")
+    return(gplots::rich.colors(n))
+}
+

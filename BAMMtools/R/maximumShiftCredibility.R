@@ -30,6 +30,69 @@
 #   This is analogous to the maximum clade credibility tree from a 
 #		Bayesian phylogenetic analysis.
 
+##' @title Estimate maximum shift credibility configuration
+##'
+##' @description This is one estimate of the "best" rate shift configuration,
+##'     considering only those shift configurations that were actually sampled
+##'     using \code{BAMM}'s reversible jump MCMC simulator. This is analogous
+##'     to the "maximum clade credibility tree" from a Bayesian phylogenetic
+##'     analysis. It is not necessarily the same as the shift configuration
+##'     with the maximum a posteriori probability.
+##'
+##' @param ephy An object of class \code{BAMMdata}.
+##' @param maximize Maximize the marginal probability of the product or sum of
+##'     branch-specific shifts.
+##'
+##' @details This is one point estimate of the overall "best" rate shift
+##'     configuration. Following an MCMC simulation, the marginal shift
+##'     probabilities on each individual branch are computed using
+##'     \code{\link{marginalShiftProbsTree}}. The shift configuration that
+##'     maximizes the product (or sum, if specified) of these marginal
+##'     branch-specific shift probabilities is the \emph{maximum shift
+##'     credibility configuration}.  
+##' 
+##'     This option is only recommended if you have no clear "winner" in your
+##'     credible set of shift configurations (see
+##'     \code{\link{credibleShiftSet}}). If you have a number of
+##'     largely-equiprobable shift configurations in your 95\% credible set,
+##'     you may wish to try this function as an alternative for identifying a
+##'     single best shift configuration. Otherwise, it is recommended that you
+##'     present the shift configuration with the maximum a posteriori
+##'     probability (see \code{\link{getBestShiftConfiguration}}).
+##'
+##' @return A list with the following components:
+##'     \itemize{
+##'         \item{bestconfigs} {A vector of the index values of MCMC samples
+##'             with shift configurations equal to the maximum. Usually, more
+##'             than one state sampled during the MCMC simulation will have an
+##'             identical (maximized) marginal probability. All samples given
+##'             in this vector will have an identical shift configuration.}
+##'         \item{scores} {The optimality score (product or sum of marginal
+##'             shift probabilities) for all sampled shift configurations in
+##'             the \code{BAMMdata} object.}
+##'         \item{optimalityType} {Whether the product or sum of marginal
+##'             shift probabilities was used to compute the maximum shift
+##'             credibility configuration.}
+##'         \item{sampleindex} {A representative sample that is equal to the
+##'             maximum shift credibility configuration (e.g., this can be
+##'             plotted with \code{\link{addBAMMshifts}}).}
+##'     }
+##'
+##' @author Dan Rabosky
+##'
+##' @seealso \code{\link{marginalShiftProbsTree}},
+##'     \code{\link{addBAMMshifts}}, \code{\link{cumulativeShiftProbsTree}},
+##'     \code{\link{credibleShiftSet}},
+##'     \code{\link{getBestShiftConfiguration}}
+##'
+##' @examples
+##' data(whales, events.whales)
+##' ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
+##' best_config <- maximumShiftCredibility(ed)
+##' plot(ed)
+##' addBAMMshifts(ed, method='phylogram', index=best_config$sampleindex)
+##' @keywords manip graphics
+##' @export
 maximumShiftCredibility <- function(ephy, maximize = 'product') {
 
 	if (!'bammdata' %in% class(ephy)) {
@@ -45,7 +108,6 @@ maximumShiftCredibility <- function(ephy, maximize = 'product') {
 	px <- mtree$edge.length;
 	
 	ttx <- table(ephy$numberEvents) / length(ephy$numberEvents);
-	
 	
 	for (i in 1:length(ephy$eventData)) {
 		

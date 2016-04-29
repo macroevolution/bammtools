@@ -1,3 +1,4 @@
+##' @export
 print.bammdata = function(x, ...)
 {
 	print.phylo(as.phylo.bammdata(x));

@@ -1,5 +1,34 @@
 ### subsetEventData
 
+##' @title Subset a \code{bammdata} object
+##'
+##' @description Subsets a \code{bammdata} object. Returns a \code{bammdata}
+##'     object after extracting a specified set of samples from the posterior.
+##'
+##' @param ephy An object of class \code{bammdata}.
+##' @param index A vector of integers corresponding to samples to be extracted
+##'     from the posterior distribution of shift configurations included in
+##'     the \code{bammdata} object.
+##'
+##' @details This will result in an error if you attempt to access samples
+##'     that do not exist in the \code{ephy} data object. For example, if your
+##'     \code{bammdata} object includes 100 samples from a posterior
+##'     distribution sampled with \code{BAMM}, you can only attempt to subset
+##'     with index values 1:100.
+##'
+##' @author Dan Rabosky
+##'
+##' @seealso \code{\link{plot.bammdata}}, \code{\link{getCohortMatrix}},
+##'     \code{\link{image}}
+##'
+##' @examples
+##' data(whales, events.whales)
+##' ed <- getEventData(whales, events.whales, nsamples=500)
+##' ed2 <- subsetEventData(ed, index=1)
+##' plot(ed2) 
+##' addBAMMshifts(ed2, cex=2)
+##' @keywords manip
+##' @export
 subsetEventData <- function(ephy, index) {
 	
 	if (class(ephy) != 'bammdata') {

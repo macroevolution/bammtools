@@ -3,3 +3,6 @@
 BAMMtools.Rcheck/*
 *.tar.gz
 *.Rapp.history
+# compiled files
+*.o
+*.so

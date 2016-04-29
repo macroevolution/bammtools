@@ -1,3 +1,4 @@
+##' @export
 as.phylo.bammdata <- function(x, ...) {
 	
 	if (!'bammdata' %in% class(x)) {

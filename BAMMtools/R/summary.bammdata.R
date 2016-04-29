@@ -1,3 +1,33 @@
+##' @title Summary of rate shift results from \code{BAMM} analysis
+##'
+##' @description Summarizes the posterior distribution on the number of
+##'     shifts.
+##'
+##' @param object An object of class \code{bammdata}.
+##' @param display An integer for the number of rows of the posterior to
+##'     display.
+##' @param print Print summary of shift distribution in console window?
+##' @param \dots Additional arguments (currently unused).
+##'
+##' @details Prints to console the number of posterior samples and the
+##'     posterior distribution on the number of shifts, which is just the
+##'     fraction of samples in the posterior having 0, 1, 2,...n shifts.
+##'
+##' @return Returns (invisibly) a dataframe with 2 components:
+##'     \item{shifts}{The number of shifts.}
+##'     \item{prob}{The corresponding posterior probability of a model with a
+##'     given number of rate shifts.}
+##'
+##' @author Mike Grundler, Dan Rabosky
+##'
+##' @references \url{http://bamm-project.org}
+##'
+##' @examples
+##' data(whales, events.whales)
+##' ephy <- getEventData(whales, events.whales, nsamples=100)
+##' summary(ephy)
+##' @keywords models
+##' @export
 summary.bammdata = function(object, display=10, print=T, ...) {
 
 	fev <- sapply(object$eventData, nrow);

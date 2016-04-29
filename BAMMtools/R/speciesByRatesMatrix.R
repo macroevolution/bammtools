@@ -1,3 +1,55 @@
+##' @title Compute species-specific rate through time trajectories
+##'
+##' @description Computes the mean of the marginal posterior density of
+##'     speciation/extinction or phenotypic rates for equally spaced points
+##'     along the root to tip path for each species.
+##'
+##' @param ephy An object of class \code{bammdata}.
+##' @param nslices An integer number of time slices. This determines the
+##'     number of equally spaced points in time at which rates are computed
+##'     for each species.
+##' @param index An integer or vector of mode integer indicating which
+##'     posterior samples to use in the calculation. If \code{NULL} (default)
+##'     all samples are used.
+##' @param spex A character string. "s" (default) calculates speciation rates;
+##'     "e" calculates extinction rates; "netdiv" calculates diversification
+##'     rates. Ignored if \code{ephy$type = "trait"}.
+##'
+##' @return A list with two components:
+##'     \itemize{
+##'         \item{times} {A vector of time points where rates were
+##'             calculated.}
+##'         \item{rates} {A species X times matrix of rate through time
+##'             trajectories.}
+##'     }
+##'
+##' @author Mike Grundler
+##'
+##' @seealso \code{\link{getRateThroughTimeMatrix}}
+##'
+##' @references \url{http://bamm-project.org}
+##'
+##' @examples
+##' data(whales, events.whales)
+##' ed <- getEventData(whales,events.whales,burnin=0.25, nsamples=500)
+##' ratemat <- speciesByRatesMatrix(ed, nslices = 100)
+##' 
+##' dolphins <- extract.clade(whales,140)$tip.label
+##' plot.new()
+##' plot.window(xlim=c(0,35),ylim=c(0,0.8))
+##' for (i in 1:nrow(ratemat$rates)) {
+##'     if (whales$tip.label[i] \%in\% dolphins) {
+##'         lines(ratemat$times, ratemat$rates[i,], lwd=2, col=4)	
+##'     } else {
+##'         lines(ratemat$times, ratemat$rates[i,], lwd=2, col=8)
+##'     }
+##' }
+##' axis(1,seq(-5,35,5))
+##' axis(2,seq(-0.2,0.8,0.2),las=1)
+##' mtext("Time since root",1,line=2.5)
+##' mtext("Speciation rate",2,line=2.5)
+##' @keywords models
+##' @export
 speciesByRatesMatrix = function(ephy, nslices, index = NULL, spex = "s") {
 	if (!spex %in% c('s', 'e', 'netdiv')) {
 		stop("arg spex must be 's', 'e' or 'netdiv'.")

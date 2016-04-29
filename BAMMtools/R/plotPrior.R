@@ -1,3 +1,27 @@
+##' @title Plot the prior and posterior distribution of shifts
+##'
+##' @description Generates a barplot of the prior and posterior distributions
+##'     of the number of shifts.
+##'
+##' @param mcmc A dataframe of the mcmc_out file from a \code{BAMM} run, or
+##'     the filename.
+##' @param expectedNumberOfShifts Expected number of shifts under the prior.
+##' @param burnin The fraction of samples to discard as burn-in.
+##' @param priorCol Color for the prior distribution.
+##' @param postCol Color for the posterior distribution.
+##' @param legendPos Placement of the legend, see \code{\link{legend}}.
+##' @param \dots Additional parameters that are passed to
+##'     \code{\link{barplot}}.
+##'
+##' @return Invisibly returns a matrix with the probability of each shift
+##'     number under the prior and the posterior.
+##'
+##' @author Pascal Title
+##'
+##' @examples
+##' data(mcmc.whales)
+##' plotPrior(mcmc.whales, expectedNumberOfShifts = 1, burnin = 0.15)
+##' @export
 plotPrior <- function(mcmc, expectedNumberOfShifts = 1, burnin = 0.15, priorCol = 'light blue', postCol = 'red', legendPos = 'topright', ...) {
 	
 	if (!class(mcmc) %in% c('character', 'data.frame', 'matrix')) {

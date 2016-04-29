@@ -1,3 +1,45 @@
+##' @title Summary of credible set of shift configurations from a \code{BAMM}
+##'     analysis
+##'
+##' @description Prints summary attributes of the \code{BAMM} credible set of
+##'     shift configurations.
+##'
+##' @param object,x An object of class \code{credibleshiftset}.
+##' @param \dots Additional arguments (unused).
+##'
+##' @details Prints to console summary attributes of the XX\% credible set of
+##'     shift configurations sampled using \code{BAMM}. Attributes printed
+##'     include: the number of distinct configurations in the XX\% credible
+##'     set and the posterior probability, cumulative probability, and number
+##'     of rate shifts in the 9 most-probable shift configurations.
+##'
+##' @return \code{summary.credibleshiftset} returns (invisibly) a dataframe
+##'     with a number of rows equal to the number of shift configurations in
+##'     the credible set and four columns:
+##'     \item{rank}{The ranked index of each shift configuration (ranked by
+##'         posterior probability).}
+##'     \item{probability}{The posterior probability of each shift
+##'         configuration.}
+##'     \item{cumulative}{The cumulative probability of each shift
+##'         configuration.}
+##'     \item{N_shifts}{The number of rate shifts in each shift
+##'         configuration (can be zero).}
+##'
+##' @author Dan Rabosky
+##'
+##' @seealso \code{\link{distinctShiftConfigurations}},
+##'     \code{\link{plot.bammshifts}}, \code{\link{credibleShiftSet}}
+##'
+##' @references \url{http://bamm-project.org}
+##'
+##' @examples
+##' data(whales, events.whales)
+##' ed <- getEventData(whales, events.whales, nsamples = 500)
+##' cset <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
+##' summary(cset)
+##' @rdname summary.credibleshiftset
+##' @keywords models
+##' @export
 summary.credibleshiftset <- function(object, ...) {
 
 	conf <- round(100*object$set.limit);
@@ -36,9 +78,11 @@ summary.credibleshiftset <- function(object, ...) {
 	
 	cat('\n')
 	
-
-	
 	invisible(dd);
 }
 
-
+##' @export
+##' @rdname summary.credibleshiftset
+print.credibleshiftset <- function(x, ...){
+	summary.credibleshiftset(x, ...);
+}

@@ -7,7 +7,83 @@
 #	add.freq.text = argument to add text to each plot indicating the frequency of the 
 #		shift configuration
 
-
+##' @title Plot distinct rate shift configurations on a phylogeny
+##'
+##' @description Plots a random distinct rate shift configuration sampled by
+##'     \code{BAMM} on a phylogeny.
+##'
+##' @param x An object of class \code{bammshifts}.
+##' @param ephy An object of class \code{bammdata}.
+##' @param method A character string for which plotting method to use.
+##'     "phylogram" uses rectangular coordinates. "polar" uses polar
+##'     coordinates.
+##' @param pal The color palette to use in \code{plot.bammdata}.
+##' @param rank The rank of the core shift configuration to plot. For the
+##'     default (\code{NULL}) a random configuration is chosen. 
+##' @param index The posterior sample to plot. For the default (\code{NULL})
+##'     a random sample is chosen.
+##' @param spex A character string indicating what type of macroevolutionary
+##'     rates should be plotted. "s" (default) indicates speciation rates, "e"
+##'     indicates extinction rates, and 'netdiv' indicates net diversification
+##'     rates. Ignored if \code{ephy$type = "trait"}.
+##' @param legend Logical indicating whether to plot a legend.
+##' @param add.freq.text A logical indicating whether the frequency of each
+##'     sampled shift configuration should be added to each plot.
+##' @param logcolor Logical. Should colors be plotted on a log scale.
+##' @param breaksmethod Method used for determining color breaks. See help
+##'     file for \code{\link{assignColorBreaks}}.
+##' @param color.interval Min and max value for the mapping of rates. One of
+##'     the two values can be \code{NA}. See details in
+##'     \code{\link{plot.bammdata}} for further details. 
+##' @param JenksSubset If \code{breaksmethod = "jenks"}, the number of
+##'     regularly-spaced samples to subset from the full rates vector. Only
+##'     relevant for large datasets. See help file for
+##'     \code{\link{assignColorBreaks}}.
+##' @param \dots Other arguments to \code{plot.bammdata}.
+##'
+##' @details A rate shift configuration is the set of nodes of the phylogeny
+##'     where a shift occurs in the macroevolutionary rate dynamic of
+##'     diversification or trait evolution. Each posterior sample is a
+##'     potentially distinct rate shift configuration. Different
+##'     configurations may imply different macroevolutionary scenarios. This
+##'     function helps visualize the different distinct rate shift
+##'     configurations sampled by \code{BAMM}.
+##'
+##'     A core shift configuration is defined by a set of nodes that have
+##'     shift probabilities that are substantially elevated relative to what
+##'     you expect under the prior alone. These core configurations are
+##'     inferred in \code{\link{distinctShiftConfigurations}}. It is almost
+##'     certain that more than one core shift configuration will be sampled by
+##'     \code{BAMM}. Moreover, each core shift configuration may contain many
+##'     subconfigurations. A subconfiguration contains the core shift node
+##'     configuration and zero or more additional shift nodes that occur with
+##'     low marginal probability.  
+##'
+##'     Points are added to the branches subtending the nodes of each rate
+##'     configuration. The size of the point is proportional to the marginal
+##'     probability that a shift occurs on a specific branch. If the
+##'     instantaneous rate at a shift's origin represents an initial increase
+##'     above the ancestral instantaneous rate the point is red. If the
+##'     instantaneous rate at a shift's origin represents an initial decrease
+##'     below the ancestral instantaneous rate the point is blue.
+##'
+##' @author Mike Grundler, Dan Rabosky
+##'
+##' @seealso \code{\link{distinctShiftConfigurations}},
+##'     \code{\link{plot.bammdata}}
+##'
+##' @references \url{http://bamm-project.org}
+##'
+##' @examples
+##' data(whales, events.whales)
+##' 
+##' ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
+##' 
+##' sc <- distinctShiftConfigurations(ed, expectedNumberOfShifts = 1,
+##'                                   threshold = 5)
+##' 
+##' plot(sc, ed)
+##' @export
 plot.bammshifts <- function(x, ephy, method="phylogram", pal="RdYlBu", 
 rank=NULL, index=NULL, spex="s", legend=TRUE, add.freq.text=TRUE, logcolor=FALSE, breaksmethod="linear", color.interval=NULL, JenksSubset=20000, ...) 
 {
