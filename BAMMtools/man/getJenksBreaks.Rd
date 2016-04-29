@@ -62,4 +62,5 @@ Pascal Title
 See \code{\link{assignColorBreaks}} and
     \code{\link{plot.bammdata}}.
 }
+\keyword{graphics}
 

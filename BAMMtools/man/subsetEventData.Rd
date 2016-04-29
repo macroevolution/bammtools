@@ -38,4 +38,5 @@ Dan Rabosky
 \code{\link{plot.bammdata}}, \code{\link{getCohortMatrix}},
     \code{\link{image}}
 }
+\keyword{manip}
 

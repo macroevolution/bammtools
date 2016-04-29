@@ -83,6 +83,7 @@
 ##' # samples in the \code{bamm-data} object.
 ##' lam <- getTipRates(ephy, returnNetDiv = FALSE, statistic = 'mean')$lambda
 ##' rowMeans(lam)
+##' @keywords models
 ##' @export
 getTipRates <- function(ephy, returnNetDiv = FALSE, statistic = 'mean') {
 	

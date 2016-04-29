@@ -83,4 +83,5 @@ Mike Grundler
 \seealso{
 \code{\link{getShiftNodesFromIndex}}, \code{\link{plot.bammdata}}
 }
+\keyword{graphics}
 

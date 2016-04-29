@@ -38,6 +38,7 @@
 ##' ed2 <- subsetEventData(ed, index = 1:20)
 ##' ratetree <- getMeanBranchLengthTree(ed2, rate='speciation')
 ##' plot(ratetree$phy, show.tip.label=FALSE)
+##' @keywords models
 ##' @export
 getMeanBranchLengthTree <- function(ephy, rate='speciation') {
 	

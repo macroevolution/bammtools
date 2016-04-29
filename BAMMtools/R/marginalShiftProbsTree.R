@@ -76,6 +76,7 @@
 ##' plot.phylo(mst, no.margin=TRUE, show.tip.label=FALSE)
 ##' plot.phylo(cst, no.margin=TRUE, show.tip.label=FALSE)
 ##' @rdname ShiftProbsTree
+##' @keywords graphics
 ##' @export
 marginalShiftProbsTree <- function(ephy) {
 	

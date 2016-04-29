@@ -68,6 +68,7 @@
 ##' 
 ##' plot(best)
 ##' addBAMMshifts(best)
+##' @keywords models
 ##' @export
 getBestShiftConfiguration <- function(x, expectedNumberOfShifts , threshold = 5){
 	

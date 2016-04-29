@@ -150,4 +150,5 @@ Dan Rabosky, Huateng Huang
 \seealso{
 \code{\link{subtreeBAMM}}
 }
+\keyword{nonparametric}
 

@@ -46,4 +46,5 @@ Dan Rabosky
 \code{\link{addBAMMshifts}}, \code{\link{plot.bammdata}},
 \code{\link{maximumShiftCredibility}}
 }
+\keyword{models}
 

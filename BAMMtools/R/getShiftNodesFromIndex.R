@@ -49,6 +49,7 @@
 ##' # maximum shift credibility configuration:
 ##' 
 ##' getShiftNodesFromIndex(ed, index=msc$sampleindex)
+##' @keywords models
 ##' @export
 getShiftNodesFromIndex <- function(ephy, index) {
 	

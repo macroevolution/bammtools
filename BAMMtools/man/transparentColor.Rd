@@ -26,4 +26,5 @@ This function is used internally by
 \author{
 Pascal Title
 }
+\keyword{manip}
 

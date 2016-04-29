@@ -43,6 +43,7 @@
 ##' ed <- getEventData(whales, events.whales, nsamples = 10)
 ##' mbr <- getMarginalBranchRateMatrix(ed)
 ##' dim(mbr$lambda_branch_matrix)
+##' @keywords models
 ##' @export
 getMarginalBranchRateMatrix <- function(ephy, verbose=FALSE) {
 	

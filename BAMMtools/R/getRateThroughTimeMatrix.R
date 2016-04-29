@@ -126,6 +126,7 @@
 ##' }
 ##'
 ##' ## This shows the grid of time slices over the phylogeny}
+##' @keywords models
 ##' @export
 getRateThroughTimeMatrix <- function(ephy, start.time=NULL, end.time=NULL, nslices=100, node=NULL, nodetype = 'include') {
 	

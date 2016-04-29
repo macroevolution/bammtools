@@ -20,6 +20,7 @@
 ##' @author Mike Grundler
 ##'
 ##' @seealso \code{\link{subtreeBAMM}}
+##' @keywords manip
 ##' @export
 getmrca <- function(phy,t1,t2)
 {

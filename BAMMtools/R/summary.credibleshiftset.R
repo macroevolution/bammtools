@@ -38,6 +38,7 @@
 ##' cset <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
 ##' summary(cset)
 ##' @rdname summary.credibleshiftset
+##' @keywords models
 ##' @export
 summary.credibleshiftset <- function(object, ...) {
 

@@ -151,6 +151,7 @@
 ##' 
 ##' # Plot rates:
 ##' plot(xx)
+##' @keywords models
 ##' @export
 getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALSE, type = 'diversification')
 {	

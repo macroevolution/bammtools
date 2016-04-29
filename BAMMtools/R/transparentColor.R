@@ -21,6 +21,7 @@
 ##' @return Returns the transparent color in RGB format.
 ##'
 ##' @author Pascal Title
+##' @keywords manip
 ##' @export
 transparentColor <- function(namedColor, alpha = 0.8) {
 	res <- col2rgb(namedColor) / 255;

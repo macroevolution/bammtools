@@ -57,4 +57,5 @@ Dan Rabosky
     \code{\link{plot.bammshifts}}, \code{\link{summary.credibleshiftset}},
     \code{\link{plot.credibleshiftset}}, \code{\link{credibleShiftSet}}
 }
+\keyword{models}
 

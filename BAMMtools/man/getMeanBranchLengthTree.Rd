@@ -47,4 +47,5 @@ Dan Rabosky
 \seealso{
 \code{\link{plot.bammdata}}
 }
+\keyword{models}
 

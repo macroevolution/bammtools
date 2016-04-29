@@ -64,4 +64,5 @@ Mike Grundler
 \seealso{
 \code{\link{getRateThroughTimeMatrix}}
 }
+\keyword{models}
 

@@ -126,4 +126,5 @@ Dan Rabosky
 \seealso{
 \link[BAMMtools]{plotRateThroughTime}
 }
+\keyword{models}
 

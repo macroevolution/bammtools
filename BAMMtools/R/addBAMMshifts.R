@@ -60,6 +60,7 @@
 ##'   plot(sed, par.reset=FALSE)
 ##'   addBAMMshifts(sed,index=1,method="phylogram",par.reset=FALSE)	
 ##' }
+##' @keywords graphics
 ##' @export
 addBAMMshifts = function(ephy, index = 1, method = 'phylogram', cex=1, pch=21, col=1, bg=2, msp = NULL, shiftnodes = NULL, par.reset=TRUE) {
 	if (!'bammdata' %in% class(ephy)) stop("Object ephy must be of class bammdata");

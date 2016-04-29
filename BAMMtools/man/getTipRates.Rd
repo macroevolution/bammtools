@@ -86,4 +86,5 @@ Pascal Title
 Requires an object of class \code{bammdata} as obtained with
     \code{\link{getEventData}}.
 }
+\keyword{models}
 

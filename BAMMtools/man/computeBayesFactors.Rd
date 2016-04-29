@@ -56,4 +56,5 @@ computeBayesFactors(mcmc.whales, expectedNumberOfShifts = 1, burnin = 0.1)
 \author{
 Dan Rabosky
 }
+\keyword{models}
 

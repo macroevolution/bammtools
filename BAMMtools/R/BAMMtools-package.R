@@ -28,6 +28,7 @@
 ##'
 ##' @name BAMMtools
 ##' @docType package
+##' @keywords package
 ##' @useDynLib BAMMtools
 ##' @importFrom Rcpp evalCpp
 ##' @importFrom gplots rich.colors

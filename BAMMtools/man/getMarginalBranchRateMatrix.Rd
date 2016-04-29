@@ -48,4 +48,5 @@ dim(mbr$lambda_branch_matrix)
 \author{
 Dan Rabosky
 }
+\keyword{models}
 

@@ -80,6 +80,7 @@
 ##' # defining multiple nodes
 ##' mean(getCladeRates(ed, node=c(132, 140),
 ##'      nodetype=c('include','exclude'))$lambda)
+##' @keywords models
 ##' @export
 getCladeRates <- function(ephy, node = NULL, nodetype='include', verbose=FALSE) {
 	

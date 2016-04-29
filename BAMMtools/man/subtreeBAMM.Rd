@@ -49,4 +49,5 @@ Huateng Huang
 \seealso{
 \code{\link{getmrca}}, \code{\link{plot.bammdata}}
 }
+\keyword{graphics}
 

@@ -27,6 +27,7 @@
 ##' ed2 <- subsetEventData(ed, index=1)
 ##' plot(ed2) 
 ##' addBAMMshifts(ed2, cex=2)
+##' @keywords manip
 ##' @export
 subsetEventData <- function(ephy, index) {
 	

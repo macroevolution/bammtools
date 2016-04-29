@@ -74,4 +74,5 @@ Mike Grundler, Pascal Title
 \seealso{
 \code{\link{plot.bammdata}}
 }
+\keyword{graphics}
 

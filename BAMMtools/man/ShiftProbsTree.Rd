@@ -80,4 +80,5 @@ Dan Rabosky
 \seealso{
 \code{\link{maximumShiftCredibility}}
 }
+\keyword{graphics}
 

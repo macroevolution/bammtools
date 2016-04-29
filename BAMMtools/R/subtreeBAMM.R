@@ -34,6 +34,7 @@
 ##' 
 ##' # plot the subtree
 ##' plot(subphy)
+##' @keywords graphics
 ##' @export
 subtreeBAMM <- function(ephy,tips=NULL,node=NULL)
 {

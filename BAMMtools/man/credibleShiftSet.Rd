@@ -232,4 +232,5 @@ Dan Rabosky
     \code{\link{plot.credibleshiftset}},
     \code{\link{getBranchShiftPriors}}
 }
+\keyword{models}
 

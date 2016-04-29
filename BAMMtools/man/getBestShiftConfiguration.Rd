@@ -83,4 +83,5 @@ Dan Rabosky
 \link{getEventData},  \link{credibleShiftSet},
     \link{plot.credibleshiftset}, \link{plot.bammdata}
 }
+\keyword{models}
 

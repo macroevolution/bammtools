@@ -215,6 +215,7 @@
 ##'
 ##' # Now we can plot the credible set:
 ##' plot(cset, plotmax=4)
+##' @keywords models
 ##' @export
 credibleShiftSet <- function(ephy, expectedNumberOfShifts, threshold = 5, set.limit = 0.95, ...){
 	

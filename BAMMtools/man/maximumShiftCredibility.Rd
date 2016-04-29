@@ -73,4 +73,6 @@ Dan Rabosky
     \code{\link{credibleShiftSet}},
     \code{\link{getBestShiftConfiguration}}
 }
+\keyword{graphics}
+\keyword{manip}
 

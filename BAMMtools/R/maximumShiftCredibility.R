@@ -91,6 +91,7 @@
 ##' best_config <- maximumShiftCredibility(ed)
 ##' plot(ed)
 ##' addBAMMshifts(ed, method='phylogram', index=best_config$sampleindex)
+##' @keywords manip graphics
 ##' @export
 maximumShiftCredibility <- function(ephy, maximize = 'product') {
 

@@ -73,6 +73,7 @@
 ##' 
 ##' # use specified range of posterior samples
 ##' ed <- dtRates(ed, tau=0.01, ism=50:150)
+##' @keywords graphics
 ##' @export
 dtRates <- function (ephy, tau, ism = NULL, tmat = FALSE) {
     if (!"bammdata" %in% class(ephy)) {

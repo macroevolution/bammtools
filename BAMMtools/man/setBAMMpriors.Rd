@@ -87,4 +87,5 @@ setBAMMpriors(phy = whales, total.taxa = 89, outfile = NULL)
 \author{
 Dan Rabosky
 }
+\keyword{models}
 

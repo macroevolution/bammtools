@@ -159,6 +159,7 @@
 ##'                         return.full = TRUE, method = 's', logrates = TRUE,
 ##'                         two.tailed = TRUE)
 ##' @aliases strapp
+##' @keywords nonparametric
 ##' @export
 traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.full = FALSE, method = 'spearman', logrates = TRUE, two.tailed = TRUE, traitorder = NA, nthreads = 1) {
 

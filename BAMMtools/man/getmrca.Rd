@@ -35,4 +35,5 @@ Mike Grundler
 \seealso{
 \code{\link{subtreeBAMM}}
 }
+\keyword{manip}
 

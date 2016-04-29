@@ -57,6 +57,7 @@
 ##' 
 ##' # Return breaks for the binning of speciation rates into 64 groups
 ##' getJenksBreaks(vec, 64)
+##' @keywords graphics
 ##' @export
 getJenksBreaks <- function(var, k, subset = NULL) {
 	k <- k - 1;

@@ -79,6 +79,7 @@
 ##' 
 ##' dim(cormat)
 ##' hist(cormat, breaks=50)
+##' @keywords models
 ##' @export
 getCohortMatrix <- function(ephy) {
 	if (!'bammdata' %in% class(ephy)) {

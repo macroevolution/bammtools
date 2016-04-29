@@ -55,6 +55,7 @@
 ##' #this also works for diversification rates
 ##'
 ##' plot(ed, colorbreaks = colors, spex="netdiv")
+##' @keywords graphics
 ##' @export
 assignColorBreaks <- function(rates, NCOLORS = 64, spex = "s", logcolor = FALSE, method = c("linear","quantile","jenks"), JenksSubset = NULL) {
 	method = match.arg(method, c("linear", "quantile", "jenks"));

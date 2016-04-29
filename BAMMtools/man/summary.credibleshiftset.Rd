@@ -55,4 +55,5 @@ Dan Rabosky
 \code{\link{distinctShiftConfigurations}},
     \code{\link{plot.bammshifts}}, \code{\link{credibleShiftSet}}
 }
+\keyword{models}
 

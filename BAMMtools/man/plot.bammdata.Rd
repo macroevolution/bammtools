@@ -283,4 +283,6 @@ Mike Grundler, Pascal Title
     \code{\link{assignColorBreaks}}, \code{\link{subtreeBAMM}},
     \code{\link{colorRampPalette}}
 }
+\keyword{graphics}
+\keyword{models}
 

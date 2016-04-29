@@ -71,4 +71,5 @@ Mike Grundler
 \seealso{
 \code{\link{plot.bammdata}}
 }
+\keyword{graphics}
 

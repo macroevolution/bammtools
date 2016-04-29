@@ -48,6 +48,7 @@
 ##' axis(2,seq(-0.2,0.8,0.2),las=1)
 ##' mtext("Time since root",1,line=2.5)
 ##' mtext("Speciation rate",2,line=2.5)
+##' @keywords models
 ##' @export
 speciesByRatesMatrix = function(ephy, nslices, index = NULL, spex = "s") {
 	if (!spex %in% c('s', 'e', 'netdiv')) {

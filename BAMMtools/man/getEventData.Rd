@@ -172,4 +172,5 @@ Dan Rabosky, Mike Grundler
 \code{\link{summary.bammdata}}, \code{\link{plot.bammdata}},
     \code{\link{dtRates}}.
 }
+\keyword{models}
 

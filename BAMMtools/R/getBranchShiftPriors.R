@@ -42,6 +42,7 @@
 ##' plot(prior_tree1$edge.length ~ prior_tree10$edge.length, xlim=c(0,0.05),
 ##'      ylim=c(0,0.05), asp=1)
 ##' lines(x=c(0,1), y=c(0,1))
+##' @keywords models
 ##' @export
 getBranchShiftPriors <- function(phy, expectedNumberOfShifts) {
 	
