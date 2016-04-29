@@ -44,7 +44,6 @@
 ##'
 ##' @examples
 ##' data(whales, events.whales)
-##' library(gplots)
 ##' ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=500)
 ##' x <- getCohortMatrix(ed)
 ##' cohorts(x, ed)

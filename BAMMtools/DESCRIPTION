@@ -8,10 +8,10 @@ Author: Dan Rabosky, Mike Grundler, Pascal Title, Carlos Anderson, Jeff Shi,
     Joseph Brown, Huateng Huang, Jon Mitchell
 Maintainer: Pascal Title <ptitle@umich.edu>
 Imports:
-    Rcpp (>= 0.11.0),
-    gplots
+    Rcpp (>= 0.11.0)
 Depends:
     ape,
+    gplots,
     R (>= 2.10)
 Description: Provides functions for analyzing and visualizing complex
     macroevolutionary dynamics on phylogenetic trees. It is a companion
