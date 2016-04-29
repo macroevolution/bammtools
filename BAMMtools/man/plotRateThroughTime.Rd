@@ -83,7 +83,7 @@ be 'auto'.}
 
 \item{add}{A logical: should rates be added to an existing plot.}
 
-\item{axis.labels}{A logical: if TRUE, axis labels will be plotted.}
+\item{axis.labels}{A logical: if \code{TRUE}, axis labels will be plotted.}
 }
 \value{
 If \code{plot = FALSE}, then a list is returned with the following
