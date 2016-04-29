@@ -140,8 +140,8 @@ To calculate rates, each branch of the phylogeny is discretized
     plotted instead. If \code{legend = TRUE} the function will plot a
     legend that contains the mapping of colors to numerical values.  
 
-    A number of color palettes come built in with BAMMtools. Color-blind
-    friendly options include:
+    A number of color palettes come built in with \code{BAMMtools}.
+    Color-blind friendly options include:
     \itemize{
         \item{BrBG}
         \item{PiYG}

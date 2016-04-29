@@ -2,7 +2,7 @@
 % Please edit documentation in R/bammLikelihood.R
 \name{BAMMlikelihood}
 \alias{BAMMlikelihood}
-\title{Calculate BAMM likelihood}
+\title{Calculate \code{BAMM} likelihood}
 \usage{
 BAMMlikelihood(phy, eventdata, gen = "last", segLength = 0.02, sf = 1,
   return.intermediates = FALSE, e_prob_condition = "if_different", ...)
@@ -11,18 +11,19 @@ BAMMlikelihood(phy, eventdata, gen = "last", segLength = 0.02, sf = 1,
 \item{phy}{Either an object of class \code{phylo} or the path to a tree
 file in newick format.}
 
-\item{eventdata}{A table of event data, as returned by BAMM, either as an
-object of class \code{dataframe} or as the path to an event_data file.
-Alternatively, a named numeric vector of length two holding speciation
-("lambda") and extinction ("mu") rates for the constant-rate
-birth-death process.}
+\item{eventdata}{A table of event data, as returned by \code{BAMM}, either
+as an object of class \code{dataframe} or as the path to an event_data
+file. Alternatively, a named numeric vector of length two holding
+speciation ("lambda") and extinction ("mu") rates for the
+constant-rate birth-death process.}
 
-\item{gen}{The BAMM generation for which the likelihood should be
+\item{gen}{The \code{BAMM} generation for which the likelihood should be
 calculated. Can be an integer specifying a specific generation, or
 \code{last}, specifying the last generation, or \code{all}, in which
 case the likelihood will be calculated for all generations.}
 
-\item{segLength}{The relative segment length, exactly as defined for BAMM.}
+\item{segLength}{The relative segment length, exactly as defined for
+\code{BAMM}.}
 
 \item{sf}{The sampling fraction.}
 
@@ -57,12 +58,13 @@ Calculates the likelihood of a phylogeny exactly as is done
 }
 \details{
 This function allows the user to check the likelihoods computed
-    by BAMM using an independent R-based implementation. This is designed
-    to provide a check on potential software bugs that might be introduced
-    during future BAMM development and which might compromise the
-    likelihood calculation. If you observe measurable discrepancies
-    between the likelihood computed by this function and the corresponding
-    likelihood returned by BAMM, please inform the BAMM development team.
+    by \code{BAMM} using an independent R-based implementation. This is
+    designed to provide a check on potential software bugs that might be
+    introduced during future \code{BAMM} development and which might
+    compromise the likelihood calculation. If you observe measurable
+    discrepancies between the likelihood computed by this function and the
+    corresponding likelihood returned by \code{BAMM}, please inform the
+    \code{BAMM} development team.
 }
 \examples{
 # a global sampling fraction of 0.98 was used in generating the whales

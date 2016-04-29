@@ -9,15 +9,15 @@ setBAMMpriors(phy, total.taxa = NULL, traits = NULL,
 }
 \arguments{
 \item{phy}{An object of class \code{phylo}, e.g., the phylogenetic tree
-you will analyze with BAMM.}
+you will analyze with \code{BAMM}.}
 
 \item{total.taxa}{If doing speciation-extinction analysis, the total
 number of taxa in your clade. If your tree contains all taxa in the
 clade (100\% sampling), then leave this as \code{NULL}.}
 
-\item{traits}{A filename where the trait data (BAMM format) are stored, or
-a numeric vector named according to the tips in \code{phy}. Leave
-\code{NULL} if doing a speciation-extinction analysis.}
+\item{traits}{A filename where the trait data (\code{BAMM} format) are
+stored, or a numeric vector named according to the tips in \code{phy}.
+Leave \code{NULL} if doing a speciation-extinction analysis.}
 
 \item{outfile}{Filename for outputting the sample priors block. If
 \code{NULL}, then a vector is returned instead.}
@@ -36,20 +36,20 @@ The function does not return anything. It simply performs some
     \code{outfile = NULL}, then a named vector is returned.
 }
 \description{
-Set priors for BAMM analysis.
+Set priors for \code{BAMM} analysis.
 }
 \details{
 This is a "quick and dirty" tool for identifying approximately
-    acceptable priors for a BAMM analysis. We have found that choice of
-    prior can have a substantial impact on BAMM analyses. It is difficult
-    to simply set a default prior that applies across datasets, because
-    users often have trees with branch lengths in very different units
-    (e.g., numbers of substitutions versus millions of years). Hence,
-    without some careful attention, you can inadvertently specify some
-    very bad prior distributions. This function is designed to at
-    least put you in the right ballpark for decent prior distributions,
-    but there are no guarantees that these are most appropriate for your
-    data.
+    acceptable priors for a \code{BAMM} analysis. We have found that
+    choice of prior can have a substantial impact on \code{BAMM} analyses.
+    It is difficult to simply set a default prior that applies across
+    datasets, because users often have trees with branch lengths in very
+    different units (e.g., numbers of substitutions versus millions of
+    years). Hence, without some careful attention, you can inadvertently
+    specify some very bad prior distributions. This function is designed
+    to at least put you in the right ballpark for decent prior
+    distributions, but there are no guarantees that these are most
+    appropriate for your data.
 
     The general rules applied here are: 
 

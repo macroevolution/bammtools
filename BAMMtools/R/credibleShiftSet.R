@@ -1,7 +1,7 @@
 # Feb 28 2014
 
 ##' @title Credible set of macroevolutionary rate shift configurations from
-##'     BAMM results
+##'     \code{BAMM} results
 ##'
 ##' @description Computes the 95\% (or any other \%) credible set of
 ##'     macroevolutionary rate shift configurations from a \code{bammdata}
@@ -19,17 +19,18 @@
 ##'
 ##' @details Computes the 95\% credible set (or XX\% credible set, depending
 ##'     on \code{set.limit}) of diversification shift configurations sampled
-##'     using BAMM. This is analogous to a credible set of phylogenetic tree
-##'     topologies from a Bayesian phylogenetic analysis. 
+##'     using \code{BAMM}. This is analogous to a credible set of phylogenetic
+##'     tree topologies from a Bayesian phylogenetic analysis. 
 ##'
 ##'     To understand how this calculation is performed, one must first
 ##'     distinguish between "core" and "non-core" rate shifts. A "core shift"
 ##'     is a rate shift with a marginal probability that is substantially
 ##'     elevated above the probability expected on the basis of the prior
-##'     alone. With BAMM, every branch in a phylogenetic tree is associated
-##'     with some non-zero prior probability of a rate shift. Typically this
-##'     is a very low per-branch shift probability (this prior is determined
-##'     by the value of the "poissonRatePrior" parameter in a BAMM analysis). 
+##'     alone. With \code{BAMM}, every branch in a phylogenetic tree is
+##'     associated with some non-zero prior probability of a rate shift.
+##'     Typically this is a very low per-branch shift probability (this prior
+##'     is determined by the value of the "poissonRatePrior" parameter in a
+##'     \code{BAMM} analysis). 
 ##'
 ##'     If we compute distinct shift configurations with every sampled shift
 ##'     (including those shifts with very low marginal probabilities), the
@@ -39,7 +40,7 @@
 ##'     using these shifts to identify distinct shift configurations simply
 ##'     generates noise and isn't particularly useful.
 ##'
-##'     The solution adopted in BAMMtools is, for each branch in the
+##'     The solution adopted in \code{BAMMtools} is, for each branch in the
 ##'     phylogeny, to compute both the posterior and prior probabilities of a
 ##'     rate shift occurring. The ratio of these probabilities is a
 ##'     branch-specific marginal odds ratio: it is the marginal posterior
@@ -164,9 +165,9 @@
 ##'     \item{tipMu}{A list of numeric vectors. Each element is a single
 ##'         distinct shift configuration. For each tip the rate of extinction
 ##'         at the end of the terminal branch subtending that tip. Meaningless
-##'         if working with BAMM trait results.}
+##'         if working with \code{BAMM} trait results.}
 ##'     \item{type}{A character string. Either "diversification" or "trait"
-##'         depending on your BAMM analysis.}
+##'         depending on your \code{BAMM} analysis.}
 ##'     \item{downseq}{An integer vector holding the nodes of \code{phy}. The
 ##'         order corresponds to the order in which nodes are visited by a
 ##'         pre-order tree traversal.}

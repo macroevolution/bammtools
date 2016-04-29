@@ -1,11 +1,11 @@
-##' @title Generate control file for BAMM
+##' @title Generate control file for \code{BAMM}
 ##'
 ##' @description enerates a template diversification or trait control files
-##'     for BAMM, while allowing the user to specify parameter values.
+##'     for \code{BAMM}, while allowing the user to specify parameter values.
 ##'
 ##' @param file Destination file name with or without path.
 ##' @param type Character, either \dQuote{\code{diversification}} or 
-##'     \dQuote{\code{trait}}, depending on the desired BAMM analysis.
+##'     \dQuote{\code{trait}}, depending on the desired \code{BAMM} analysis.
 ##' @param params List of parameters, see \code{Details}.
 ##'
 ##' @details The user can supply parameters as a list, where the name of the

@@ -10,7 +10,7 @@
 ##' @title Plot distinct rate shift configurations on a phylogeny
 ##'
 ##' @description Plots a random distinct rate shift configuration sampled by
-##'     BAMM on a phylogeny.
+##'     \code{BAMM} on a phylogeny.
 ##'
 ##' @param x An object of class \code{bammshifts}.
 ##' @param ephy An object of class \code{bammdata}.
@@ -47,14 +47,14 @@
 ##'     potentially distinct rate shift configuration. Different
 ##'     configurations may imply different macroevolutionary scenarios. This
 ##'     function helps visualize the different distinct rate shift
-##'     configurations sampled by BAMM.
+##'     configurations sampled by \code{BAMM}.
 ##'
 ##'     A core shift configuration is defined by a set of nodes that have
 ##'     shift probabilities that are substantially elevated relative to what
 ##'     you expect under the prior alone. These core configurations are
 ##'     inferred in \code{\link{distinctShiftConfigurations}}. It is almost
 ##'     certain that more than one core shift configuration will be sampled by
-##'     BAMM. Moreover, each core shift configuration may contain many
+##'     \code{BAMM}. Moreover, each core shift configuration may contain many
 ##'     subconfigurations. A subconfiguration contains the core shift node
 ##'     configuration and zero or more additional shift nodes that occur with
 ##'     low marginal probability.  

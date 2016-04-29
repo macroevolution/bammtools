@@ -81,7 +81,7 @@
 ##'
 ##' @author Dan Rabosky
 ##'
-##' @seealso \link[BAMMtools]{plotRateThroughTime}
+##' @seealso \code{\link{plotRateThroughTime}}
 ##'
 ##' @examples
 ##' \dontrun{

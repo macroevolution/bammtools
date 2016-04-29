@@ -3,8 +3,8 @@
 ##' @description Generates a barplot of the prior and posterior distributions
 ##'     of the number of shifts.
 ##'
-##' @param mcmc A dataframe of the mcmc_out file from a BAMM run, or the
-##'     filename.
+##' @param mcmc A dataframe of the mcmc_out file from a \code{BAMM} run, or
+##'     the filename.
 ##' @param expectedNumberOfShifts Expected number of shifts under the prior.
 ##' @param burnin The fraction of samples to discard as burn-in.
 ##' @param priorCol Color for the prior distribution.

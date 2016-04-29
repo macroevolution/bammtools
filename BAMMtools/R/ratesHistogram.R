@@ -9,7 +9,7 @@
 		# brksCol = color for breaks lines
 		# ... additional arguments passed on to mtext for axis labels
 
-##' @title Histogram of BAMM rate frequencies
+##' @title Histogram of \code{BAMM} rate frequencies
 ##'
 ##' @description Plots a histogram of the frequency of rate values across the
 ##'     phylogeny.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ratesHistogram.R
 \name{ratesHistogram}
 \alias{ratesHistogram}
-\title{Histogram of BAMM rate frequencies}
+\title{Histogram of \code{BAMM} rate frequencies}
 \usage{
 ratesHistogram(phylorates, plotBrks = TRUE, xlab = "speciation rate",
   ylab = "density", lwd = 0.2, lty = 1, brksCol = "black", ...)

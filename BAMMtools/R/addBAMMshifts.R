@@ -1,4 +1,4 @@
-##' @title Add BAMM-inferred rate shifts to a phylogeny plot
+##' @title Add \code{BAMM}-inferred rate shifts to a phylogeny plot
 ##'
 ##' @description Adds symbols to a plotted tree to mark the location(s) where
 ##'     there is a shift in the macroevolutionary dynamics of diversification

@@ -34,14 +34,15 @@
 # }
 
 ##' @title Compute the pairwise correlation in rate regimes between all tips
-##'     in a bammdata object
+##'     in a \code{bammdata} object
 ##'
 ##' @description Takes a \code{bammdata} object and computes the pairwise
 ##'     correlation in evolutionary rate regimes between all tips in the
 ##'     phylogeny. This can be used to identify cohorts of taxa that share
 ##'     common macroevolutionary rate parameters. It can also be used to
-##'     construct a correlation matrix for GLS analyses using BAMM-estimated
-##'     tip rates of speciation, extinction, or phenotypic evolution.
+##'     construct a correlation matrix for GLS analyses using
+##'     \code{BAMM}-estimated tip rates of speciation, extinction, or
+##'     phenotypic evolution.
 ##'
 ##' @param ephy An object of class \code{bammdata}.
 ##'

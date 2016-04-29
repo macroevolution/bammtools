@@ -56,9 +56,9 @@ Identify topologically distinct rate shift configurations
     posterior to one of the distinct shift configurations.
 }
 \details{
-See Rabosky et al (2014) and the BAMM project website for details
-    on the nature of distinct shift configurations and especially the
-    distinction between "core" and "non-core" rate shifts. Note that
+See Rabosky et al (2014) and the \code{BAMM} project website for
+    details on the nature of distinct shift configurations and especially
+    the distinction between "core" and "non-core" rate shifts. Note that
     branches with elevated marginal posterior probabilities relative to
     the prior (marginal odds ratios) cannot be claimed to have
     "significant" evidence for a rate shift on the basis of this evidence

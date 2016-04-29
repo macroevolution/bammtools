@@ -1,7 +1,8 @@
-##' @title Plot credible set of rate shift configurations from BAMM analysis
+##' @title Plot credible set of rate shift configurations from \code{BAMM}
+##'     analysis
 ##'
 ##' @description Plots the credible set of rate shift configurations from a
-##'     BAMM analysis on a phylogeny
+##'     \code{BAMM} analysis on a phylogeny
 ##'
 ##' @param x An object of class \code{credibleshiftset}.	
 ##' @param plotmax An integer number of plots to display. 

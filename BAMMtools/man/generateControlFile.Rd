@@ -2,7 +2,7 @@
 % Please edit documentation in R/generateControlFile.R
 \name{generateControlFile}
 \alias{generateControlFile}
-\title{Generate control file for BAMM}
+\title{Generate control file for \code{BAMM}}
 \usage{
 generateControlFile(file = "controlfile.txt", type = "diversification",
   params = NULL)
@@ -11,13 +11,13 @@ generateControlFile(file = "controlfile.txt", type = "diversification",
 \item{file}{Destination file name with or without path.}
 
 \item{type}{Character, either \dQuote{\code{diversification}} or 
-\dQuote{\code{trait}}, depending on the desired BAMM analysis.}
+\dQuote{\code{trait}}, depending on the desired \code{BAMM} analysis.}
 
 \item{params}{List of parameters, see \code{Details}.}
 }
 \description{
 enerates a template diversification or trait control files
-    for BAMM, while allowing the user to specify parameter values.
+    for \code{BAMM}, while allowing the user to specify parameter values.
 }
 \details{
 The user can supply parameters as a list, where the name of the

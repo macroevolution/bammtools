@@ -1,17 +1,18 @@
 ##' @title Create \code{bammdata} object from MCMC output
 ##'
 ##' @description \code{getEventData} Reads shift configuration data (the
-##'     "event data" output) from a BAMM analysis and creates a
+##'     "event data" output) from a \code{BAMM} analysis and creates a
 ##'     \code{bammdata} object. The \code{bammdata} object is fundamental
 ##'     for extracting information about macroevolutionary rate variation
 ##'     through time and among lineages.
 ##'
 ##' @param phy An object of class \code{phylo} - specifically, the
-##'     time-calibrated tree that was analyzed with BAMM. Alternatively, a
-##'     character string specifying the path to a newick-formatted tree.
-##' @param eventdata A character string specifying the path to a BAMM
+##'     time-calibrated tree that was analyzed with \code{BAMM}.
+##'     Alternatively, a character string specifying the path to a
+##'     newick-formatted tree.
+##' @param eventdata A character string specifying the path to a \code{BAMM}
 ##'     event-data file. Alternatively, an object of class \code{data.frame}
-##'     that includes the event data from a BAMM run.
+##'     that includes the event data from a \code{BAMM} run.
 ##' @param burnin A numeric indicating the fraction of posterior samples to
 ##'     discard as burn-in.
 ##' @param nsamples An integer indicating the number of posterior samples to
@@ -19,19 +20,19 @@
 ##' @param verbose A logical. If \code{TRUE} progess is outputted to the
 ##'     console. Defaults to \code{FALSE}.
 ##' @param type A character string. Either "diversification" or "trait"
-##'     depending on your BAMM analysis.
+##'     depending on your \code{BAMM} analysis.
 ##'
-##' @details In the BAMM framework, an "event" defines a macroevolutionary
-##'     process of diversification or trait evolution. Every sample from the
-##'     posterior includes at least one process, defined by such an "event".
-##'     If a given sample includes just a single event, then the dynamics of
-##'     diversification or trait evolution can be described entirely by a
-##'     single time-constant or time-varying process that begins at the root
-##'     of the tree. Any sample from the posterior distribution may include a
-##'     complex mixture of distinct processes. To represent temporal
-##'     heterogeneity in macroevolutionary rates, \code{BAMM} models a rate
-##'     \eqn{R}, e.g. speciation, as a function that changes exponentially
-##'     with time:
+##' @details In the \code{BAMM} framework, an "event" defines a
+##'     macroevolutionary process of diversification or trait evolution. Every
+##'     sample from the posterior includes at least one process, defined by
+##'     such an "event". If a given sample includes just a single event, then
+##'     the dynamics of diversification or trait evolution can be described
+##'     entirely by a single time-constant or time-varying process that begins
+##'     at the root of the tree. Any sample from the posterior distribution
+##'     may include a complex mixture of distinct processes. To represent
+##'     temporal heterogeneity in macroevolutionary rates, \code{BAMM} models
+##'     a rate \eqn{R}, e.g. speciation, as a function that changes
+##'     exponentially with time:
 ##'
 ##'     \eqn{R(t) = R(0)*exp(b*t)}.
 ##'
@@ -115,10 +116,10 @@
 ##'         the terminal branch subtending that tip.}
 ##'     \item{meanTipMu} {For each tip the mean of the marginal posterior
 ##'         density of the rate of extinction at the end of the terminal
-##'         branch subtending that tip. Meaningless if working with BAMM trait
-##'         results.}
+##'         branch subtending that tip. Meaningless if working with
+##'         \code{BAMM} trait results.}
 ##'     \item{type} {A character string. Either "diversification" or "trait"
-##'         depending on your BAMM analysis.}
+##'         depending on your \code{BAMM} analysis.}
 ##'     \item{downseq} {An integer vector holding the nodes of \code{phy}. The
 ##'         order corresponds to the order in which nodes are visited by a
 ##'         pre-order tree traversal.}

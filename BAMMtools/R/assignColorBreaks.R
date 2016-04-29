@@ -9,8 +9,8 @@
 ##'     default is 64 and is probably sufficient for most purposes.
 ##' @param spex A character string. "s" means that speciation rates are used
 ##'     to make the map, "e" means that extinction rates are used. "netdiv"
-##'     means that diversification rates are used. Ignored for BAMM trait
-##'     data.
+##'     means that diversification rates are used. Ignored for \code{BAMM}
+##'     trait data.
 ##' @param logcolor Logical. Should the natural logarithm of rates be used for
 ##'     the color map.
 ##' @param method Determines how the color breaks are created. See Details.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/addBAMMshifts.R
 \name{addBAMMshifts}
 \alias{addBAMMshifts}
-\title{Add BAMM-inferred rate shifts to a phylogeny plot}
+\title{Add \code{BAMM}-inferred rate shifts to a phylogeny plot}
 \usage{
 addBAMMshifts(ephy, index = 1, method = "phylogram", cex = 1, pch = 21,
   col = 1, bg = 2, msp = NULL, shiftnodes = NULL, par.reset = TRUE)

@@ -42,12 +42,12 @@ This function returns a matrix of pairwise Bayes factors, where
 
     This function will only compute Bayes factors between models which
     were actually sampled during simulation of the posterior. Hence, if
-    a model has such low probability that it is never visited by BAMM
-    during the simulation of the posterior, it will be impossible to
-    estimate its posterior probability (and thus, you will get no Bayes
-    factors involving this particular model). This is likely to change in
-    the future with more robust methods for estimating posterior
-    probabilities in the tails of the distribution.
+    a model has such low probability that it is never visited by
+    \code{BAMM} during the simulation of the posterior, it will be
+    impossible to estimate its posterior probability (and thus, you will
+    get no Bayes factors involving this particular model). This is likely
+    to change in the future with more robust methods for estimating
+    posterior probabilities in the tails of the distribution.
 }
 \examples{
 data(mcmc.whales)

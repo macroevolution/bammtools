@@ -1,7 +1,7 @@
 ##' @title Write a \code{bammdata} object to disk
 ##'
-##' @description Takes a bammdata object and re-writes it back into a treefile
-##'     and an event csv file.
+##' @description Takes a \code{bammdata} object and re-writes it back into a
+##'     treefile and an event csv file.
 ##'
 ##' @param ephy A \code{bammdata} object.
 ##' @param outtreefile The file name for outputting the tree.

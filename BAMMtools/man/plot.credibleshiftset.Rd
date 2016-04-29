@@ -2,7 +2,8 @@
 % Please edit documentation in R/plot.credibleshiftset.R
 \name{plot.credibleshiftset}
 \alias{plot.credibleshiftset}
-\title{Plot credible set of rate shift configurations from BAMM analysis}
+\title{Plot credible set of rate shift configurations from \code{BAMM}
+    analysis}
 \usage{
 \method{plot}{credibleshiftset}(x, plotmax = 9, method = "phylogram",
   pal = "RdYlBu", shiftColor = "black", spex = "s",
@@ -61,7 +62,7 @@ relevant for large datasets. See help file for
 }
 \description{
 Plots the credible set of rate shift configurations from a
-    BAMM analysis on a phylogeny
+    \code{BAMM} analysis on a phylogeny
 }
 \details{
 This produces phylorate plots for the \code{plotmax}

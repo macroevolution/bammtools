@@ -124,7 +124,7 @@ for (i in 1:length(tvec)){
 Dan Rabosky
 }
 \seealso{
-\link[BAMMtools]{plotRateThroughTime}
+\code{\link{plotRateThroughTime}}
 }
 \keyword{models}
 

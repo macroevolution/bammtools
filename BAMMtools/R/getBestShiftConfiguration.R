@@ -1,4 +1,4 @@
-##' @title Get the best (sampled) rate shift configuration from a BAMM
+##' @title Get the best (sampled) rate shift configuration from a \code{BAMM}
 ##'     analysis
 ##'
 ##' @description Get the rate shift configuration with the maximum a
@@ -15,7 +15,7 @@
 ##' @details This function estimates the rate shift configuration with the
 ##'     highest maximum a posteriori (MAP) probability. It returns a
 ##'     \code{bammdata} object with a single sample. This can be plotted with
-##'     \link[BAMMtools]{plot.bammdata}, and individual rate shifts can then
+##'     \code{\link{plot.bammdata}}, and individual rate shifts can then
 ##'     be added with \code{\link{addBAMMshifts}}. 
 ##'
 ##'     The parameters of this object are averaged over all samples in the

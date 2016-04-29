@@ -8,8 +8,8 @@ plotPrior(mcmc, expectedNumberOfShifts = 1, burnin = 0.15,
   priorCol = "light blue", postCol = "red", legendPos = "topright", ...)
 }
 \arguments{
-\item{mcmc}{A dataframe of the mcmc_out file from a BAMM run, or the
-filename.}
+\item{mcmc}{A dataframe of the mcmc_out file from a \code{BAMM} run, or
+the filename.}
 
 \item{expectedNumberOfShifts}{Expected number of shifts under the prior.}
 
