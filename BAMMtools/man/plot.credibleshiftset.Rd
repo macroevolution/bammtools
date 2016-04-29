@@ -62,7 +62,7 @@ relevant for large datasets. See help file for
 }
 \description{
 Plots the credible set of rate shift configurations from a
-    \code{BAMM} analysis on a phylogeny
+    \code{BAMM} analysis on a phylogeny.
 }
 \details{
 This produces phylorate plots for the \code{plotmax}

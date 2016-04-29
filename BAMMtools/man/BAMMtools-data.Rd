@@ -36,7 +36,7 @@ Vos R.A., A.O. Mooers. 2006. A new dated supertree of the Primates.
 }
 \description{
 Example datasets and sample \code{BAMM} output for the
-    package \code{BAMMtools}
+    package \code{BAMMtools}.
 }
 \details{
 This includes both the raw data and the \code{BAMM} output for
@@ -91,13 +91,13 @@ This includes both the raw data and the \code{BAMM} output for
     \code{abstime}: The absolute occurrence time of the shift, assuming
     that the time of the root node is 0.0.
 
-    \code{lambdainit, lambdashift}: for speciation extinction model, the
+    \code{lambdainit, lambdashift}: For speciation extinction model, the
     initial speciation rate and rate change parameter for the process.
 
-    \code{muinit}: for speciation extinction model, the extinction rate
+    \code{muinit}: For speciation extinction model, the extinction rate
     (time-invariant).
 
-    \code{betainit, betashift}: for phenotypic evolutionary model, the
+    \code{betainit, betashift}: For phenotypic evolutionary model, the
     initial (\code{betainit}) rate of phenotypic evolution and the rate
     change parameter (\code{betashift}).
 }

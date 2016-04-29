@@ -43,7 +43,7 @@ or to the right.}
 the first and last terminal nodes. Ignored if
 \code{method = "phylogram"}.}
 
-\item{rbf}{a numeric indicating the length of the root branch as a
+\item{rbf}{A numeric indicating the length of the root branch as a
 fraction of total tree height. Ignored if \code{method = "phylogram"}.}
 
 \item{show}{A logical indicating whether or not to plot the tree. Defaults

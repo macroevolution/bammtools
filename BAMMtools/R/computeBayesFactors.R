@@ -6,9 +6,9 @@
 ##'
 ##' @param postdata Filename for the MCMC output file from a \code{BAMM} run.
 ##'     Alternatively, a dataframe containing this information.
-##' @param expectedNumberOfShifts Expected number of shifts under the prior
+##' @param expectedNumberOfShifts Expected number of shifts under the prior.
 ##' @param burnin What fraction of samples to discard from postdata as burnin?
-##' @param \dots Additional arguments to computeBayesFactors
+##' @param \dots Additional arguments to computeBayesFactors.
 ##'
 ##' @details This function returns a matrix of pairwise Bayes factors, where
 ##'     the Bayes factor is the ratio of marginal likelihoods between two

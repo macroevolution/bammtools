@@ -2,7 +2,7 @@
 ##' @description An R package for the analysis and visualization of complex
 ##'     macroevolutionary dynamics. Functions in \code{BAMMtools} are oriented
 ##'     entirely around analysis of results obtained using the \code{BAMM}
-##'     software (\code{http://bamm-project.org/}).
+##'     software (\url{http://bamm-project.org/}).
 ##'
 ##' @author Dan Rabosky, Mike Grundler, Pascal Title, Jonathan Mitchell,
 ##'     Carlos Anderson, Jeff Shi, Joseph Brown, Huateng Huang

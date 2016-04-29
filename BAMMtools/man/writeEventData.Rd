@@ -16,8 +16,8 @@ writeEventData(ephy, outtreefile, outeventfile, ...)
 \item{\dots}{Additional arguments to pass to \code{write.csv}.}
 }
 \description{
-Takes a bammdata object and re-writes it back into a treefile
-    and an event csv file.
+Takes a \code{bammdata} object and re-writes it back into a
+    treefile and an event csv file.
 }
 \seealso{
 \code{\link{subtreeBAMM}}

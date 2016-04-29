@@ -7,7 +7,7 @@
 transparentColor(namedColor, alpha = 0.8)
 }
 \arguments{
-\item{namedColor}{A color name}
+\item{namedColor}{A color name.}
 
 \item{alpha}{A transparency value between 0 and 1, where 0 is fully
 transparent.}

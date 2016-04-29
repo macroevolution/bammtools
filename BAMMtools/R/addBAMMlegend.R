@@ -17,7 +17,8 @@
 
 ##' @title Add a color legend to a phylo-rate plot
 ##'
-##' @description Add a legend to a phylorate plot, with greater manual control
+##' @description Add a legend to a phylorate plot, with greater manual
+##'     control.
 ##'
 ##' @param x A \code{plot.bammdata} object.
 ##' @param direction Direction of color ramp. If omitted, then direction is 

@@ -2,7 +2,7 @@
 ##'
 ##' @description Computes the mean of the marginal posterior density of
 ##'     speciation/extinction or phenotypic rates for equally spaced points
-##'     along the root to tip path for each species
+##'     along the root to tip path for each species.
 ##'
 ##' @param ephy An object of class \code{bammdata}.
 ##' @param nslices An integer number of time slices. This determines the
@@ -13,7 +13,7 @@
 ##'     all samples are used.
 ##' @param spex A character string. "s" (default) calculates speciation rates;
 ##'     "e" calculates extinction rates; "netdiv" calculates diversification
-##'     rates. Ignored if \code{ephy$type = "trait"}
+##'     rates. Ignored if \code{ephy$type = "trait"}.
 ##'
 ##' @return A list with two components:
 ##'     \itemize{

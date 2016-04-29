@@ -11,7 +11,7 @@
 ##' @description Converts a named color and opacity and returns the proper RGB
 ##'     code.
 ##'
-##' @param namedColor A color name
+##' @param namedColor A color name.
 ##' @param alpha A transparency value between 0 and 1, where 0 is fully
 ##'     transparent.
 ##'

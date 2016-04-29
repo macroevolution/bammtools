@@ -19,7 +19,7 @@ all samples are used.}
 
 \item{spex}{A character string. "s" (default) calculates speciation rates;
 "e" calculates extinction rates; "netdiv" calculates diversification
-rates. Ignored if \code{ephy$type = "trait"}}
+rates. Ignored if \code{ephy$type = "trait"}.}
 }
 \value{
 A list with two components:
@@ -33,7 +33,7 @@ A list with two components:
 \description{
 Computes the mean of the marginal posterior density of
     speciation/extinction or phenotypic rates for equally spaced points
-    along the root to tip path for each species
+    along the root to tip path for each species.
 }
 \examples{
 data(whales, events.whales)

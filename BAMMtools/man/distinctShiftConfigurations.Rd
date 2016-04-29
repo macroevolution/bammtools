@@ -17,7 +17,7 @@ ratios, used to identify branches with elevated shift probabilities
 relative to prior (core vs non-core shifts).}
 
 \item{\dots}{Other arguments to distinctShiftConfigurations (possibly
-deprecated args)}
+deprecated args).}
 }
 \value{
 An object of class \code{bammshifts}. This is a list with the

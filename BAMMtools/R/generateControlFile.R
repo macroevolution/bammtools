@@ -1,6 +1,6 @@
 ##' @title Generate control file for \code{BAMM}
 ##'
-##' @description enerates a template diversification or trait control files
+##' @description Generates a template diversification or trait control files
 ##'     for \code{BAMM}, while allowing the user to specify parameter values.
 ##'
 ##' @param file Destination file name with or without path.

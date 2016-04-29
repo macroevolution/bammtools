@@ -28,7 +28,7 @@
 ##'     ratios, used to identify branches with elevated shift probabilities
 ##'     relative to prior (core vs non-core shifts).
 ##' @param \dots Other arguments to distinctShiftConfigurations (possibly
-##'     deprecated args)
+##'     deprecated args).
 ##'
 ##' @details See Rabosky et al (2014) and the \code{BAMM} project website for
 ##'     details on the nature of distinct shift configurations and especially

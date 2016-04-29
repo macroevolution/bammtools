@@ -10,11 +10,11 @@ computeBayesFactors(postdata, expectedNumberOfShifts, burnin = 0.1, ...)
 \item{postdata}{Filename for the MCMC output file from a \code{BAMM} run.
 Alternatively, a dataframe containing this information.}
 
-\item{expectedNumberOfShifts}{Expected number of shifts under the prior}
+\item{expectedNumberOfShifts}{Expected number of shifts under the prior.}
 
 \item{burnin}{What fraction of samples to discard from postdata as burnin?}
 
-\item{\dots}{Additional arguments to computeBayesFactors}
+\item{\dots}{Additional arguments to computeBayesFactors.}
 }
 \value{
 A matrix of pairwise Bayes factors between models.

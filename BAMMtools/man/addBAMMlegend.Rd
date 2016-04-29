@@ -52,7 +52,8 @@ Invisibly returns a list with the following components:
     }
 }
 \description{
-Add a legend to a phylorate plot, with greater manual control
+Add a legend to a phylorate plot, with greater manual
+    control.
 }
 \details{
 A number of predefined locations exist in this function to make

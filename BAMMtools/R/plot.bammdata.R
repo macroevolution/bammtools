@@ -38,7 +38,7 @@ redirect <- function(coord, theta) {
 ##' @param vtheta A numeric indicating the angular separation (in degrees) of
 ##'     the first and last terminal nodes. Ignored if
 ##'     \code{method = "phylogram"}.
-##' @param rbf a numeric indicating the length of the root branch as a
+##' @param rbf A numeric indicating the length of the root branch as a
 ##'     fraction of total tree height. Ignored if \code{method = "phylogram"}.
 ##' @param show A logical indicating whether or not to plot the tree. Defaults
 ##'     to \code{TRUE}.
