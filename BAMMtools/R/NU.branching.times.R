@@ -19,13 +19,13 @@ NU.branching.times <- function(phy, return.type = 'bt'){
 	
 	phy$begin <- rep(0, nrow(phy$edge)) 
 	phy$end <-  rep(0, nrow(phy$edge))
+	root <- length(phy$tip.label) + 1
 	
 	# Do it recursively
 	
 	fx <- function(phy, node){
 	
 		cur.time <- 0
-		root <- length(phy$tip.label) + 1
 		if (node > root){
 			cur.time <- phy$end[which(phy$edge[,2] == node)]	
 		}
