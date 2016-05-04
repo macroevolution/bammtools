@@ -171,8 +171,11 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 	}
 	
 # Getting branching times direct from
-#		the begin and end components of phy
-#		should be able to now handle non-ultrametric trees.
+# the begin and end components of phy
+# should be able to now handle non-ultrametric trees.
+
+# NOTE: for ultrametric trees, this is less efficient than branching.times(phy),
+#       and needlessly adds rounding errors.
 	
 	maxbt <- max(phy$end)
 	nodes <- (length(phy$tip.label) + 1):(2*length(phy$tip.label) - 1)
@@ -231,7 +234,9 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
  	cat('\nSetting recursive sequence on tree...\n');
  	phy <- getRecursiveSequence(phy);
  	cat('\nDone with recursive sequence\n\n');
- 
+
+# Fast up until here
+
 	######### Get ancestors for each pair of taxa
 	if (verbose) {
 		cat("Start preprocessing MRCA pairs....\n");
@@ -250,7 +255,7 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 		cat("Done preprocessing MRCA pairs....\n");
 	}	
 
-	####### Done with risky sstuff
+	####### Done with risky stuff
 	
 	meanTipMu <- numeric(length(phy$tip.label));
 	

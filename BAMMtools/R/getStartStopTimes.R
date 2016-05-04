@@ -15,5 +15,5 @@ getStartStopTimes <- function(phy){
 		phy$end <- as.numeric(end);
 		return(phy);
 	}
-	return( NU.branching.times(phy, "begin.end"));
+	return(NU.branching.times(phy, "begin.end"));
 }

@@ -1,3 +1,20 @@
+## new version: much faster, and doesn't suffer from rounding errors
+NU.branching.times <- function(phy, return.type = 'bt') {
+    n <- length(phy$tip.label);
+    tt <- node.depth.edgelength(phy);
+    root <- max(tt);
+    bt <- root - tt;
+    names(bt) <- 1:length(bt);
+    
+    if (return.type == 'bt') {
+        return(bt[(n+1):length(bt)]);
+    } else if (return.type == 'begin.end') {
+        phy$begin <- as.numeric(root - bt[phy$edge[,1]]);
+        phy$end <-  as.numeric(root - bt[phy$edge[,2]]);
+        return(phy);
+    }
+}
+
 
 # Recursively compute branching times for phylogenetic tree.
 #	Allows for non-ultrametric (fossil) trees.
@@ -11,7 +28,7 @@
 #		This is slower than ape::branching.times, on account of
 #			the recursion. Could recode in C for speed.
 #
-NU.branching.times <- function(phy, return.type = 'bt'){
+NU.branching.times.old <- function(phy, return.type = 'bt'){
 	
 	if (!is.binary.tree(phy)){
 		stop("error. Need fully bifurcating (resolved) tree\n")
