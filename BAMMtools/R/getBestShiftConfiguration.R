@@ -72,9 +72,11 @@
 ##' @export
 getBestShiftConfiguration <- function(x, expectedNumberOfShifts , threshold = 5){
 	
-	if (class(x) == 'bammdata') {
+	if ("bammdata" %in% class(x)) {
 		x <- credibleShiftSet(x, expectedNumberOfShifts, threshold, set.limit = 0.95);	
-	} else if (class(x) == 'credibleshiftset') {
+	} else if ("credibleshiftset" %in% class(x)) {
+	
+	## *** IS SOMETHING SUPPOSED TO BE HERE? ***
 
 	} else {
 		stop("Argument x must be of class bammdata or credibleshiftset\n");

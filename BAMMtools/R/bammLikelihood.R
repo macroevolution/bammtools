@@ -25,8 +25,8 @@
 #                   event encountered as one moves rootwards towards the tips from the focal node
  
 eventMatrix <- function(x, phy) {
- 
-	if (class(x) != 'data.frame') {
+
+	if (!"data.frame" %in% class(x)) {
 		x <- read.csv(x, header = FALSE, stringsAsFactors = FALSE)			
 	}
 
@@ -592,11 +592,11 @@ BAMMlikelihood <- function(phy, eventdata, gen = 'last', segLength = 0.02, sf = 
 		
 	}
 	
-	if (class(phy) == 'character') {
+	if ("character" %in% class(phy)) {
 		phy <- read.tree(phy)
 	}
 	
-	if (class(eventdata) != 'data.frame') {
+	if (!"data.frame" %in% class(eventdata)) {
 		eventdatafile <- eventdata
 		eventdata <- read.csv(eventdata, header = FALSE, stringsAsFactors = FALSE)			
 	}

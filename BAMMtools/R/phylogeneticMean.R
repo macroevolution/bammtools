@@ -1,15 +1,14 @@
 phylogeneticMean <- function(traits, phy, lambda=1){
 	
-	if (!is.null(names(traits)))
+	if (!is.null(names(traits))) {
 		traits <- traits[phy$tip.label];
+	}
 	
-	if (class(phy) == 'phylo'){
+	if ("phylo" %in% class(phy)) {
 		vmat <- vcv.phylo(phy);			
 	}else{
 		vmat <- phy;
-		
 	}
-	
 	
 	dd <- diag(vmat);
 	vmat <- vmat * lambda;
@@ -21,5 +20,5 @@ phylogeneticMean <- function(traits, phy, lambda=1){
 	beta <- as.vector((t(traits-anc) %*% solve(vmat) %*% (traits-anc))/length(traits));
 	
 	return(list(anc=as.vector(anc), beta=as.vector(beta)));
-
 }
+
