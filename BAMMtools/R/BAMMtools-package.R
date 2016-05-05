@@ -32,5 +32,14 @@
 ##' @useDynLib BAMMtools
 ##' @importFrom Rcpp evalCpp
 ##' @importFrom gplots rich.colors
+##' @importFrom methods hasArg
+##' @importFrom utils lsf.str read.csv read.table tail write.csv write.table
+##' @importFrom stats cor.test dbinom density dgeom kruskal.test loess median
+##'     optim quantile reorder runif sd setNames wilcox.test
+##' @importFrom grDevices col2rgb colorRampPalette dev.off gray pdf rgb
+##'     terrain.colors
+##' @importFrom graphics abline axTicks axis barplot box grconvertX grconvertY
+##'     image layout legend lines locator mtext par plot plot.new plot.window
+##'     points polygon rect segments text
 ##' @import ape
 NULL
