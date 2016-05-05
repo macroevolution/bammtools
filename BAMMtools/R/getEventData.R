@@ -170,35 +170,19 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 		phy <- getStartStopTimes(phy)
 	}
 	
-# Getting branching times direct from
-# the begin and end components of phy
-# should be able to now handle non-ultrametric trees.
-
-# NOTE: for ultrametric trees, this is less efficient than branching.times(phy),
-#       and needlessly adds rounding errors.
-	
-	maxbt <- max(phy$end)
-	nodes <- (length(phy$tip.label) + 1):(2*length(phy$tip.label) - 1)
-	bt <- numeric(length(nodes))
-	names(bt) <- nodes
-	for (i in 1:length(bt)){
-		tt <- phy$begin[phy$edge[,1] == nodes[i]][1]
-		bt[i] <- maxbt - tt
-	}
-	
+	bt <- NU.branching.times(phy)
+	maxbt <- as.numeric(max(phy$end))
 	
 	########
 	if ("data.frame" %in% class(eventdata)) {
 		cat("Processing event data from data.frame\n");
 		uniquegens <- sort(unique(eventdata[,1]));
-	}
-	else if ("character" %in% class(eventdata)) {
+	} else if ("character" %in% class(eventdata)) {
 		cat("Reading event datafile: ", eventdata, "\n\t\t...........");
 		eventdata <- read.csv(eventdata, header=TRUE, stringsAsFactors=FALSE);
  		uniquegens <- sort(unique(eventdata[,1]));
  		cat("\nRead a total of", length(uniquegens), "samples from posterior\n");				
-	} 
-	else {
+	} else {
 		err.string = c('eventdata arg invalid\n\nType is ', class(eventdata), '\n', sep='');
 		stop(err.string);
 	}
@@ -211,8 +195,7 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
  
  	if (is.null(nsamples)) {
  		nsamples <- length(uniquegens);
- 	} 
- 	else if (nsamples > length(uniquegens)) {
+ 	} else if (nsamples > length(uniquegens)) {
  		nsamples <- length(uniquegens);
  	}
 	
@@ -235,7 +218,7 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
  	phy <- getRecursiveSequence(phy);
  	cat('\nDone with recursive sequence\n\n');
 
-# Fast up until here
+## Fast up until here
 
 	######### Get ancestors for each pair of taxa
 	if (verbose) {
@@ -263,6 +246,8 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
  
  	stoptime <- maxbt;
  	
+## this is slow
+ 	
  	for (i in 1:length(goodsamples)) {
   		tmpEvents <- x2[x2[,1] == goodsamples[i], ];
 		
@@ -277,8 +262,7 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 				stop("Unidentified column in event data file. Maybe try setting argument 'type = trait'");
 			}
  			mu2 <- as.numeric(tmpEvents[, 8]); #mu parameter 2 
-		} 
-		else { #for bamm trait data we set the mu columns to zero because those params don't exist	
+		} else { #for bamm trait data we set the mu columns to zero because those params don't exist	
 			mu1 <- rep(0, nrow(tmpEvents)); 
  			mu2 <- rep(0, nrow(tmpEvents)); 
 		}	
@@ -387,8 +371,7 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 	phy$meanTipMu = meanTipMu;
 	if (type == 'diversification') {
 		phy$type <- 'diversification';
-	} 
-	else {
+	} else {
 		phy$type <- 'trait';	
 	}
  	

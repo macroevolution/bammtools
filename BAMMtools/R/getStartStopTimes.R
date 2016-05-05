@@ -7,6 +7,7 @@
 
 getStartStopTimes <- function(phy){
  	if (is.ultrametric(phy)) {
+ 		phy$node.label <- NULL;
 	 	bmax <- max(branching.times(phy));
 		bt <- bmax - branching.times(phy);
 		begin <- bt[as.character(phy$edge[,1])];
