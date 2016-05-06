@@ -38,3 +38,32 @@ getmrca <- function(phy,t1,t2)
 	
 	.C('fetchmrca',anc,desc,root,ne,npair,as.integer(t1),as.integer(t2),integer(npair))[[8]];
 }
+
+## version above does a lot of recalculating
+## scales with sample size, not unique shift nodes
+getmrca2 <- function (phy, t1, t2) {
+    if (mode(t1) == "character") {
+        t1 <- match(t1, phy$tip.label);
+    }
+    if (mode(t2) == "character") {
+        t2 <- match(t2, phy$tip.label);
+    }
+    ff <- as.data.frame(cbind(t1, t2, o.id=1:length(t1)));
+    gg <- unique(ff[,c(1,2)]);
+    gg$u.id <- 1:nrow(gg);
+    
+    hh <- merge(ff, gg);
+    
+    t1 <- gg[,1];
+    t2 <- gg[,2];
+    ne <- as.integer(dim(phy$edge)[1]);
+    npair <- as.integer(length(t1));
+    anc <- as.integer(phy$edge[, 1]);
+    desc <- as.integer(phy$edge[, 2]);
+    root <- as.integer(length(phy$tip.label) + 1);
+    u.res <- .C("fetchmrca", anc, desc, root, ne, npair, as.integer(t1), 
+                as.integer(t2), integer(npair))[[8]];
+    res <- numeric(length(t1));
+    res[hh$o.id] <- u.res[hh$u.id];
+    return(res);
+}

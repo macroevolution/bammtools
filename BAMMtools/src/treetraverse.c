@@ -213,6 +213,16 @@ void setphylotreecoords(int * anc, int * desc, int * ndorder, double * begin, do
 	Free(ci);
 }
 
+
+/*
+anc and desc are from phy$edge
+root = root node number
+ne = number of edges
+npair = number of (non-unique) pairs of tips
+t1 and t2 are vectors of left and right tips (again non-unique)
+ret = results
+*/
+
 void fetchmrca(int * anc, int * desc, int * root, int * ne, int * npair, int * t1, int * t2, int * ret) {	
 	int i,j,k;
 
@@ -257,8 +267,7 @@ void fetchmrca(int * anc, int * desc, int * root, int * ne, int * npair, int * t
 	
 		if (mrca == 1) {
 			ret[k] = node;
-		}
-		else {
+		} else {
 			ret[k] = *root;
 		}
 		Free(path);
