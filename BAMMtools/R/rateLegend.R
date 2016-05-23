@@ -35,7 +35,7 @@ rateLegend = function(colobj, log = FALSE) {
 		# rate.colors = colorRampPalette(rev(brewer.pal(3,pal)),space='Lab')(NCOLORS);
 	# }
 	# else if(pal == 'temperature') {
-		# rate.colors = rich.colors(NCOLORS);	
+		# rate.colors = gplots::rich.colors(NCOLORS);	
 	# }
 	# qx = quantile(rates,seq(0,1,length.out = NCOLORS+1));
 	# cat("Click once where you want the lower left corner of the figure\n");

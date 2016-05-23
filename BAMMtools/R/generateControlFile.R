@@ -1,6 +1,6 @@
 ##' @title Generate control file for \code{BAMM}
 ##'
-##' @description Generates a template diversification or trait control files
+##' @description Generates a template diversification or trait control file
 ##'     for \code{BAMM}, while allowing the user to specify parameter values.
 ##'
 ##' @param file Destination file name with or without path.
@@ -89,7 +89,7 @@ generateControlFile <- function(file = "controlfile.txt", type = "diversificatio
 	# name for species-specific sampling probabilities (see sampleProbsFilename)
 	                                        
 	globalSamplingFraction = 1.0            
-	# The sampling probability. If useGlobalSamplingFraction = 0, this is ignored
+	# The sampling probability. If useGlobalSamplingProbability = 0, this is ignored
 	# and BAMM looks for a file name with species-specific sampling fractions
 	
 	sampleProbsFilename = sample_probs.txt

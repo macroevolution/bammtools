@@ -16,7 +16,7 @@ generateControlFile(file = "controlfile.txt", type = "diversification",
 \item{params}{List of parameters, see \code{Details}.}
 }
 \description{
-Generates a template diversification or trait control files
+Generates a template diversification or trait control file
     for \code{BAMM}, while allowing the user to specify parameter values.
 }
 \details{

@@ -68,7 +68,7 @@ assign("palettes", palettes, env = .colorEnv);
 ##' @seealso \code{\link[gplots]{rich.colors}}
 ##' @export
 richColors <- function (n) {
-    cat("NOTE: function `richColors` is deprecated. Please use `rich.colors` instead.")
+    cat("NOTE: function `richColors` is deprecated. Please use `rich.colors` instead.\n")
     return(gplots::rich.colors(n))
 }
 

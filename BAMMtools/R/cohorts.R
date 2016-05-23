@@ -8,7 +8,8 @@
 ##' @param ephy An object of class \code{bammdata}.
 ##' @param col A vector of colors passed to the function \code{image}. These
 ##'     will be used to color the values in \code{x}. See documentation for
-##'     \code{image}.
+##'     \code{image}. If \code{col = 'temperature'}, the color palette from
+##'		\code{\link{rich.colors}} from the gplots package will be used. 
 ##' @param pal The palette to use if \code{use.plot.bammdata=TRUE}. See
 ##'     options documented in the help file for \code{\link{plot.bammdata}}.  	
 ##' @param lwd A numeric indicating the width of branches in the phylogeny.  	
@@ -47,9 +48,9 @@
 ##' ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=500)
 ##' x <- getCohortMatrix(ed)
 ##' cohorts(x, ed)
-##' cohorts(x, ed, col=rich.colors(64))
-##' cohorts(x, ed, ofs=0.05, col=rich.colors(64))
-##' cohorts(x, ed, pal="temperature", col=rich.colors(64))
+##' cohorts(x, ed, col='temperature')
+##' cohorts(x, ed, ofs=0.05, col='temperature')
+##' cohorts(x, ed, pal="temperature", col='temperature', use.plot.bammdata=TRUE)
 ##' # gray scale
 ##' cohorts(x, ed, col=gray(seq(0.2,0.9,length.out=128)),
 ##'         use.plot.bammdata=FALSE)
@@ -73,6 +74,8 @@ cohorts <- function(x, ephy, col, pal, lwd = 1, ofs = 0, use.plot.bammdata = FAL
 		pal <- "RdYlBu";
 	if (missing(col))
 		col <- colorRampPalette(get("palettes",.colorEnv)[["RdYlBu"]])(64);
+	if (all(col == 'temperature'))
+		col <- gplots::rich.colors(64);
 	ncolors <- length(col);
 	breaks <- quantile(seq(0,1.01,length.out=100),probs=seq(0,1,length.out=ncolors+1));
 	
