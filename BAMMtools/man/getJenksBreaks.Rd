@@ -9,7 +9,7 @@ getJenksBreaks(var, k, subset = NULL)
 \arguments{
 \item{var}{Numeric vector.}
 
-\item{k}{Number of groupings.}
+\item{k}{Number of breaks.}
 
 \item{subset}{Number of regularly spaced samples to subset from
 \code{var}. Intended to improve runtime for large datasets. If
@@ -20,14 +20,14 @@ A numeric vector of intervals.
 }
 \description{
 Given a vector of numeric values and the number of desired
-    categories, calculate the optimum breakpoints using Jenks natural
+    breaks, calculate the optimum breakpoints using Jenks natural
     breaks optimization.
 }
 \details{
 \code{getJenksBreaks} is called by
     \code{\link{assignColorBreaks}}.
 
-    The values in \code{var} are binned into \code{k} categories,
+    The values in \code{var} are binned into \code{k+1} categories,
     according to the Jenks natural breaks classification method. This
     method is borrowed from the field of cartography, and seeks to
     minimize the variance within categories, while maximizing the variance
@@ -52,7 +52,8 @@ ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 ed <- dtRates(ed, tau=0.01)
 vec <- ed$dtrates$rates[[1]]
 
-# Return breaks for the binning of speciation rates into 64 groups
+# Return breaks for the binning of speciation rates into 65 groups
+# yielding 64 breaks
 getJenksBreaks(vec, 64)
 }
 \author{

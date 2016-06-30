@@ -35,7 +35,7 @@
 ##' @title STRAPP: STructured Rate Permutations on Phylogenies
 ##'
 ##' @description Given a \code{bammdata} object and a vector of (continuous)
-##'     trait data , assess whether the correlation between the trait and bamm
+##'     trait data, assess whether the correlation between the trait and bamm
 ##'     estimated speciation, extinction or net diversification rate is
 ##'     significant using permutation. A set of posterior samples is randomly
 ##'     drawn from the \code{bammdata} object. If the trait is continuous,
@@ -62,7 +62,8 @@
 ##' @param rate A character string specifying which estimated rate from the
 ##'     \code{bammdata} object to use for testing correlation, must be one of
 ##'     'speciation', 'extinction', or 'net diversification'. Defaults to
-##'     'speciation'. You can specify just the initial letter.
+##'     'speciation'. You can specify just the initial letter. Ignored for 
+##' 	trait event data.
 ##' @param return.full A logical. If \code{TRUE}, the list of posterior
 ##'     samples, the observed correlation for each posterior sample, and the
 ##'     null distribution will be included in the returned object. Defaults to
@@ -88,7 +89,7 @@
 ##'     function. The R package \code{parallel} must be loaded for
 ##'     \code{nthreads > 1}.
 ##'
-##' @details Tip rates --speciation, extinction, or net diversification
+##' @details Tip rates --trait, speciation, extinction, or net diversification
 ##'     rates-- are permuted in a way such that pairwise covariances in rates
 ##'     between species are maintained. That is, tips with the same
 ##'     \code{tipStates} still have the same rate after permutation. Posterior
@@ -162,9 +163,9 @@
 ##' @keywords nonparametric
 ##' @export
 traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.full = FALSE, method = 'spearman', logrates = TRUE, two.tailed = TRUE, traitorder = NA, nthreads = 1) {
-
-	if (ephy$type != 'diversification'){
-		stop("Function currently supports only bammdata objects from speciationextinction analyses\n");
+ 
+	if (ephy$type == 'trait') {
+		rate <- 'speciation'
 	}
   
 	if (nthreads > 1) {
@@ -174,6 +175,7 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 	}
 	ratetype.option <- c("speciation", "extinction", "net diversification");
 	ratetype <- ratetype.option[grep(paste("^", rate, sep = ''), ratetype.option, ignore.case = TRUE, perl = TRUE)];
+	  
   if (length(ratetype) == 0) {
     stop("Rate must be one of 'speciation', 'extinction', or 'net diversification', only the initial letter is needed\n")
   }

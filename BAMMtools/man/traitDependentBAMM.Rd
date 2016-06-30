@@ -22,7 +22,8 @@ number of posterior samples to randomly draw with replacement from the
 \item{rate}{A character string specifying which estimated rate from the
 \code{bammdata} object to use for testing correlation, must be one of
 'speciation', 'extinction', or 'net diversification'. Defaults to
-'speciation'. You can specify just the initial letter.}
+'speciation'. You can specify just the initial letter. Ignored for 
+trait event data.}
 
 \item{return.full}{A logical. If \code{TRUE}, the list of posterior
 samples, the observed correlation for each posterior sample, and the
@@ -84,7 +85,7 @@ A list with the following components:
 }
 \description{
 Given a \code{bammdata} object and a vector of (continuous)
-    trait data , assess whether the correlation between the trait and bamm
+    trait data, assess whether the correlation between the trait and bamm
     estimated speciation, extinction or net diversification rate is
     significant using permutation. A set of posterior samples is randomly
     drawn from the \code{bammdata} object. If the trait is continuous,
@@ -103,7 +104,7 @@ Given a \code{bammdata} object and a vector of (continuous)
     sum statistic is used.
 }
 \details{
-Tip rates --speciation, extinction, or net diversification
+Tip rates --trait, speciation, extinction, or net diversification
     rates-- are permuted in a way such that pairwise covariances in rates
     between species are maintained. That is, tips with the same
     \code{tipStates} still have the same rate after permutation. Posterior
