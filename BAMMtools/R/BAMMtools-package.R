@@ -41,5 +41,6 @@
 ##' @importFrom graphics abline axTicks axis barplot box grconvertX grconvertY
 ##'     image layout legend lines locator mtext par plot plot.new plot.window
 ##'     points polygon rect segments text
+##' @importFrom stats qchisq
 ##' @import ape
 NULL

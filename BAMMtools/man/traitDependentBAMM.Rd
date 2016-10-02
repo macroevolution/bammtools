@@ -92,7 +92,7 @@ Given a \code{bammdata} object and a vector of (continuous)
     this function calculates the correlation coefficients between the
     trait and tip rates (observed correlation), as well as that with
     permuted rates for each posterior sample. In a one-tailed test for
-    positive correlations,the reported p-value is the proportion of the
+    positive correlations, the reported p-value is the proportion of the
     posterior samples in which the observed correlation is larger than the
     correlations calculated with permuted rates. In a two-tailed test, the
     reported p-value is the proportion of the posterior samples in which

@@ -42,7 +42,7 @@
 ##'     this function calculates the correlation coefficients between the
 ##'     trait and tip rates (observed correlation), as well as that with
 ##'     permuted rates for each posterior sample. In a one-tailed test for
-##'     positive correlations,the reported p-value is the proportion of the
+##'     positive correlations, the reported p-value is the proportion of the
 ##'     posterior samples in which the observed correlation is larger than the
 ##'     correlations calculated with permuted rates. In a two-tailed test, the
 ##'     reported p-value is the proportion of the posterior samples in which
@@ -74,7 +74,7 @@
 ##' @param logrates A logical. If \code{TRUE} log-transform the rates before
 ##'     analysis. Defaults to \code{TRUE}. This can only matter for the
 ##'     pearson correlation. 
-##' @param two.tailed A logical, used for cotinuous trait data. If
+##' @param two.tailed A logical, used for continuous trait data. If
 ##'     \code{TRUE}, perform a two-tailed statistical test (i.e., if the null
 ##'     distribution is symmetric, it is equivalent to doubling the p-value).
 ##'     Defaults to \code{TRUE}.  
@@ -320,7 +320,13 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 	}
 
 	kruskaltest <- function(rates, traits) {
-		return(kruskal.test(rates ~ traits)$statistic);
+		testres <- kruskal.test(rates ~ traits);
+		# If there is no variation in rates (chi-squared value is NaN), then return a chi-squared value that has a P-value of 0.999, using the appropriate degrees of freedom
+		if (is.na(testres$statistic)) {
+			return(qchisq(p = 0.999, df = testres$parameter));
+		} else {
+			return(testres$statistic);
+		}
 	}
  
 
@@ -379,7 +385,7 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 		} else {
 			ave.tiprate <- getTipRates(ephy)$lambda.avg - getTipRates(ephy)$mu.avg;
 		}
-		l <- lapply(unique(traits[! is.na(traits)]), function(x) {
+		l <- lapply(unique(traits[!is.na(traits)]), function(x) {
 			median(ave.tiprate[which(traits == x)], na.rm = TRUE);
 		});
 		names(l) <- as.character(unique(traits[! is.na(traits)]));
