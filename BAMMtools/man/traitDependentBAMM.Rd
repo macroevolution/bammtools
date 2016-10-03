@@ -38,7 +38,7 @@ just the initial letter.}
 analysis. Defaults to \code{TRUE}. This can only matter for the
 pearson correlation.}
 
-\item{two.tailed}{A logical, used for cotinuous trait data. If
+\item{two.tailed}{A logical, used for continuous trait data. If
 \code{TRUE}, perform a two-tailed statistical test (i.e., if the null
 distribution is symmetric, it is equivalent to doubling the p-value).
 Defaults to \code{TRUE}.}
