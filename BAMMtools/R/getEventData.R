@@ -314,10 +314,16 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 		
 		is_noEventBranch = !(phy$edge[,2] %in% dftemp$node);
 		
-		tmpEventSegMat[1:sum(is_noEventBranch), 1] <- phy$edge[,2][is_noEventBranch];
-		tmpEventSegMat[1:sum(is_noEventBranch),2] <- phy$begin[is_noEventBranch];
- 		tmpEventSegMat[1:sum(is_noEventBranch),3] <- phy$end[is_noEventBranch];
- 		tmpEventSegMat[1:sum(is_noEventBranch),4] <- statevec[is_noEventBranch];		
+		if (sum(is_noEventBranch) > 0) {
+			
+			tmpEventSegMat[1:sum(is_noEventBranch), 1] <- phy$edge[,2][is_noEventBranch];
+			tmpEventSegMat[1:sum(is_noEventBranch), 2] <- phy$begin[is_noEventBranch];
+	 		tmpEventSegMat[1:sum(is_noEventBranch), 3] <- phy$end[is_noEventBranch];
+	 		tmpEventSegMat[1:sum(is_noEventBranch), 4] <- statevec[is_noEventBranch];
+	 			
+		} else {
+			tempEventSegMat <- cbind(phy$edge[, 2], phy$begin, phy$end, statevec);
+		}
  		
 		eventnodeset <- intersect(non.root, dftemp$node);
 		pos <- 1 + sum(is_noEventBranch);
@@ -336,7 +342,7 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 				proc.set <- c(statevec[phy$edge[,2] == parent], events.on.branch$index);			
 			}
 				
- 			zzindex = pos:(pos+nrow(events.on.branch));	
+ 			zzindex = pos:(pos + nrow(events.on.branch));	
 				
 			tmpEventSegMat[zzindex, 1] <- rep(k, length(zzindex));
 			tmpEventSegMat[zzindex, 2] <- start.times;
@@ -350,8 +356,8 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
  		eventBranchSegs[[i]] <- tmpEventSegMat;
 
 		tipstates <- numeric(length(phy$tip.label));
-		tipstates <- statevec[phy$edge[,2] <= phy$Nnode+1];
-		tipstates <- tipstates[order(phy$edge[phy$edge[,2] <= phy$Nnode+1,2])];
+		tipstates <- statevec[phy$edge[,2] <= phy$Nnode + 1];
+		tipstates <- tipstates[order(phy$edge[phy$edge[,2] <= phy$Nnode + 1, 2])];
 		
  		### Compute tip rates:
 		
