@@ -356,7 +356,13 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
         		ofs <- max(nchar(phy$tip.label) * 0.03 * cex);
         }
         if (method == "polar") {
-            plot.window(xlim = c(-1, 1) + c(-rb, rb) + c(-ofs, ofs), ylim = c(-1, 1) + c(-rb, rb) + c(-ofs, ofs), asp = 1);
+            if (is.null(xlim) || is.null(ylim)) {
+                if (is.null(xlim))
+                    xlim = c(-1, 1) + c(-rb, rb) + c(-ofs, ofs)
+                if (is.null(ylim))
+                    ylim = c(-1, 1) + c(-rb, rb) + c(-ofs, ofs) 
+            }
+            plot.window(xlim = xlim, ylim = ylim, asp = 1);
             segments(x0, y0, x1, y1, col = edge.color, lwd = lwd, lend = 2);
             arc(0, 0, ret$arcs[, 1], ret$arcs[, 2], c(rb, rb + phy$end/tH), border = arc.color, lwd = lwd);
             if (labels) {
