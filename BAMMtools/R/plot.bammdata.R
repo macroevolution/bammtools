@@ -158,7 +158,8 @@ redirect <- function(coord, theta) {
 ##'     other rate variation being drowned out. If specified, the color ramp
 ##'     will be built between these two color.interval values, and the rates
 ##'     outside of the color interval range will be set to the highest and
-##'     lowest color. 
+##'     lowest color. The total number of colors will also be increased such
+##'     that 64 color bins are found within the color.interval.
 ##'
 ##'     If \code{plot.bammdata} is called repeatedly with the same
 ##'     \code{bammdata} object, computation can be reduced by first calling
@@ -277,7 +278,7 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
             stop("color.interval must be a vector of 2 numeric values.");
         }
     }
-
+    
     if (!is.binary.tree(phy)) {
         stop("Function requires fully bifurcating tree");
     }
@@ -287,8 +288,39 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
     if (!("dtrates" %in% names(x))) {
         x <- dtRates(x, tau);
     }
+    
+    NCOLORS <- 64;
+	
+	if (!is.null(color.interval)) {
+    	# change the number of breaks such that the range of color.interval 
+    	# is equivalent in terms of number of colors to the full range
+    	# this way we preserve good resolution
+        # Here we will ensure that NCOLORS bins occur within the color.interval
+    	
+   		if (x$type == "trait") {
+    		ratesRange <- range(x$dtrates$rates);
+    	} else if (x$type == "diversification") {
+    		if (tolower(spex) == "s") {
+    			ratesRange <- range(x$dtrates$rates[[1]]);
+    		} else if (tolower(spex) == "e") {
+    			ratesRange <- range(x$dtrates$rates[[2]]);
+    		} else if (tolower(spex) == "netdiv") {
+    			ratesRange <- range(x$dtrates$rates[[1]] - x$dtrates$rates[[2]]);
+    		}
+    	}	
+    	brks <- seq(ratesRange[1], ratesRange[2], length.out = (NCOLORS+1));
+    	if (all(!is.na(color.interval))) {
+    		intervalLength <- length(which.min(abs(color.interval[1] - brks)) : which.min(abs(color.interval[2] - brks)));
+    	} else if (is.na(color.interval[1])) {
+    		intervalLength <- length(1 : which.min(abs(color.interval[2] - brks)));
+    	} else if (is.na(color.interval[2])) {
+    		intervalLength <- length(which.min(abs(color.interval[1] - brks)) : length(brks));
+    	}
+    	NCOLORS <- round((NCOLORS ^ 2) / intervalLength)    	
+    }
+
     if (is.null(colorbreaks)) {
-   	    colorbreaks <- assignColorBreaks(x$dtrates$rates, 64, spex, logcolor, breaksmethod, JenksSubset);
+   	    colorbreaks <- assignColorBreaks(x$dtrates$rates, NCOLORS, spex, logcolor, breaksmethod, JenksSubset);
     }
     if (x$type == "trait") {
     	colorobj <- colorMap(x$dtrates$rates, pal, colorbreaks, logcolor, color.interval);
