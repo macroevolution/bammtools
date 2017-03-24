@@ -163,9 +163,6 @@ mean(brates$beta)
 # Plot rates:
 plot(xx)
 }
-\author{
-Dan Rabosky, Mike Grundler
-}
 \references{
 \url{http://bamm-project.org/}
 }
@@ -173,5 +170,7 @@ Dan Rabosky, Mike Grundler
 \code{\link{summary.bammdata}}, \code{\link{plot.bammdata}},
     \code{\link{dtRates}}.
 }
+\author{
+Dan Rabosky, Mike Grundler
+}
 \keyword{models}
-

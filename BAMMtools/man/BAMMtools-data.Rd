@@ -3,16 +3,16 @@
 \docType{data}
 \name{BAMMtools-data}
 \alias{BAMMtools-data}
-\alias{events.fishes}
-\alias{events.primates}
-\alias{events.whales}
-\alias{fishes}
-\alias{mass.primates}
-\alias{mcmc.primates}
-\alias{mcmc.whales}
-\alias{primates}
-\alias{traits.fishes}
 \alias{whales}
+\alias{primates}
+\alias{fishes}
+\alias{mcmc.whales}
+\alias{mcmc.primates}
+\alias{events.whales}
+\alias{events.primates}
+\alias{events.fishes}
+\alias{mass.primates}
+\alias{traits.fishes}
 \title{BAMMtools datasets}
 \source{
 Vos R.A., A.O. Mooers. 2006. A new dated supertree of the Primates.
@@ -102,4 +102,3 @@ This includes both the raw data and the \code{BAMM} output for
     change parameter (\code{betashift}).
 }
 \keyword{datasets}
-

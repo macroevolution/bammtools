@@ -68,11 +68,10 @@ colors <- assignColorBreaks(ed$dtrates$rates, spex="netdiv")
 
 plot(ed, colorbreaks = colors, spex="netdiv")
 }
-\author{
-Mike Grundler, Pascal Title
-}
 \seealso{
 \code{\link{plot.bammdata}}
 }
+\author{
+Mike Grundler, Pascal Title
+}
 \keyword{graphics}
-

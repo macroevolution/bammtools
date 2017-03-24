@@ -49,4 +49,3 @@ dim(mbr$lambda_branch_matrix)
 Dan Rabosky
 }
 \keyword{models}
-

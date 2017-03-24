@@ -80,11 +80,10 @@ mean(dol_rates$mu)
 mean(getCladeRates(ed, node=c(132, 140),
      nodetype=c('include','exclude'))$lambda)
 }
-\author{
-Dan Rabosky
-}
 \references{
 \url{http://bamm-project.org}
 }
+\author{
+Dan Rabosky
+}
 \keyword{models}
-

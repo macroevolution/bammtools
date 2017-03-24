@@ -64,15 +64,14 @@ best_config <- maximumShiftCredibility(ed)
 plot(ed)
 addBAMMshifts(ed, method='phylogram', index=best_config$sampleindex)
 }
-\author{
-Dan Rabosky
-}
 \seealso{
 \code{\link{marginalShiftProbsTree}},
     \code{\link{addBAMMshifts}}, \code{\link{cumulativeShiftProbsTree}},
     \code{\link{credibleShiftSet}},
     \code{\link{getBestShiftConfiguration}}
 }
+\author{
+Dan Rabosky
+}
 \keyword{graphics}
 \keyword{manip}
-

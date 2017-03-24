@@ -16,4 +16,3 @@ Deprecated function. Please use
 \seealso{
 \code{\link[gplots]{rich.colors}}
 }
-

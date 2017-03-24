@@ -82,4 +82,3 @@ samplingProbs(tree, cladeTable = spTable, cladeRichness = NULL,
 \author{
 Pascal Title
 }
-

@@ -52,11 +52,10 @@ cormat <- getCohortMatrix(ed)
 dim(cormat)
 hist(cormat, breaks=50)
 }
-\author{
-Dan Rabosky
-}
 \references{
 \url{http://bamm-project.org}
 }
+\author{
+Dan Rabosky
+}
 \keyword{models}
-

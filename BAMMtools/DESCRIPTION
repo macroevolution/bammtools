@@ -28,4 +28,4 @@ URL: http://www.bamm-project.org
 NeedsCompilation: yes
 Suggests:
     parallel
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

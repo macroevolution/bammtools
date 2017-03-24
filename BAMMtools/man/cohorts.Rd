@@ -69,11 +69,10 @@ cohorts(x, ed, pal="temperature", col='temperature', use.plot.bammdata=TRUE)
 cohorts(x, ed, col=gray(seq(0.2,0.9,length.out=128)),
         use.plot.bammdata=FALSE)
 }
-\author{
-Mike Grundler
-}
 \seealso{
 \code{\link{plot.bammdata}}, \code{\link{getCohortMatrix}},
     \code{\link{image}}
 }
-
+\author{
+Mike Grundler
+}

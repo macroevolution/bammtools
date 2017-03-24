@@ -11,10 +11,6 @@ An R package for the analysis and visualization of complex
     entirely around analysis of results obtained using the \code{BAMM}
     software (\url{http://bamm-project.org/}).
 }
-\author{
-Dan Rabosky, Mike Grundler, Pascal Title, Jonathan Mitchell,
-    Carlos Anderson, Jeff Shi, Joseph Brown, Huateng Huang
-}
 \references{
 \url{http://bamm-project.org}
 
@@ -35,5 +31,8 @@ Dan Rabosky, Mike Grundler, Pascal Title, Jonathan Mitchell,
     and morphological evolution are correlated across the largest
     vertebrate radiation. Nature Communications DOI: 10.1038/ncomms2958.
 }
+\author{
+Dan Rabosky, Mike Grundler, Pascal Title, Jonathan Mitchell,
+    Carlos Anderson, Jeff Shi, Joseph Brown, Huateng Huang
+}
 \keyword{package}
-

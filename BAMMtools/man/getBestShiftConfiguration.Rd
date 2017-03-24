@@ -76,12 +76,11 @@ best <- getBestShiftConfiguration(css, expectedNumberOfShifts = 1,
 plot(best)
 addBAMMshifts(best)
 }
-\author{
-Dan Rabosky
-}
 \seealso{
 \link{getEventData},  \link{credibleShiftSet},
     \link{plot.credibleshiftset}, \link{plot.bammdata}
 }
+\author{
+Dan Rabosky
+}
 \keyword{models}
-

@@ -92,10 +92,9 @@ x <- plot(ephy, breaksmethod = 'linear',
           color.interval = c(NA, 0.12), lwd = 2)
 addBAMMlegend(x, location = c(0, 30, 200, 205), nTicks = 1, side = 3)
 }
-\author{
-Pascal Title
-}
 \seealso{
 Requires an object created with \code{\link{plot.bammdata}}.
 }
-
+\author{
+Pascal Title
+}

@@ -221,9 +221,6 @@ cset$indices[[1]]
 # Now we can plot the credible set:
 plot(cset, plotmax=4)
 }
-\author{
-Dan Rabosky
-}
 \references{
 \url{http://bamm-project.org}
 }
@@ -233,5 +230,7 @@ Dan Rabosky
     \code{\link{plot.credibleshiftset}},
     \code{\link{getBranchShiftPriors}}
 }
+\author{
+Dan Rabosky
+}
 \keyword{models}
-

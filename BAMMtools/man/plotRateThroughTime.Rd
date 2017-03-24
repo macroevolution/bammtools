@@ -168,11 +168,10 @@ plotRateThroughTime(ephy,useMedian=FALSE, intervals=c(0.05,0.95),
 # function, we can make plot=FALSE
 plotRateThroughTime(ephy, plot=FALSE)}
 }
-\author{
-Pascal Title
-}
 \seealso{
 See \code{\link{getEventData}} and
     \code{\link{getRateThroughTimeMatrix}} to generate input data.
 }
-
+\author{
+Pascal Title
+}

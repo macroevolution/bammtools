@@ -73,10 +73,9 @@ sc <- distinctShiftConfigurations(ed, expectedNumberOfShifts = 1,
 
 plot(sc, ed, rank=1)
 }
-\author{
-Dan Rabosky
-}
 \seealso{
 \code{\link{plot.bammshifts}}, \code{\link{credibleShiftSet}}
 }
-
+\author{
+Dan Rabosky
+}

@@ -120,11 +120,10 @@ for (i in 1:length(tvec)){
 
 ## This shows the grid of time slices over the phylogeny}
 }
-\author{
-Dan Rabosky
-}
 \seealso{
 \code{\link{plotRateThroughTime}}
 }
+\author{
+Dan Rabosky
+}
 \keyword{models}
-

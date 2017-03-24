@@ -38,14 +38,13 @@ ed2 <- subsetEventData(ed, index = 1:20)
 ratetree <- getMeanBranchLengthTree(ed2, rate='speciation')
 plot(ratetree$phy, show.tip.label=FALSE)
 }
-\author{
-Dan Rabosky
-}
 \references{
 \url{http://bamm-project.org}
 }
 \seealso{
 \code{\link{plot.bammdata}}
 }
+\author{
+Dan Rabosky
+}
 \keyword{models}
-

@@ -48,10 +48,9 @@ generateControlFile(file = 'divcontrol.txt', params = list(
     muInitPrior = as.numeric(priors['muInitPrior']),
     expectedNumberOfShifts = '1'))
 }
-\author{
-Pascal Title
-}
 \references{
 \url{http://bamm-project.org}
 }
-
+\author{
+Pascal Title
+}

@@ -39,12 +39,11 @@ msc <- maximumShiftCredibility(ed)
 
 getShiftNodesFromIndex(ed, index=msc$sampleindex)
 }
-\author{
-Dan Rabosky
-}
 \seealso{
 \code{\link{addBAMMshifts}}, \code{\link{plot.bammdata}},
 \code{\link{maximumShiftCredibility}}
 }
+\author{
+Dan Rabosky
+}
 \keyword{models}
-

@@ -22,4 +22,3 @@ Takes a \code{bammdata} object and re-writes it back into a
 \seealso{
 \code{\link{subtreeBAMM}}
 }
-

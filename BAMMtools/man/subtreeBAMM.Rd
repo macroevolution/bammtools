@@ -43,11 +43,10 @@ subphy <- subtreeBAMM(ephy,node=103)
 # plot the subtree
 plot(subphy)
 }
-\author{
-Huateng Huang
-}
 \seealso{
 \code{\link{getmrca}}, \code{\link{plot.bammdata}}
 }
+\author{
+Huateng Huang
+}
 \keyword{graphics}
-

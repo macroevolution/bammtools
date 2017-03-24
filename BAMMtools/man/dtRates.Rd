@@ -62,14 +62,13 @@ ed <- dtRates(ed, tau=0.01)
 # use specified range of posterior samples
 ed <- dtRates(ed, tau=0.01, ism=50:150)
 }
-\author{
-Mike Grundler
-}
 \references{
 \url{http://bamm-project.org}
 }
 \seealso{
 \code{\link{plot.bammdata}}
 }
+\author{
+Mike Grundler
+}
 \keyword{graphics}
-

@@ -48,13 +48,12 @@ postProb <- table(mcmc.whales$N_shifts) / nrow(mcmc.whales)
 stepBF(postProb, step.size = 1, inputType = 'postProb')
 
 }
-\author{
-Jonathan Mitchell
-}
 \references{
 \url{http://bamm-project.org}
 }
 \seealso{
 \code{\link{computeBayesFactors}}
 }
-
+\author{
+Jonathan Mitchell
+}

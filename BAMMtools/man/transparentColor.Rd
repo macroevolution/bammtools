@@ -27,4 +27,3 @@ This function is used internally by
 Pascal Title
 }
 \keyword{manip}
-

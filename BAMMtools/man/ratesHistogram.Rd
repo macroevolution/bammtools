@@ -53,13 +53,12 @@ phylorates <- plot(ed, breaksmethod='jenks', show = FALSE)
 
 ratesHistogram(phylorates, plotBrks = TRUE, xlab = 'trait rates')
 }
-\author{
-Pascal Title
-}
 \references{
 \url{http://bamm-project.org}
 }
 \seealso{
 \code{\link{plot.bammdata}}
 }
-
+\author{
+Pascal Title
+}

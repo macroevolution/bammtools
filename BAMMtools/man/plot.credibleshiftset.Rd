@@ -82,9 +82,6 @@ ed <- getEventData(whales, events.whales, nsamples=500)
 cset <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
 plot(cset)
 }
-\author{
-Mike Grundler
-}
 \references{
 \url{http://bamm-project.org}
 }
@@ -93,4 +90,6 @@ Mike Grundler
     \code{\link{distinctShiftConfigurations}},
     \code{\link{plot.bammdata}}, \code{\link{plot.bammshifts}}
 }
-
+\author{
+Mike Grundler
+}

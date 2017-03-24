@@ -55,14 +55,13 @@ axis(2,seq(-0.2,0.8,0.2),las=1)
 mtext("Time since root",1,line=2.5)
 mtext("Speciation rate",2,line=2.5)
 }
-\author{
-Mike Grundler
-}
 \references{
 \url{http://bamm-project.org}
 }
 \seealso{
 \code{\link{getRateThroughTimeMatrix}}
 }
+\author{
+Mike Grundler
+}
 \keyword{models}
-

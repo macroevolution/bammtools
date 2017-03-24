@@ -29,11 +29,10 @@ Finds the most recent common ancestor for each pair of tips where
     \code{t2}[2]), ... , (\code{t1}[i], \code{t2}[i]), ... ,(\code{t1}[n],
     \code{t2}[n]).
 }
-\author{
-Mike Grundler
-}
 \seealso{
 \code{\link{subtreeBAMM}}
 }
+\author{
+Mike Grundler
+}
 \keyword{manip}
-

@@ -79,12 +79,11 @@ ndr <- getTipRates(ephy, returnNetDiv = TRUE,
 lam <- getTipRates(ephy, returnNetDiv = FALSE, statistic = 'mean')$lambda
 rowMeans(lam)
 }
-\author{
-Pascal Title
-}
 \seealso{
 Requires an object of class \code{bammdata} as obtained with
     \code{\link{getEventData}}.
 }
+\author{
+Pascal Title
+}
 \keyword{models}
-

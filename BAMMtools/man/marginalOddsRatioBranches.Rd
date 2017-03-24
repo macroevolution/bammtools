@@ -49,12 +49,11 @@ generateControlFile(file = 'divcontrol.txt', params = list(
 	muInitPrior = as.numeric(priors['muInitPrior']),
 	expectedNumberOfShifts = '1'))
 }
-\author{
-Dan Rabosky
-}
 \seealso{
 \code{\link{getBranchShiftPriors}},
     \code{\link{distinctShiftConfigurations}},
     \code{\link{credibleShiftSet}}
 }
-
+\author{
+Dan Rabosky
+}

@@ -80,6 +80,12 @@ colorMap <- function(x, pal, breaks, logcolor = FALSE, color.interval = NULL) {
 			breaksEnd <- which(sapply(1:length(newbreaks), function(x) max(breaks) >= newbreaks[x] & max(breaks) <= newbreaks[x + 1]));
 			
 			colpalette <- colpalette2[breaksStart : breaksEnd];
+			if (anyNA(colpalette)) {
+				NAcol <- which(is.na(colpalette))
+				nonNAcol <- which(!is.na(colpalette))
+				colFill <- sapply(NAcol, function(y) which.min(y - nonNAcol))
+				colpalette[NAcol] <- colpalette[colFill]
+			}
 		}
 	}
 	

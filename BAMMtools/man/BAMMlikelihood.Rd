@@ -84,4 +84,3 @@ BAMMlikelihood(whales, pars, sf = 0.98)
 \author{
 Dan Rabosky, Pascal Title
 }
-

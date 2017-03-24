@@ -93,9 +93,6 @@ sc <- distinctShiftConfigurations(ed, expectedNumberOfShifts = 1,
 
 plot(sc, ed)
 }
-\author{
-Mike Grundler, Dan Rabosky
-}
 \references{
 \url{http://bamm-project.org}
 }
@@ -103,4 +100,6 @@ Mike Grundler, Dan Rabosky
 \code{\link{distinctShiftConfigurations}},
     \code{\link{plot.bammdata}}
 }
-
+\author{
+Mike Grundler, Dan Rabosky
+}

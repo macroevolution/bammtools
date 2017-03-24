@@ -116,13 +116,12 @@ mtext(side = 2, text = "Bayes factor: uniform prior odds", line=3,
 # To be clear, the Bayes factors in this example were computed from the
 #  same posterior probabilities: it is only the prior odds that differed.
 }
-\author{
-Dan Rabosky
-}
 \references{
 \url{http://bamm-project.org}
 }
 \seealso{
 \code{\link{getRateThroughTimeMatrix}}
 }
-
+\author{
+Dan Rabosky
+}

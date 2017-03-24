@@ -77,11 +77,10 @@ for (i in 1:6) {
   addBAMMshifts(sed,index=1,method="phylogram",par.reset=FALSE)	
 }
 }
-\author{
-Mike Grundler
-}
 \seealso{
 \code{\link{getShiftNodesFromIndex}}, \code{\link{plot.bammdata}}
 }
+\author{
+Mike Grundler
+}
 \keyword{graphics}
-

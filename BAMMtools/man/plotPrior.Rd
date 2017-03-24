@@ -39,4 +39,3 @@ plotPrior(mcmc.whales, expectedNumberOfShifts = 1, burnin = 0.15)
 \author{
 Pascal Title
 }
-

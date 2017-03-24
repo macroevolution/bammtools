@@ -275,14 +275,13 @@ plot(ed, pal=c("darkgreen","yellow2","red"),lwd=3)
 plot(ed,method="polar",pal="Spectral", lwd=3)
 plot(ed,method="polar",pal="RdYlBu", lwd=3)}
 }
-\author{
-Mike Grundler, Pascal Title
-}
 \seealso{
 \code{\link{dtRates}}, \code{\link{addBAMMshifts}},
     \code{\link{assignColorBreaks}}, \code{\link{subtreeBAMM}},
     \code{\link{colorRampPalette}}
 }
+\author{
+Mike Grundler, Pascal Title
+}
 \keyword{graphics}
 \keyword{models}
-

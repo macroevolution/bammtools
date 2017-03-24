@@ -56,12 +56,11 @@ vec <- ed$dtrates$rates[[1]]
 # yielding 64 breaks
 getJenksBreaks(vec, 64)
 }
-\author{
-Pascal Title
-}
 \seealso{
 See \code{\link{assignColorBreaks}} and
     \code{\link{plot.bammdata}}.
 }
+\author{
+Pascal Title
+}
 \keyword{graphics}
-
