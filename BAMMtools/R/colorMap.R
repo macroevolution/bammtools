@@ -50,7 +50,7 @@ colorMap <- function(x, pal, breaks, logcolor = FALSE, color.interval = NULL) {
 			
 			#replace colors in original color ramp
 			colpalette[goodbreaks[1:(length(goodbreaks) - 1)]] <- colpalette2;
-			colpalette[1:(goodbreaks[1]-1)] <- bottomcolor;
+			colpalette[1:(goodbreaks[1] - 1)] <- bottomcolor;
 			colpalette[goodbreaks[length(goodbreaks)]:length(colpalette)] <- topcolor;
 		}
 
@@ -61,6 +61,7 @@ colorMap <- function(x, pal, breaks, logcolor = FALSE, color.interval = NULL) {
 			newbreaks <- seq(from = min(color.interval[1], min(breaks)), to = max(color.interval[2], max(breaks)), by = (breaks[2] - breaks[1]));
 			newbreaks <- seq(from = min(color.interval[1], min(breaks)), to = max(color.interval[2], max(breaks)), length.out = length(newbreaks));
 			
+			# which breaks fall within the defined color.interval
 			goodbreaks <- intersect(which(newbreaks >= color.interval[1]), which(newbreaks <= color.interval[2]));
 			
 			#generate colors for new breaks
@@ -74,17 +75,20 @@ colorMap <- function(x, pal, breaks, logcolor = FALSE, color.interval = NULL) {
 			} else if (tolower(pal) == "terrain") {
 				colpalette2 <- terrain.colors(NCOLORS);
 			}
+						
+			# create new color palette that contains the color ramp 
+			# within the color.interval
+			# Fill in other slots with repeats of min or max color
+			colpalette <- character(length(newbreaks) - 1);
+			colpalette[goodbreaks[1:length(goodbreaks) - 1]] <- colpalette2;
 			
-			#identify max and min colors that define the rates in the bammdata object
-			breaksStart <- which(sapply(1:length(newbreaks), function(x) min(breaks) >= newbreaks[x] & min(breaks) <= newbreaks[x + 1]));
-			breaksEnd <- which(sapply(1:length(newbreaks), function(x) max(breaks) >= newbreaks[x] & max(breaks) <= newbreaks[x + 1]));
+			breaks <- newbreaks;
 			
-			colpalette <- colpalette2[breaksStart : breaksEnd];
-			if (anyNA(colpalette)) {
-				NAcol <- which(is.na(colpalette))
-				nonNAcol <- which(!is.na(colpalette))
-				colFill <- sapply(NAcol, function(y) which.min(y - nonNAcol))
-				colpalette[NAcol] <- colpalette[colFill]
+			if (any(colpalette == '')) {
+				NAcol <- which(colpalette == '');
+				nonNAcol <- which(colpalette != '');
+				colFill <- sapply(NAcol, function(y) which.min(abs(y - nonNAcol)));
+				colpalette[NAcol] <- colpalette[nonNAcol[colFill]];
 			}
 		}
 	}
@@ -107,7 +111,7 @@ colorMap <- function(x, pal, breaks, logcolor = FALSE, color.interval = NULL) {
         }
     }
 	coldens <- data.frame(kde$x,kde$y,coldens,stringsAsFactors=FALSE);	
-	return(list(cols = colset, colsdensity = coldens, colpalette = colpalette));
+	return(list(cols = colset, colsdensity = coldens, breaks = breaks, colpalette = colpalette));
 }
 
 # colorMap = function(x, pal, NCOLORS)

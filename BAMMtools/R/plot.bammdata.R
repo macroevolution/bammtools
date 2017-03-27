@@ -308,12 +308,14 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
     			ratesRange <- range(x$dtrates$rates[[1]] - x$dtrates$rates[[2]]);
     		}
     	}	
-    	brks <- seq(ratesRange[1], ratesRange[2], length.out = (NCOLORS+1));
     	if (all(!is.na(color.interval))) {
+    		brks <- seq(min(color.interval[1], ratesRange[1]), max(color.interval[2], ratesRange[2]), length.out = (NCOLORS+1));
     		intervalLength <- length(which.min(abs(color.interval[1] - brks)) : which.min(abs(color.interval[2] - brks)));
     	} else if (is.na(color.interval[1])) {
+    		brks <- seq(ratesRange[1], max(color.interval[2], ratesRange[2]), length.out = (NCOLORS+1));
     		intervalLength <- length(1 : which.min(abs(color.interval[2] - brks)));
     	} else if (is.na(color.interval[2])) {
+    		brks <- seq(min(color.interval[1], ratesRange[1]), ratesRange[2], length.out = (NCOLORS+1));
     		intervalLength <- length(which.min(abs(color.interval[1] - brks)) : length(brks));
     	}
     	NCOLORS <- round((NCOLORS ^ 2) / intervalLength)    	
@@ -505,13 +507,13 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
         	assign("last_plot.phylo", list(type = "fan", Ntip = phy$Nnode + 1, Nnode = phy$Nnode, edge = phy$edge, xx = ret$segs[index, 3], yy = ret$segs[index, 4], theta = ret$segs[index, 5], rb = rb, pp = par(no.readonly = TRUE)), envir = .PlotPhyloEnv);
 		}
 	if (legend) {
-		addBAMMlegend(x = list(coords = ret$segs[-1, ], colorbreaks = colorbreaks, palette = colorobj$colpalette, colordens = colorobj$colsdensity), location = 'right')
+		addBAMMlegend(x = list(coords = ret$segs[-1, ], colorbreaks = colorobj$breaks, palette = colorobj$colpalette, colordens = colorobj$colsdensity), location = 'right')
 	}
 	}
     if (par.reset) {
         par(op);
     }
-    invisible(list(coords = ret$segs[-1, ], colorbreaks = colorbreaks, palette = colorobj$colpalette, colordens = colorobj$colsdensity));
+    invisible(list(coords = ret$segs[-1, ], colorbreaks = colorobj$breaks, palette = colorobj$colpalette, colordens = colorobj$colsdensity));
 }
 
 

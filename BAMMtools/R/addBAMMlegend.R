@@ -29,6 +29,9 @@
 ##' @param location Either a location name (see Details), or coordinates for
 ##'     the corners of the bar legend c(xmin, xmax, ymin, ymax).
 ##' @param nTicks Number of tick marks, besides min and max.
+##' @param stretchInterval If color.interval was defined, should the legend be
+##' 	stretched to the color.interval, or should the full range of rates be 
+##' 	presented.
 ##' @param shortFrac Percent of the plot width range that will be used as the
 ##'     short dimention of the legend. Only applies to preset location
 ##'     options.
@@ -91,7 +94,7 @@
 ##'           color.interval = c(NA, 0.12), lwd = 2)
 ##' addBAMMlegend(x, location = c(0, 30, 200, 205), nTicks = 1, side = 3)
 ##' @export
-addBAMMlegend <- function(x, direction, side, location = 'topleft', nTicks = 2, shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, labelDist = 0.7, ...) {
+addBAMMlegend <- function(x, direction, side, location = 'topleft', nTicks = 2, stretchInterval = FALSE, shortFrac = 0.02, longFrac = 0.3, axisOffset = 0.002, cex.axis = 0.8, labelDist = 0.7, ...) {
 	#location xmin,xmax,ymin,ymax
 	
 	if (hasArg('corners')) {
@@ -118,6 +121,29 @@ addBAMMlegend <- function(x, direction, side, location = 'topleft', nTicks = 2, 
 	
 	colorbreaks <- x$colorbreaks;
 	pal <- x$palette;
+
+	# If there are duplicate colors, then this color ramp is the result of
+	# a specified color.interval. If stretchInterval is TRUE, then rather
+	# than include many duplicate colors, we will only include the color.interval
+	# range.
+	# intervalSide = top means that the top range of the color palette has
+	# duplicate colors
+	intervalSide <- NULL
+	if (length(unique(pal)) != length(pal) & stretchInterval) {
+		uniquePal <- which(!duplicated(pal))
+		if (uniquePal[2] != (uniquePal[1] + 1)) {
+			uniquePal[1] <- uniquePal[2] - 1
+		}
+		colorbreaks <- colorbreaks[c(uniquePal, uniquePal[length(uniquePal)] + 1)]
+		pal <- pal[uniquePal]
+		if (identical(x$palette[1], x$palette[2]) & identical(tail(x$palette, 1), tail(x$palette, 2)[1])) {
+			intervalSide <- 'both'
+		} else if (identical(x$palette[1], x$palette[2]) & !identical(tail(x$palette, 1), tail(x$palette, 2)[1])) {
+			intervalSide <- 'bottom'
+		} else if (!identical(x$palette[1], x$palette[2]) & identical(tail(x$palette, 1), tail(x$palette, 2)[1])) {
+			intervalSide <- 'top'
+		}
+	} 
 
 	n <- length(colorbreaks);
 
@@ -304,17 +330,26 @@ addBAMMlegend <- function(x, direction, side, location = 'topleft', nTicks = 2, 
 	}
 	
 	#add tickmarks
+	tickLabels <- as.character(signif(tx, 2));
+	if (!is.null(intervalSide)) {
+		if (intervalSide == 'top' | intervalSide == 'both') {
+			tickLabels[length(tickLabels)] <- paste('\u2265', tickLabels[length(tickLabels)])
+		}
+		if (intervalSide == 'bottom' | intervalSide == 'both') {
+			tickLabels[1] <- paste('\u2264', tickLabels[1])
+		}
+	}
 	if (side == 1) { #bottom
-		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);
+		axis(side, at = tickLocs, pos = location[3] - axisOffset, labels = tickLabels, xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);
 	} 
 	if (side == 3) { #top
-		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);
+		axis(side, at = tickLocs, pos = location[4] + axisOffset, labels = tickLabels, xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);
 	}
 	if (side == 2) { #left
-		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);
+		axis(side, at = tickLocs, pos = location[1] - axisOffset, labels = tickLabels, xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);
 	}
 	if (side == 4) { #right
-		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = signif(tx, 2), xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);
+		axis(side, at = tickLocs, pos = location[2] + axisOffset, labels = tickLabels, xpd = NA, las = 1, cex.axis = cex.axis, mgp = c(3, labelDist, 0), ...);
 	}
 	invisible(list(coords = x, width = width, pal = pal, tickLocs = tickLocs, labels = tx))
 }
