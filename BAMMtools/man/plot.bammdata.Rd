@@ -203,7 +203,8 @@ To calculate rates, each branch of the phylogeny is discretized
     other rate variation being drowned out. If specified, the color ramp
     will be built between these two color.interval values, and the rates
     outside of the color interval range will be set to the highest and
-    lowest color. 
+    lowest color. The total number of colors will also be increased such
+    that 64 color bins are found within the color.interval.
 
     If \code{plot.bammdata} is called repeatedly with the same
     \code{bammdata} object, computation can be reduced by first calling
