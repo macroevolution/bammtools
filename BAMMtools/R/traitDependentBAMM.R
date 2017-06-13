@@ -264,7 +264,7 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 	}
 
 	if (logrates) {
-		tiprates <- lapply(1:length(tiprates), function(x){ log(tiprates[[x]]) });
+		tiprates <- lapply(1:length(tiprates), function(x){ log(tiprates[[x]] + .Machine$double.eps) });
 	}
 
 	#randomly sample generations from BAMM posterior
