@@ -30,24 +30,10 @@ This function returns a copy of a phylogenetic tree where each
     for the purpose of distinguishing core and non-core shifts.
 }
 \examples{
-#Produce a blank template control file
-generateControlFile(file = 'traitcontrol.txt', type='trait')
+data(whales, events.whales)
+ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=500)
+marginalOddsRatioBranches(ed, expectedNumberOfShifts = 1)
 
-#Produce a customized control file
-data(whales)
-
-#get bamm priors to supply to control file
-priors <- setBAMMpriors(whales, outfile = NULL)
-
-generateControlFile(file = 'divcontrol.txt', params = list(
-	treefile = 'whales.tre',
-	globalSamplingFraction = '1',
-	numberOfGenerations = '100000',
-	overwrite = '1',
-	lambdaInitPrior = as.numeric(priors['lambdaInitPrior']),
-	lambdaShiftPrior = as.numeric(priors['lambdaShiftPrior']),
-	muInitPrior = as.numeric(priors['muInitPrior']),
-	expectedNumberOfShifts = '1'))
 }
 \seealso{
 \code{\link{getBranchShiftPriors}},
