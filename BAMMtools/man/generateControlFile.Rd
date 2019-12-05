@@ -32,6 +32,7 @@ The user can supply parameters as a list, where the name of the
     uncommented if it was commented in the template.
 }
 \examples{
+\dontrun{
 #Produce a blank template control file
 generateControlFile(file = 'traitcontrol.txt', type='trait')
 
@@ -50,6 +51,7 @@ generateControlFile(file = 'divcontrol.txt', params = list(
     lambdaShiftPrior = as.numeric(priors['lambdaShiftPrior']),
     muInitPrior = as.numeric(priors['muInitPrior']),
     expectedNumberOfShifts = '1'))
+}
 }
 \references{
 \url{http://bamm-project.org}
