@@ -80,7 +80,7 @@ ed <- getEventData(whales, events.whales, burnin=0.1, nsamples=200)
 tree.pp <- testTimeVariableBranches(ed)
 
 # Plot tree, but color all branches where the posterior 
-# probability of time-varying rates exceeds 95\\\%:
+# probability of time-varying rates exceeds 95\\%:
 
 colvec <- rep("black", nrow(whales$edge))
 colvec[tree.pp$edge.length >= 0.95] <- 'red'

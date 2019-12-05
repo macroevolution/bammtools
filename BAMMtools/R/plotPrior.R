@@ -24,7 +24,7 @@
 ##' @export
 plotPrior <- function(mcmc, expectedNumberOfShifts = 1, burnin = 0.15, priorCol = 'light blue', postCol = 'red', legendPos = 'topright', ...) {
 	
-	if (!class(mcmc) %in% c('character', 'data.frame', 'matrix')) {
+	if (!any(inherits(mcmc, c('character', 'data.frame', 'matrix')))) {
 		stop('mcmc must be either a dataframe or the path to the mcmc_out file.')
 	}
 	

@@ -63,7 +63,7 @@
 ##' @export
 plot.credibleshiftset <- function(x, plotmax=9, method='phylogram', pal = 'RdYlBu', shiftColor = 'black', spex = "s", add.freq.text = TRUE, use.plot.bammdata = TRUE, border = TRUE, legend = FALSE, send2pdf = FALSE, logcolor=FALSE, breaksmethod='linear', color.interval=NULL, JenksSubset=20000, ...)
 {
-	if (class(x) != "credibleshiftset") {
+	if (!inherits(x, "credibleshiftset")) {
 		stop('arg x must be of class "credibleshiftset"');
 	}
 	if (!spex %in% c('s', 'e', 'netdiv')) {

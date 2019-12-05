@@ -160,7 +160,7 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 		stop("Invalid 'type' specification. Should be 'diversification' or 'trait'");
 	}
 	
-	if (class(phy) == 'character') {
+	if (inherits(phy, 'character')) {
 		phy <- read.tree(phy);
 	}
 	
@@ -186,11 +186,11 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 	
 	########
 	
-	if (class(eventdata) == 'data.frame') {
+	if (inherits(eventdata, 'data.frame')) {
 		cat("Processing event data from data.frame\n");
 		uniquegens <- sort(unique(eventdata[,1]));
 	} 
-	else if (class(eventdata) == 'character') {
+	else if (inherits(eventdata, 'character')) {
 		cat("Reading event datafile: ", eventdata, "\n\t\t...........");
 		eventdata <- read.csv(eventdata, header=TRUE, stringsAsFactors=FALSE);
  		uniquegens <- sort(unique(eventdata[,1]));

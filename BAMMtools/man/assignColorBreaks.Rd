@@ -4,8 +4,14 @@
 \alias{assignColorBreaks}
 \title{Map macroevolutionary rates to colors}
 \usage{
-assignColorBreaks(rates, NCOLORS = 64, spex = "s", logcolor = FALSE,
-  method = c("linear", "quantile", "jenks"), JenksSubset = NULL)
+assignColorBreaks(
+  rates,
+  NCOLORS = 64,
+  spex = "s",
+  logcolor = FALSE,
+  method = c("linear", "quantile", "jenks"),
+  JenksSubset = NULL
+)
 }
 \arguments{
 \item{rates}{A numeric vector of phenotypic rates or a list of numeric

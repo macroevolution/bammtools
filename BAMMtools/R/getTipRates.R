@@ -87,7 +87,7 @@
 ##' @export
 getTipRates <- function(ephy, returnNetDiv = FALSE, statistic = 'mean') {
 	
-	if (!'bammdata' %in% class(ephy)) {
+	if (!inherits(ephy, 'bammdata')) {
 		stop("Object ephy must be of class bammdata\n");
 	}
 	if (!statistic %in% c('mean','median')) {

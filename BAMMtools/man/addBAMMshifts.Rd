@@ -4,8 +4,18 @@
 \alias{addBAMMshifts}
 \title{Add \code{BAMM}-inferred rate shifts to a phylogeny plot}
 \usage{
-addBAMMshifts(ephy, index = 1, method = "phylogram", cex = 1, pch = 21,
-  col = 1, bg = 2, msp = NULL, shiftnodes = NULL, par.reset = TRUE)
+addBAMMshifts(
+  ephy,
+  index = 1,
+  method = "phylogram",
+  cex = 1,
+  pch = 21,
+  col = 1,
+  bg = 2,
+  msp = NULL,
+  shiftnodes = NULL,
+  par.reset = TRUE
+)
 }
 \arguments{
 \item{ephy}{An object of class \code{bammdata}.}

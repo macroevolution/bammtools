@@ -4,8 +4,15 @@
 \alias{plotPrior}
 \title{Plot the prior and posterior distribution of shifts}
 \usage{
-plotPrior(mcmc, expectedNumberOfShifts = 1, burnin = 0.15,
-  priorCol = "light blue", postCol = "red", legendPos = "topright", ...)
+plotPrior(
+  mcmc,
+  expectedNumberOfShifts = 1,
+  burnin = 0.15,
+  priorCol = "light blue",
+  postCol = "red",
+  legendPos = "topright",
+  ...
+)
 }
 \arguments{
 \item{mcmc}{A dataframe of the mcmc_out file from a \code{BAMM} run, or

@@ -5,8 +5,13 @@
 \title{Credible set of macroevolutionary rate shift configurations from
     \code{BAMM} results}
 \usage{
-credibleShiftSet(ephy, expectedNumberOfShifts, threshold = 5,
-  set.limit = 0.95, ...)
+credibleShiftSet(
+  ephy,
+  expectedNumberOfShifts,
+  threshold = 5,
+  set.limit = 0.95,
+  ...
+)
 }
 \arguments{
 \item{ephy}{An object of class \code{bammdata}.}

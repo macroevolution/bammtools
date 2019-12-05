@@ -38,7 +38,7 @@
 ##' @export
 subtreeBAMM <- function(ephy,tips=NULL,node=NULL)
 {
-	if (!('bammdata' %in% class(ephy)))
+	if (!inherits(ephy, 'bammdata'))
     	stop('Object phy must be of class bammdata');
 	if (is.null(tips) && is.null(node))
 		stop("need to specify either the tips or a innernode on the tree for subsetting");
@@ -54,9 +54,9 @@ subtreeBAMM <- function(ephy,tips=NULL,node=NULL)
 		tips <- wtree$tip.label[tips[tips <= wtree$Nnode + 1]];
 	}
 	else {
-    	if(length(tips) == 1)
+    	if (length(tips) == 1)
 			stop("need more than one tip to subset the bammdata object");
-		if(class(tips) != 'character')
+		if (!inherits(tips, 'character'))
 			tips <- wtree$tip.label[tips];
 	}
 	stree <- drop.tip(wtree, tip = setdiff(wtree$tip.label, tips));

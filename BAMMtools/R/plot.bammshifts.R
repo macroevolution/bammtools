@@ -87,10 +87,10 @@
 plot.bammshifts <- function(x, ephy, method="phylogram", pal="RdYlBu", 
 rank=NULL, index=NULL, spex="s", legend=TRUE, add.freq.text=TRUE, logcolor=FALSE, breaksmethod="linear", color.interval=NULL, JenksSubset=20000, ...) 
 {
-	if (class(x) != "bammshifts") {
+	if (!inherits(x, "bammshifts")) {
 		stop("arg sc must be of class 'bammshifts'");
 	}        	
-	if (class(ephy) != "bammdata") {
+	if (!inherits(ephy, "bammdata")) {
 		stop("arg ephy must be of class 'bammdata'");
 	}
 	if (!spex %in% c('s', 'e', 'netdiv')) {

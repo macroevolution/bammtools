@@ -8,12 +8,32 @@
     \url{http://geography.uoregon.edu/datagraphics/color_scales.htm}
 }
 \usage{
-\method{plot}{bammdata}(x, tau = 0.01, method = "phylogram", xlim = NULL,
-  ylim = NULL, vtheta = 5, rbf = 0.001, show = TRUE, labels = FALSE,
-  legend = FALSE, spex = "s", lwd = 1, cex = 1, pal = "RdYlBu",
-  mask = integer(0), mask.color = gray(0.5), colorbreaks = NULL,
-  logcolor = FALSE, breaksmethod = "linear", color.interval = NULL,
-  JenksSubset = 20000, par.reset = FALSE, direction = "rightwards", ...)
+\method{plot}{bammdata}(
+  x,
+  tau = 0.01,
+  method = "phylogram",
+  xlim = NULL,
+  ylim = NULL,
+  vtheta = 5,
+  rbf = 0.001,
+  show = TRUE,
+  labels = FALSE,
+  legend = FALSE,
+  spex = "s",
+  lwd = 1,
+  cex = 1,
+  pal = "RdYlBu",
+  mask = integer(0),
+  mask.color = gray(0.5),
+  colorbreaks = NULL,
+  logcolor = FALSE,
+  breaksmethod = "linear",
+  color.interval = NULL,
+  JenksSubset = 20000,
+  par.reset = FALSE,
+  direction = "rightwards",
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{bammdata}.}

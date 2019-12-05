@@ -4,8 +4,14 @@
 \alias{getEventData}
 \title{Create \code{bammdata} object from MCMC output}
 \usage{
-getEventData(phy, eventdata, burnin = 0, nsamples = NULL, verbose = FALSE,
-  type = "diversification")
+getEventData(
+  phy,
+  eventdata,
+  burnin = 0,
+  nsamples = NULL,
+  verbose = FALSE,
+  type = "diversification"
+)
 }
 \arguments{
 \item{phy}{An object of class \code{phylo} - specifically, the

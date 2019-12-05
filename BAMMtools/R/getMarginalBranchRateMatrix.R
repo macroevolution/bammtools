@@ -45,9 +45,9 @@
 ##' dim(mbr$lambda_branch_matrix)
 ##' @keywords models
 ##' @export
-getMarginalBranchRateMatrix <- function(ephy, verbose=FALSE) {
+getMarginalBranchRateMatrix <- function(ephy, verbose = FALSE) {
 	
-	if (class(ephy) != 'bammdata'){
+	if (!inherits(ephy, 'bammdata')) {
 		stop("Object must be of class bammdata\n");
 	}
 

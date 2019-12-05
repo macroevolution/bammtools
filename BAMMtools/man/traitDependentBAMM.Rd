@@ -5,9 +5,18 @@
 \alias{strapp}
 \title{STRAPP: STructured Rate Permutations on Phylogenies}
 \usage{
-traitDependentBAMM(ephy, traits, reps, rate = "speciation",
-  return.full = FALSE, method = "spearman", logrates = TRUE,
-  two.tailed = TRUE, traitorder = NA, nthreads = 1)
+traitDependentBAMM(
+  ephy,
+  traits,
+  reps,
+  rate = "speciation",
+  return.full = FALSE,
+  method = "spearman",
+  logrates = TRUE,
+  two.tailed = TRUE,
+  traitorder = NA,
+  nthreads = 1
+)
 }
 \arguments{
 \item{ephy}{An object of class \code{bammdata}.}
@@ -21,7 +30,7 @@ number of posterior samples to randomly draw with replacement from the
 
 \item{rate}{A character string specifying which estimated rate from the
 \code{bammdata} object to use for testing correlation, must be one of
-'speciation', 'extinction', or 'net diversification'. Defaults to
+'speciation', 'extinction', 'net diversification' or 'trait'. Defaults to
 'speciation'. You can specify just the initial letter. Ignored for 
 trait event data.}
 

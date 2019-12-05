@@ -4,8 +4,16 @@
 \alias{BAMMlikelihood}
 \title{Calculate \code{BAMM} likelihood}
 \usage{
-BAMMlikelihood(phy, eventdata, gen = "last", segLength = 0.02, sf = 1,
-  return.intermediates = FALSE, e_prob_condition = "if_different", ...)
+BAMMlikelihood(
+  phy,
+  eventdata,
+  gen = "last",
+  segLength = 0.02,
+  sf = 1,
+  return.intermediates = FALSE,
+  e_prob_condition = "if_different",
+  ...
+)
 }
 \arguments{
 \item{phy}{Either an object of class \code{phylo} or the path to a tree

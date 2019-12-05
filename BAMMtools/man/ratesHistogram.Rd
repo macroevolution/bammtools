@@ -4,8 +4,16 @@
 \alias{ratesHistogram}
 \title{Histogram of \code{BAMM} rate frequencies}
 \usage{
-ratesHistogram(phylorates, plotBrks = TRUE, xlab = "speciation rate",
-  ylab = "density", lwd = 0.2, lty = 1, brksCol = "black", ...)
+ratesHistogram(
+  phylorates,
+  plotBrks = TRUE,
+  xlab = "speciation rate",
+  ylab = "density",
+  lwd = 0.2,
+  lty = 1,
+  brksCol = "black",
+  ...
+)
 }
 \arguments{
 \item{phylorates}{A saved \code{\link{plot.bammdata}} object.}

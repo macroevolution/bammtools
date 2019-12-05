@@ -4,8 +4,11 @@
 \alias{generateControlFile}
 \title{Generate control file for \code{BAMM}}
 \usage{
-generateControlFile(file = "controlfile.txt", type = "diversification",
-  params = NULL)
+generateControlFile(
+  file = "controlfile.txt",
+  type = "diversification",
+  params = NULL
+)
 }
 \arguments{
 \item{file}{Destination file name with or without path.}

@@ -83,7 +83,7 @@
 ##' @keywords models
 ##' @export
 getCohortMatrix <- function(ephy) {
-	if (!'bammdata' %in% class(ephy)) {
+	if (!inherits(ephy, 'bammdata')) {
 		stop("Object ephy must be of class bammdata\n");
 	}
 	tipStates <- unlist(ephy$tipStates);

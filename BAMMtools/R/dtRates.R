@@ -76,7 +76,7 @@
 ##' @keywords graphics
 ##' @export
 dtRates <- function (ephy, tau, ism = NULL, tmat = FALSE) {
-    if (!"bammdata" %in% class(ephy)) {
+    if (!inherits(ephy, "bammdata")) {
         stop("Object ephy must be of class bammdata");
     }
     if (attributes(ephy)$order != "cladewise") {

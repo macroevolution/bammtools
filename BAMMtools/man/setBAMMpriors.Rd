@@ -4,8 +4,14 @@
 \alias{setBAMMpriors}
 \title{Set BAMM Priors}
 \usage{
-setBAMMpriors(phy, total.taxa = NULL, traits = NULL,
-  outfile = "myPriors.txt", Nmax = 1000, suppressWarning = FALSE)
+setBAMMpriors(
+  phy,
+  total.taxa = NULL,
+  traits = NULL,
+  outfile = "myPriors.txt",
+  Nmax = 1000,
+  suppressWarning = FALSE
+)
 }
 \arguments{
 \item{phy}{An object of class \code{phylo}, e.g., the phylogenetic tree

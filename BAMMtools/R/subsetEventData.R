@@ -31,7 +31,7 @@
 ##' @export
 subsetEventData <- function(ephy, index) {
 	
-	if (class(ephy) != 'bammdata') {
+	if (!inherits(ephy, 'bammdata')) {
 		stop("Object ephy must be of class bammdata\n");
 	}
 	

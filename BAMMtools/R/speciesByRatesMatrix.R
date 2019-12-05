@@ -31,25 +31,27 @@
 ##'
 ##' @examples
 ##' data(whales, events.whales)
-##' ed <- getEventData(whales,events.whales,burnin=0.25, nsamples=500)
+##' ed <- getEventData(whales, events.whales, burnin=0.25, nsamples=500)
 ##' ratemat <- speciesByRatesMatrix(ed, nslices = 100)
 ##' 
-##' dolphins <- extract.clade(whales,140)$tip.label
+##' dolphins <- extract.clade(whales, 140)$tip.label
 ##' plot.new()
-##' plot.window(xlim=c(0,35),ylim=c(0,0.8))
+##' plot.window(xlim = c(0, 35), ylim = c(0, 0.8))
 ##' for (i in 1:nrow(ratemat$rates)) {
-##'     if (whales$tip.label[i] \%in\% dolphins) {
-##'         lines(ratemat$times, ratemat$rates[i,], lwd=2, col=4)	
-##'     } else {
-##'         lines(ratemat$times, ratemat$rates[i,], lwd=2, col=8)
-##'     }
+##' 	if (whales$tip.label[i] %in% dolphins) {
+##' 		lines(ratemat$times, ratemat$rates[i,], lwd = 2, col = 4)	
+##' 	} else {
+##' 		lines(ratemat$times, ratemat$rates[i,], lwd = 2, col = 8)
+##' 	}
 ##' }
-##' axis(1,seq(-5,35,5))
-##' axis(2,seq(-0.2,0.8,0.2),las=1)
-##' mtext("Time since root",1,line=2.5)
-##' mtext("Speciation rate",2,line=2.5)
+##' axis(1, seq(-5, 35, 5))
+##' axis(2, seq(-0.2, 0.8, 0.2), las = 1)
+##' mtext("Time since root", 1, line = 2.5)
+##' mtext("Speciation rate", 2, line = 2.5)
+##'
 ##' @keywords models
 ##' @export
+
 speciesByRatesMatrix = function(ephy, nslices, index = NULL, spex = "s") {
 	if (!spex %in% c('s', 'e', 'netdiv')) {
 		stop("arg spex must be 's', 'e' or 'netdiv'.")

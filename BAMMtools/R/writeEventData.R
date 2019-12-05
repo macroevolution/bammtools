@@ -12,7 +12,7 @@
 ##' @export
 writeEventData <- function(ephy, outtreefile, outeventfile, ...){
   
-	if(! "bammdata" %in% class(ephy)) {
+	if(!inherits(ephy, "bammdata")) {
 		stop("Input has to be a bammdata object.\n");
 	}
   

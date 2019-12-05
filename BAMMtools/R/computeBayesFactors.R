@@ -52,11 +52,11 @@ computeBayesFactors <- function(postdata, expectedNumberOfShifts, burnin = 0.1, 
 		stop();
 	}
 
-	if (class(postdata) == 'character'){
+	if (inherits(postdata, 'character')){
 		dpost <- read.csv(postdata, header=T);
-	}else if (class(postdata) == 'data.frame'){
+	} else if (inherits(postdata, 'data.frame')){
 		dpost <- postdata;
-	}else{
+	} else{
 		stop("invalid postdata argument (wrong class) in computeBayesFactors\n");
 	}
  

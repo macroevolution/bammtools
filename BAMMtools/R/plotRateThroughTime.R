@@ -162,24 +162,24 @@
 ##' @export
 plotRateThroughTime <- function(ephy, useMedian = TRUE, intervals=seq(from = 0,to = 1,by = 0.01), ratetype = 'auto', nBins = 100, smooth = FALSE, smoothParam = 0.20, opacity = 0.01, intervalCol='blue', avgCol='red',start.time = NULL, end.time = NULL, node = NULL, nodetype='include', plot = TRUE, cex.axis=1, cex.lab=1.3, lwd=3, xline=3.5, yline=3.5, mar=c(6,6,1,1), xticks=NULL, yticks=NULL, xlim='auto', ylim='auto',add=FALSE, axis.labels=TRUE) {
 	
-	if (!any(c('bammdata', 'bamm-ratematrix') %in% class(ephy))) {
+	if (!any(inherits(ephy, c('bammdata', 'bamm-ratematrix')))) {
 		stop("ERROR: Object ephy must be of class 'bammdata' or 'bamm-ratematrix'.\n");
 	}
 	if (!is.logical(useMedian)) {
 		stop('ERROR: useMedian must be either TRUE or FALSE.');
 	}
-	if (!any(c('numeric', 'NULL') %in% class(intervals))) {
+	if (!any(inherits(intervals, c('numeric', 'NULL')))) {
 		stop("ERROR: intervals must be either 'NULL' or a vector of quantiles.");
 	}
 	if (!is.logical(smooth)) {
 		stop('ERROR: smooth must be either TRUE or FALSE.');
 	}
 	
-	if ('bammdata' %in% class(ephy)) {
+	if (inherits(ephy, 'bammdata')) {
 		#get rates through binned time
 		rmat <- getRateThroughTimeMatrix(ephy, start.time = start.time, end.time = end.time, node = node, nslices = nBins, nodetype=nodetype);
 	}
-	if ('bamm-ratematrix' %in% class(ephy)) {
+	if (inherits(ephy, 'bamm-ratematrix')) {
 		if (!any(is.null(c(start.time, end.time, node)))) {
 			stop('ERROR: You cannot specify start.time, end.time or node if the rate matrix is being provided. Please either provide the bammdata object instead or specify start.time, end.time or node in the creation of the bamm-ratematrix.')
 		}

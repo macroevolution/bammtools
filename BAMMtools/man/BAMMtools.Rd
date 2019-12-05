@@ -3,7 +3,6 @@
 \docType{package}
 \name{BAMMtools}
 \alias{BAMMtools}
-\alias{BAMMtools-package}
 \title{BAMMtools}
 \description{
 An R package for the analysis and visualization of complex

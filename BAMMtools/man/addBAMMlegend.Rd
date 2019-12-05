@@ -4,9 +4,20 @@
 \alias{addBAMMlegend}
 \title{Add a color legend to a phylo-rate plot}
 \usage{
-addBAMMlegend(x, direction, side, location = "topleft", nTicks = 2,
-  stretchInterval = FALSE, shortFrac = 0.02, longFrac = 0.3,
-  axisOffset = 0.002, cex.axis = 0.8, labelDist = 0.7, ...)
+addBAMMlegend(
+  x,
+  direction,
+  side,
+  location = "topleft",
+  nTicks = 2,
+  stretchInterval = FALSE,
+  shortFrac = 0.02,
+  longFrac = 0.3,
+  axisOffset = 0.002,
+  cex.axis = 0.8,
+  labelDist = 0.7,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{plot.bammdata} object.}

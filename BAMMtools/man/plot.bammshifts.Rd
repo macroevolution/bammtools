@@ -4,10 +4,22 @@
 \alias{plot.bammshifts}
 \title{Plot distinct rate shift configurations on a phylogeny}
 \usage{
-\method{plot}{bammshifts}(x, ephy, method = "phylogram", pal = "RdYlBu",
-  rank = NULL, index = NULL, spex = "s", legend = TRUE,
-  add.freq.text = TRUE, logcolor = FALSE, breaksmethod = "linear",
-  color.interval = NULL, JenksSubset = 20000, ...)
+\method{plot}{bammshifts}(
+  x,
+  ephy,
+  method = "phylogram",
+  pal = "RdYlBu",
+  rank = NULL,
+  index = NULL,
+  spex = "s",
+  legend = TRUE,
+  add.freq.text = TRUE,
+  logcolor = FALSE,
+  breaksmethod = "linear",
+  color.interval = NULL,
+  JenksSubset = 20000,
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{bammshifts}.}

@@ -4,8 +4,7 @@
 \alias{stepBF}
 \title{Identify the optimal number of shifts using Bayes factors}
 \usage{
-stepBF(BFmat, step.size = 20, expectedNumberOfShifts = 1,
-  inputType = "matrix")
+stepBF(BFmat, step.size = 20, expectedNumberOfShifts = 1, inputType = "matrix")
 }
 \arguments{
 \item{BFmat}{square Bayes factor matrix or a named vector of posterior probabilities}

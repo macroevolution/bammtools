@@ -1,7 +1,7 @@
 ##' @export
 as.phylo.bammdata <- function(x, ...) {
 	
-	if (!'bammdata' %in% class(x)) {
+	if (!inherits(x, 'bammdata')) {
 		stop("Object ephy must be of class bammdata\n");
 	}		
 	

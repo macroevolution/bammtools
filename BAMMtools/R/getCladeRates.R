@@ -84,7 +84,7 @@
 ##' @export
 getCladeRates <- function(ephy, node = NULL, nodetype='include', verbose=FALSE) {
 	
-	if (!'bammdata' %in% class(ephy)) {
+	if (!inherits(ephy, 'bammdata')) {
 		stop("Object ephy must be of class bammdata\n");
 	}	
 	

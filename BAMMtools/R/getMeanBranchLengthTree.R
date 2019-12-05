@@ -42,7 +42,7 @@
 ##' @export
 getMeanBranchLengthTree <- function(ephy, rate='speciation') {
 	
-	if (class(ephy) == 'bammdata') {
+	if (inherits(ephy, 'bammdata')) {
 		v <- as.phylo.bammdata(ephy);
 	}
 	obj <- getMarginalBranchRateMatrix(ephy,verbose=FALSE);

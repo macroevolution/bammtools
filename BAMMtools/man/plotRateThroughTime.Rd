@@ -4,14 +4,35 @@
 \alias{plotRateThroughTime}
 \title{Plot rates through time}
 \usage{
-plotRateThroughTime(ephy, useMedian = TRUE, intervals = seq(from = 0, to =
-  1, by = 0.01), ratetype = "auto", nBins = 100, smooth = FALSE,
-  smoothParam = 0.2, opacity = 0.01, intervalCol = "blue",
-  avgCol = "red", start.time = NULL, end.time = NULL, node = NULL,
-  nodetype = "include", plot = TRUE, cex.axis = 1, cex.lab = 1.3,
-  lwd = 3, xline = 3.5, yline = 3.5, mar = c(6, 6, 1, 1),
-  xticks = NULL, yticks = NULL, xlim = "auto", ylim = "auto",
-  add = FALSE, axis.labels = TRUE)
+plotRateThroughTime(
+  ephy,
+  useMedian = TRUE,
+  intervals = seq(from = 0, to = 1, by = 0.01),
+  ratetype = "auto",
+  nBins = 100,
+  smooth = FALSE,
+  smoothParam = 0.2,
+  opacity = 0.01,
+  intervalCol = "blue",
+  avgCol = "red",
+  start.time = NULL,
+  end.time = NULL,
+  node = NULL,
+  nodetype = "include",
+  plot = TRUE,
+  cex.axis = 1,
+  cex.lab = 1.3,
+  lwd = 3,
+  xline = 3.5,
+  yline = 3.5,
+  mar = c(6, 6, 1, 1),
+  xticks = NULL,
+  yticks = NULL,
+  xlim = "auto",
+  ylim = "auto",
+  add = FALSE,
+  axis.labels = TRUE
+)
 }
 \arguments{
 \item{ephy}{Object of class \code{bammdata} or \code{bamm-ratematrix}.}

@@ -18,7 +18,7 @@
 ##' @rdname ShiftProbsTree
 cumulativeShiftProbsTree <- function(ephy) {
 	
-	if (!'bammdata' %in% class(ephy)) {
+	if (!inherits(ephy, 'bammdata')) {
 		stop("Object ephy must be of class bammdata\n");
 	}	
 			

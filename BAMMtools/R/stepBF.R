@@ -44,11 +44,11 @@
 
 stepBF <- function(BFmat, step.size = 20, expectedNumberOfShifts = 1, inputType = 'matrix') {
 	inputType <-  match.arg(inputType, c('matrix', 'postProb'))
-	if (class(BFmat) == "table") {
+	if (inherits(BFmat, "table")) {
 		BFmat <- setNames(as.vector(BFmat), names(BFmat))
 	}
 	if (inputType == 'postProb') {
-		if (class(BFmat) == "matrix") {
+		if (inherits(BFmat, "matrix")) {
 			stop("If inputType is 'postProb', please provide a vector of posterior probabilities.")
 		}
 		post <- BFmat
@@ -63,12 +63,12 @@ stepBF <- function(BFmat, step.size = 20, expectedNumberOfShifts = 1, inputType 
 				} else {
 					prior_odds <- prior[i] / prior[j]
 					post_odds <- post[i] / post[j]
-					BFmat[i,j] <- post_odds *  (1/prior_odds)
+					BFmat[i,j] <- post_odds * (1/prior_odds)
 				}		
 			}
 		}
 	}
-	if (class(BFmat) == 'numeric' | !identical(ncol(BFmat), nrow(BFmat))) {
+	if (inherits(BFmat, 'numeric') | !identical(ncol(BFmat), nrow(BFmat))) {
 		stop("Bayes factor matrix, BFmat, must be square, with each cell (i,j) representing the BF of model i relative to model j.")
 	}
 	if (step.size < 1) {

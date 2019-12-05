@@ -95,7 +95,7 @@
 ##' @export
 maximumShiftCredibility <- function(ephy, maximize = 'product') {
 
-	if (!'bammdata' %in% class(ephy)) {
+	if (!inherits(ephy, 'bammdata')) {
 		stop("Object ephy must be of class bammdata\n");
 	}			
 	

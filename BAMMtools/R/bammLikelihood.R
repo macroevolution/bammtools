@@ -26,7 +26,7 @@
  
 eventMatrix <- function(x, phy) {
  
-	if (class(x) != 'data.frame') {
+	if (!inherits(x, 'data.frame')) {
 		x <- read.csv(x, header = FALSE, stringsAsFactors = FALSE)			
 	}
 
