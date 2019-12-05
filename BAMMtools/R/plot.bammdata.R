@@ -279,7 +279,7 @@ plot.bammdata <- function (x, tau = 0.01, method = "phylogram", xlim = NULL, yli
         }
     }
     
-    if (!is.binary.tree(phy)) {
+    if (!is.binary.phylo(phy)) {
         stop("Function requires fully bifurcating tree");
     }
     if (any(phy$edge.length == 0)) {

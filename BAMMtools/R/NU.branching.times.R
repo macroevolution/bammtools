@@ -13,7 +13,7 @@
 #
 NU.branching.times <- function(phy, return.type = 'bt'){
 	
-	if (!is.binary.tree(phy)){
+	if (!is.binary.phylo(phy)){
 		stop("error. Need fully bifurcating (resolved) tree\n")
 	}
 	
