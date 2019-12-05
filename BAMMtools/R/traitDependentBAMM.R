@@ -61,7 +61,7 @@
 ##'     \code{bammdata} object).
 ##' @param rate A character string specifying which estimated rate from the
 ##'     \code{bammdata} object to use for testing correlation, must be one of
-##'     'speciation', 'extinction', or 'net diversification'. Defaults to
+##'     'speciation', 'extinction', 'net diversification' or 'trait'. Defaults to
 ##'     'speciation'. You can specify just the initial letter. Ignored for 
 ##' 	trait event data.
 ##' @param return.full A logical. If \code{TRUE}, the list of posterior
@@ -163,25 +163,34 @@
 ##' @keywords nonparametric
 ##' @export
 traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.full = FALSE, method = 'spearman', logrates = TRUE, two.tailed = TRUE, traitorder = NA, nthreads = 1) {
- 
-	if (ephy$type == 'trait') {
-		rate <- 'speciation'
-	}
-  
+   
 	if (nthreads > 1) {
 		if (!"package:parallel" %in% search()) {
 			stop("Please load package 'parallel' for using the multi-thread option\n");
 		}
 	}
-	ratetype.option <- c("speciation", "extinction", "net diversification");
-	ratetype <- ratetype.option[grep(paste("^", rate, sep = ''), ratetype.option, ignore.case = TRUE, perl = TRUE)];
+	
+	if (ephy$type == 'trait') {
+		rate <- 'trait'
+	}
+	
+	ratetype.option <- c("speciation", "extinction", "net diversification", "trait");
+	ratetype <- grep(paste0("^", rate), ratetype.option, value = TRUE, ignore.case = TRUE);
 	  
   if (length(ratetype) == 0) {
-    stop("Rate must be one of 'speciation', 'extinction', or 'net diversification', only the initial letter is needed\n")
+    stop("Rate must be one of 'speciation', 'extinction', or 'net diversification', only the initial letter is needed.\n")
   }
   
 	if (ratetype == "net diversification" & logrates == TRUE) {
 		cat("WARNING: Net diversification might be negative and logged rates would then produce NaNs.\n");
+	}
+
+	if (ratetype == 'trait' & ephy$type == 'diversification') {
+		stop('Rate must be either speciation or net diversification if ephy is a diversification analysis.\n');
+	}
+
+	if (ratetype %in% c('speciation', 'net diversification') & ephy$type == 'trait') {
+		stop('Rate must be trait if ephy is a trait analysis.\n');
 	}
 	
 	# check if species in ephy and traits match
@@ -190,7 +199,7 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 	}
 
 	method.option <- c("spearman",  "pearson", "mann-whitney", "kruskal");
-	method <- method.option[grep(paste("^", method, sep = ''), method.option, ignore.case = TRUE)];
+	method <- grep(paste0("^", method), method.option, ignore.case = TRUE, value = TRUE);
 	if (length(method) == 0) {
 		stop("method must be one of 'spearman', 'pearson', 'mann-whitney', or 'kruskal', only the initial letter is needed");
 	}
@@ -199,7 +208,7 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 
 	if (method == 'spearman' | method == "pearson") {
 		if (! is.numeric(traits)){
-			cat(paste("selected ", method, ", but the trait is not numeric, converted the trait into a numeric vector\n",sep=''));
+			cat(paste0("selected ", method, ", but the trait is not numeric, converted the trait into a numeric vector\n"));
 			traits <- as.numeric(traits);
 		}
 	} else if (method == "mann-whitney"| method == "kruskal") {
@@ -225,11 +234,11 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 		}
 		if (method == 'spearman' | method == "pearson") {
 			direction.option <- c("positive", "negative");
-			direction <- direction.option[grep(paste("^",traitorder,sep=''), direction.option, ignore.case = TRUE)];
+			direction <- grep(paste0("^", traitorder), direction.option, ignore.case = TRUE, value = TRUE);
 			if (length(direction) == 0) {
 				stop(" for one-tail test with continous trait, traitorder must be either 'positive' or 'negative', only the initial letter is needed");
 			} else {
-				cat(paste("select one-tailed ", method, " test\nAlternative hypothesis: the trait is ", direction, "ly correlated with speciation rate\n", sep = ''));
+				cat(paste0("select one-tailed ", method, " test\nAlternative hypothesis: the trait is ", direction, "ly correlated with speciation rate\n"));
 			}
 		} else {
 			traitorder <- gsub(" ", "", traitorder);
@@ -237,7 +246,7 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 			if (length(trait.state) != 2) {
 				stop("please specify the traitorder for binary trait:\nTwo states separated by comma, and the state that is expected to have lower speciation rate first\n");
 			} else {
-				cat(paste("selected one-tail ", method, " test\nAlternative hypothesis: species with trait ", trait.state[2], " has higher speciation rate than those with trait ", trait.state[1], "\n", sep = ''));
+				cat(paste0("selected one-tail ", method, " test\nAlternative hypothesis: species with trait ", trait.state[2], " has higher speciation rate than those with trait ", trait.state[1], "\n"));
 			}
 			for (i in trait.state) {
 				if (sum(traits == i) == 0) {
@@ -250,8 +259,10 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 		tiprates <- ephy$tipLambda;
 	} else if (ratetype == "extinction") {
 		tiprates <- ephy$tipMu;
-	} else {
-		tiprates <- lapply(1:length(ephy$tipLambda), function(i) {ephy$tipLambda[[i]] - ephy$tipMu[[i]]});
+	} else if (ratetype == 'net diversification') {
+		tiprates <- lapply(1:length(ephy$tipLambda), function(i) ephy$tipLambda[[i]] - ephy$tipMu[[i]]);
+	} else if (ratetype == 'trait') {
+		tiprates <- ephy$tipLambda;
 	}
 	tipstates <- ephy$tipStates;
 	#tiprates <- tiprates[ephy$tip.label];
@@ -264,7 +275,7 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 	}
 
 	if (logrates) {
-		tiprates <- lapply(1:length(tiprates), function(x){ log(tiprates[[x]]) });
+		tiprates <- lapply(1:length(tiprates), function(x) log(tiprates[[x]]));
 	}
 
 	#randomly sample generations from BAMM posterior
@@ -382,8 +393,10 @@ traitDependentBAMM <- function(ephy, traits, reps, rate = 'speciation', return.f
 			ave.tiprate <- getTipRates(ephy)$lambda.avg;
 		} else if (ratetype == 'extinction') {
 			ave.tiprate <- getTipRates(ephy)$mu.avg;
-		} else {
+		} else if (ratetype == 'net diversification') {
 			ave.tiprate <- getTipRates(ephy)$lambda.avg - getTipRates(ephy)$mu.avg;
+		} else if (ratetype == 'trait') {
+			ave.tiprate <- getTipRates(ephy)$beta.avg;
 		}
 		l <- lapply(unique(traits[!is.na(traits)]), function(x) {
 			median(ave.tiprate[which(traits == x)], na.rm = TRUE);
