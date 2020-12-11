@@ -97,7 +97,7 @@ descended from \code{node}. If 'exclude', the clade descended from
 
 \item{xlim}{Vector of length 2 with min and max times for x axis. X axis
 is time since present, so if plotting till the present,
-\code{xlim[2]==0}. Can also be 'auto'.}
+\code{xlim[2] == 0}. Can also be 'auto'.}
 
 \item{ylim}{Vector of length 2 with min and max rates for y axis. Can also
 be 'auto'.}
@@ -157,37 +157,37 @@ ephy <- getEventData(whales,events.whales)
 plotRateThroughTime(ephy)
 
 # Plot two processes separately with 90\% CI and loess smoothing
-plotRateThroughTime(ephy, intervals=seq(from=0,0.9,by=0.01), smooth=TRUE,
-                    node=141, nodetype='exclude', ylim=c(0,1.2))
+plotRateThroughTime(ephy, intervals = seq(from = 0, 0.9, by = 0.01), smooth = TRUE,
+                    node = 141, nodetype = 'exclude', ylim = c(0, 1.2))
 
-plotRateThroughTime(ephy, intervals=seq(from=0,0.9,by=0.01), smooth=TRUE, 
-                    node=141, nodetype='include', add=TRUE,
-                    intervalCol='orange')
+plotRateThroughTime(ephy, intervals = seq(from = 0, 0.9, by = 0.01), smooth = TRUE, 
+                    node = 141, nodetype = 'include', add = TRUE,
+                    intervalCol = 'orange')
 
-legend('topleft', legend=c('Dolphins','Whales'), col='red',
-    fill=c('orange','blue'), border=FALSE, lty=1, lwd=2, merge=TRUE,
+legend('topleft', legend = c('Dolphins','Whales'), col = 'red',
+    fill = c('orange', 'blue'), border = FALSE, lty = 1, lwd = 2, merge = TRUE,
            seg.len=0.6)
 
 # Same plot, but from bamm-ratematrix objects
-rmat1 <- getRateThroughTimeMatrix(ephy, node=141, nodetype='exclude')
-rmat2 <- getRateThroughTimeMatrix(ephy, node=141, nodetype='include')
+rmat1 <- getRateThroughTimeMatrix(ephy, node = 141, nodetype = 'exclude')
+rmat2 <- getRateThroughTimeMatrix(ephy, node = 141, nodetype = 'include')
 
-plotRateThroughTime(rmat1, intervals=seq(from=0,0.9,by=0.01), 
-    smooth=TRUE, ylim=c(0,1.2))
+plotRateThroughTime(rmat1, intervals=seq(from = 0, 0.9, by = 0.01), 
+    smooth = TRUE, ylim = c(0, 1.2))
 
-plotRateThroughTime(rmat2, intervals=seq(from=0,0.9,by=0.01), 
-    smooth=TRUE, add=TRUE, intervalCol='orange')
+plotRateThroughTime(rmat2, intervals = seq(from = 0, 0.9, by = 0.01), 
+    smooth = TRUE, add = TRUE, intervalCol = 'orange')
 
 # To plot the mean rate without the confidence envelope
-plotRateThroughTime(ephy,useMedian=FALSE, intervals=NULL)
+plotRateThroughTime(ephy, useMedian = FALSE, intervals = NULL)
 
 # To plot the mean rate, with a single 95\% confidence envelope, grayscale
-plotRateThroughTime(ephy,useMedian=FALSE, intervals=c(0.05,0.95),
-    intervalCol='gray70', avgCol='black', opacity=1)
+plotRateThroughTime(ephy, useMedian = FALSE, intervals = c(0.05, 0.95),
+    intervalCol = 'gray70', avgCol = 'black', opacity = 1)
 
 # To not plot, but instead return the plotting data generated in this
-# function, we can make plot=FALSE
-plotRateThroughTime(ephy, plot=FALSE)}
+# function, we can make plot = FALSE
+plotRateThroughTime(ephy, plot = FALSE)}
 }
 \seealso{
 See \code{\link{getEventData}} and

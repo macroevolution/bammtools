@@ -72,7 +72,7 @@
 ##'     \code{NULL}.
 ##' @param xlim Vector of length 2 with min and max times for x axis. X axis
 ##'     is time since present, so if plotting till the present,
-##'     \code{xlim[2]==0}. Can also be 'auto'.
+##'     \code{xlim[2] == 0}. Can also be 'auto'.
 ##' @param ylim Vector of length 2 with min and max rates for y axis. Can also
 ##'     be 'auto'.
 ##' @param add A logical: should rates be added to an existing plot.
@@ -128,39 +128,39 @@
 ##' plotRateThroughTime(ephy)
 ##' 
 ##' # Plot two processes separately with 90% CI and loess smoothing
-##' plotRateThroughTime(ephy, intervals=seq(from=0,0.9,by=0.01), smooth=TRUE,
-##'                     node=141, nodetype='exclude', ylim=c(0,1.2))
+##' plotRateThroughTime(ephy, intervals = seq(from = 0, 0.9, by = 0.01), smooth = TRUE,
+##'                     node = 141, nodetype = 'exclude', ylim = c(0, 1.2))
 ##' 
-##' plotRateThroughTime(ephy, intervals=seq(from=0,0.9,by=0.01), smooth=TRUE, 
-##'                     node=141, nodetype='include', add=TRUE,
-##'                     intervalCol='orange')
+##' plotRateThroughTime(ephy, intervals = seq(from = 0, 0.9, by = 0.01), smooth = TRUE, 
+##'                     node = 141, nodetype = 'include', add = TRUE,
+##'                     intervalCol = 'orange')
 ##' 
-##' legend('topleft', legend=c('Dolphins','Whales'), col='red',
-##'     fill=c('orange','blue'), border=FALSE, lty=1, lwd=2, merge=TRUE,
+##' legend('topleft', legend = c('Dolphins','Whales'), col = 'red',
+##'     fill = c('orange', 'blue'), border = FALSE, lty = 1, lwd = 2, merge = TRUE,
 ##'            seg.len=0.6)
 ##' 
 ##' # Same plot, but from bamm-ratematrix objects
-##' rmat1 <- getRateThroughTimeMatrix(ephy, node=141, nodetype='exclude')
-##' rmat2 <- getRateThroughTimeMatrix(ephy, node=141, nodetype='include')
+##' rmat1 <- getRateThroughTimeMatrix(ephy, node = 141, nodetype = 'exclude')
+##' rmat2 <- getRateThroughTimeMatrix(ephy, node = 141, nodetype = 'include')
 ##'
-##' plotRateThroughTime(rmat1, intervals=seq(from=0,0.9,by=0.01), 
-##'     smooth=TRUE, ylim=c(0,1.2))
+##' plotRateThroughTime(rmat1, intervals=seq(from = 0, 0.9, by = 0.01), 
+##'     smooth = TRUE, ylim = c(0, 1.2))
 ##' 
-##' plotRateThroughTime(rmat2, intervals=seq(from=0,0.9,by=0.01), 
-##'     smooth=TRUE, add=TRUE, intervalCol='orange')
+##' plotRateThroughTime(rmat2, intervals = seq(from = 0, 0.9, by = 0.01), 
+##'     smooth = TRUE, add = TRUE, intervalCol = 'orange')
 ##'
 ##' # To plot the mean rate without the confidence envelope
-##' plotRateThroughTime(ephy,useMedian=FALSE, intervals=NULL)
+##' plotRateThroughTime(ephy, useMedian = FALSE, intervals = NULL)
 ##'
 ##' # To plot the mean rate, with a single 95% confidence envelope, grayscale
-##' plotRateThroughTime(ephy,useMedian=FALSE, intervals=c(0.05,0.95),
-##'     intervalCol='gray70', avgCol='black', opacity=1)
+##' plotRateThroughTime(ephy, useMedian = FALSE, intervals = c(0.05, 0.95),
+##'     intervalCol = 'gray70', avgCol = 'black', opacity = 1)
 ##'
 ##' # To not plot, but instead return the plotting data generated in this
-##' # function, we can make plot=FALSE
-##' plotRateThroughTime(ephy, plot=FALSE)}
+##' # function, we can make plot = FALSE
+##' plotRateThroughTime(ephy, plot = FALSE)}
 ##' @export
-plotRateThroughTime <- function(ephy, useMedian = TRUE, intervals=seq(from = 0,to = 1,by = 0.01), ratetype = 'auto', nBins = 100, smooth = FALSE, smoothParam = 0.20, opacity = 0.01, intervalCol='blue', avgCol='red',start.time = NULL, end.time = NULL, node = NULL, nodetype='include', plot = TRUE, cex.axis=1, cex.lab=1.3, lwd=3, xline=3.5, yline=3.5, mar=c(6,6,1,1), xticks=NULL, yticks=NULL, xlim='auto', ylim='auto',add=FALSE, axis.labels=TRUE) {
+plotRateThroughTime <- function(ephy, useMedian = TRUE, intervals = seq(from = 0, to = 1, by = 0.01), ratetype = 'auto', nBins = 100, smooth = FALSE, smoothParam = 0.20, opacity = 0.01, intervalCol = 'blue', avgCol = 'red', start.time = NULL, end.time = NULL, node = NULL, nodetype = 'include', plot = TRUE, cex.axis = 1, cex.lab = 1.3, lwd = 3, xline = 3.5, yline = 3.5, mar = c(6, 6, 1, 1), xticks = NULL, yticks = NULL, xlim = 'auto', ylim = 'auto',add = FALSE, axis.labels = TRUE) {
 	
 	if (!any(inherits(ephy, c('bammdata', 'bamm-ratematrix')))) {
 		stop("ERROR: Object ephy must be of class 'bammdata' or 'bamm-ratematrix'.\n");
@@ -213,16 +213,17 @@ plotRateThroughTime <- function(ephy, useMedian = TRUE, intervals=seq(from = 0,t
 		rate <- rmat$lambda - rmat$mu;
 		ratelabel <- 'net diversification rate';
 	}
-
-	maxTime <- max(rmat$times)
+	
+	# times in rate matrix are in terms of node heights (where root age = 0 and present = max divergence time)
+	## Now reorganize in terms of time before present
+	timeBP <- as.numeric(names(rmat$times))
 
 	#remove NaN columns
 	nanCol <- apply(rate, 2, function(x) any(is.nan(x)));
 	rate <- rate[,which(nanCol == FALSE)];
-	rmat$times <- rmat$times[which(nanCol == FALSE)];
+	timeBP <- timeBP[which(nanCol == FALSE)];
 
 	#generate coordinates for polygons
-	rmat$times <- max(rmat$times) - rmat$times;
 	if (!is.null(intervals)) {
 		mm <- apply(rate, MARGIN = 2, quantile, intervals);
 
@@ -231,8 +232,8 @@ plotRateThroughTime <- function(ephy, useMedian = TRUE, intervals=seq(from = 0,t
 		q2 <- nrow(mm);
 		repeat {
 			if (q1 >= q2) {break}
-			a <- as.data.frame(cbind(rmat$times,mm[q1,]));
-			b <- as.data.frame(cbind(rmat$times,mm[q2,]));
+			a <- as.data.frame(cbind(timeBP, mm[q1,]));
+			b <- as.data.frame(cbind(timeBP, mm[q2,]));
 			b <- b[rev(rownames(b)),];
 			colnames(a) <- colnames(b) <- c('x','y');
 			poly[[q1]] <- rbind(a,b);
@@ -245,7 +246,7 @@ plotRateThroughTime <- function(ephy, useMedian = TRUE, intervals=seq(from = 0,t
 	if (!useMedian) {
 		avg <- colMeans(rate);
 	} else {
-		avg <- unlist(apply(rate,2,median));
+		avg <- unlist(apply(rate, 2, median));
 	}
 	
 	#apply loess smoothing to intervals
@@ -253,84 +254,67 @@ plotRateThroughTime <- function(ephy, useMedian = TRUE, intervals=seq(from = 0,t
 		for (i in 1:length(poly)) {
 			p <- poly[[i]];
 			rows <- nrow(p);
-			p[1:rows/2,2] <- loess(p[1:rows/2,2] ~ p[1:rows/2,1],span = smoothParam)$fitted;
-			p[(rows/2):rows,2] <- loess(p[(rows/2):rows,2] ~ p[(rows/2):rows,1],span = smoothParam)$fitted;
+			p[1:rows/2,2] <- loess(p[1:rows/2, 2] ~ p[1:rows/2, 1], span = smoothParam)$fitted;
+			p[(rows/2):rows, 2] <- loess(p[(rows/2):rows, 2] ~ p[(rows/2):rows, 1], span = smoothParam)$fitted;
 			poly[[i]] <- p;
 		}
-		avg <- loess(avg ~ rmat$time,span = smoothParam)$fitted;
+		avg <- loess(avg ~ timeBP,span = smoothParam)$fitted;
 	}
 
 	#begin plotting
 	if (plot) {
 		if (!add) {
 			plot.new();
-			par(mar=mar);
-			if (unique(xlim == 'auto') & unique(ylim == 'auto')) {
-				xMin <- maxTime;
-				xMax <- 0;
+			par(mar = mar);
+			if (unique(xlim == 'auto')) {
+				xMin <- max(timeBP);
+				xMax <- min(timeBP);				
+			} else {
+				xMin <- xlim[1];
+				xMax <- xlim[2];				
+			}
+			if (unique(ylim == 'auto')) {
 				if (!is.null(intervals)){
-					yMin <- min(poly[[1]][,2]);
-					yMax <- max(poly[[1]][,2]);
+					yMin <- min(poly[[1]][, 2]);
+					yMax <- max(poly[[1]][, 2]);
 				} else {
 					yMin <- min(avg);
 					yMax <- max(avg);
 				}
 				if (yMin >= 0) {
 					yMin <- 0;
-				}
-			}
-			if (unique(xlim != 'auto') & unique(ylim == 'auto')) {
-				xMin <- xlim[1];
-				xMax <- xlim[2];
-				if (!is.null(intervals)){
-					yMin <- min(poly[[1]][,2]);
-					yMax <- max(poly[[1]][,2]);
-				} else {
-					yMin <- min(avg);
-					yMax <- max(avg);
-				}
-				if (yMin >= 0) {
-					yMin <- 0;
-				}
-			}
-			if (unique(xlim == 'auto') & unique(ylim != 'auto')) {
-				xMin <- maxTime;
-				xMax <- 0;
+				}				
+			} else {
 				yMin <- ylim[1];
-				yMax <- ylim[2];
-			}
-			if (unique(xlim != 'auto') & unique(ylim != 'auto')) {
-				xMin <- xlim[1];
-				xMax <- xlim[2];
-				yMin <- ylim[1];
-				yMax <- ylim[2];
-			}
-			plot.window(xlim=c(xMin, xMax), ylim=c(yMin, yMax));
+				yMax <- ylim[2];				
+			}			
+			plot.window(xlim = c(xMin, xMax), ylim = c(yMin, yMax));
 			if (is.null(xticks)) {
-				axis(at=c(round(1.2*xMin),axTicks(1)), cex.axis = cex.axis, side = 1);
+				axis(side = 1, cex.axis = cex.axis, lwd = 0, lwd.ticks = 1);
 			}
 			if (!is.null(xticks)) {
-				axis(at=c(1.2*xMin,seq(xMin,xMax, length.out=xticks+1)), labels = c(1.2*xMin,signif(seq(xMin, xMax, length.out=xticks+1),digits=2)), cex.axis = cex.axis, side = 1);
+				axis(side = 1, at = seq(xMin, xMax, length.out = xticks + 1), labels = signif(seq(xMin, xMax, length.out = xticks + 1),digits = 2), cex.axis = cex.axis, lwd = 0, lwd.ticks = 1);
 			}
 			if (is.null(yticks)) {
-				axis(at=c(-1,axTicks(2)), cex.axis = cex.axis, las = 1, side = 2);
+				axis(side = 2, cex.axis = cex.axis, las = 1, lwd = 0, lwd.ticks = 1);
 			}
 			if (!is.null(yticks)) {
-				axis(at=c(-0.2,seq(yMin, 1.2*yMax, length.out=yticks+1)), labels = c(-0.2,signif(seq(yMin, 1.2*yMax, length.out=yticks+1),digits=2)), las=1, cex.axis = cex.axis, side = 2);	
+				axis(side = 2, at = seq(yMin, 1.2 * yMax, length.out = yticks + 1), labels = signif(seq(yMin, 1.2 * yMax, length.out = yticks + 1),digits = 2), las=1, cex.axis = cex.axis, lwd = 0, lwd.ticks = 1);	
 			}
 			if (axis.labels) {
 				mtext(side = 1, text = 'time before present', line = xline, cex = cex.lab);
 				mtext(side = 2, text = ratelabel, line = yline, cex = cex.lab);
 			}
+			box(which = "plot", bty = "l");
 		}
 		#plot intervals
 		if (!is.null(intervals)) {
 			for (i in 1:length(poly)) {
-				polygon(x=poly[[i]][,1],y=poly[[i]][,2],col=transparentColor(intervalCol,opacity),border=NA);
+				polygon(x = poly[[i]][, 1],y = poly[[i]][, 2], col = BAMMtools::transparentColor(intervalCol, opacity), border = NA);
 			}
 		}
-		lines(x = rmat$time, y = avg, lwd = lwd, col = avgCol);
+		lines(x = timeBP, y = avg, lwd = lwd, col = avgCol);
 	} else {
-		return(list(poly = poly,avg = avg,times = rmat$time));
+		return(list(poly = poly,avg = avg, times = timeBP));
 	}
 }
