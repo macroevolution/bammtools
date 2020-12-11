@@ -156,18 +156,20 @@ getRateThroughTimeMatrix <- function(ephy, start.time=NULL, end.time=NULL, nslic
 
 	#convert from time before present to node heights
 	if (!is.null(start.time)) {
-		start.time <- max(bt) - start.time;
+		new.start.time <- max(bt) - start.time;
 	}
 	if (!is.null(end.time)) {
-		end.time <- max(bt) - end.time;
+		new.end.time <- max(bt) - end.time;
 	}
 
 
 	if (is.null(start.time)) {
-		start.time <- max(bt) - maxpossible;
+		new.start.time <- max(bt) - maxpossible;
+		start.time <- maxpossible;
 	}
 	if (is.null(end.time)) {
-		end.time <- max(bt);
+		new.end.time <- max(bt);
+		end.time <- 0;
 	}
 	
  	#remove node from nodeset to prevent branch leading up to node from being included
@@ -179,7 +181,8 @@ getRateThroughTimeMatrix <- function(ephy, start.time=NULL, end.time=NULL, nslic
 	}
 
 	
-	tvec <- seq(start.time, end.time, length.out= nslices);
+	tvec <- seq(new.start.time, new.end.time, length.out = nslices);
+	names(tvec) <- seq(start.time, end.time, length.out = nslices);
 	#tol = 1*10^-decimals(ephy$eventBranchSegs[[1]][1,2]);
 	tol <- 0.00001
 	
@@ -231,10 +234,10 @@ getRateThroughTimeMatrix <- function(ephy, start.time=NULL, end.time=NULL, nslic
 	obj$times <- tvec;
 	
 	class(obj) <- 'bamm-ratematrix';
-	if (ephy$type=='diversification') {
-		obj$type = 'diversification';
+	if (ephy$type == 'diversification') {
+		obj$type <- 'diversification';
 	} else {
-		obj$type = 'trait';	
+		obj$type <- 'trait';	
 	}
 	return(obj);
 }
