@@ -133,7 +133,7 @@
 ##'
 ##' @seealso \code{\link{subtreeBAMM}}
 ##'
-##' @references \url{http://bamm-project.org}
+##' @references \url{http://bamm-project.org/}
 ##'
 ##'     Rabosky, D. L. and Huang, H., 2015. A Robust Semi-Parametric Test for
 ##'     Detecting Trait-Dependent Diversification. Systematic Biology 65:

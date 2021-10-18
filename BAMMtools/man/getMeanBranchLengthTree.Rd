@@ -39,7 +39,7 @@ ratetree <- getMeanBranchLengthTree(ed2, rate='speciation')
 plot(ratetree$phy, show.tip.label=FALSE)
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \seealso{
 \code{\link{plot.bammdata}}

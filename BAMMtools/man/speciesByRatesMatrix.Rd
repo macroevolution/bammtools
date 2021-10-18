@@ -57,7 +57,7 @@ mtext("Speciation rate", 2, line = 2.5)
 
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \seealso{
 \code{\link{getRateThroughTimeMatrix}}

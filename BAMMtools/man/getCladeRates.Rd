@@ -81,7 +81,7 @@ mean(getCladeRates(ed, node=c(132, 140),
      nodetype=c('include','exclude'))$lambda)
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \author{
 Dan Rabosky

@@ -37,7 +37,7 @@ ephy <- getEventData(whales, events.whales, nsamples=100)
 summary(ephy)
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \author{
 Mike Grundler, Dan Rabosky

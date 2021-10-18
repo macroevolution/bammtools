@@ -54,7 +54,7 @@ generateControlFile(file = 'divcontrol.txt', params = list(
 }
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \author{
 Pascal Title

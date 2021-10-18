@@ -53,7 +53,7 @@ dim(cormat)
 hist(cormat, breaks=50)
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \author{
 Dan Rabosky

@@ -7,7 +7,7 @@
 ##' @author Dan Rabosky, Mike Grundler, Pascal Title, Jonathan Mitchell,
 ##'     Carlos Anderson, Jeff Shi, Joseph Brown, Huateng Huang
 ##'
-##' @references \url{http://bamm-project.org}
+##' @references \url{http://bamm-project.org/}
 ##'
 ##'     Rabosky, D., M. Grundler, C. Anderson, P. Title, J. Shi, J. Brown,
 ##'     H. Huang and J. Larson. 2014. BAMMtools: an R package for the

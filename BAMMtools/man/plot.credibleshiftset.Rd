@@ -95,7 +95,7 @@ cset <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
 plot(cset)
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \seealso{
 \code{\link{credibleShiftSet}},

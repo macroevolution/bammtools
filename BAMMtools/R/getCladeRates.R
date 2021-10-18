@@ -60,7 +60,7 @@
 ##'
 ##' @author Dan Rabosky
 ##'
-##' @references \url{http://bamm-project.org}
+##' @references \url{http://bamm-project.org/}
 ##'
 ##' @examples
 ##' data(events.whales, whales)

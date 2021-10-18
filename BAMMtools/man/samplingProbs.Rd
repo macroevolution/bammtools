@@ -52,7 +52,7 @@ This function handles two types of input: The cladeTable can
     the species in the phylogeny, then cladeRichness should be set to
     \code{NULL}. The \code{globalSampling} value should represent the
     overall completeness of species sampling in terms of major clades. See
-    \url{http://bamm-project.org} for additional details.
+    \url{http://bamm-project.org/} for additional details.
 }
 \examples{
 # Generate dummy data

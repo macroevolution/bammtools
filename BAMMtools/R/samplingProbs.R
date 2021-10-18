@@ -35,7 +35,7 @@
 ##'     the species in the phylogeny, then cladeRichness should be set to
 ##'     \code{NULL}. The \code{globalSampling} value should represent the
 ##'     overall completeness of species sampling in terms of major clades. See
-##'     \url{http://bamm-project.org} for additional details.
+##'     \url{http://bamm-project.org/} for additional details.
 ##'
 ##' @return If \code{writeToDisk = TRUE}, then no object is returned. If
 ##'     \code{writeToDisk = FALSE}, then a dataframe is returned. The

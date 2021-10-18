@@ -32,7 +32,7 @@
 ##'     \code{\link{plot.bammshifts}}, \code{\link{summary.credibleshiftset}},
 ##'     \code{\link{plot.credibleshiftset}}, \code{\link{credibleShiftSet}}
 ##'
-##' @references \url{http://bamm-project.org}
+##' @references \url{http://bamm-project.org/}
 ##'
 ##' @examples
 ##' data(whales)

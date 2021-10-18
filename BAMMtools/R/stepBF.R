@@ -25,7 +25,7 @@
 ##' and the Bayes factor support for the best model over the second best.
 ##' @author Jonathan Mitchell
 ##'
-##' @references \url{http://bamm-project.org}
+##' @references \url{http://bamm-project.org/}
 ##' @seealso \code{\link{computeBayesFactors}}
 ##'
 ##' @examples

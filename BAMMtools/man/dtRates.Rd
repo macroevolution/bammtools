@@ -63,7 +63,7 @@ ed <- dtRates(ed, tau=0.01)
 ed <- dtRates(ed, tau=0.01, ism=50:150)
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \seealso{
 \code{\link{plot.bammdata}}

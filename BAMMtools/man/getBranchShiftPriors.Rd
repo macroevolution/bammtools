@@ -47,7 +47,7 @@ plot(prior_tree1$edge.length ~ prior_tree10$edge.length, xlim=c(0,0.05),
 lines(x=c(0,1), y=c(0,1))
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \seealso{
 \code{\link{distinctShiftConfigurations}},

@@ -52,7 +52,7 @@
 ##'     \code{\link{distinctShiftConfigurations}},
 ##'     \code{\link{plot.bammdata}}, \code{\link{plot.bammshifts}}
 ##'
-##' @references \url{http://bamm-project.org}
+##' @references \url{http://bamm-project.org/}
 ##'
 ##' @examples
 ##' data(events.whales)

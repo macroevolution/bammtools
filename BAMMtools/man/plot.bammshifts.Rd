@@ -106,7 +106,7 @@ sc <- distinctShiftConfigurations(ed, expectedNumberOfShifts = 1,
 plot(sc, ed)
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \seealso{
 \code{\link{distinctShiftConfigurations}},

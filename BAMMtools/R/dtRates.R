@@ -62,7 +62,7 @@
 ##'
 ##' @seealso \code{\link{plot.bammdata}}
 ##'
-##' @references \url{http://bamm-project.org}
+##' @references \url{http://bamm-project.org/}
 ##'
 ##' @examples
 ##' data(whales, events.whales)

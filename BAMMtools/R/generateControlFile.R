@@ -18,7 +18,7 @@
 ##'
 ##' @author Pascal Title
 ##'
-##' @references \url{http://bamm-project.org}
+##' @references \url{http://bamm-project.org/}
 ##'
 ##' @examples
 ##' \dontrun{

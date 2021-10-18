@@ -30,7 +30,7 @@
 ##' @seealso \code{\link{distinctShiftConfigurations}},
 ##'     \code{\link{plot.bammshifts}}, \code{\link{credibleShiftSet}}
 ##'
-##' @references \url{http://bamm-project.org}
+##' @references \url{http://bamm-project.org/}
 ##'
 ##' @examples
 ##' data(whales, events.whales)

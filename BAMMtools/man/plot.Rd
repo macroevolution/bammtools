@@ -5,8 +5,8 @@
 \alias{plot}
 \title{Plot \code{BAMM}-estimated macroevolutionary rates on a phylogeny}
 \source{
-\url{http://colorbrewer2.org},
-    \url{http://geography.uoregon.edu/datagraphics/color_scales.htm}
+\url{https://colorbrewer2.org/},
+    \url{https://pjbartlein.github.io/datagraphics/color_scales.html}
 }
 \usage{
 \method{plot}{bammdata}(
@@ -189,8 +189,8 @@ To calculate rates, each branch of the phylogeny is discretized
         \item{revgray}
     }
     For more information about these color palettes visit
-    \url{http://colorbrewer2.org} and
-    \url{http://geography.uoregon.edu/datagraphics/color_scales.htm} or
+    \url{https://colorbrewer2.org/} and
+    \url{https://pjbartlein.github.io/datagraphics/color_scales.html} or
     use the help files of the R packages \code{RColorBrewer} and
     \code{dichromat}.
 

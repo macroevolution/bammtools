@@ -20,7 +20,7 @@
 ##'
 ##' @author Mike Grundler, Dan Rabosky
 ##'
-##' @references \url{http://bamm-project.org}
+##' @references \url{http://bamm-project.org/}
 ##'
 ##' @examples
 ##' data(whales, events.whales)

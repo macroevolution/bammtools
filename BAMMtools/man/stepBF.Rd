@@ -48,7 +48,7 @@ stepBF(postProb, step.size = 1, inputType = 'postProb')
 
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \seealso{
 \code{\link{computeBayesFactors}}

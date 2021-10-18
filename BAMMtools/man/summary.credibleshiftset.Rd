@@ -46,7 +46,7 @@ cset <- credibleShiftSet(ed, expectedNumberOfShifts = 1, threshold = 5)
 summary(cset)
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \seealso{
 \code{\link{distinctShiftConfigurations}},

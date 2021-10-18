@@ -73,7 +73,7 @@ plot.phylo(mst, no.margin=TRUE, show.tip.label=FALSE)
 plot.phylo(cst, no.margin=TRUE, show.tip.label=FALSE)
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \seealso{
 \code{\link{maximumShiftCredibility}}

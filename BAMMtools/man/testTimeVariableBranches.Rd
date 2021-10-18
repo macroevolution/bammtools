@@ -117,7 +117,7 @@ mtext(side = 2, text = "Bayes factor: uniform prior odds", line=3,
 #  same posterior probabilities: it is only the prior odds that differed.
 }
 \references{
-\url{http://bamm-project.org}
+\url{http://bamm-project.org/}
 }
 \seealso{
 \code{\link{getRateThroughTimeMatrix}}

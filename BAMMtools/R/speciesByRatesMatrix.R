@@ -27,7 +27,7 @@
 ##'
 ##' @seealso \code{\link{getRateThroughTimeMatrix}}
 ##'
-##' @references \url{http://bamm-project.org}
+##' @references \url{http://bamm-project.org/}
 ##'
 ##' @examples
 ##' data(whales, events.whales)
