@@ -166,6 +166,14 @@ getEventData <- function(phy, eventdata, burnin=0, nsamples = NULL, verbose=FALS
 	
 	phy$node.label <- NULL;
 	
+	# check that tree is binary and rooted.
+	if (!is.binary.phylo(phy)) {
+		stop('phy is not completely bifurcating.')
+	}
+	if (!is.rooted.phylo(phy)) {
+		stop('phy is not rooted.')
+	}
+	
 	if (any(is.null(c(phy$begin, phy$end)))) {
 		phy <- getStartStopTimes(phy)
 	}
