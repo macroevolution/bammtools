@@ -86,6 +86,7 @@
 
 ##' @aliases plot.bammshifts
 ##' @export
+##' @export plot.bammshifts
 
 plot.bammshifts <- function(x, ephy, method="phylogram", pal="RdYlBu", 
 rank=NULL, index=NULL, spex="s", legend=TRUE, add.freq.text=TRUE, logcolor=FALSE, breaksmethod="linear", color.interval=NULL, JenksSubset=20000, ...) 

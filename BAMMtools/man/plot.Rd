@@ -2,7 +2,6 @@
 % Please edit documentation in R/plot.bammdata.R
 \name{plot.bammdata}
 \alias{plot.bammdata}
-\alias{plot}
 \title{Plot \code{BAMM}-estimated macroevolutionary rates on a phylogeny}
 \source{
 \url{https://colorbrewer2.org/},
