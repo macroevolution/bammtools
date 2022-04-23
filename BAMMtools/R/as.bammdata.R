@@ -1,6 +1,6 @@
 
 as.bammdata <- function(x, ...) {
-	if (length(class(x)) == 1 && class(x) == "bammdata") {
+	if (length(class(x)) == 1 && inherits(x, "bammdata")) {
 		return(x);
 	}
 	UseMethod("as.bammdata");

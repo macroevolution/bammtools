@@ -592,11 +592,11 @@ BAMMlikelihood <- function(phy, eventdata, gen = 'last', segLength = 0.02, sf = 
 		
 	}
 	
-	if (class(phy) == 'character') {
+	if (inherits(phy, 'character')) {
 		phy <- read.tree(phy)
 	}
 	
-	if (class(eventdata) != 'data.frame') {
+	if (!inherits(eventdata, 'data.frame')) {
 		eventdatafile <- eventdata
 		eventdata <- read.csv(eventdata, header = FALSE, stringsAsFactors = FALSE)			
 	}
