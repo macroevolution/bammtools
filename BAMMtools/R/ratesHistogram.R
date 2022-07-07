@@ -64,8 +64,9 @@ ratesHistogram <- function(phylorates, plotBrks = TRUE, xlab = 'speciation rate'
 	y <- phylorates$colordens[,2];
 	plot.window(xlim = c(min(x), max(x)), ylim = c(0, max(y)));
 	segments(x, y, x, 0, lend = 2, col = phylorates$colordens[,3], lwd = 3);
-	axis(1, signif(seq(min(0, min(x)), max(x), length.out = 5), 2), xaxs = "i", cex.axis = 0.75, tcl = NA, mgp = c(0, 0.25, 0));
-	axis(2, round(c(-1, seq(0, max(y), length.out = 4))), las = 1, yaxs = "i", cex.axis = 0.75, tcl = NA, mgp = c(0, 0.35, 0));
+	axis(1, signif(seq(min(0, min(x)), max(x), length.out = 5), 2), xaxs = "i", cex.axis = 0.75, tcl = NA, mgp = c(0, 0.25, 0), lwd = 0, lwd.ticks = 1);
+	axis(2, round(seq(0, max(y), length.out = 4)), las = 1, yaxs = "i", cex.axis = 0.75, tcl = NA, mgp = c(0, 0.35, 0), lwd = 0, lwd.ticks = 1);
+	box(which = "plot", bty = "l");
 	
 	mtext(xlab, side = 1, line = 1.5, ...);
 	mtext(ylab, side = 2, line = 1.5, ...);

@@ -123,7 +123,7 @@ samplingProbs <- function(tree, cladeTable, cladeRichness = NULL, globalSampling
 			probs[i,2] <- clade;
 			probs[i,3] <- length(inTree) / length(cladeTable[cladeTable[,2] == clade,1]);
 		}
-		probs <- rbind(c(globalSampling,'','',''),probs);
+		probs <- rbind(c(globalSampling,'',''),probs);
 	}
 	
 	if (nrow(cladeTable) == length(tree$tip.label) & !is.null(cladeRichness)) {
@@ -135,7 +135,7 @@ samplingProbs <- function(tree, cladeTable, cladeRichness = NULL, globalSampling
 			probs[i,2] <- clade;
 			probs[i,3] <- nrow(cladeTable[cladeTable[,2] == clade,]) / cladeRichness[clade];
 		}
-		probs <- rbind(c(globalSampling,'','',''),probs);
+		probs <- rbind(c(globalSampling,'',''),probs);
 	}
 	if (writeToDisk) {
 		write.table(probs, file=output, quote=F, col.names=F, row.names=F, sep='\t');

@@ -93,7 +93,7 @@ getCladeRates <- function(ephy, node = NULL, nodetype='include', verbose=FALSE) 
 	} else if (!is.null(node[1]) & nodetype[1] == 'include' & length(node) == 1) {
 		nodeset <- getDesc(ephy, node)$desc_set;
 	} else if (!is.null(node[1]) & nodetype[1] == 'exclude' & length(node) == 1) {
-		nodeset <- setdiff( ephy$edge[,2],  getDesc(ephy, node)$desc_set);
+		nodeset <- setdiff(ephy$edge[,2],  getDesc(ephy, node)$desc_set);
 	} else if (!is.null(node[1]) & length(nodetype) == length(node) & length(node) > 1) {
 		nodesets <- lapply(node, function(x) getDesc(ephy, x)$desc_set);
 		Drop <- which(nodetype == 'exclude');
@@ -115,7 +115,7 @@ getCladeRates <- function(ephy, node = NULL, nodetype='include', verbose=FALSE) 
 	
 	for (i in 1:length(ephy$eventBranchSegs)) {
 		if (verbose) {
-			cat('Processing sample ', i, '\n');
+			cat('Processing sample', i, '\n');
 		}
 		esegs <- ephy$eventBranchSegs[[i]];
 		esegs <- esegs[esegs[,1] %in% nodeset, ];
