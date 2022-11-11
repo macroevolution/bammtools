@@ -24,6 +24,7 @@
 ##'     locations of shifts to plot. 	
 ##' @param par.reset A logical indicating whether to reset the graphical
 ##'     parameters before exiting.
+##'	@param \dots additional arguments to be passed to \code{\link{points}}.
 ##'
 ##' @details Any given sample from the posterior distribution sampled using
 ##'     \code{BAMM} contains a potentially unique configuration of rate shifts
@@ -62,7 +63,7 @@
 ##' }
 ##' @keywords graphics
 ##' @export
-addBAMMshifts = function(ephy, index = 1, method = 'phylogram', cex=1, pch=21, col=1, bg=2, msp = NULL, shiftnodes = NULL, par.reset=TRUE) {
+addBAMMshifts = function(ephy, index = 1, method = 'phylogram', cex=1, pch=21, col=1, bg=2, msp = NULL, shiftnodes = NULL, par.reset=TRUE, ...) {
 	if (!inherits(ephy, 'bammdata')) stop("Object ephy must be of class bammdata");
 	lastPP <- get("last_plot.phylo", envir = .PlotPhyloEnv);
 	
@@ -97,7 +98,7 @@ addBAMMshifts = function(ephy, index = 1, method = 'phylogram', cex=1, pch=21, c
 		XX <- (rb+times/max(branching.times(as.phylo.bammdata(ephy)))) * cos(lastPP$theta[shiftnodes]);
 		YY <- (rb+times/max(branching.times(as.phylo.bammdata(ephy)))) * sin(lastPP$theta[shiftnodes]);		
 	}	
-	points(XX,YY,pch=pch,cex=cex,col=col,bg=bg);
+	points(XX,YY,pch=pch,cex=cex,col=col,bg=bg, ...);
 	if (par.reset) {
 		par(op);		
 	}

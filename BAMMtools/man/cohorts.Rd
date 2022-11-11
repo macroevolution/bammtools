@@ -46,7 +46,8 @@ should plot the matrix as a raster.}
 \code{useraster} will be coerced to \code{TRUE}.}
 
 \item{\dots}{Further arguments passed to \code{plot.bammdata} if
-\code{use.plot.bammdata=TRUE}.}
+\code{use.plot.bammdata=TRUE} or \code{plot.phylo} if 
+\code{use.plot.bammdata=FALSE}.}
 }
 \description{
 Plots the matrix of pairwise correlations in rate regimes

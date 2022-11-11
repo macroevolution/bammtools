@@ -14,7 +14,8 @@ addBAMMshifts(
   bg = 2,
   msp = NULL,
   shiftnodes = NULL,
-  par.reset = TRUE
+  par.reset = TRUE,
+  ...
 )
 }
 \arguments{
@@ -47,6 +48,8 @@ locations of shifts to plot.}
 
 \item{par.reset}{A logical indicating whether to reset the graphical
 parameters before exiting.}
+
+\item{\dots}{additional arguments to be passed to \code{\link{points}}.}
 }
 \description{
 Adds symbols to a plotted tree to mark the location(s) where
