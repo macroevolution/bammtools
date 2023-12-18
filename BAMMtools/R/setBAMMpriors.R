@@ -74,8 +74,18 @@
 ##' @author Dan Rabosky
 ##'
 ##' @examples
+##' # for diversification analyses
 ##' data(whales)
 ##' setBAMMpriors(phy = whales, total.taxa = 89, outfile = NULL)
+##'
+##' # for trait analyses
+##' data("primates")
+##' data("mass.primates")
+##'
+##' ## create a named vector of trait values
+##' mass <- setNames(mass.primates[,2], mass.primates[,1])
+##'
+##' setBAMMpriors(phy = primates, traits = mass, outfile = NULL)
 ##' @keywords models
 ##' @export
 setBAMMpriors <- function(phy, total.taxa = NULL, traits=NULL, outfile = 'myPriors.txt', Nmax = 1000, suppressWarning = FALSE){

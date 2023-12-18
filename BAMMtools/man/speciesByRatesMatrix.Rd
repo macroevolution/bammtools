@@ -24,10 +24,10 @@ rates. Ignored if \code{ephy$type = "trait"}.}
 \value{
 A list with two components:
     \itemize{
-        \item{times} {A vector of time points where rates were
-            calculated.}
-        \item{rates} {A species X times matrix of rate through time
-            trajectories.}
+        \item times: A vector of time points where rates were
+            calculated.
+        \item rates: A species X times matrix of rate through time
+            trajectories.
     }
 }
 \description{

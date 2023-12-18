@@ -1,7 +1,15 @@
-
+.Rhistory
+.Rapp.history
+.Rbuildignore
 *.DS_Store
+BAMMtools/R/.DS_Store
+BAMMtools/man/.DS_Store
+BAMMtools/data/.DS_Store
+./data/.DS_Store
+corBAMM/.DS_Store
 BAMMtools.Rcheck/*
 ./BAMMtools.Rcheck/*
+BAMMtools/.RData
 *.tar.gz
 *.Rapp.history
 # compiled files

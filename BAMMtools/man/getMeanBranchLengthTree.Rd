@@ -16,12 +16,12 @@ getMeanBranchLengthTree(ephy, rate = "speciation")
 \value{
 A list with the following components:
     \itemize{
-        \item{phy} {A phylogenetic tree, topologically identical to the
+        \item phy: A phylogenetic tree, topologically identical to the
             model tree, but with branch lengths replaced by the mean
             (marginal) rates on each branch as estimated from the
-            posterior samples in the \code{bammdata} object.}
-        \item{mean} {The mean rate over all branches.}
-        \item{median} {the median rate over all branches.}
+            posterior samples in the \code{bammdata} object.
+        \item mean: The mean rate over all branches.
+        \item median: the median rate over all branches.
     }
 }
 \description{

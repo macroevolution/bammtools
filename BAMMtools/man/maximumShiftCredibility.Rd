@@ -15,20 +15,20 @@ branch-specific shifts.}
 \value{
 A list with the following components:
     \itemize{
-        \item{bestconfigs} {A vector of the index values of MCMC samples
+        \item bestconfigs: A vector of the index values of MCMC samples
             with shift configurations equal to the maximum. Usually, more
             than one state sampled during the MCMC simulation will have an
             identical (maximized) marginal probability. All samples given
-            in this vector will have an identical shift configuration.}
-        \item{scores} {The optimality score (product or sum of marginal
+            in this vector will have an identical shift configuration.
+        \item scores: The optimality score (product or sum of marginal
             shift probabilities) for all sampled shift configurations in
-            the \code{BAMMdata} object.}
-        \item{optimalityType} {Whether the product or sum of marginal
+            the \code{BAMMdata} object.
+        \item optimalityType: Whether the product or sum of marginal
             shift probabilities was used to compute the maximum shift
-            credibility configuration.}
-        \item{sampleindex} {A representative sample that is equal to the
+            credibility configuration.
+        \item sampleindex: A representative sample that is equal to the
             maximum shift credibility configuration (e.g., this can be
-            plotted with \code{\link{addBAMMshifts}}).}
+            plotted with \code{\link{addBAMMshifts}}).
     }
 }
 \description{

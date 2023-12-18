@@ -23,16 +23,16 @@ returned.}
 A \code{bammdata} object with a new component named "dtrates", which
     is a list with two or three components:
     \itemize{
-        \item{tau} {The parameter value of \code{tau} used in the
-            calculation.}
-        \item{rates} {If \code{ephy$type = "trait"}: a numeric vector with
+        \item tau: The parameter value of \code{tau} used in the
+            calculation.
+        \item rates: If \code{ephy$type = "trait"}: a numeric vector with
             the phenotypic rates of each segment on each branch. If
             \code{ephy$type = "diversification"}: a list with two
             components. The first component is a numeric vector of
             speciation rates. The second component is a numeric vector of
-            extinction rates.}
-        \item{tmat} {A matrix of the starting and ending times of the
-            segments on each branch. Only if \code{tmat = TRUE}.}
+            extinction rates.
+        \item tmat: A matrix of the starting and ending times of the
+            segments on each branch. Only if \code{tmat = TRUE}.
 }
 }
 \description{

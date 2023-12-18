@@ -41,23 +41,23 @@
 ##' @return An object of class \code{bammshifts}. This is a list with the
 ##'     following components:
 ##'     \itemize{
-##'         \item{marg.probs} {A list of the marginal probability of a shift
+##'         \item marg.probs: A list of the marginal probability of a shift
 ##'             occurring at each node of the phylogeny for each distinct rate
-##'             shift configuration.}
-##'         \item{marginal_odd_ratio} {Marginal posterior-to-prior odds ratios
-##'             for one or more rate shifts an a given branch.}
-##'         \item{shifts} {A list of the set of shift nodes for each distinct
-##'             rate configuration.}
-##'         \item{samplesets} {A list of sample indices that reduce to each of
-##'             the unique shift sets.}
-##'         \item{frequency} {A vector of frequencies of each distinct shift
-##'             configuration.}
-##'         \item{coreshifts} {A vector of node numbers corresponding to the
+##'             shift configuration.
+##'         \item marginal_odd_ratio: Marginal posterior-to-prior odds ratios
+##'             for one or more rate shifts an a given branch.
+##'         \item shifts: A list of the set of shift nodes for each distinct
+##'             rate configuration.
+##'         \item samplesets: A list of sample indices that reduce to each of
+##'             the unique shift sets.
+##'         \item frequency: A vector of frequencies of each distinct shift
+##'             configuration.
+##'         \item coreshifts: A vector of node numbers corresponding to the
 ##'             core shifts. All of these nodes have a marginal odds ratio of
-##'             at least \code{threshold} supporting a rate shift.}
-##'         \item{threshold} {A single numeric value giving the marginal
+##'             at least \code{threshold} supporting a rate shift.
+##'         \item threshold: A single numeric value giving the marginal
 ##'             posterior:prior odds ratio threshold used during enumeration
-##'             of distinct shift configurations}
+##'             of distinct shift configurations.
 ##'     }
 ##'     Results are sorted by frequency:
 ##'

@@ -87,8 +87,18 @@ This is a "quick and dirty" tool for identifying approximately
     \code{BAMM} control file.
 }
 \examples{
+# for diversification analyses
 data(whales)
 setBAMMpriors(phy = whales, total.taxa = 89, outfile = NULL)
+
+# for trait analyses
+data("primates")
+data("mass.primates")
+
+## create a named vector of trait values
+mass <- setNames(mass.primates[,2], mass.primates[,1])
+
+setBAMMpriors(phy = primates, traits = mass, outfile = NULL)
 }
 \author{
 Dan Rabosky

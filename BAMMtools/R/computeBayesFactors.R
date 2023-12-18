@@ -12,7 +12,7 @@
 ##'
 ##' @details This function returns a matrix of pairwise Bayes factors, where
 ##'     the Bayes factor is the ratio of marginal likelihoods between two
-##'     models M_{i} and M_{j}. Numerator models are given as rows, and
+##'     models \ifelse{html}{\out{M<sub>i</sub>}}{\eqn{M_i}} and \ifelse{html}{\out{M<sub>j</sub>}}{\eqn{M_j}}. Numerator models are given as rows, and
 ##'     denominator models as columns. Row names and column names give the
 ##'     number of shifts in the corresponding model. Suppose you have an
 ##'     output matrix with row and column names 0:3 (0, 1, 2, 3). Model 0 is a

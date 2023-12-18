@@ -124,16 +124,16 @@ orientation of the tips when the phylogeny plotted.}
 \value{
 Returns (invisibly) a list with three components. 
     \itemize{
-        \item{coords} {A matrix of plot coordinates. Rows correspond to
+        \item coords: A matrix of plot coordinates. Rows correspond to
             branches. Columns 1-2 are starting (x,y) coordinates of each
             branch and columns 3-4 are ending (x,y) coordinates of each
             branch. If \code{method = "polar"} a fifth column gives the
-            angle(in radians) of each branch.}
-        \item{colorbreaks} {A vector of percentiles used to group
-            macroevolutionary rates into color bins.}
-        \item{colordens} {A matrix of the kernel density estimates (column
+            angle(in radians) of each branch.
+        \item colorbreaks: A vector of percentiles used to group
+            macroevolutionary rates into color bins.
+        \item colordens: A matrix of the kernel density estimates (column
             2) of evolutionary rates (column 1) and the color (column 3)
-            corresponding to each rate value.}
+            corresponding to each rate value.
     }
 }
 \description{
@@ -163,29 +163,29 @@ To calculate rates, each branch of the phylogeny is discretized
     A number of color palettes come built in with \code{BAMMtools}.
     Color-blind friendly options include:
     \itemize{
-        \item{BrBG}
-        \item{PiYG}
-        \item{PRGn}
-        \item{PuOr}
-        \item{RdBu}
-        \item{RdYlBu}
-        \item{BuOr}
-        \item{BuOrRd}
-        \item{DkRdBu}
-        \item{BuDkOr}
-        \item{GnPu}
+        \item BrBG
+        \item PiYG
+        \item PRGn
+        \item PuOr
+        \item RdBu
+        \item RdYlBu
+        \item BuOr
+        \item BuOrRd
+        \item DkRdBu
+        \item BuDkOr
+        \item GnPu
     }
     Some color-blind unfriendly options include:
     \itemize{
-        \item{RdYlGn}
-        \item{Spectral}
-        \item{temperature}
-        \item{terrain}
+        \item RdYlGn
+        \item Spectral
+        \item temperature
+        \item terrain
     }
     Some grayscale options include:
     \itemize{
-        \item{grayscale}
-        \item{revgray}
+        \item grayscale
+        \item revgray
     }
     For more information about these color palettes visit
     \url{https://colorbrewer2.org/} and

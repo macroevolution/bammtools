@@ -27,15 +27,15 @@ useful for extremely large trees.}
 \value{
 A list with the following components:
     \itemize{
-        \item{lambda} {A vector of speciation rates (if applicable), with
+        \item lambda: A vector of speciation rates (if applicable), with
             the i'th rate corresponding to the mean rate from the i'th
-            sample in the posterior.}
-        \item{mu} {A vector of extinction rates (if applicable), with the
+            sample in the posterior.
+        \item mu: A vector of extinction rates (if applicable), with the
             i'th rate corresponding to the mean rate from the i'th sample
-            in the posterior.}
-        \item{beta} {A vector of phenotypic rates (if applicable), with
+            in the posterior.
+        \item beta: A vector of phenotypic rates (if applicable), with
             the i'th rate corresponding to the mean rate from the i'th 
-            sample in the posterior.}
+            sample in the posterior.
     }
 }
 \description{

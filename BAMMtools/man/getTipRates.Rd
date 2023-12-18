@@ -23,37 +23,37 @@ Returns a list with the following elements:
 
     If \code{ephy} type is 'diversification':
     \itemize{
-        \item{lambda} {A matrix of tip speciation rates with species as
-            rows, and posterior samples as columns.}
-        \item{mu} {A matrix of tip extinction rates with species as rows,
-            and posterior samples as columns.}
-        \item{lambda.avg} {A vector of average tip speciation rates,
+        \item lambda: A matrix of tip speciation rates with species as
+            rows, and posterior samples as columns.
+        \item mu: A matrix of tip extinction rates with species as rows,
+            and posterior samples as columns.
+        \item lambda.avg: A vector of average tip speciation rates,
             averaged with mean or median, depending on selected option for
-            \code{statistic}. The vector is named with species names.}
-        \item{mu.avg} {A vector of average tip extinction rates, averaged
+            \code{statistic}. The vector is named with species names.
+        \item mu.avg: A vector of average tip extinction rates, averaged
             with mean or median, depending on selected option for
-            \code{statistic}. The vector is named with species names.}
+            \code{statistic}. The vector is named with species names.
     }
 
     If \code{ephy} type is 'diversification' and
     \code{returnNetDiv = TRUE}:
     \itemize{
-        \item{netdiv} {A matrix of tip net diversification rates with
-            species as rows, and posterior samples as columns.}
+        \item netdiv: A matrix of tip net diversification rates with
+            species as rows, and posterior samples as columns.
 
-        \item{netdiv.avg} {A vector of average tip net diversification
+        \item netdiv.avg: A vector of average tip net diversification
             rates, averaged with mean or median, depending on selected
             option for \code{statistic}. The vector is named with species
-            names.}
+            names.
     }
 
     If \code{ephy} type is 'trait':
     \itemize{
-        \item{beta} {A matrix of tip phenotypic rates with species as
-            rows, and posterior samples as columns.}
-        \item{beta.avg} {A vector of average tip phenotypic rates,
+        \item beta: A matrix of tip phenotypic rates with species as
+            rows, and posterior samples as columns.
+        \item beta.avg: A vector of average tip phenotypic rates,
             averaged with mean or median, depending on selected option for
-            \code{statistic}. The vector is named with species names.}
+            \code{statistic}. The vector is named with species names.
     }
 }
 \description{

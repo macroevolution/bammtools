@@ -67,29 +67,29 @@ function. The R package \code{parallel} must be loaded for
 \value{
 A list with the following components:
     \itemize{
-        \item{estimate} {A numeric value for continous trait data: the
+        \item estimate: A numeric value for continous trait data: the
             average observed correlation between tip rates and the trait
             across the posterior samples. For categorical traits, it is
             a list showing the median species-specific rates for each
-            trait state.}
-        \item{p.value} {A numeric value. The probability that the observed
+            trait state.
+        \item p.value: A numeric value. The probability that the observed
             correlation is less than or equal to a sample from the null
-            distribution.}
-        \item{method} {A character string, as input.}
-        \item{rate} {A character string, as input.}
-        \item{two.tailed} {A logical, as input.}
-        \item{gen} {An integer vector, recording which posterior samples
+            distribution.
+        \item method: A character string, as input.
+        \item rate: A character string, as input.
+        \item two.tailed: A logical, as input.
+        \item gen: An integer vector, recording which posterior samples
             were selected. Only present when \code{return.full} is
-            \code{TRUE}.}
-        \item{obs.corr} {A numeric vector, the observed correlation
+            \code{TRUE}.
+        \item obs.corr: A numeric vector, the observed correlation
             coefficents for each posterior sample. Only present when
             \code{return.full} is \code{TRUE}. For binary traits, centered
             U statistics (U - n1* n2/2; where n1 and n2 are the number of
-            species in each state of the binary trait) is reported.}
-        \item{null} {A numeric vector. The null distribution of
+            species in each state of the binary trait) is reported.
+        \item null: A numeric vector. The null distribution of
             correlation coefficients (or centered U statistics for binary
             traits) from permutation. Only present when \code{return.full}
-            is \code{TRUE}.}
+            is \code{TRUE}.
     }
 }
 \description{

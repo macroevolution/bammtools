@@ -38,21 +38,21 @@ depending on your \code{BAMM} analysis.}
 \value{
 A list with many components:
 \itemize{
-    \item{edge} {See documentation for class \code{phylo} in package ape.}
-    \item{Nnode} {See documentation for class \code{phylo} in package
-        ape.}
-    \item{tip.label} {See documentation for class \code{phylo} in package
-        ape.}
-    \item{edge.length} {See documentation for class \code{phylo} in
-        package ape.}
-    \item{begin} {The beginning time of each branch in absolute time (the
-        root is set to time zero)}
-    \item{end} {The ending time of each branch in absolute time.}
-    \item{numberEvents} {An integer vector with the number of events
+    \item edge: See documentation for class \code{phylo} in package ape.
+    \item Nnode: See documentation for class \code{phylo} in package
+        ape.
+    \item tip.label: See documentation for class \code{phylo} in package
+        ape.
+    \item edge.length: See documentation for class \code{phylo} in
+        package ape.
+    \item begin: The beginning time of each branch in absolute time (the
+        root is set to time zero)
+    \item end: The ending time of each branch in absolute time.
+    \item numberEvents: An integer vector with the number of events
         contained in \code{phy} for each posterior sample. The length of
         this vector is equal to the number of posterior samples in the
-        \code{bammdata} object.}
-    \item{eventData} {A list of dataframes. Each element is a single
+        \code{bammdata} object.
+    \item eventData: A list of dataframes. Each element is a single
         posterior sample. Each row in a dataframe holds the data for a
         single event. Data associated with an event are: \code{node} - a
         node number. This identifies the branch where the event
@@ -61,12 +61,12 @@ A list with many components:
         - an initial rate of speciation or trait evolution. \code{lam2} -
         a decay/growth parameter. \code{mu1} - an initial rate of
         extinction. \code{mu2} - a decay/growth parameter. \code{index} -
-        a unique integer associated with the event. See 'Details'.}
-    \item{eventVectors} {A list of integer vectors. Each element is a
+        a unique integer associated with the event. See 'Details'.
+    \item eventVectors: A list of integer vectors. Each element is a
         single posterior sample. For each branch in \code{phy} the index
         of the event that occurs along that branch. Branches are ordered
-        increasing here and elsewhere.}
-    \item{eventBranchSegs} {A list of matrices. Each element is a single
+        increasing here and elsewhere.
+    \item eventBranchSegs: A list of matrices. Each element is a single
         posterior sample. Each matrix has four columns: \code{Column 1}
         identifies a node in \code{phy}. \code{Column 2} identifies the
         beginning time of the branch or segment of the branch that
@@ -74,36 +74,36 @@ A list with many components:
         the ending time of the branch or segment of the branch that
         subtends the node in \code{Column 1}. \code{Column 4} identifies
         the index of the event that occurs along the branch or segment of
-        the branch that subtends the node in \code{Column 1}.}
-    \item{tipStates} {A list of integer vectors. Each element is a single
+        the branch that subtends the node in \code{Column 1}.
+    \item tipStates: A list of integer vectors. Each element is a single
         posterior sample. For each tip the index of the event that occurs
         along the branch subtending the tip. Tips are ordered increasing
-        here and elsewhere.}
-    \item{tipLambda} {A list of numeric vectors. Each element is a single
+        here and elsewhere.
+    \item tipLambda: A list of numeric vectors. Each element is a single
         posterior sample. For each tip the rate of speciation or trait
-        evolution at the end of the terminal branch subtending that tip.}
-    \item{tipMu} {A list of numeric vectors. Each element is a single
+        evolution at the end of the terminal branch subtending that tip.
+    \item tipMu: A list of numeric vectors. Each element is a single
         posterior sample. For each tip the rate of extinction at the end
         of the terminal branch subtending that tip. Meaningless if working
-        with \code{BAMM} trait results.}
-    \item{meanTipLambda} {For each tip the mean of the marginal posterior
+        with \code{BAMM} trait results.
+    \item meanTipLambda: For each tip the mean of the marginal posterior
         density of the rate of speciation or trait evolution at the end of
-        the terminal branch subtending that tip.}
-    \item{meanTipMu} {For each tip the mean of the marginal posterior
+        the terminal branch subtending that tip.
+    \item meanTipMu: For each tip the mean of the marginal posterior
         density of the rate of extinction at the end of the terminal
         branch subtending that tip. Meaningless if working with
-        \code{BAMM} trait results.}
-    \item{type} {A character string. Either "diversification" or "trait"
-        depending on your \code{BAMM} analysis.}
-    \item{downseq} {An integer vector holding the nodes of \code{phy}. The
+        \code{BAMM} trait results.
+    \item type: A character string. Either "diversification" or "trait"
+        depending on your \code{BAMM} analysis.
+    \item downseq: An integer vector holding the nodes of \code{phy}. The
         order corresponds to the order in which nodes are visited by a
-        pre-order tree traversal.}
-    \item{lastvisit} {An integer vector giving the index of the last node
+        pre-order tree traversal.
+    \item lastvisit: An integer vector giving the index of the last node
         visited by the node in the corresponding position in
         \code{downseq}. \code{downseq} and \code{lastvisit} can be used to
         quickly retrieve the descendants of any node. e.g. the descendants
         of node 89 can be found by
-        \code{downseq[which(downseq==89):which(downseq==lastvisit[89])}.}
+        \code{downseq[which(downseq==89):which(downseq==lastvisit[89])}.
 }
 }
 \description{

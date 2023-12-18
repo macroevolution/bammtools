@@ -28,4 +28,4 @@ License: GPL (>=2)
 URL: http://bamm-project.org/
 NeedsCompilation: yes
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3

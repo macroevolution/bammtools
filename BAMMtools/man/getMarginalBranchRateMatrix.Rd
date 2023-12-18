@@ -14,12 +14,12 @@ getMarginalBranchRateMatrix(ephy, verbose = FALSE)
 \value{
 Returns a list with the following components:
     \itemize{
-        \item{lambda_branch_matrix} {A \code{nbranches x nsamples} matrix
-            of mean speciation rates for each branch.}
-        \item{mu_branch_matrix} {A \code{nbranches x nsamples} matrix of
-            mean extinction rates for each branch.}
-        \item{beta_branch_matrix} {A \code{nbranches x nsamples} matrix of
-            mean phenotypic rates for each branch.}
+        \item lambda_branch_matrix: A \code{nbranches x nsamples} matrix
+            of mean speciation rates for each branch.
+        \item mu_branch_matrix: A \code{nbranches x nsamples} matrix of
+            mean extinction rates for each branch.
+        \item beta_branch_matrix: A \code{nbranches x nsamples} matrix of
+            mean phenotypic rates for each branch.
 }
 }
 \description{

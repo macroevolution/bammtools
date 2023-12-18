@@ -104,13 +104,13 @@
 ##' @return If \code{plot = FALSE}, then a list is returned with the following
 ##'     components:
 ##'     \itemize{
-##'         \item{poly} {A list of matrices, where each matrix contains the
+##'         \item poly: A list of matrices, where each matrix contains the
 ##'             coordinates that define each overlapping confidence interval
-##'             polygon.}
-##'         \item{avg} {A vector of y-coordinates for mean or median rates
-##'             used to plot the average rates line.}
-##'         \item{times} {A vector of time values, used as x-coordinates in
-##'             this plot function.}
+##'             polygon.
+##'         \item avg: A vector of y-coordinates for mean or median rates
+##'             used to plot the average rates line.
+##'         \item times: A vector of time values, used as x-coordinates in
+##'             this plot function.
 ##'     }
 ##'
 ##' @author Pascal Title

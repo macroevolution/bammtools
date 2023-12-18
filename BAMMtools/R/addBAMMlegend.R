@@ -54,13 +54,13 @@
 ##'
 ##' @return Invisibly returns a list with the following components:
 ##'     \itemize{
-##'         \item{coords} {A 2-column matrix of xy coordinates for each color
-##'             bin in the legend.}
-##'         \item{width} {Coordinates for the short dimension of the legend.}
-##'         \item{pal} {The color ramp.}
-##'         \item{tickLocs} {The tick mark locations in plotting units.}
-##'         \item{labels} {The rate values associated with those tick
-##'             locations.}
+##'         \item coords: A 2-column matrix of xy coordinates for each color
+##'             bin in the legend.
+##'         \item width: Coordinates for the short dimension of the legend.
+##'         \item pal: The color ramp.
+##'         \item tickLocs: The tick mark locations in plotting units.
+##'         \item labels: The rate values associated with those tick
+##'             locations.
 ##'     }
 ##'
 ##' @author Pascal Title
